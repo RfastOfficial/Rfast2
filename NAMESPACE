@@ -1,0 +1,19 @@
+useDynLib("Rfast2", .registration = TRUE)
+
+importFrom("stats", "pt", "cov", "pchisq", "pf", "cor", "qt", "sd", 
+"qnorm", "dpois", "pnorm", "rchisq", "rexp", ".lm.fit", "qf", 
+"model.matrix", "aggregate", "prcomp", "qchisq", "optimise", 
+"runif", "dnorm", "dbinom", "dexp", "dgeom", "nlm" , "optimize",
+"optim","lm.fit")
+
+importFrom("Rfast", vm.mle, colvm.mle, colmeans, colsums, eachrow, 
+group, colVars, spdinv, mediandir, colMins, nth,
+gammamle, weibull.mle, poisson_only, logistic_only, multinom.regs,
+multinom.mle, Var, normlog.regs, eachcol.apply, Sort)
+
+importFrom(Rcpp, evalCpp)
+
+
+export(add.term,benchmark,bic.regs,censpois.mle,censweibull.mle,circ.cor1,circ.cors1,cls,cluster.lm,col.waldpoisrat,colborel.mle,colGroup,collogitnorm.mle,collognorm.mle,colmeansvars,colQuantile,colspml.mle,colTrimMean,covar,diffic,discrim,empirical.entropy,fbed.reg,gammapois.mle,gee.reg,gumbel.reg,halfcauchy.mle,Intersect,is.lower.tri,is.skew.symmetric,is.upper.tri,km,kumar.mle,leverage,lm.drop1,logiquant.regs,lud,Merge,mle.lda,mmpc,mmpc2,moranI,multinom.reg,negbin.reg,pc.sel,pca,pooled.colVars,powerlaw.mle,purka.mle,Quantile,refmeta,reg.mle.lda,rowQuantile,rowTrimMean,simplex.mle,sp.logiregs,trim.mean,trunccauchy.mle,truncexpmle,wald.poisrat,walter.ci,weib.regs,welch.tests,zigamma.mle,zil.mle,ziweibull.mle,ztp.reg)
+
+S3method(print,benchmark)
