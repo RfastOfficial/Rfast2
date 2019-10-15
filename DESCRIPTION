@@ -9,6 +9,8 @@ Depends: R (>= 3.5.0), Rcpp (>= 0.12.3)
 LinkingTo: Rcpp (>= 0.12.3), RcppArmadillo
 Imports: Rfast
 SystemRequirements: C++11
+BugReports: https://github.com/RfastOfficial/Rfast2/issues
+URL: https://github.com/RfastOfficial/Rfast2
 Description: A collection of fast statistical and utility functions for data analysis. Functions for regression, maximum likelihood, column-wise statistics and many more have been included. C++ has been utilized to speed up the functions.
 License: GPL (>= 2.0)
 LazyData: TRUE
