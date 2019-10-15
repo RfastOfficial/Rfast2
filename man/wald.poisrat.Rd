@@ -2,11 +2,11 @@
 \alias{wald.poisrat}
 \alias{col.waldpoisrat}
 \title{
-Cox confidence interval for the ratio of two Poisson variables
+Wald confidence interval for the ratio of two Poisson variables
 }
 
 \description{
-Cox confidence interval for the ratio of two Poisson variables.
+Wald confidence interval for the ratio of two Poisson variables.
 }
 
 \usage{
@@ -43,7 +43,7 @@ Ratio, weighted average, and product of means. Communications in Statistics-Theo
 \author{
 Michail Tsagris
 
-R implementation and documentation: Michail Tsagris <mtsagris@yahoo.gr>
+R implementation and documentation: Michail Tsagris \email{mtsagris@yahoo.gr}.
 }
 %\note{
 %%  ~~further notes~~

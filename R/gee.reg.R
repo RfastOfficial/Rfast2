@@ -20,17 +20,13 @@ gee.reg <- function(y, x, id, tol = 1e-07, maxiters = 100) {
 
   b1 <- solve(crossprod(x), Rfast::eachcol.apply(x, y) )
   e <- y - x %*% b1
-  com <- Rfast::group(e^2, id)
-  phi <- sum( com ) / n
-  a1 <- numeric(K)
-  for (j in 1:K)  a1[j] <- sum( tcrossprod( e[id == j] ) )
-  a <-  sum( a1 - com ) / Ni / phi
-  # R <- matrix(a, m, m)
-  # diag(R) <- 1
+  phi <- sum( e^2 ) / n
+  a <- 0
+  for (j in 1:K)  a <- a + sum( tcrossprod( e[id == j] ) )
+  a <- a / Ni / phi - n/Ni
   d1 <- matrix(0, p, p)
   d2 <- numeric(p)
   for (j in 1:K) {
-    ## co <- solve( R[ 1:ni[j], 1:ni[j] ] )
     co <- Rinv(a, ni[j])
     z <- x[id == j, , drop = FALSE]
     co2 <- t(z) %*% co
@@ -44,18 +40,15 @@ gee.reg <- function(y, x, id, tol = 1e-07, maxiters = 100) {
     i <- i + 1
     b1 <- b2
     e <- y - x %*% b1
-    com <- Rfast::group(e^2, id)
-    phi <- sum( com ) / n
-    for (j in 1:K)  a1[j] <- sum( tcrossprod( e[id == j] ) )
-    a <- sum( a1 - com ) / Ni / phi
-    # R <- matrix(a, m, m)
-    # diag(R) <- 1
+    phi <- sum( e^2 ) / n
+    a <- 0
+    for (j in 1:K)  a <- a + sum( tcrossprod( e[id == j] ) )
+    a <- a / Ni / phi - n/Ni
     d1 <- matrix(0, p, p)
     d2 <- numeric(p)
     for (j in 1:K) {
-     ## co <- solve( R[ 1:ni[j], 1:ni[j] ] )
       co <- Rinv(a, ni[j])
-      z <- x[id == j, ,drop = FALSE]
+      z <- x[id == j, , drop = FALSE]
       co2 <- t(z) %*% co
       d1 <- d1 + co2 %*% z
       d2 <- d2 + co2 %*% y[id == j]
@@ -66,7 +59,6 @@ gee.reg <- function(y, x, id, tol = 1e-07, maxiters = 100) {
   B <- 0
   for (j in 1:K)  {
     z <- x[id == j, ,drop = FALSE]
-    ## co <- crossprod(z, solve( R[ 1:ni[j], 1:ni[j] ] ) )
     co <- crossprod(z, Rinv(a, ni[j]) )  
     mesi <- tcrossprod( e[id == j] )
     B <- B + co %*% mesi %*% t(co)
