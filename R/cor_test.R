@@ -1,5 +1,5 @@
 #[export]
-cor_test <- function(x, y, type = "pearson", rho = 0, a = 0.05) { 
+cor_test <- function(y, x, type = "pearson", rho = 0, a = 0.05) { 
     n <- length(y)
     if (type == "pearson") {
         r <- as.vector(cor(y, x))

@@ -1,4 +1,4 @@
-c#[export]
+#[export]
 multivm.mle <- function(x, ina, tol = 1e-07, ell = FALSE) {
   ni <- tabulate(ina)
   ni <- ni[ni > 0]
@@ -43,7 +43,7 @@ multivm.mle <- function(x, ina, tol = 1e-07, ell = FALSE) {
 
 
 #[export]
-multispml.mle <- function(x, ina, tol = 1e-7, ell = FALSE) {
+multispml.mle <- function(x, ina, tol = 1e-07, ell = FALSE) {
   ni <- tabulate(ina)
   ni <- ni[ni > 0]
   g <- length(ni)
