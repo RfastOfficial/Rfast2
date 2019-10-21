@@ -1,4 +1,4 @@
-#[export
+#[export]
 overdispreg.test <- function(y, x) {
   mod <- Rfast::glm_poisson(x, y, tol = 1e-07)
   x <- model.matrix( y ~ ., data.frame(x) )

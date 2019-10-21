@@ -9,7 +9,7 @@ Non linear least squares regression for percentages or proporions.
 }
 
 \usage{
-ols.compreg(y, x, cov = FALSE, tol = 1e-07, maxiters = 100)
+propols.reg(y, x, cov = FALSE, tol = 1e-07 ,maxiters = 100)
 }
 
 \arguments{

@@ -22,6 +22,7 @@ benchmark<-function(...,times,envir=parent.frame(),order=NULL){
     res
 }
 
+#[export s3]
 print.benchmark<-function(x,...){
     class(x)<-NULL
     min_max_res<-x[,c("min","max")]
