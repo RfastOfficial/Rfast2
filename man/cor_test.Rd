@@ -9,7 +9,7 @@ Correlation significance testing using Fisher's z-transformation.
 }
 
 \usage{
-cor_test(y, x, type = "pearson", a = 0.05, rho = 0)
+cor_test(y, x, type = "pearson", rho = 0, a = 0.05 )
 }
 
 \arguments{
@@ -23,11 +23,11 @@ A numerical vector.
 The type of correlation you want. "pearson" and "spearman" are the two supported types 
 because their standard error is easily calculated. 
 }
-\item{a}{
-The significance level used for the confidence intervals.
-}
 \item{rho}{
 The value of the hypothesised correlation to be used in the hypothesis testing.
+}
+\item{a}{
+The significance level used for the confidence intervals.
 }
 }
 

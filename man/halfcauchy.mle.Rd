@@ -10,7 +10,7 @@ MLE of continuous univariate distributions defined on the positive line.
 }
 
 \usage{
-halfcauchy.mle(x, tol = 1e-07, maxiters = 50) 
+halfcauchy.mle(x, tol = 1e-07) 
 powerlaw.mle(x)
 }
 
@@ -20,9 +20,6 @@ A vector with positive valued data (zeros are not allowed).
 }
 \item{tol}{
 The tolerance level up to which the maximisation stops; set to 1e-09 by default.
-}
-\item{maxiters}{
-The maximum number of iterations the Newton-Raphson will perform. 
 }
 }
 

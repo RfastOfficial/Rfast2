@@ -11,8 +11,8 @@ MLE of some circular distributions with multiple samples.
 }
 
 \usage{
-multivm.mle(x, ina, tol = 1e-09, ell = FALSE)
-multispml.mle(x, ina, tol = 1e-09, ell = FALSE)
+multivm.mle(x, ina, tol = 1e-07, ell = FALSE)
+multispml.mle(x, ina, tol = 1e-07, ell = FALSE)
 }
 
 \arguments{
