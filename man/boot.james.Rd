@@ -10,8 +10,8 @@ Bootstrap James and Hotelling test for 2 independent sample mean vectors.
 }
 
 \usage{
-boot.james(y1, y2, B = 999)
-boot.hotel2(y1, y2, B = 999)
+boot.james(y1, y2, R = 999)
+boot.hotel2(y1, y2, R = 999)
 }
 
 \arguments{
@@ -21,7 +21,7 @@ A numerical matrix with the data of the one sample.
 \item{y2}{
 A numerical matrix with the data of the other sample.
 }
-\item{B}{
+\item{R}{
 The number of bootstrap samples to use.
 }
 }
