@@ -11,8 +11,8 @@ Naive Bayes classifiers for directional data.
 }
 
 \usage{
-vm.nb(xnew, x, ina, tol = 1e-07)
-spml.nb(xnew, x, ina, tol = 1e-07)
+vm.nb(xnew = NULL, x, ina, tol = 1e-07)
+spml.nb(xnew = NULL, x, ina, tol = 1e-07)
 }
 
 \arguments{

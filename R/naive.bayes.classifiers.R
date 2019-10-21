@@ -44,7 +44,7 @@ weibullnb.pred <- function(xnew, shape, scale, ni) {
 
 
 #[export]
-normlog.nb <- function(xnew, x, ina) {
+normlog.nb <- function(xnew = NULL, x, ina) {
   est <- NULL
   ni <- tabulate(ina)
   ni <- ni[ni > 0]
@@ -82,7 +82,7 @@ normlognb.pred <- function(xnew, expmu, sigma, ni) {
 
 
 #[export]
-laplace.nb <- function(xnew, x, ina) {
+laplace.nb <- function(xnew = NULL, x, ina) {
   est <- NULL
   ni <- tabulate(ina)
   ni <- ni[ni > 0]
@@ -120,7 +120,7 @@ laplacenb.pred <- function(xnew, location, scale, ni) {
 
 
 #[export]
-vm.nb <- function(xnew, x, ina, tol = 1e-07) {
+vm.nb <- function(xnew = NULL, x, ina, tol = 1e-07) {
   est <- NULL
   ni <- tabulate(ina)
   ni <- ni[ni > 0]
@@ -159,7 +159,7 @@ vmnb.pred <- function(xnew, mu, kappa, ni) {
 
 
 #[export]
-spml.nb <- function(xnew, x, ina, tol = 1e-07) {
+spml.nb <- function(xnew = NULL, x, ina, tol = 1e-07) {
   est <- NULL
   ni <- tabulate(ina)
   ni <- ni[ni > 0]
