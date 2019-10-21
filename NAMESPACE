@@ -14,6 +14,8 @@ multinom.mle, Var, normlog.regs, eachcol.apply, Sort)
 importFrom(Rcpp, evalCpp)
 
 
-export(add.term,benchmark,bic.regs,censpois.mle,censweibull.mle,circ.cor1,circ.cors1,cls,cluster.lm,col.waldpoisrat,colborel.mle,colGroup,collogitnorm.mle,collognorm.mle,colmeansvars,colQuantile,colspml.mle,colTrimMean,covar,diffic,discrim,empirical.entropy,fbed.reg,gammapois.mle,gee.reg,gumbel.reg,halfcauchy.mle,Intersect,is.lower.tri,is.skew.symmetric,is.upper.tri,km,kumar.mle,leverage,lm.drop1,logiquant.regs,lud,Merge,mle.lda,mmpc,mmpc2,moranI,multinom.reg,negbin.reg,pc.sel,pca,pooled.colVars,powerlaw.mle,purka.mle,Quantile,refmeta,reg.mle.lda,rowQuantile,rowTrimMean,simplex.mle,sp.logiregs,trim.mean,trunccauchy.mle,truncexpmle,wald.poisrat,walter.ci,weib.regs,welch.tests,zigamma.mle,zil.mle,ziweibull.mle,ztp.reg)
+export(Intersect,Merge,Quantile,add.term,benchmark,bic.regs,boot.hotel2,boot.james,boot.student2,cauchy0.mle,censpois.mle,censweibull.mle,circ.cor1,circ.cors1,cls,cluster.lm,col.waldpoisrat,colGroup,colQuantile,colTrimMean,colborel.mle,colhalfnorm.mle,coljack.means,collogitnorm.mle,collognorm.mle,colmeansvars,colordinal.mle,colspml.mle,cor_test,covar,depth.mahala,diffic,discrim,embed.circaov,empirical.entropy,fbed.reg,fipois.reg,gammapois.mle,gee.reg,gumbel.reg,halfcauchy.mle,hcf.circaov,het.circaov,is.lower.tri,is.skew.symmetric,is.upper.tri,jack.mean,km,kumar.mle,laplace.nb,laplacenb.pred,leverage,lm.drop1,lm.parboot,logiquant.regs,lr.circaov,lud,mle.lda,mmpc,mmpc2,moranI,multinom.reg,multispml.mle,negbin.reg,normlog.nb,normlognb.pred,pc.sel,pca,perm.ttest2,pooled.colVars,powerlaw.mle,propols.reg,purka.mle,refmeta,reg.mle.lda,riag,rowQuantile,rowTrimMean,rowjack.means,score.zipregs,simplex.mle,sp.logiregs,spml.nb,spmlnb.pred,trim.mean,trunccauchy.mle,truncexpmle,vm.nb,vmnb.pred,wald.poisrat,walter.ci,weib.regs,weibull.nb,weibullnb.pred,welch.tests,zigamma.mle,zil.mle,ziweibull.mle,ztp.reg)
 
-S3method(print,benchmark)
+
+
+
