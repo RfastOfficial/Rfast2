@@ -2,13 +2,13 @@
 cor_test <- function(y, x, type = "pearson", rho = 0, a = 0.05) { 
     n <- length(y)
     if (type == "pearson") {
-        r <- as.vector(cor(y, x))
+        r <- as.vector( cor(y, x) )
         zh0 <- 0.5 * log((1 + rho)/(1 - rho))
         zh1 <- 0.5 * log((1 + r)/(1 - r))
         se <- 1/sqrt(n - 3)
     }
     else if (type == "spearman") {
-        r <- as.vector(cor(Rfast::Rank(y), Rfast::colRanks(x)))
+        r <- as.vector( cor(Rfast::Rank(y), Rfast::Rank(x)) )
         zh0 <- 0.5 * log((1 + rho)/(1 - rho))
         zh1 <- 0.5 * log((1 + r)/(1 - r))
         se <- 1.029563/sqrt(n - 3)
