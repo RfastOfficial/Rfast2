@@ -34,6 +34,9 @@ with a log link with the intercept only ( glm(y ~ 1, Gamma(log) ) ).
 
 \value{
 A list including:
+\item{iters}{
+The number of iterations required by the newton-Raphson.
+}
 \item{deviance}{
 The deviance value.
 }
@@ -43,9 +46,6 @@ perform an F hypothesis test for the significance of one or more independent var
 }
 \item{be}{
 The regression coefficient(s). 
-}
-\item{info}{
-The number of iterations, the deviance and the dispersion parameter.
 }
 }
 
