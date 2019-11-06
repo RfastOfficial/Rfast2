@@ -64,7 +64,7 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@yahoo.gr} an
 %}
 
 \seealso{
-\code{\link{colmeansvars.mle}, \link{gammapois.mle}
+\code{\link{collognorm.mle}, \link{gammapois.mle}
 }
 }
 
