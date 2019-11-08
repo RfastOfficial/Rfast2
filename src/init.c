@@ -36,6 +36,8 @@ SEXP Rfast2_multinom_reg(SEXP ySEXP,SEXP x0SEXP, SEXP tolSEXP,SEXP maxitersSEXP)
 SEXP Rfast2_weib_regs(SEXP ySEXP,SEXP xSEXP, SEXP tolSEXP,SEXP loggedSEXP,SEXP maxitersSEXP, SEXP parallelSEXP);
 SEXP Rfast2_welch_tests(SEXP xSEXP, SEXP ySEXP, SEXP loggedSEXP, SEXP parallelSEXP);
 SEXP Rfast2_negbin_reg(SEXP ySEXP, SEXP xSEXP, SEXP tolSEXP, SEXP maxitersSEXP);
+SEXP Rfast2_gamma_regs(SEXP YSEXP, SEXP XSEXP,SEXP tolSEXP,SEXP loggedSEXP,SEXP parallelSEXP,SEXP maxitersSEXP);
+SEXP Rfast2_gamma_reg(SEXP YSEXP, SEXP XSEXP,SEXP modSEXP,SEXP tolSEXP,SEXP maxitersSEXP);
 
 //Stefanos
 
@@ -65,6 +67,8 @@ static const R_CallMethodDef CallEntries[] = {
   {"Rfast2_weib_regs", (DL_FUNC) &Rfast2_weib_regs, 6},
   {"Rfast2_welch_tests", (DL_FUNC) &Rfast2_welch_tests, 4},
   {"Rfast2_negbin_reg", (DL_FUNC) &Rfast2_negbin_reg, 4},
+  {"Rfast2_gamma_regs", (DL_FUNC) &Rfast2_gamma_regs, 6},
+  {"Rfast2_gamma_reg", (DL_FUNC) &Rfast2_gamma_reg, 5},
   {NULL, NULL, 0}
 };
 

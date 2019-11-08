@@ -98,7 +98,7 @@ RcppExport SEXP Rfast2_gamma_reg(SEXP YSEXP, SEXP XSEXP,SEXP modSEXP,SEXP tolSEX
   traits::input_parameter< List >::type mod(modSEXP);
   traits::input_parameter< const double >::type tol(tolSEXP);
   traits::input_parameter< const int >::type maxiters(maxitersSEXP);
-  __result = gamma_reg(Y,X,mod,tol,maxiters);
+  __result = wrap(gamma_reg(Y,X,mod,tol,maxiters));
   return __result;
   END_RCPP
 }

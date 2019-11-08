@@ -11,7 +11,7 @@ using namespace Rcpp;
 using namespace std;
 
 // [[Rcpp::export]]
-NumericMatrix gamma_regs(NumericVector Y, NumericMatrix X, const double tol = 1e-08, const bool logged = 0, const bool parallel = 1, const int maxiters = 100) {
+NumericMatrix gamma_regs(NumericVector Y, NumericMatrix X, const double tol = 1e-08, const bool logged = false, const bool parallel = true, const int maxiters = 100) {
   int D = X.ncol(), n = X.nrow();
   mat x(X.begin(),n,D,false);
   NumericMatrix ret(D,2);
