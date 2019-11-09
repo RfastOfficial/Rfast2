@@ -157,7 +157,6 @@ embed.circaov <- function (u, ina) {
 
   mu <- atan(S/C) + pi * (C < 0)
   con <- sum( cos(u - mu) )
-  R <- sqrt( sum(rs^2) )
   k1 <- (1.28 - 0.53 * Rbar^2) * tan(0.5 * pi * Rbar)
   if (k1 < 710) {
     der <- con - n * besselI(k1, 1, expon.scaled = TRUE)/besselI(k1, 0, expon.scaled = TRUE)

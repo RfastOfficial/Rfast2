@@ -67,7 +67,7 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@yahoo.gr}.
 
 \examples{
 x <- matrix( runif( 100, 0, 1 ), ncol = 2 )
-ina <- rbinom(100, 1, 0.5) + 1
+ina <- rbinom(50, 1, 0.5) + 1
 a <- vm.nb(x, x, ina)
 a2 <- vmnb.pred(x, a$mu, a$kappa, a$ni)
 }

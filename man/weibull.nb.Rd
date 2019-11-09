@@ -91,7 +91,7 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@yahoo.gr}.
 }
 
 \examples{
-x <- matrix( rweibull( 100, 3, 4 ), ncol = 4 )
-ina <- rbinom(100, 1, 0.5) + 1
+x <- matrix( rweibull( 100, 3, 4 ), ncol = 2 )
+ina <- rbinom(50, 1, 0.5) + 1
 a <- weibull.nb(x, x, ina)
 }

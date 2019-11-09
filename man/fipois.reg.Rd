@@ -81,7 +81,7 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@yahoo.gr}.
 }
 
 \examples{
-y <- rnorm(200)
+y <- rpois(200, 10)
 id <- sample(1:10, 200, replace = TRUE)
 x <- rpois(200, 10)
 fipois.reg(y, x, id)

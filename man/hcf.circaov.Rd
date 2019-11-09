@@ -68,10 +68,10 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 }
 
 \examples{
-x <- rvonmises(100, 2.4, 10)
-ina <- rep(1:4,each = 25)
-hcf.circaov(x, ina, rads = TRUE)
-lr.circaov(x, ina, rads = TRUE)
-het.circaov(x, ina, rads = TRUE)
-embed.circaov(x, ina, rads = TRUE)
+x <- rvonmises(60, 2.4, 4)
+ina <- rep(1:3,each = 20)
+hcf.circaov(x, ina)
+lr.circaov(x, ina)
+het.circaov(x, ina)
+embed.circaov(x, ina)
 }
