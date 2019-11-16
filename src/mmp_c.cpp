@@ -8,9 +8,6 @@
 
 #include "mmp_c.h"
 
-// [[Rcpp::plugins("cpp11")]]
-// [[Rcpp::depends("RcppArmadillo")]]
-
 #define DEBUG 0
 #define db_print(...) \
 	do { if (DEBUG) Rprintf(__VA_ARGS__); } while (0)
@@ -30,6 +27,18 @@ static double STAT_PVALUE[2];
 
 Rcpp::List res;
 unsigned int kv_length;
+
+static void check_args(const double thres, const int max_k, const std::string method) {
+    if (max_k < 1) {
+        Rcpp::stop("Invalid max_k argument provided.\nExiting...\n");
+    }
+    else if (thres < 0 || thres >= 1) {
+        Rcpp::stop("Invalid thres argument provided.\nExiting...\n");
+    }
+    else if (method.compare("pearson") && method.compare("spearman")) {
+        Rcpp::stop("Invalid method name provided.\nExiting...\n");
+    }
+}
 
 static arma::mat calc_resid(arma::mat& cor_ds, arma::mat& sol_ds, 
 		arma::uvec& idxs_a, arma::uvec& idxs_b) {
@@ -560,15 +569,8 @@ Rcpp::List calc_mmp_c(arma::vec& target_vars, arma::mat& ds, int max_k,
 	hash_on ? kv_length = stats_kv[".length"] : kv_length = 0;
 	db_print("Call: adj_med_NAs\n");
 	adj_med_NAs(ds);
-	if (max_k < 1 || thres < 0 || thres >= 1) {
-		db_print("True: max_k < 1 || thres < 0 || thres >= 1\n");
-		if (max_k < 1) {
-			Rcpp::stop("Invalid max_k argument provided.\nExiting...\n");
-		}
-		else {
-			Rcpp::stop("Invalud thres argument provided.\nExiting...\n");
-		}
-	}
+    check_args(thres, max_k, method);
+
 	const unsigned int var_size = ds.n_cols;
 	if (max_k > (int) var_size) {
 		db_print("True: max_k > var_size\n");
