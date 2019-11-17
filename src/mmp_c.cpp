@@ -40,6 +40,13 @@ static void check_args(const double thres, const int max_k, const std::string me
     }
 }
 
+static void upd_args(arma::vec& target_vars, arma::mat& ds, const std::string method) {
+    if (!method.compare("spearman")) {
+        target_vars = rank_mean<arma::vec, arma::vec, arma::uvec>(target_vars, false);
+        ds = calc_rank(ds);
+    }
+}
+
 static arma::mat calc_resid(arma::mat& cor_ds, arma::mat& sol_ds, 
 		arma::uvec& idxs_a, arma::uvec& idxs_b) {
 	arma::mat lh_sub = cor_ds.submat(idxs_a, idxs_a);
@@ -380,15 +387,20 @@ static arma::vec calc_univ_pvalues(arma::vec& stats, const double dof) {
 }
 
 static void calc_univs(arma::vec& target_vars, arma::mat& ds, const std::string method, Rcpp::List& univs) {
+    arma::mat cor_mat = arma::cor(target_vars, ds);
+    arma::vec cor_vec = to_vec(cor_mat);
+    const unsigned int dof = ds.n_rows - 3;
+    arma::vec stats;
 	if (!method.compare("pearson")) {
 		db_print("True: !method.compare(\"pearson\")\n");
-		arma::mat cor_mat = arma::cor(target_vars, ds);
-		arma::vec cor_vec = to_vec(cor_mat);
-		const unsigned int dof = ds.n_rows - 3;
-		arma::vec stats = 0.5 * arma::log((1 + cor_vec) / (1 - cor_vec)) * std::sqrt(dof);
-		univs["stat"] = stats;
-		univs["pvalue"] = calc_univ_pvalues(stats, dof); 
+		stats = 0.5 * arma::log((1 + cor_vec) / (1 - cor_vec)) * std::sqrt(dof);
 	}
+    else if (!method.compare("spearman")) {
+		db_print("True: !method.compare(\"spearman\")\n");
+		stats = 0.5 * arma::log((1 + cor_vec) / (1 - cor_vec)) * std::sqrt(dof) / 1.029563;
+    }
+    univs["stat"] = stats;
+    univs["pvalue"] = calc_univ_pvalues(stats, dof); 
 }
 
 static double get_time_spent(const clock_t begin) {
@@ -569,8 +581,11 @@ Rcpp::List calc_mmp_c(arma::vec& target_vars, arma::mat& ds, int max_k,
 	hash_on ? kv_length = stats_kv[".length"] : kv_length = 0;
 	db_print("Call: adj_med_NAs\n");
 	adj_med_NAs(ds);
+	db_print("Call: check_args\n");
     check_args(thres, max_k, method);
 
+	db_print("Call: upd_args\n");
+    upd_args(target_vars, ds, method);
 	const unsigned int var_size = ds.n_cols;
 	if (max_k > (int) var_size) {
 		db_print("True: max_k > var_size\n");
