@@ -25,26 +25,14 @@ License: \tab GPL-2\cr
 }
 
 \author{
-Manos Papadakis <papadakm95@gmail.com>, Michail Tsagris <mtsagris@yahoo.gr>, Marios Dimitriadis <kmdimitriadis@gmail.com>, Stefanos Fafalios <stefanosfafalios@gmail.com>, 
-Ioannis Tsamardinos <tsamard@csd.uoc.gr>, Matteo Fasiolo <matteo.fasiolo@gmail.com>, Giorgos Borboudakis <borbudak@gmail.com>, John Burkardt <jburkardt@fsu.edu> and 
-Kleanthi Lakiotaki <kliolak@gmail.com>, Changliang Zou <nk.chlzou@gmail.com>, Christina Chatzipantsiou <chatzipantsiou@gmail.com>
+Manos Papadakis <papadakm95@gmail.com>, Michail Tsagris <mtsagris@yahoo.gr>, Stefanos Fafalios <stefanosfafalios@gmail.com>, Marios Dimitriadis <kmdimitriadis@gmail.com>.
 }
 
 \section{Maintainers }{
-Manos Papadakis <papadakm95@gmail.com>
+Manos Papadakis \email{rfastofficial@gmail.com}
 }
 
-\note{
-Acknowledgments:
-
-We would like to acknowledge Professor Kurt Hornik, Doctor Uwe Ligges (and the rest of R core team) for 
-their invaluable help with this R package. Erich Studerus for his invaluable comments and Neal Fultz for his 
-suggestions. Vassilis Vasdekis for his invaluable help with the random effects models. Marios Dimitriadis work 
-was funded by the Special Account for Research Funds of the University of Crete, Department of Computer Science. 
-Phillip Si is greatly acknowledged for his help with the Floyd-Warshal algorithm. Keefe Murphy for his invaluable 
-help with NEWS file and for his suggestions. Zacharias Papadovassilakis gave us the inspiration for the memory 
-efficient version of the k-NN algorithm. Yannis Pantazis explained us how the orhtogonal matching pursuit works. 
-Achim Zeileis for his help with the quasi Poisson regression models. Pedro J. Aphalo for finding a bug.
-Dimitris Kyriakis for finding a bug. 
-}
+%\note{
+%Acknowledgments:
+%}
 
