@@ -21,7 +21,7 @@ END_RCPP
 }
 
 // [[Rcpp::export]]
-Rcpp::List mmp_c(arma::vec target_vars, arma::mat ds, int max_k, 
+Rcpp::List mmp_c(arma::vec target_vars, arma::mat ds, int32_t max_k, 
 		const double thres, const std::string method, Rcpp::List inits, 
 		const bool hash_on, Rcpp::Environment stats_kv, 
 		Rcpp::Environment pvalues_kv, const bool bws_on) {
@@ -35,7 +35,7 @@ BEGIN_RCPP
     RNGScope __rngScope;
     traits::input_parameter< arma::vec >::type target_vars(target_varsSEXP);
     traits::input_parameter< arma::mat >::type ds(dsSEXP);
-    traits::input_parameter< int >::type max_k(max_kSEXP);
+    traits::input_parameter< int32_t >::type max_k(max_kSEXP);
     traits::input_parameter< const double >::type thres(thresSEXP);
     traits::input_parameter< const std::string >::type method(methodSEXP);
     traits::input_parameter< List >::type inits(initsSEXP);

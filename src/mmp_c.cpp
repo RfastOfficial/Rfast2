@@ -21,14 +21,14 @@ static arma::uvec DEF_UVEC;
 static Rcpp::List DEF_LIST;
 static Rcpp::Environment DEF_ENV;
 
-static const unsigned int STAT_POS = 0;
-static const unsigned int PVALUE_POS = 1;
+static const uint32_t STAT_POS = 0;
+static const uint32_t PVALUE_POS = 1;
 static double STAT_PVALUE[2];
 
 Rcpp::List res;
-unsigned int kv_length;
+uint32_t kv_length;
 
-static void check_args(const double thres, const int max_k, const std::string method) {
+static void check_args(const double thres, const int32_t max_k, const std::string method) {
     if (max_k < 1) {
         Rcpp::stop("Invalid max_k argument provided.\nExiting...\n");
     }
@@ -63,22 +63,22 @@ static arma::mat calc_sol(arma::mat& ds, arma::uvec& idxs_a, arma::uvec& idxs_b)
 	return res;
 }
 
-static void upd_col(arma::vec& src, arma::mat& dst, const unsigned int col) {
-	for (unsigned int i = 0; i < src.size(); ++i) {
+static void upd_col(arma::vec& src, arma::mat& dst, const uint32_t col) {
+	for (uint32_t i = 0; i < src.size(); ++i) {
 		dst(i, col) = src[i];
 	}
 }
 
 static arma::mat col_bind(arma::vec& src_a, arma::vec& src_b, arma::mat& src_c) {
-	const unsigned int nrows = src_c.n_rows;
-	const unsigned int ncols = src_c.n_cols + 2;
+	const uint32_t nrows = src_c.n_rows;
+	const uint32_t ncols = src_c.n_cols + 2;
 	arma::mat dst(nrows, ncols);
 	upd_col(src_a, dst, 0);
 	upd_col(src_b, dst, 1);
-	for (unsigned int src_col = 0, dst_col = 2; 
+	for (uint32_t src_col = 0, dst_col = 2; 
 			src_col < src_c.n_cols && dst_col < dst.n_cols; 
 			++src_col, ++dst_col) {
-		for (unsigned int i = 0; i < nrows; ++i) {
+		for (uint32_t i = 0; i < nrows; ++i) {
 			dst(i, dst_col) = src_c(i, src_col);
 		}
 	}
@@ -92,26 +92,26 @@ static void form_ret(const double stat, const double pvalue) {
 }
 
 
-static std::string form_key(const unsigned int val, std::vector<unsigned int>& vals) {
+static std::string form_key(const uint32_t val, std::vector<uint32_t>& vals) {
 	std::string key = std::to_string(val + 1); 
-	for (unsigned int i = 0; i < vals.size(); ++i) {
+	for (uint32_t i = 0; i < vals.size(); ++i) {
 		key += " " + std::to_string(vals[i] + 1);
 	}
 	return key;
 }
 
 void calc_pearson(arma::vec& target_vars, arma::mat& ds, 
-		const unsigned int x, arma::uvec& idxs, Rcpp::List& univs,
+		const uint32_t x, arma::uvec& idxs, Rcpp::List& univs,
 		const bool hash_on, Rcpp::Environment& stats_kv, 
 		Rcpp::Environment& pvalues_kv) {
 	const double def_stat = 0;
 	const double def_pvalue = std::log(1);
 	db_print("Call: rm_lt_nan\n");
-	std::vector<unsigned int> idxs_adj = rm_lt_nan(idxs, 0);
+	std::vector<uint32_t> idxs_adj = rm_lt_nan(idxs, 0);
 	std::string key;
 	if (hash_on) {
 		db_print("True: hash_on\n");
-		std::vector<unsigned int> idxs_nz(idxs_adj);
+		std::vector<uint32_t> idxs_nz(idxs_adj);
 		db_print("Call: std::sort\n");
 		std::sort(idxs_nz.begin(), idxs_nz.end());
 		db_print("Call: form_key\n");
@@ -161,7 +161,7 @@ void calc_pearson(arma::vec& target_vars, arma::mat& ds,
 		else {
 			db_print("True: tmp_ds.n_cols != 1\n");
 			db_print("Checking tmp_ds, tmp_vec by column equality.\n");
-			for (unsigned int j = 0; j < tmp_ds.n_cols; ++j) {
+			for (uint32_t j = 0; j < tmp_ds.n_cols; ++j) {
 				if (are_equal(tmp_ds, tmp_vec, true, j)) {
 					if (hash_on) {
 						if (!stats_kv.exists(key)) {
@@ -201,7 +201,7 @@ void calc_pearson(arma::vec& target_vars, arma::mat& ds,
 		arma::uvec idxs_a(2);
 		std::iota(idxs_a.begin(), idxs_a.end(), 0);
 		arma::uvec idxs_b(idxs.size());
-		for (unsigned int i = 0; i < idxs_b.size(); ++i) {
+		for (uint32_t i = 0; i < idxs_b.size(); ++i) {
 			idxs_b[i] = i + 2;
 		}
 		db_print("Call: calc_sol\n");
@@ -241,16 +241,16 @@ bool cmp_pvalues(const double stat_lh, const double stat_rh,
 }
 
 // Alters ds
-static void rbind_mat(arma::umat& ds, const unsigned int val) {
+static void rbind_mat(arma::umat& ds, const uint32_t val) {
 	ds.resize(ds.n_rows + 1, ds.n_cols);
-	for (unsigned int j = 0; j < ds.n_cols; ++j) {
+	for (uint32_t j = 0; j < ds.n_cols; ++j) {
 		ds(ds.n_rows - 1, j) = val;
 	}
 }
 
-static std::vector<unsigned int> keep_val(arma::uvec& vals, const unsigned int val_to_keep) {
-	std::vector<unsigned int> vals_adj;
-	for (unsigned int i = 0; i < vals.size(); ++i) {
+static std::vector<uint32_t> keep_val(arma::uvec& vals, const uint32_t val_to_keep) {
+	std::vector<uint32_t> vals_adj;
+	for (uint32_t i = 0; i < vals.size(); ++i) {
 		if (vals[i] == val_to_keep) {
 			vals_adj.push_back(i);
 		}
@@ -259,18 +259,18 @@ static std::vector<unsigned int> keep_val(arma::uvec& vals, const unsigned int v
 }
 
 void assoc_min(arma::vec& target_vars, arma::mat& ds, const std::string method, 
-		const int max_k, const unsigned int sel_idx, arma::uvec& sel_idxs, arma::vec& stats, 
+		const int32_t max_k, const uint32_t sel_idx, arma::uvec& sel_idxs, arma::vec& stats, 
 		arma::vec& pvalues, arma::uvec& sel_ord_idxs, const bool hash_on, 
 		Rcpp::Environment& stats_kv, Rcpp::Environment& pvalues_kv) {
 	double sel_stat = stats[sel_idx];
 	double sel_pvalue = pvalues[sel_idx];
-	std::vector<unsigned int> sel_idxs_adj = keep_val(sel_idxs, 1);
-	const unsigned int k = std::min(max_k, (int) sel_idxs_adj.size());
-	unsigned int curr_k = 1;
+	std::vector<uint32_t> sel_idxs_adj = keep_val(sel_idxs, 1);
+	const uint32_t k = std::min(max_k, (int) sel_idxs_adj.size());
+	uint32_t curr_k = 1;
 	while (curr_k <= k) {
-		const unsigned int max_idx = arma::index_max(sel_ord_idxs);
-		std::unordered_set<unsigned int> tmp_idxs = get_diff(sel_idxs_adj, max_idx);
-		std::vector<unsigned int> tmp_idxs_adj(tmp_idxs.begin(), tmp_idxs.end());
+		const uint32_t max_idx = arma::index_max(sel_ord_idxs);
+		std::unordered_set<uint32_t> tmp_idxs = get_diff(sel_idxs_adj, max_idx);
+		std::vector<uint32_t> tmp_idxs_adj(tmp_idxs.begin(), tmp_idxs.end());
 		arma::umat subsetcsk;
 		if (curr_k == 1) {
 			subsetcsk = arma::umat(1, 1);
@@ -280,7 +280,7 @@ void assoc_min(arma::vec& target_vars, arma::mat& ds, const std::string method,
 			subsetcsk = nchoosek(tmp_idxs_adj, curr_k - 1);
 			rbind_mat(subsetcsk, max_idx);
 		}
-		for (unsigned int i = 0; i < subsetcsk.n_cols; ++i) {
+		for (uint32_t i = 0; i < subsetcsk.n_cols; ++i) {
 			arma::uvec subsetcsk_col = subsetcsk.col(i);
 			Rcpp::List univs;
 			calc_pearson(target_vars, ds, sel_idx, subsetcsk_col, univs, hash_on, stats_kv, pvalues_kv);
@@ -296,15 +296,15 @@ void assoc_min(arma::vec& target_vars, arma::mat& ds, const std::string method,
 	form_ret(sel_stat, sel_pvalue);
 }
 
-unsigned int assoc_max_min(arma::vec& target_vars, arma::mat& ds, const std::string method,
-		const double thres, const int max_k, arma::uvec& sel_idxs, 
+uint32_t assoc_max_min(arma::vec& target_vars, arma::mat& ds, const std::string method,
+		const double thres, const int32_t max_k, arma::uvec& sel_idxs, 
 		arma::vec& stats, arma::vec& pvalues, arma::uvec& rem_idxs, arma::uvec& sel_ord_idxs,
 		const bool hash_on, Rcpp::Environment& stats_kv, Rcpp::Environment& pvalues_kv) {
-	int sel_idx = -1;
+	int32_t sel_idx = -1;
 	double sel_pvalue = 2;
 	double sel_stat = 0;
-	std::vector<unsigned int> rem_idxs_adj = keep_val(rem_idxs, 1);
-	for (unsigned int i = 0; i < rem_idxs_adj.size(); ++i) {
+	std::vector<uint32_t> rem_idxs_adj = keep_val(rem_idxs, 1);
+	for (uint32_t i = 0; i < rem_idxs_adj.size(); ++i) {
 		assoc_min(target_vars, ds, method, max_k, rem_idxs_adj[i], sel_idxs,	
 				stats, pvalues, sel_ord_idxs, hash_on, stats_kv, pvalues_kv);
 		const double tmp_pvalue = STAT_PVALUE[PVALUE_POS];
@@ -323,16 +323,16 @@ unsigned int assoc_max_min(arma::vec& target_vars, arma::mat& ds, const std::str
 
 static arma::uvec get_sort_idxs(arma::vec& vals, arma::uvec& idxs) {
 	std::vector<double> vals_tmp;
-	for (unsigned int i = 0; i < idxs.size(); ++i) {
+	for (uint32_t i = 0; i < idxs.size(); ++i) {
 		vals_tmp.push_back(vals[idxs[i]]);
 	}
 	arma::vec vals_adj(vals_tmp);
 	return arma::sort_index(vals_adj);
 }
 
-static arma::uvec get_idxs_eq(arma::uvec vals, const unsigned int val) {
-	std::vector<unsigned int> vals_adj;
-	for (unsigned int i = 0; i < vals.size(); ++i) {
+static arma::uvec get_idxs_eq(arma::uvec vals, const uint32_t val) {
+	std::vector<uint32_t> vals_adj;
+	for (uint32_t i = 0; i < vals.size(); ++i) {
 		if (vals[i] == val) {
 			vals_adj.push_back(i);
 		}
@@ -340,8 +340,8 @@ static arma::uvec get_idxs_eq(arma::uvec vals, const unsigned int val) {
 	return arma::uvec(vals_adj);
 }
 
-static void neg_zero_idxs(arma::uvec& src, arma::uvec& base, const unsigned int val) {
-	for (unsigned int i = 0; i < src.size() && i < base.size(); ++i) {
+static void neg_zero_idxs(arma::uvec& src, arma::uvec& base, const uint32_t val) {
+	for (uint32_t i = 0; i < src.size() && i < base.size(); ++i) {
 		if (!base[i]) {
 			src[i] = val;
 		}
@@ -349,7 +349,7 @@ static void neg_zero_idxs(arma::uvec& src, arma::uvec& base, const unsigned int 
 }
 
 static bool is_true(arma::uvec& vals) {
-	for (unsigned int i = 0; i < vals.size(); ++i) {
+	for (uint32_t i = 0; i < vals.size(); ++i) {
 		if (vals[i]) {
 			return true;
 		}
@@ -358,7 +358,7 @@ static bool is_true(arma::uvec& vals) {
 }
 
 static void adj_gt_vals(arma::uvec& rem_idxs, arma::vec& pvalues, const double thres, const double val) {
-	for (unsigned int i = 0; i < rem_idxs.size(); ++i) {
+	for (uint32_t i = 0; i < rem_idxs.size(); ++i) {
 		if (pvalues[i] > thres) {
 			rem_idxs[i] = 0;
 		}
@@ -371,7 +371,7 @@ static void copy_vecs(Rcpp::List& src, arma::vec& dst1, arma::vec& dst2) {
 	dst1.set_size(src1.size());
 	dst2.set_size(src2.size());
 
-	for (unsigned int i = 0; i < src1.size(); ++i) {
+	for (uint32_t i = 0; i < src1.size(); ++i) {
 		dst1[i] = src1[i];
 		dst2[i] = src2[i];
 	}
@@ -380,7 +380,7 @@ static void copy_vecs(Rcpp::List& src, arma::vec& dst1, arma::vec& dst2) {
 static arma::vec calc_univ_pvalues(arma::vec& stats, const double dof) {
 	arma::vec pvalues(stats.size());
 	static const double tmp_log = std::log(2);
-	for (unsigned int i = 0; i < stats.size(); ++i) {
+	for (uint32_t i = 0; i < stats.size(); ++i) {
 		pvalues[i] = tmp_log + R::pt(std::abs(stats[i]), dof, false, true);
 	}
 	return pvalues;
@@ -389,7 +389,7 @@ static arma::vec calc_univ_pvalues(arma::vec& stats, const double dof) {
 static void calc_univs(arma::vec& target_vars, arma::mat& ds, const std::string method, Rcpp::List& univs) {
     arma::mat cor_mat = arma::cor(target_vars, ds);
     arma::vec cor_vec = to_vec(cor_mat);
-    const unsigned int dof = ds.n_rows - 3;
+    const uint32_t dof = ds.n_rows - 3;
     arma::vec stats;
 	if (!method.compare("pearson")) {
 		db_print("True: !method.compare(\"pearson\")\n");
@@ -408,9 +408,9 @@ static double get_time_spent(const clock_t begin) {
 	return (double) (end - begin) / CLOCKS_PER_SEC;
 }
 
-void inter_mmp_c(arma::vec& target_vars, arma::mat& ds, const int max_k, 
+void inter_mmp_c(arma::vec& target_vars, arma::mat& ds, const int32_t max_k, 
 		const double thres, const std::string method, Rcpp::List inits, const bool hash_on,
-		const unsigned int var_size, Rcpp::Environment& stats_kv, Rcpp::Environment& pvalues_kv) {
+		const uint32_t var_size, Rcpp::Environment& stats_kv, Rcpp::Environment& pvalues_kv) {
 	db_print("Initializing clock.\n");
 	clock_t begin = clock();
 
@@ -450,7 +450,7 @@ void inter_mmp_c(arma::vec& target_vars, arma::mat& ds, const int max_k,
 	db_print("Initializing idxs.\n");
 	arma::uvec sel_idxs(var_size, arma::fill::zeros);
 	arma::uvec sel_ord_idxs(var_size, arma::fill::zeros);
-	unsigned int sel_idx = arma::index_min(pvalues);
+	uint32_t sel_idx = arma::index_min(pvalues);
 	sel_idxs[sel_idx] = 1;
 	sel_ord_idxs[sel_idx] = 1;
 
@@ -490,14 +490,14 @@ void inter_mmp_c(arma::vec& target_vars, arma::mat& ds, const int max_k,
 	inits.size() ? res["n.tests"] = 0 : res["n.tests"] = stats.n_rows * stats.n_cols + kv_length;
 }
 
-Rcpp::List calc_mmp_c_bp(arma::vec& target_vars, arma::mat& ds, const int limit_k, const double thres,
+Rcpp::List calc_mmp_c_bp(arma::vec& target_vars, arma::mat& ds, const int32_t limit_k, const double thres,
 		const std::string method) {
 	db_print("Initializing values\n");
 	const double thres_log = std::log(thres);
 	arma::uvec idxs(ds.n_cols);
 	std::iota(idxs.begin(), idxs.end(), 0);
 
-	unsigned int cntr = 0;
+	uint32_t cntr = 0;
 	std::vector<double> pvalues;
 	if (ds.n_cols == 1) {
 		db_print("True: ds.n_cols == 1\n");
@@ -535,18 +535,18 @@ Rcpp::List calc_mmp_c_bp(arma::vec& target_vars, arma::mat& ds, const int limit_
 	}
 	else {
 		db_print("True: !ds.n_cols || ds.n_cols > 2\n");
-		std::vector<unsigned int> combn_vals(ds.n_cols);
+		std::vector<uint32_t> combn_vals(ds.n_cols);
 		std::iota(combn_vals.begin(), combn_vals.end(), 1);
-		for (unsigned int i = 0; i < ds.n_cols; ++i) {
-			int k = 0;
+		for (uint32_t i = 0; i < ds.n_cols; ++i) {
+			int32_t k = 0;
 			double tmp_pvalue = -5.0;
 			std::vector<double> tmp_pvalues;
-			while (k < (int) ds.n_cols - 1 && k < limit_k && tmp_pvalue < thres_log) {
-				arma::umat combns = find_combn<arma::umat, std::vector<unsigned int>>(combn_vals, ++k);
+			while (k < (int32_t) ds.n_cols - 1 && k < limit_k && tmp_pvalue < thres_log) {
+				arma::umat combns = find_combn<arma::umat, std::vector<uint32_t>>(combn_vals, ++k);
 				combns -= 1;
-				std::vector<unsigned int> cols_rem = det_cols(combns, i);
+				std::vector<uint32_t> cols_rem = det_cols(combns, i);
 				arma::umat combns_adj = rm_cols(combns, cols_rem);
-				unsigned int j = 0;
+				uint32_t j = 0;
 				while (j < combns_adj.n_cols && tmp_pvalue < thres_log) {
 					arma::uvec tmp_idxs = combns_adj.col(j);
 					calc_pearson(target_vars, ds, i, tmp_idxs, 
@@ -568,13 +568,13 @@ Rcpp::List calc_mmp_c_bp(arma::vec& target_vars, arma::mat& ds, const int limit_
 
 static std::vector<double> upd_vals(std::vector<double>& src_pvalues, arma::uvec& idxs,
 		std::vector<double> dst_pvalues) {
-	for (unsigned int i = 0; i < idxs.size(); ++i) {
+	for (uint32_t i = 0; i < idxs.size(); ++i) {
 		dst_pvalues[idxs[i]] = src_pvalues[i];
 	}
 	return dst_pvalues;
 }
 
-Rcpp::List calc_mmp_c(arma::vec& target_vars, arma::mat& ds, int max_k, 
+Rcpp::List calc_mmp_c(arma::vec& target_vars, arma::mat& ds, int32_t max_k, 
 		const double thres, const std::string method, Rcpp::List& inits, 
 		const bool hash_on, Rcpp::Environment& stats_kv, 
 		Rcpp::Environment& pvalues_kv, const bool bws_on) {
@@ -586,8 +586,8 @@ Rcpp::List calc_mmp_c(arma::vec& target_vars, arma::mat& ds, int max_k,
 
 	db_print("Call: upd_args\n");
     upd_args(target_vars, ds, method);
-	const unsigned int var_size = ds.n_cols;
-	if (max_k > (int) var_size) {
+	const uint32_t var_size = ds.n_cols;
+	if (max_k > (int32_t) var_size) {
 		db_print("True: max_k > var_size\n");
 		max_k = var_size;
 	}
@@ -607,7 +607,7 @@ Rcpp::List calc_mmp_c(arma::vec& target_vars, arma::mat& ds, int max_k,
 		std::vector<double> res_im_pvalues = res["pvalues"];
 		std::vector<double> res_mb_pvalues = res_mb["pvalue"];
 		res["pvalues"] = upd_vals(res_mb_pvalues, res_im_idxs, res_im_pvalues);
-		inits.size() ? res["n.tests"] = 0 : res["n.tests"] = (int) res["n.tests"] + (int) res_mb["counter"];
+		inits.size() ? res["n.tests"] = 0 : res["n.tests"] = (int32_t) res["n.tests"] + (int32_t) res_mb["counter"];
 	}
 	if (hash_on) {
 		stats_kv[".length"] = kv_length;
