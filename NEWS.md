@@ -1,7 +1,7 @@
 <h1 align="center"> _Rfast2_ </h1>
 
 > ####New version 
-Date release: **05/08/2019**
+Date release: **01/12/2019**
 
 ***
 
