@@ -16,9 +16,29 @@ Date release: **05/08/2019**
 >
 >>2. <u> **New** </u>
 >>
->>  | 	   Function 	   |             What's new!             |
->>  | -------------------- | ----------------------------------- |
->>  |     				   |  									 |
+>>  | 	   Function 	   |             What's new!                            |
+>>  | gammareg             | Gamma regression                                   |
+>>  | gammaregs            | Many gamma regressions                             |
+>>  | cor_test   		   | Hypothesis testing for the correlation coefficient	|
+>>  | cor_test   		   | Hypothesis testing for the correlation coefficient	|
+>>  | hcf.circaov   	   | ANOVA for circular data                            |
+>>  | het.circaov     	   | ANOVA for circular data                            |
+>>  | lr.circaov    	   | ANOVA for circular data                            |
+>>  | multivm.mle   	   | Fitting many von Mises distributions               |
+>>  | multispml.mle   	   | Fitting many von SPML distributions                |
+>>  | depth.mahala   	   | Mahalanobis depth                                  |
+>>  | perm.ttest2   	   | Permutation based 2 sample t-test                  |
+>>  | lm.parboot     	   | Parametric bootstrap for linear models             |
+>>  | weibull.nb     	   | Weibull Naive Bayes (NB) classifier                |
+>>  | weibullnb.pred  	   | Prediction using Weibull NB classifier             |
+>>  | normlog.nb     	   | Gaussian(log-link) NB classifier                   |
+>>  | normlognb.pred  	   | Prediction using Gaussian(log-link) NB classifier  |
+>>  | laplace.nb     	   | Laplace NB classifier                              |
+>>  | laplacenb.pred  	   | Prediction using Laplace NB classifier             |
+>>  | vm.nb     	       | von Mises NB classifier                            |
+>>  | vmnb.pred  	       | Prediction using von Mises NB classifier           |
+>>  | spml.nb     	       | SPML NB classifier                                 |
+>>  | spml.pred  	       | Prediction using SPML NB classifier                |
 >
 ***
 >
