@@ -13,7 +13,7 @@ colGroup<-function(x,ina,method="sum",names=TRUE, std = FALSE){
 	else y <- .Call(Rfast2_col_group,x,ina,length(unique_ina),method)
 	
 	if(names){
-		rownames(y)<-as.character(Rfast::Sort.int(unique_ina))
+		rownames(y)<-as.character(Rfast::Sort(unique_ina))
 	}
 	
 	y

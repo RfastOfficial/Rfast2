@@ -60,9 +60,11 @@ R implementation and documentation: Michail Tsagris <mtsagris@yahoo.gr>
 }
 
 \examples{
+\donttest{
 y <- rnorm(200)
 id <- sample(1:20, 200, replace = TRUE)
 x <- rnorm(200, 3)
 cluster.lm(y, x, id)
+}
 }
 
