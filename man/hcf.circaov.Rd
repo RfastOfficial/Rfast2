@@ -68,7 +68,7 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 }
 
 \examples{
-x <- Rfast::rvonmises(60, 2.4, 4)
+x <- rnorm(60, 2.3, 0.3)
 ina <- rep(1:3,each = 20)
 hcf.circaov(x, ina)
 lr.circaov(x, ina)
