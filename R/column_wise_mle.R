@@ -21,7 +21,7 @@ colordinal.mle <- function (x, link = "logit") {
     } else  param <- qnorm(ni)
     ep <- which( is.infinite(param) )
     param[ep] <- NA
-    loglik <- rowSums( t(ina) * log( cbind( ni[1, ], coldiffs( t(ni)) ) ), na.rm = TRUE )
+    loglik <- Rfast::rowSums( t(ina) * log( cbind( ni[1, ], coldiffs( t(ni)) ) ), na.rm = TRUE )
     list(param = a, loglik = loglik)
 }
 

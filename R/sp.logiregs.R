@@ -23,8 +23,8 @@ sp.logiregs <- function(y, x, logged = FALSE) {
 # ## Do the computations}
 # z = log(p / (1 - p)) + (y - p) / w 
 # zc = z - mean(z)
-# s1 = colSums(S)
-# s2 = colSums(S ^ 2)
+# s1 = Rfast::colSums(S)
+# s2 = Rfast::colSums(S ^ 2)
 # den1 = s2 - s1 ^ 2 / n
 # b = crossprod(zc, S) / den1
 # err = sqrt(1 / (w[1] * den1))

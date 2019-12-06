@@ -10,7 +10,7 @@ circ.cors1 <- function(theta, phi, pvalue = FALSE) {
   sintheta <- sin(theta - m1)
   sinphi <- sin( Rfast::eachrow(phi, m2, oper = "-") )
   up <- Rfast::colsums( sintheta * sinphi )
-  down <- sqrt( sum( sintheta ^2 ) * colsums( sinphi^2 ) )
+  down <- sqrt( sum( sintheta ^2 ) * Rfast::colsums( sinphi^2 ) )
   rho <- up/down  ## circular correlation
   res <- rho
   if (pvalue) {
