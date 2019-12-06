@@ -109,10 +109,12 @@ R implementation and documentation: Manos Papadakis \email{papadakm95@gmail.com}
 }
 
 \examples{
+\donttest{
 y <- rbinom(100, 1, 0.5)
 x <- matrix( rnorm(100 * 500), ncol = 500 )
 m1 <- mmpc2(y, x, max_k = 3, threshold = 0.05, test = "logistic")
 m2 <- fbed.reg(y, x, type = "logistic")
+}
 }
 
 
