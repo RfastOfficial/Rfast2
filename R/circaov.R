@@ -108,7 +108,7 @@ lr.circaov <- function(u, ina) {
   m <- matrix(rep(m, g), nrow = g, byrow = TRUE)
 
   n <- dim(x)[1]
-  rs <- colsums(rsi)
+  rs <- Rfast::colsums(rsi)
   mu <- atan(rs[2]/rs[1]) + pi * (rs[1] < 0)
   con <- sum( cos(u - mu) )
   R <- sqrt( sum(rs^2) )
