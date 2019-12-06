@@ -67,9 +67,11 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@yahoo.gr}.
 }
 
 \examples{
+\donttest{
 y <- rpois(100, 5)
 y[y == 0] <- 1
 x <- matrix( rnorm(100 * 5), ncol = 5 )
 mod <- ztp.reg(y, x)
+}
 }
 

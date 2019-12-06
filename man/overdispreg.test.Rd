@@ -50,7 +50,9 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}
 }
 
 \examples{
+\donttest{
 y <- rnbinom(100, 10, 0.4)
 x <- rnorm(100)
 overdispreg.test(y, x)
+}
 }

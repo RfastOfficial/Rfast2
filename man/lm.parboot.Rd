@@ -52,8 +52,10 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@yahoo.gr}.
 }
 
 \examples{
+\donttest{
 y <- rnorm(50)
-x <- matrnorm(50, 2)
+x <- Rfast::matrnorm(50, 2)
 a <- lm.parboot(x, y, 500)
+}
 }
 

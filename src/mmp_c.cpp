@@ -376,7 +376,7 @@ static void calc_univs(arma::vec& target_vars, arma::mat& ds, const std::string 
 		arma::mat cor_mat = arma::cor(target_vars, ds);
 		arma::vec cor_vec = to_vec(cor_mat);
 		const unsigned int dof = ds.n_rows - 3;
-		arma::vec stats = 0.5 * arma::log((1 + cor_vec) / (1 - cor_vec)) * std::sqrt(dof);
+		arma::vec stats = 0.5 * foreach<std::log,arma::vec>((1 + cor_vec) / (1 - cor_vec)) * std::sqrt(dof);
 		univs["stat"] = stats;
 		univs["pvalue"] = calc_univ_pvalues(stats, dof); 
 	}

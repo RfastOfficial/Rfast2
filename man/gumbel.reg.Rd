@@ -63,8 +63,10 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@yahoo.gr}.
 }
 
 \examples{
+\donttest{
 y <- rnorm(100)
 x <- matrix(rnorm(100 * 3), ncol = 3)
 mod <- gumbel.reg(y, x)
+}
 }
 

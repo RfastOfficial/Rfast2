@@ -61,9 +61,11 @@ Stefanos Fafalios \email{stefanosfafalios@gmail.com}.
 }
 
 \examples{
+\donttest{
 y <- iris[, 5]
 x <- matrix( rnorm(150 * 3), ncol = 3 )
 multinom.reg(y, x)
+}
 }
 
 \keyword{ Multinomial distribution }

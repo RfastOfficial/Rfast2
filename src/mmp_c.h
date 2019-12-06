@@ -10,6 +10,7 @@
 #include <functional>
 #include <RcppArmadillo.h>
 #include "cts.h"
+#include "templates.h"
 
 // [[Rcpp::plugins("cpp11")]]
 // [[Rcpp::depends("RcppArmadillo")]]

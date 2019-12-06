@@ -81,9 +81,11 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@yahoo.gr}.
 }
 
 \examples{
+\donttest{
 y <- rnorm(200)
 id <- sample(1:20, 200, replace = TRUE)
 x <- rnorm(200, 3)
 gee.reg(y, x, id)
+}
 }
 

@@ -61,8 +61,10 @@ Stefanos Fafalios \email{stefanosfafalios@gmail.com}.
 }
 
 \examples{
+\donttest{
 y <- rnbinom(100, 10, 0.7)
 x <- matrix( rnorm(100 * 3), ncol = 3 )
 mod <- negbin.reg(y, x)
+}
 }
 
