@@ -272,21 +272,72 @@ List fbed_reg(Rcpp::NumericVector Y, Rcpp::NumericMatrix X,
       idx = -1;
       //mods = (double *)malloc(sizeof(double)*idxsz);
       mods = new double[idxsz];
-      #ifdef _OPENMP
-      #pragma omp parallel if(parallel)
-      {
-      #endif
+      if(parallel){
+        #ifdef _OPENMP
+        #pragma omp parallel
+        {
+        #endif
+          mat tmpmat = vecs,tmpu;
+          tmpmat.resize(n, selectedColumnSize+1);
+          if(inttype==4){
+            tmpu = u;
+            tmpu.resize(idmx,selectedColumnSize+1);
+          }
+          #ifdef _OPENMP
+          #pragma omp for
+          #endif
+          for(int i = 0; i < idxsz; i++){
+            //tmpmat = bindColsToMat(x.col(idxs[i]), vecs, selectedColumnSize, tmpmat);
+            tmpmat.col(selectedColumnSize) = x.col(idxs[i]);
+            if(inttype == 1){
+              mods[i] = glm_logistic3(tmpmat, y, &ni[0], sy, tol,maxiters);
+            }
+            else if(inttype==2){
+              mods[i] = -(prop_reg2(tmpmat, y, &ni[0],sy,tol,maxiters)[2]);
+
+              D = 0;
+            }
+            else if(inttype==3){
+              mods[i] = glm_poisson3( tmpmat, y, lgmy, tol,maxiters);
+            }
+            else if(inttype == 4){
+              tmpu.col(selectedColumnSize) = group_sum_helper<vec,vec,IntegerVector>(tmpmat.col(selectedColumnSize), id, &idmn,&idmx);
+              mods[i] = -rint_reg2(tmpmat,y,ni,tmpu,sy,idmx,tol,maxiters);
+
+              D = 0;
+            }
+            else if(inttype == 5){
+              mods[i] = -(qpois_reg2(tmpmat, y,lgmy,ylogy, tol,maxiters)[2]);
+              D = 0;
+            }
+            else if(inttype == 6){
+              mods[i] = -2*weib_reg2(y, tmpmat, ni, ylogy, tol, maxiters);
+            }
+            else if(inttype == 7){
+              mods[i] = -2*spml_reg2(u, tmpmat, tol, maxiters);
+            }
+            else if(inttype == 8){
+              mods[i] = multinom_reg2(Y1, tmpmat, u, m0, b0, tol, maxiters);
+            }
+            else{
+              // if(inttype == 9)
+              mods[i] = normlog_reg2(y, tmpmat, ni, tol, maxiters)(1);
+            }
+          }
+          tmpmat.clear();
+        #ifdef _OPENMP
+        }
+        #endif
+      }
+      else{
         mat tmpmat = vecs,tmpu;
         tmpmat.resize(n, selectedColumnSize+1);
         if(inttype==4){
           tmpu = u;
           tmpu.resize(idmx,selectedColumnSize+1);
         }
-        #ifdef _OPENMP
-        #pragma omp for
-        #endif
+
         for(int i = 0; i < idxsz; i++){
-          //tmpmat = bindColsToMat(x.col(idxs[i]), vecs, selectedColumnSize, tmpmat);
           tmpmat.col(selectedColumnSize) = x.col(idxs[i]);
           if(inttype == 1){
             mods[i] = glm_logistic3(tmpmat, y, &ni[0], sy, tol,maxiters);
@@ -324,10 +375,8 @@ List fbed_reg(Rcpp::NumericVector Y, Rcpp::NumericMatrix X,
           }
         }
         tmpmat.clear();
-      #ifdef _OPENMP
-      }
-      #endif
 
+      }
       for(i = 0; i < idxsz; i++){
         stat = D - mods[i];
 
@@ -390,14 +439,31 @@ List fbed_reg(Rcpp::NumericVector Y, Rcpp::NumericMatrix X,
     int removed = 0;
     while(selectedColumnSize > 1){
       mods = new double[selectedColumnSize-1];
-      #ifdef _OPENMP
-      #pragma omp parallel if(parallel)
-      {
-      #endif
+      if(parallel){
+        #ifdef _OPENMP
+        #pragma omp parallel
+        {
+        #endif
+          mat tmpmat(n,selectedColumnSize-1);
+        #ifdef _OPENMP
+        #pragma omp for
+        #endif
+          for(int i = 1; i < selectedColumnSize; i++){
+            tmpmat = bindColsToMat2(i, vecs, selectedColumnSize,tmpmat);
+            if(inttype == 1)
+              //mods[i-1] = lrfit2( bindColsToMat2(i, vecs, selectedColumnSize,tmpmat), y, eye, tol,maxiters);
+              mods[i-1] = glm_logistic3( tmpmat, y,&ni[0],sy, tol,maxiters);
+            else if(inttype == 3)
+              mods[i-1] = glm_poisson3(tmpmat, y, lgmy, tol,maxiters);
+            else if(inttype==7)
+              mods[i-1] = -2*spml_reg2(u, tmpmat, tol, maxiters);
+          }
+        #ifdef _OPENMP
+        }
+        #endif
+      }
+      else{
         mat tmpmat(n,selectedColumnSize-1);
-      #ifdef _OPENMP
-      #pragma omp for
-      #endif
         for(int i = 1; i < selectedColumnSize; i++){
           tmpmat = bindColsToMat2(i, vecs, selectedColumnSize,tmpmat);
           if(inttype == 1)
@@ -408,9 +474,7 @@ List fbed_reg(Rcpp::NumericVector Y, Rcpp::NumericMatrix X,
           else if(inttype==7)
             mods[i-1] = -2*spml_reg2(u, tmpmat, tol, maxiters);
         }
-      #ifdef _OPENMP
       }
-      #endif
       minstat = mods[0]-D;
       stats[i] = minstat;
       idx = selectedColumns[1];
@@ -458,29 +522,29 @@ List fbed_reg(Rcpp::NumericVector Y, Rcpp::NumericMatrix X,
     tmp(i-1,1) = stats[i];
   }
 
-  timer.Stop();
   l["colsfound"] = tmp;
   l["kmatrix"] = kmatrix;
+  timer.Stop();
   l["runtime"] = timer.getTime();
 
   return l;
 }
 
 RcppExport SEXP Rfast2_fbed_reg(SEXP ySEXP,SEXP xSEXP,SEXP sigSEXP,SEXP typeSEXP,SEXP idSEXP,SEXP kSEXP,SEXP backwardSEXP, SEXP tolSEXP,SEXP parallelSEXP,SEXP maxitersSEXP) {
-BEGIN_RCPP
-    RObject __result;
-    RNGScope __rngScope;
-    traits::input_parameter< NumericVector >::type y(ySEXP);
-    traits::input_parameter< NumericMatrix >::type x(xSEXP);
-    traits::input_parameter< const double >::type sig(sigSEXP);
-    traits::input_parameter< const std::string >::type type(typeSEXP);
-    traits::input_parameter< IntegerVector >::type id(idSEXP);
-    traits::input_parameter< int >::type k(kSEXP);
-    traits::input_parameter< bool >::type backward(backwardSEXP);
-    traits::input_parameter< const double >::type tol(tolSEXP);
-    traits::input_parameter< const bool >::type parallel(parallelSEXP);
-    traits::input_parameter< const int >::type maxiters(maxitersSEXP);
-    __result = fbed_reg(y,x,sig,type,id,k,backward,tol,parallel,maxiters);
-    return __result;
-END_RCPP
+  BEGIN_RCPP
+  RObject __result;
+  RNGScope __rngScope;
+  traits::input_parameter< NumericVector >::type y(ySEXP);
+  traits::input_parameter< NumericMatrix >::type x(xSEXP);
+  traits::input_parameter< const double >::type sig(sigSEXP);
+  traits::input_parameter< const std::string >::type type(typeSEXP);
+  traits::input_parameter< IntegerVector >::type id(idSEXP);
+  traits::input_parameter< int >::type k(kSEXP);
+  traits::input_parameter< bool >::type backward(backwardSEXP);
+  traits::input_parameter< const double >::type tol(tolSEXP);
+  traits::input_parameter< const bool >::type parallel(parallelSEXP);
+  traits::input_parameter< const int >::type maxiters(maxitersSEXP);
+  __result = fbed_reg(y,x,sig,type,id,k,backward,tol,parallel,maxiters);
+  return __result;
+  END_RCPP
 }
