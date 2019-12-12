@@ -9,7 +9,7 @@ importFrom("stats", "pt", "cov", "pchisq", "pf", "cor", "qt", "sd",
 importFrom("Rfast", vm.mle, colvm.mle, colmeans, colsums, eachrow, 
 group, colVars, spdinv, mediandir, colMins, nth,
 gammamle, weibull.mle, poisson_only, logistic_only, multinom.regs,
-multinom.mle, Var, normlog.regs, eachcol.apply, Sort)
+multinom.mle, Var, normlog.regs, eachcol.apply, Sort,coldiffs,rowsums)
 
 importFrom(Rcpp, evalCpp)
 
