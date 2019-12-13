@@ -39,7 +39,7 @@ This can either be "logit" or "probit". It is the link function to be used.
 %\item{maxiters}{
 %The maximum number of iterations to implement.
 %}
-}
+%}
 
 \details{
 For each column, the same distribution is fitted and its parameters and log-likelihood are computed.
