@@ -37,9 +37,6 @@ A matrix with the (MLE, hence biased) variance parameters.
 \item{location}{
 A matrix with the location parameters (medians).
 }
-\item{scale}{
-A matrix with the scale parameters.
-}
 \item{ni}{
 A vector with the frequencies of each group.
 }
