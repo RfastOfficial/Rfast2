@@ -192,11 +192,12 @@ spml.nb <- function(xnew = NULL, x, ina, tol = 1e-07) {
 
 
 #[export]
-spmlnb.pred <- function(xnew, mu1, mu2, gam, ni) {
+spmlnb.pred <- function(xnew, mu1, mu2, ni) {
   k <- dim(gam)[1]
   score <- matrix(0, dim(xnew)[1], k)
   com <-  -0.5 * Rfast::rowsums( mu1^2 + mu2^2 ) + log(ni)
   xnew <- t(xnew)
+  mu <- cbind( cos(mu1), sin(mu2) ) 
   for (i in 1:k) {
     ta <- sqrt(gam[i, ]) * cos(xnew - mu[i, ]) 
     score[, i] <- Rfast::colsums( log1p( ta * pnorm(ta) / dnorm(ta) ) )  

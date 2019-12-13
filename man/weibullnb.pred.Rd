@@ -25,7 +25,7 @@ For the Gaussian case this contain positive numbers only.
 \item{shape}{
 A matrix with the group shape parameters. Each row corresponds to a group.
 }
-\item{s}{
+\item{scale}{
 A matrix with the group scale parameters. Each row corresponds to a group.
 }
 \item{expmu}{

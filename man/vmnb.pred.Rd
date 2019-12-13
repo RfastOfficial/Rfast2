@@ -12,7 +12,7 @@ Prediction with some naive Bayes classifiers for circular data.
 
 \usage{
 vmnb.pred(xnew, mu, kappa, ni)
-spmlnb.pred(xnew, mu1, mu2, gam, ni)
+spmlnb.pred(xnew, mu1, mu2, ni)
 }
 
 \arguments{

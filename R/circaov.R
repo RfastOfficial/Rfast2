@@ -65,7 +65,7 @@ het.circaov <- function(u, ina) {
   coni <- ki
   for (i in 1:g) {
     n <- ni[i]
-    coni[i] <- sum( cos( x[ina == i] - mi[i] ) )
+    coni[i] <- sum( cos( u[ina == i] - mi[i] ) )
     con <- coni[i]
     k1 <- ki[i]
     if (k1 < 710) {
