@@ -79,7 +79,6 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@yahoo.gr}.
 
 \examples{
 \donttest{
-library(MASS)
 y <- rbeta(150, 3, 4)
 x <- iris
 a <- propols.reg(y, x)

@@ -43,7 +43,7 @@ The parameters of the model.
 
 \references{
 Sandra Taylor and Katherine Pollard (2009). Hypothesis Tests for Point-Mass 
-Mixture Datawith Application to `Omics Data with Many Zero Values. 
+Mixture Data with Application to Omics Data with Many Zero Values. 
 Statistical Applications in Geneticsand Molecular Biology, 8(1): 1--43.
 
 Kalimuthu Krishnamoorthy, Meesook Lee and Wang Xiao (2015). Likelihood ratio tests 
