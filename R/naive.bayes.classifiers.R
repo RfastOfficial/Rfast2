@@ -187,7 +187,7 @@ spml.nb <- function(xnew = NULL, x, ina, tol = 1e-07) {
     score <- Rfast::eachrow( score, com, oper = "+" ) 
     est <- Rfast::rowMaxs(score)
   }
-  list(mu1 = mu1, mu2 = mu2, mu = mu, kappa = kappa,ni = ni,  est = est)
+  list(mu1 = mu1, mu2 = mu2, mu = mu, gama = gama,ni = ni,  est = est)
 }
 
 
