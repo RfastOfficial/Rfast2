@@ -1,11 +1,11 @@
-\name{Non linear least squares regression for percentages or proporions}
+\name{Non linear least squares regression for percentages or proportions}
 \alias{propols.reg}
 \title{
-Non linear least squares regression for percentages or proporions
+Non linear least squares regression for percentages or proportions
 }
 
 \description{
-Non linear least squares regression for percentages or proporions.
+Non linear least squares regression for percentages or proportions.
 }
 
 \usage{
