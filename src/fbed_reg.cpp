@@ -30,13 +30,13 @@ List fbed_reg(Rcpp::NumericVector Y, Rcpp::NumericMatrix X,
   vec ni, sy;
   rowvec m0,b0;
   mat u,Y1;
-  double lgmy;
+  double lgmy=0;
 
   List l;
 
   double D0;
   int idmx,idmn;
-  double ylogy;
+  double ylogy=0;
   vec startmod;
 
   double con = R::qchisq(1 - sig, 1, TRUE, FALSE);
