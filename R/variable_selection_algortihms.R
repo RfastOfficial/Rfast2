@@ -1,4 +1,69 @@
 #[export]
+fbed.reg <- function (y, x, alpha = 0.05, type = "logistic", K = 0, 
+    backward = FALSE, parallel = FALSE, tol = 1e-07, maxiters = 100) {
+    mod <- .Call(Rfast2_fbed_reg, y, x, alpha, type, id = integer(0), 
+        K, backward, tol, parallel, maxiters)
+    mod$ini <- as.vector(mod$startmod)
+    mod$startmod <- NULL
+    mod$res <- mod$colsfound
+    mod$colsfound <- NULL
+    if (dim(mod$res)[2] == 1) 
+        mod$res <- matrix(0, 1, 2)
+    colnames(mod$res) <- c("Vars", "stat")
+    mod$info <- mod$kmatrix[, -1, drop = FALSE]
+    rownames(mod$info) <- paste("K=", 0:K, sep = "")
+    colnames(mod$info) <- c("Number of vars", "Number of tests")
+    mod
+}
+
+
+#[export]
+mmpc <- function(y, x, max_k = 3, alpha = 0.05, method = "pearson", ini = NULL, hash = FALSE, 
+				 hashobject = NULL, backward = FALSE) {
+	as.Hash <- function(env) {
+		env[[".length"]] <- length(env)
+		class(env) <- "Hash"
+	}
+	
+	if (is.null(hashobject)) {
+		hashobject <- new.env()
+		stat_kv <- new.env()
+		pvalue_kv <- new.env()
+		if (hash == T) {
+			stat_kv[[".length"]] <- 0
+			pvalue_kv[[".length"]] <- 0
+		}
+	}
+	else {
+		stat_kv <- hashobject$stat_hash
+		pvalue_kv <- hashobject$pvalue_hash
+	}
+	
+	res <- .Call(Rfast2_mmp_c, y, x, max_k, alpha, method, ini, hash, stat_kv, pvalue_kv, backward)
+
+	as.Hash(stat_kv) 
+	as.Hash(pvalue_kv) 
+
+	res$selected <- as.vector(res$selected + 1)
+	res$stats <- as.vector(res$stats)
+	res$pvalues <- as.vector(res$pvalues)
+	res$univ$stat <- as.vector(res$univ$stat)
+	res$univ$pvalue <- as.vector(res$univ$pvalue)
+
+	res$hashobject$stat_hash <- stat_kv
+	res$hashobject$pvalue_hash <- pvalue_kv
+
+	res
+}
+
+
+#[export]
+mmpc2 <- function (y,x,max_k=3,threshold=0.05,test="logistic",init=NULL,tol=1e-07,backward=FALSE,maxiters=100,parallel=FALSE){
+    .Call(Rfast2_mmpc2, y,x,max_k,threshold,test,init,parallel,maxiters,tol,backward)
+}
+
+
+#[export]
 pc.sel <- function(y, x, ystand = TRUE, xstand = TRUE, alpha = 0.05) {
   
   runtime <- proc.time()
