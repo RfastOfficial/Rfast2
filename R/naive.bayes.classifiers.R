@@ -120,6 +120,53 @@ laplacenb.pred <- function(xnew, location, scale, ni) {
 
 
 #[export]
+logitnorm.nb <- function(xnew = NULL, x, ina) {
+  est <- NULL
+  ni <- tabulate(ina)
+  ni <- ni[ni > 0]
+  k <- length(ni)
+  d <- dim(x)[2]
+  m <- matrix(0, k, d)
+  s <- matrix(0, k, d)
+  lx1 <- Rfast::Log(x)
+  lx2 <- Rfast::Log(1 - x)
+  y <- lx1 - lx2
+    
+  for (i in 1:k) {
+    m[i, ] <- Rfast::colsums(y[ina == i, ])/ni[i]
+    s[i, ] <- ( Rfast::colsums(y[ina == i, ]^2) - ni[i] * m[i, ]^2 ) / ni[i]
+  }
+  rownames(m) <- rownames(s) <- paste("Group", 1:k)
+  if (!is.null(xnew)) {
+    lxnew1 <- Rfast::Log(xnew) 
+    lxnew2 <- Rfast::Log(1 - xnew)
+    ynew <- lxnew1 - lxnew2
+    ynew <- t(ynew)
+    score <- matrix(0, dim(xnew)[1], k)
+    for (i in 1:k) { 
+      score[, i] <- Rfast::colsums( dnorm(ynew, m[i, ], sqrt(s[i, ]), log = TRUE) ) - Rfast::rowsums(lxnew1) - Rfast::rowsums(lxnew2)
+    }
+    est <- Rfast::rowMaxs(score)
+  }
+  list(mean = m, var = s, ni = ni, est = est)
+}
+
+#[export]
+logitnormnb.pred <- function(xnew, m, s, ni) {
+  k <- length(ni)
+  lxnew1 <- Rfast::Log(xnew) 
+  lxnew2 <- Rfast::Log(1 - xnew)
+  ynew <- lxnew1 - lxnew2
+  ynew <- t(ynew)
+  score <- matrix(0, dim(xnew)[1], k)
+  for (i in 1:k) { 
+    score[, i] <- Rfast::colsums( dnorm(ynew, m[i, ], sqrt(s[i, ]), log = TRUE) ) - Rfast::rowsums(lxnew1) - Rfast::rowsums(lxnew2) + log(ni[i])
+  }
+  Rfast::rowMaxs(score)
+}
+
+
+#[export]
 vm.nb <- function(xnew = NULL, x, ina, tol = 1e-07) {
   est <- NULL
   ni <- tabulate(ina)

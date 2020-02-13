@@ -2,6 +2,7 @@
 \alias{weibull.nb}
 \alias{normlog.nb}
 \alias{laplace.nb}
+\alias{logitnorm.nb}
 
 \title{
 Naive Bayes classifiers
@@ -15,19 +16,22 @@ Naive Bayes classifiers.
 weibull.nb(xnew = NULL, x, ina, tol = 1e-07)
 normlog.nb(xnew = NULL, x, ina)
 laplace.nb(xnew = NULL, x, ina)
+logitnorm.nb(xnew = NULL, x, ina) 
 }
 
 \arguments{
 \item{xnew}{
 A numerical matrix with new predictor variables whose group is to be predicted. For the Gaussian naive Bayes, 
 this is set to NUUL, as you might want just the model and not to predict the membership of new observations. 
-For the Gaussian case this contains any numbers, but for the multinomial and Poisson cases, the matrix must 
-contain integer valued numbers only. 
+For the Gaussian case this contains positive numbers (greater than or equal to zero), but for the multinomial 
+and Poisson cases, the matrix must contain integer valued numbers only. For the logistic normal (logitnorm.nb) 
+the data must be percentages strictly between 0 and 1.
 }
 \item{x}{
-A numerical matrix with the observed predictor variable values. For the Gaussian case this contains any numbers, 
-but for the multinomial and Poisson
-cases, the matrix must contain integer valued numbers only. 
+A numerical matrix with the observed predictor variable values. For the Gaussian case (normlognb.nb) this 
+contains positive numbers (greater than or equal to zero), but for the multinomial and Poisson cases, 
+the matrix must contain integer valued numbers only. For the logistic normal (logitnorm.nb) the data must 
+be percentages strictly between 0 and 1.
 }
 \item{ina}{
 A numerical vector with strictly positive numbers, i.e. 1,2,3 indicating the groups of the dataset. 
