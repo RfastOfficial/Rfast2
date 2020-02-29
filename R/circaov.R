@@ -29,7 +29,7 @@ hcf.circaov <- function (u, ina)  {
       k2 <- k1 + der/der2
     }
   } else k2 <- k1
-  kapa <- k2 
+  kapa <- k2
 
   if (kapa > 2) {
     Ft <- (n - g) * (V - R)/(g - 1)/(n - V)
@@ -114,17 +114,17 @@ lr.circaov <- function(u, ina) {
   R <- sqrt( sum(rs^2) )
   k1 <- (1.28 - 0.53 * R^2/n^2) * tan(0.5 * pi * R/n)
   if (k1 < 710) {
-        der <- con - n * besselI(k1, 1, expon.scaled = TRUE)/besselI(k1, 
+        der <- con - n * besselI(k1, 1, expon.scaled = TRUE)/besselI(k1,
             0, expon.scaled = TRUE)
-        a <- besselI(k1, 0)^2/2 + besselI(k1, 2) * besselI(k1, 
+        a <- besselI(k1, 0)^2/2 + besselI(k1, 2) * besselI(k1,
             0)/2 - besselI(k1, 1)^2
         der2 <- n * a/besselI(k1, 0)^2
         k2 <- k1 + der/der2
         while (abs(k1 - k2) > 1e-08) {
             k1 <- k2
-            der <- con - n * besselI(k1, 1, expon.scaled = TRUE)/besselI(k1, 
+            der <- con - n * besselI(k1, 1, expon.scaled = TRUE)/besselI(k1,
                 0, expon.scaled = TRUE)
-            a <- besselI(k1, 0)^2/2 + besselI(k1, 2) * besselI(k1, 
+            a <- besselI(k1, 0)^2/2 + besselI(k1, 2) * besselI(k1,
                 0)/2 - besselI(k1, 1)^2
             der2 <- n * a/besselI(k1, 0)^2
             k2 <- k1 + der/der2
@@ -132,7 +132,7 @@ lr.circaov <- function(u, ina) {
     } else k2 <- k1
   kapa <- k2
 
-  w <- kapa * sum(Ri * Rfast::rowsums((mi - m)^2))
+  w <- kapa * sum( Ri * Rfast::rowsums( (mi - m)^2 ) )
   pvalue <- pchisq(w, g - 1, lower.tail = FALSE)
   res <- c(w, pvalue, kapa)
   names(res) <- c("test", "p-value", "kappa")
