@@ -1,6 +1,4 @@
 pcr <- function (y, x, k, xnew = NULL) {
-    my <- mean(y)
-    y <- y - my
     dm <- dim(x)
     n <- dm[1]   ;   p <- dm[2]
     if  ( length(k) == 1 )  {
@@ -29,7 +27,7 @@ pcr <- function (y, x, k, xnew = NULL) {
     if (!is.null(xnew)) {
       xnew <- matrix(xnew, ncol = p)
       xnew <- t( ( t(xnew) - m ) / s )
-      est <- my + xnew %*% be
+      est <- xnew %*% be
     }
     nam <- colnames(x)
     if ( is.null(nam) )  nam <- paste("X", 1:p, sep = "")   
