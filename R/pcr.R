@@ -36,5 +36,5 @@ pcr <- function (y, x, k, xnew = NULL) {
     rownames(be) <- nam
     colnames(be) <- paste("PC", k1, sep = "") 
     if ( !is.null(est) ) colnames(est) <- paste("PC", k1, sep = "") 
-    list(be = be, per = per[k1], est = est)
+    list(be = be, per = per[k1], vec = vec, est = est)
 }

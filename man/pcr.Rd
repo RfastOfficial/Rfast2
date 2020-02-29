@@ -42,6 +42,9 @@ The beta coefficients.
 \item{per}{
 The percentage of variance of the cross product of the independent variables explained by the k components.
 }
+\item{vec}{
+The principal components, the loadings.
+}
 \item{est}{
 The fitted or the predicted values (if xnew is not NULL).
 }
