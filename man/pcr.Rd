@@ -37,7 +37,7 @@ obtained and classical regression is performed.
 \value{
 A list including:
 \item{be}{
-The beta coefficients.
+The beta coefficients of the predictor variables computed via the principcal components.
 }
 \item{per}{
 The percentage of variance of the cross product of the independent variables explained by the k components.
