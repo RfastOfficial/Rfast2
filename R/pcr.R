@@ -32,11 +32,14 @@ pcr <- function (y, x, k, xnew = NULL) {
     nam <- colnames(x)
     if ( is.null(nam) )  nam <- paste("X", 1:p, sep = "")
     rownames(be) <- nam
+    rownames(vec) <- nam
     if ( length(k) == 1 ) {
       colnames(be) <- paste("PC", k, sep = "")
-    } else  colnames(be) <- paste("PC", k1, sep = "")
+      colnames(vec) <- paste("PC", k, sep = "")
+    } else {
+      colnames(be) <- paste("PC", k1, sep = "")
+      colnames(vec) <- paste("PC", k, sep = "")
+    }
     if ( !is.null(est) ) colnames(est) <- paste("PC", k1, sep = "")
-    rownames(vec) <- nam
-    colnames(vec) <- paste("PC", k1, sep = "")
     list(be = be, per = per[k1], vec = vec, est = est)
 }
