@@ -22,9 +22,10 @@ pcr <- function (y, x, k, xnew = NULL) {
     #z <- eig$x[, k1, drop = FALSE]
 
     eig <- Rfast2::pca(x, center = FALSE, scale = FALSE, k = max(k1), vectors = TRUE)
-    values <- eig$values
+    k1 <- which( !is.na(eig$values) )
+    values <- eig$values[k1]
     per <- cumsum( values ) / p  ## cumulative proportion of each eigenvalue
-    vec <- eig$vectors
+    vec <- eig$vectors[, k1]
     if ( !is.matrix(vec) )  vec <- as.matrix(vec)
     z <- x %*% vec  ## PCA scores
     zzk <- 1 / Rfast::colsums(z^2)
