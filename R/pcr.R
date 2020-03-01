@@ -37,7 +37,7 @@ pcr <- function (y, x, k, xnew = NULL) {
       colnames(be) <- paste("PC", k, sep = "")
       colnames(vec) <- paste("PC", k, sep = "")
     } else {
-      colnames(be) <- paste("PC", k1, sep = "")
+      colnames(be) <- paste("PC", k, sep = "")
       colnames(vec) <- paste("PC", k, sep = "")
     }
     if ( !is.null(est) ) colnames(est) <- paste("PC", k1, sep = "")
