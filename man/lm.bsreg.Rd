@@ -53,7 +53,7 @@ R implementation and documentation: Michail Tsagris <mtsagris@yahoo.gr>
 %}
 
 \seealso{
-\code{ \link{gee.reg} }
+\code{ \link{lm.drop1} }
 }
 
 \examples{
