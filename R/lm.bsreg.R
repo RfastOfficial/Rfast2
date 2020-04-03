@@ -1,3 +1,4 @@
+#[export]
 lm.bsreg <- function(y, x, alpha = 0.05, type = "F") {
 
   alpha <- log(alpha)

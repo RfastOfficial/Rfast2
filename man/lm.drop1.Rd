@@ -26,9 +26,9 @@ For the test based on the partial correlation set this equal to "cor".
 }
 
 \details{
-This is the same function as R's built in \link{drop1} but it works with the F test and we have added
-a test based on the partial correlation coefficient. For the linear regression model, the Wald test is 
-equivalent to the partial F test. So, instead of performing many regression models with single term deletions
+This is the same function as R's built in \link{drop1} that it works with the F test or the partial 
+correlation coefficient. For the linear regression model, the Wald test is equivalent to the partial F test. 
+So, instead of performing many regression models with single term deletions
 we perform one regression model with all variables and compute their Wald test effectively. Note, that this 
 is true, only if the design matrix "x" contains the vectors of ones and in our case this must be, strictly, 
 the first column. The second option is to compute the p-value of the partial correlation. 
@@ -53,7 +53,7 @@ R implementation and documentation: Michail Tsagris <mtsagris@yahoo.gr>
 %}
 
 \seealso{
-\code{ \link{mmpc2}, \link{gee.reg}, \link{pc.sel} }
+\code{ \link{lm.bsreg} }
 }
 
 \examples{
