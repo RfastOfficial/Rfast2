@@ -22,12 +22,12 @@ tobit.reg <- function(y, x, ylow = 0, full = FALSE, tol = 1e-07, maxiters = 100)
   .e3 <- as.vector( y1 - x1 %*% be )
   .e4 <- as.vector(y0 - x0 %*% be)/.e1
   .e5 <- .e3/.e1
-  derb <-  - Rfast::eachcol.apply( x0, dnorm(.e4, 0, 1) / ( .e1 * pnorm(.e4) ) ) + 
-             Rfast::eachcol.apply( x1, dnorm(.e5, 0, 1) * .e3 / ( dnorm(.e5) * .e1^2 ) )
+  derb <-  - Rfast::eachcol.apply( x0, dnorm(.e4) / ( .e1 * pnorm(.e4) ) ) + 
+             Rfast::eachcol.apply( x1, dnorm(.e5) * .e3 / ( dnorm(.e5) * .e1^2 ) )
   .e4 <- .e4 * .e1 
   .e6 <- .e4 / .e1
   .e7 <- .e3 / .e1
-  dera <-  - sum( dnorm(.e6, 0, 1) * .e4/(.e1 * pnorm(.e6)) ) + sum( dnorm(.e7, 0, 1) * .e3^2/(dnorm(.e7) * .e1^2) ) - n1
+  dera <-  - sum( dnorm(.e6) * .e4/(.e1 * pnorm(.e6)) ) + sum( dnorm(.e7) * .e3^2/(dnorm(.e7) * .e1^2) ) - n1
   
   .e5 <- .e4 
   .e6 <- .e5/.e1
@@ -63,8 +63,8 @@ tobit.reg <- function(y, x, ylow = 0, full = FALSE, tol = 1e-07, maxiters = 100)
   .e11 <- dnorm(.e6, 0, 1)
   .e12 <- dnorm(.e7, 0, 1)
   .e13 <- .e1 * .e9
-  derab <-  - colsums( x1 * ( (2 * (.e8 * .e1) + .e12 * .e10/.e1 ) * .e1 / ( .e8 * .e1^2)^2 - .e10 / (.e8 * .e1^4) ) * .e12 * .e3 ) + 
-  colsums( x0 * ( (.e13 - .e11 * .e5)/.e13^2 - .e5^2/(.e1^3 * .e9) ) * .e11 )
+  derab <-  - Rfast::colsums( x1 * ( (2 * (.e8 * .e1) + .e12 * .e10/.e1 ) * .e1 / ( .e8 * .e1^2)^2 - .e10 / (.e8 * .e1^4) ) * .e12 * .e3 ) + 
+  Rfast::colsums( x0 * ( (.e13 - .e11 * .e5)/.e13^2 - .e5^2/(.e1^3 * .e9) ) * .e11 )
   
   der <- c(dera, derb)
   der2 <- cbind(derab, derb2)
@@ -85,12 +85,12 @@ tobit.reg <- function(y, x, ylow = 0, full = FALSE, tol = 1e-07, maxiters = 100)
     .e3 <- as.vector( y1 - x1 %*% be )
     .e4 <- as.vector(y0 - x0 %*% be)/.e1
     .e5 <- .e3/.e1
-    derb <-  - Rfast::eachcol.apply( x0, dnorm(.e4, 0, 1) / ( .e1 * pnorm(.e4) ) ) + 
-               Rfast::eachcol.apply( x1, dnorm(.e5, 0, 1) * .e3 / ( dnorm(.e5) * .e1^2 ) )
+    derb <-  - Rfast::eachcol.apply( x0, dnorm(.e4) / ( .e1 * pnorm(.e4) ) ) + 
+               Rfast::eachcol.apply( x1, dnorm(.e5) * .e3 / ( dnorm(.e5) * .e1^2 ) )
     .e4 <- .e4 * .e1 
     .e6 <- .e4 / .e1
     .e7 <- .e3 / .e1
-    dera <-  - sum( dnorm(.e6, 0, 1) * .e4/(.e1 * pnorm(.e6)) ) + sum( dnorm(.e7, 0, 1) * .e3^2/(dnorm(.e7) * .e1^2) ) - n1
+    dera <-  - sum( dnorm(.e6) * .e4/(.e1 * pnorm(.e6)) ) + sum( dnorm(.e7) * .e3^2/(dnorm(.e7) * .e1^2) ) - n1
   
     .e5 <- .e4 
     .e6 <- .e5/.e1
@@ -126,8 +126,8 @@ tobit.reg <- function(y, x, ylow = 0, full = FALSE, tol = 1e-07, maxiters = 100)
     .e11 <- dnorm(.e6, 0, 1)
     .e12 <- dnorm(.e7, 0, 1)
     .e13 <- .e1 * .e9
-    derab <-  - colsums( x1 * ( (2 * (.e8 * .e1) + .e12 * .e10/.e1 ) * .e1 / ( .e8 * .e1^2)^2 - .e10 / (.e8 * .e1^4) ) * .e12 * .e3 ) + 
-    colsums( x0 * ( (.e13 - .e11 * .e5)/.e13^2 - .e5^2/(.e1^3 * .e9) ) * .e11 )
+    derab <-  - Rfast::colsums( x1 * ( (2 * (.e8 * .e1) + .e12 * .e10/.e1 ) * .e1 / ( .e8 * .e1^2)^2 - .e10 / (.e8 * .e1^4) ) * .e12 * .e3 ) + 
+    Rfast::colsums( x0 * ( (.e13 - .e11 * .e5)/.e13^2 - .e5^2/(.e1^3 * .e9) ) * .e11 )
   
     der <- c(dera, derb)
     der2 <- cbind(derab, derb2)
