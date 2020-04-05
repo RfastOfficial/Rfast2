@@ -73,8 +73,7 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@yahoo.gr}.
 %}
 
 \seealso{
-\code{ \link{simplex.mle}, \link{kumar.mle}, \link{gee.reg}, \link{sp.logiregs}, \link{logiquant.regs} 
-}
+\code{\link{propjs.reg}, \link{simplex.mle}, \link{kumar.mle} }
 }
 
 \examples{
@@ -85,5 +84,3 @@ a <- propols.reg(y, x)
 }
 }
 
-\keyword{ ordinary least squares }
-\keyword{ multivariate regression }

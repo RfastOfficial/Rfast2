@@ -1,5 +1,5 @@
 #[export]
-js.propreg <- function(y, x, tol = 1e-07, maxiters = 100) {
+propjs.reg <- function(y, x, tol = 1e-07, maxiters = 100) {
   
   x <- model.matrix(~., data.frame(x) )
   n <- dim(x)[1]
@@ -83,7 +83,7 @@ js.propreg <- function(y, x, tol = 1e-07, maxiters = 100) {
 
 
 #[export]
-helinger.propreg(y, x, tol = 1e-07, maxiters = 100) {
+prophelling.reg(y, x, tol = 1e-07, maxiters = 100) {
 
   x <- model.matrix( y~., data.frame(x) )
   sqy <- sqrt(y)

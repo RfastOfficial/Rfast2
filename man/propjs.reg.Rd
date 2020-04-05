@@ -1,6 +1,6 @@
 \name{Jensen-Shannon divergence and Hellinger distance based univariate regression for proportions}
-\alias{js.propreg}
-\alias{hellinger.propreg}
+\alias{propjs.reg}
+\alias{prophelling.reg}
 \title{
 Jensen-Shannon divergence and Hellinger distance based univariate regression for proportions
 }
@@ -10,8 +10,8 @@ Jensen-Shannon divergence and Hellinger distance based univariate regression for
 }
 
 \usage{
-js.propreg(y, x, tol = 1e-07, maxiters = 100) 
-hellinger.propreg(y, x, tol = 1e-07, maxiters = 100) 
+propjs.reg(y, x, tol = 1e-07, maxiters = 100) 
+prophelling.reg(y, x, tol = 1e-07, maxiters = 100) 
 }
 
 \arguments{
@@ -71,12 +71,12 @@ R implementation and documentation: Michail Tsagris <mtsagris@uoc.gr>
 %}
 
 \seealso{
-\code{ \link{negbin.reg}, \link{gee.reg} }
+\code{ \link{propols.reg}, \link{simplex.mle}, \link{kumar.mle} }
 }
 
 \examples{
 y <- rbeta(150, 3, 4)
 x <- iris
-a <- js.univreg(y, x)
+a <- propjs.reg(y, x)
 }
 
