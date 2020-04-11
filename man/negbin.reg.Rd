@@ -57,7 +57,7 @@ Stefanos Fafalios \email{stefanosfafalios@gmail.com}.
 %}
 
 \seealso{
-\code{ \link{ztp.reg} }
+\code{ \link{ztp.reg}, \link{binom.reg} }
 }
 
 \examples{
