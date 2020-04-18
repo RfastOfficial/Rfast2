@@ -464,7 +464,7 @@ List mmpc2(vec y,mat x,int max_k = 3,const double threshold = 0.05,const string 
             uvec sort_sela=sort(sela);
             for (int i=1;i<max_k;++i) {  
                 cand = find_combn<umat,uvec>(sort_sela, i+1); // anagkastika i+1 gia na vgalei 2 arithmous
-                cand = cand.cols(find_arr_indices_c(cand==sela(dm)));
+                cand = cand.cols(find_arr_indices_c(cand==sela(dm)));  // delete this row
                 for(int j=0;vars.n_elem > 0  &&  j < (int)cand.n_cols;++j){
                     devi_0 = calc_devi_0(y,Cbind(oness,x.cols(cand.col(j))),ini,maxiters,tol,test,lgmy,my,sy,d1,ylogy);
                     pval2 = add_term_c(y, Cbind(oness,x.cols(cand.col(j))),x.cols(vars),devi_0,ini,tol,true,parallel,maxiters,0);
