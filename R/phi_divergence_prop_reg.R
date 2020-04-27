@@ -83,7 +83,7 @@ propjs.reg <- function(y, x, tol = 1e-07, maxiters = 100) {
 
 
 #[export]
-prophelling.reg(y, x, tol = 1e-07, maxiters = 100) {
+prophelling.reg <- function(y, x, tol = 1e-07, maxiters = 100) {
 
   x <- model.matrix( y~., data.frame(x) )
   sqy <- sqrt(y)
