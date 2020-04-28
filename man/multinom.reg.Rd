@@ -63,8 +63,8 @@ Stefanos Fafalios \email{stefanosfafalios@gmail.com}.
 \examples{
 \donttest{
 y <- iris[, 5]
-x <- matrix( rnorm(150 * 3), ncol = 3 )
-multinom.reg(y, x)
+x <- matrix( rnorm(150 * 2), ncol = 2 )
+mod <- multinom.reg(y, x)
 }
 }
 

@@ -1,8 +1,10 @@
 #[export]
 nb.cv <- function(x, ina, type = "gaussian", folds = NULL, nfolds = 10, 
                  stratified = TRUE, seed = FALSE, pred.ret = FALSE) {
+
+  ina <- as.numeric(ina)
   if ( is.null(folds) ) { 
-    folds <- generatefolds(ina, nfolds = nfolds, stratified = stratified, seed = seed)
+    folds <- makefolds(ina, nfolds = nfolds, stratified = stratified, seed = seed)
   } 
   nfolds <- length(folds)
   crit <- numeric(nfolds)
@@ -61,7 +63,7 @@ nb.cv <- function(x, ina, type = "gaussian", folds = NULL, nfolds = 10,
 
   }  ##  end  if ( type == "gaussian" |  type == "gamma" ) {
 
-  list(crit = crit, preds = preds)
+  list( preds = preds, crit = mean(crit) )
 }  
   
     
