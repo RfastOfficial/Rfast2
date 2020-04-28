@@ -1,3 +1,4 @@
+#[export]
 pcr <- function (y, x, k = 1, xnew = NULL) {
   my <- mean(y)
   y <- y - my

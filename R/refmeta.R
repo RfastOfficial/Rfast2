@@ -1,5 +1,5 @@
 #[export]
-refmeta<- function(yi, vi, tol = 1e-07) {
+refmeta <- function(yi, vi, tol = 1e-07) {
   
   reml <- function(tau, yi, vi) {
     w <- 1 / (vi + tau)

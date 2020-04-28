@@ -1,5 +1,3 @@
-
-
 #[export]
 benchmark<-function(...,times,envir=parent.frame(),order=NULL){
     exprs<-as.list(match.call(expand.dots = FALSE)$...)
@@ -21,6 +19,7 @@ benchmark<-function(...,times,envir=parent.frame(),order=NULL){
     class(res)<-"benchmark"
     res
 }
+
 
 #[export s3]
 print.benchmark<-function(x,...){

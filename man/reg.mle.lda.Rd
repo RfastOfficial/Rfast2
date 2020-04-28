@@ -53,7 +53,7 @@ R implementation and documentation: Michail Tsagris <mtsagris@yahoo.gr>
 %}
 
 \seealso{
-\code{ \link{mle.lda}, \link{welch.tests} }
+\code{ \link{regmlelda.cv} \link{mle.lda}, \link{big.knn} }
 }
 
 \examples{
