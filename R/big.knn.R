@@ -1,15 +1,21 @@
 #[export]
-big.knn <- function(xnew, y, x, k = 2:100, type = "R") {
-
+big.knn <- function(xnew, y, x, k = 2:100, type = "C") {
+  
+  if (type == "C")  y <- as.numeric(y)
   if ( !is.matrix(xnew) )  xnew <- matrix(xnew, nrow = 1)
   di <- RANN::nn2( data = x, query = xnew, k = max(k) )$nn.idx
   nu <- dim(xnew)[1]
   nk <- length(k)
-  p <- dim(di)[2]  
-  denom <- 1:p
-  est <- matrix(nrow = nu, ncol = nk + 1)
-  for ( i in 1:nu ) est[i, ] <- cumsum( y[ di[i, ] ] ) / denom
-  est <- est[, -c( min(k) - 1 ) ]
+  est <- matrix(nrow = nu, ncol = nk)
+  
+  if (type == "C") {
+    m1 <- matrix(nrow = max(k), ncol = nu)
+    for ( i in 1:nu )  m1[, i] <- y[ di[i, ] ]
+    for ( j in 1:nk ) est[, j] <- Rfast::colMaxs( Rfast::colTabulate( m1[1:k[j], ] ) )
+  } else if ( type == "R" ) {
+    for ( i in 1:nu ) est[i, ] <- cumsum( y[ di[i, ] ] )[k] / k
+  }
+
   colnames(est) <- paste("k=", k, sep = "")
   est
 }

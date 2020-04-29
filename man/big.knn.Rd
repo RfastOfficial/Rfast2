@@ -9,7 +9,7 @@ The k-NN algorithm for really lage scale data.
 }
 
 \usage{
-big.knn(xnew, y, x, k = 2:100, type = "R")
+big.knn(xnew, y, x, k = 2:100, type = "C")
 }
 
 \arguments{
@@ -77,6 +77,6 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@yahoo.gr}.
 
 \examples{
 x <- as.matrix(iris[, 1:4])
-mod <- big.knn(xnew = x, y = iris[, 5], x = x, k = c(3, 4) )
+mod <- big.knn(xnew = x, y = iris[, 5], x = x, k = c(6, 7) )
 }
 
