@@ -62,8 +62,7 @@ R implementation and documentation: Michail Tsagris <mtsagris@yahoo.gr>
 \examples{
 y <- rnorm(150)
 x <- as.matrix(iris[, 1:4])
-a <- lm(y~., data.frame(x) )
-drop1(a, test = "F")
-lm.drop1(y, cbind(1, x) )
+a <- lm(y ~., data.frame(x) )
+lm.bsreg(y, x)
 }
 

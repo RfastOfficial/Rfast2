@@ -5,7 +5,7 @@ big.knn <- function(xnew, y, x, k = 2:100, type = "R") {
   di <- RANN::nn2( data = x, query = xnew, k = max(k) )$nn.idx
   nu <- dim(xnew)[1]
   nk <- length(k)
-  di <- dim(di)[2]  
+  p <- dim(di)[2]  
   denom <- 1:p
   est <- matrix(nrow = nu, ncol = nk + 1)
   for ( i in 1:nu ) est[i, ] <- cumsum( y[ di[i, ] ] ) / denom
