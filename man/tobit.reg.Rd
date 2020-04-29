@@ -67,8 +67,7 @@ The number of iterations required by Newton-Raphson.
 }
 
 \references{
-Tobin, James (1958). Estimation of Relationships for Limited Dependent Variables. 
-Econometrica, 26(1): 24--36. 
+Tobin James (1958). Estimation of Relationships for Limited Dependent Variables. Econometrica, 26(1): 24--36. 
 
 https://en.wikipedia.org/wiki/Tobit_model
 }
@@ -90,7 +89,7 @@ R implementation and documentation: Michail Tsagris <mtsagris@uoc.gr>.
 \examples{
 x <- rnorm(100)
 y <- rnorm(100)
-y[y < 0] < -0
+y[y < 0] <- 0
 a <- tobit.reg(y, x, full = TRUE) 
 }
 

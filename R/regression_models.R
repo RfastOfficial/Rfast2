@@ -164,7 +164,6 @@ hp.reg <- function(y, x, full = FALSE, tol = 1e-07, maxiters = 100) {
   id <- which(y > 0)
   y1[id] <- 1
   prob <- Rfast::glm_logistic(x, y1, full = full, tol = tol, maxiters = maxiters)
-  x <- model.matrix(y ~ ., data.frame(x) )
   mod <- Rfast2::ztp.reg(y[id], x[id, ], full = full, tol = tol, maxiters = maxiters)
   list(prob = prob, mod = mod)
 }
@@ -275,7 +274,7 @@ sclr <- function(y, x, full = FALSE, tol = 1e-07, maxiters = 100) {
   
   res <- list(theta = theta, be = be, loglik = lik2, iters = i)
   if (full) {
-    se <- sqrt( diag( solve( - der2 ) ) )
+    se <- sqrt( diag( solve( abs( der2 ) ) ) )
     wald <- thetabe/se
     pval <- 2 * pnorm(abs(wald), lower.tail = FALSE)
     info <- cbind(thetabe, se, wald, pval)
@@ -435,7 +434,7 @@ tobit.reg <- function(y, x, ylow = 0, full = FALSE, tol = 1e-07, maxiters = 100)
   res <- list(be = be, s = s, loglik = lik2, iters = i)
   if ( full ) {
      se <- solve( der2 )
-     se <- sqrt( diag(se)[-1] )
+     se <- sqrt( abs( diag(se)[-1] ) )
      wald <- be/se
      pval <- 2 * pnorm(abs(wald), lower.tail = FALSE)
      info <- cbind(be, se, wald, pval)

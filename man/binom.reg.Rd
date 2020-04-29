@@ -9,7 +9,7 @@ Binomial regression.
 }
 
 \usage{
-binom.reg(y, ni, x, full = FALSE,tol = 1e-07, maxiters = 100)
+binom.reg(y, ni, x, full = FALSE, tol = 1e-07, maxiters = 100)
 }
 
 \arguments{
@@ -57,7 +57,7 @@ The deviance.
 }
 
 \references{
-McCullagh, Peter, and John A. Nelder. Generalized linear models. CRC press, USA, 2nd edition, 1989.
+McCullagh Peter and John A. Nelder. Generalized linear models. CRC Press, USA, 2nd edition, 1989.
 }
 
 \author{
@@ -70,12 +70,11 @@ R implementation and documentation: Michail Tsagris <mtsagris@yahoo.gr>.
 %}
 
 \seealso{
-\code{\link{negbin.reg}
-}
+\code{ \link{negbin.reg}, \link{hp.reg}, \link{ztp.reg} }
 }
 
 \examples{
-x <- matrix(rnorm(100 * 2), ncol = 3)
+x <- matrix(rnorm(100 * 2), ncol = 2)
 y <- rbinom(100, 20, 0.5)   ## binary logistic regression
 ni <- rep(20, 100)
 a <- binom.reg(y, ni, x, full = TRUE) 

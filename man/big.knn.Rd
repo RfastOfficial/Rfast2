@@ -1,19 +1,21 @@
-\name{Cross-validation for the k-NN algorithm for really lage scale data}
-\alias{bigknn.cv}
+\name{The k-NN algorithm for really lage scale data}
+\alias{big.knn}
 \title{
-Cross-validation for the k-NN algorithm for really lage scale data
+The k-NN algorithm for really lage scale data
 }
 
 \description{
-Cross-validation for the k-NN algorithm for really lage scale data.
+The k-NN algorithm for really lage scale data.
 }
 
 \usage{
-bigknn.cv(y, x, k = 5:10, type = "C", folds = NULL, nfolds = 10,
-stratified = TRUE, seed = FALSE, pred.ret = FALSE)
+big.knn(xnew, y, x, k = 2:100, type = "R")
 }
 
 \arguments{
+\item{xnew}{
+A matrix with new data, new predictor variables whose response variable must be predicted. 
+}
 \item{y}{
 A vector of data. The response variable, which can be either continuous or 
 categorical (factor is acceptable).  
@@ -28,23 +30,6 @@ A vector with the possible numbers of nearest neighbours to be considered.
 If your response variable y is numerical data, then this should be "R" (regression). 
 If y is in general categorical set this argument to "C" (classification). 
 }
-\item{folds}{
-A list with the indices of the folds.
-}
-\item{nfolds}{
-The number of folds to be used. This is taken into consideration only if "folds" is NULL.
-}
-\item{stratified}{
-Do you want the folds to be selected using stratified random sampling? This preserves the analogy of the samples of each group. 
-Make this TRUE if you wish, but only for the classification. If you have regression (type = "R"), do not put this to TRUE as 
-it will cause problems or return wrong results.
-}
-\item{seed}{
-If you set this to TRUE, the same folds will be created every time. 
-}
-\item{pred.ret}{
-If you want the predicted values returned set this to TRUE.
-}
 }
 
 \details{
@@ -58,23 +43,13 @@ case of regression, the average, median, or harmonic mean of the corresponding r
 predictor values are calculated. In the case of classification, i.e. categorical response value, a voting rule 
 is applied. The most frequent group (response value) is where the new observation is to be allocated. 
 
-This function does the cross-validation procedure to select the optimal k, the optimal number of nearest neighbours. 
-The optimal in terms of some accuracy metric. For the classification it is the percentage of correct classification 
-and for the regression the mean squared error.
-
 This function allows for the Euclidean distance only.
 }
 
 \value{
-A list including:
-\item{preds}{
-If pred.ret is TRUE the predicted values for each fold are returned as elements in a list.
-}
-\item{crit}{
-A vector whose length is equal to the number of k and is the accuracy metric for each k. 
-For the classification case it is the percentage of correct classification. For the regression
-case the mean square of prediction error.
-}
+A matrix whose number of columns is equal to the size of k. If in the input you provided there is just one value of k, 
+then a matrix with one column is returned containing the predicted values. 
+If more than one value was supplied, the matrix will contain the predicted values for every value of k. 
 }
 
 \references{
@@ -96,12 +71,12 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@yahoo.gr}.
 %}
 
 \seealso{
-\code{\link{big.knn}, \link{regmlelda.cv}, \link{multinomreg.cv}
+\code{ \link{bigknn.cv}, \link{reg.mle.lda}, \link{multinom.reg}
 }
 }
 
 \examples{
 x <- as.matrix(iris[, 1:4])
-mod <- bigknn.cv(y = iris[, 5], x = x, k = c(3, 4) )
+mod <- big.knn(xnew = x, y = iris[, 5], x = x, k = c(3, 4) )
 }
 

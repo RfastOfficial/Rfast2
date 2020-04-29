@@ -37,7 +37,7 @@ censweibull.mle <- function(x, di, tol = 1e-07) {
   n <- length(x)
   n1 <- length(y1)
   n2 <- n - n1
-  mod <- weibull.mle(x[di==1])
+  mod <- Rfast::weibull.mle(x[di==1])
   if ( n2 > 0 ) {
     m <- log(mod$param[2])
     es <- 1/mod$param[1]

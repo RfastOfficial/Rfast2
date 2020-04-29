@@ -1,11 +1,11 @@
-\name{Cross-validation for the Regularised maximum likelihood linear discriminant analysis
+\name{Cross-validation for the regularised maximum likelihood linear discriminant analysis}
 \alias{regmlelda.cv}
 \title{
-Cross-validation for the Regularised maximum likelihood linear discriminant analysis
+Cross-validation for the regularised maximum likelihood linear discriminant analysis
 }
 
 \description{
-Cross-validation for the Regularised maximum likelihood linear discriminant analysis.
+Cross-validation for the regularised maximum likelihood linear discriminant analysis.
 }
 
 \usage{
@@ -85,6 +85,6 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@yahoo.gr}.
 
 \examples{
 x <- as.matrix(iris[, 1:4])
-mod <- regmlelda.cv(y = iris[, 5], x = x)
+mod <- regmlelda.cv(x, iris[, 5])
 }
 

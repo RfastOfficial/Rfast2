@@ -44,7 +44,7 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}
 %}
 
 \seealso{
-\code{\link{kumar.mle}, \alias{simplex.mle}, \link{collogitnorm.mle}, \link{propols.reg}
+\code{\link{kumar.mle}, \link{simplex.mle}, \link{collogitnorm.mle}, \link{propols.reg}
 }
 }
 
