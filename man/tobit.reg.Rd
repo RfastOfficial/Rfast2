@@ -41,7 +41,7 @@ The tobit regression model is fitted.
 
 \value{
 When full is FALSE a list including:
-}
+
 \item{be}{
 The estimated regression coefficients.
 }

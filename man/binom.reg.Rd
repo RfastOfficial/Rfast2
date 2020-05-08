@@ -80,5 +80,3 @@ ni <- rep(20, 100)
 a <- binom.reg(y, ni, x, full = TRUE) 
 x <- NULL
 }
-}
-

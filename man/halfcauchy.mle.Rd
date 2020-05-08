@@ -3,7 +3,8 @@
 \alias{powerlaw.mle}
 
 \title{
-MLE of continuous univariate distributions defined on the positive line}
+MLE of continuous univariate distributions defined on the positive line
+}
 
 \description{
 MLE of continuous univariate distributions defined on the positive line.

@@ -1,7 +1,8 @@
 \name{MLE of the Purkayashta distribution}
 \alias{purka.mle}
 
-\title{MLE of the Purkayashta distribution
+\title{
+MLE of the Purkayashta distribution
 }
 
 \description{
