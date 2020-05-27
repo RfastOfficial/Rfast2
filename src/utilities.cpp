@@ -77,7 +77,7 @@ END_RCPP
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool is_upper_tri(NumericMatrix x,const bool dg=false){
+bool is_lower_tri(NumericMatrix x,const bool dg=false){
   const int ncl=x.ncol();
   int i,j;
   if(dg){
@@ -100,13 +100,13 @@ bool is_upper_tri(NumericMatrix x,const bool dg=false){
   return true;
 }
 
-RcppExport SEXP Rfast2_is_upper_tri(SEXP xSEXP,SEXP dgSEXP){
+RcppExport SEXP Rfast2_is_lower_tri(SEXP xSEXP,SEXP dgSEXP){
 BEGIN_RCPP
     RObject __result;
     RNGScope __rngScope;
     traits::input_parameter< NumericMatrix >::type x(xSEXP);
     traits::input_parameter< const bool >::type dg(dgSEXP);
-    __result = is_upper_tri(x,dg);
+    __result = is_lower_tri(x,dg);
     return __result;
 END_RCPP
 }
@@ -114,7 +114,7 @@ END_RCPP
 /////////////////////////////////////////////////////////////
 
 
-double is_lower_tri(NumericMatrix x,const bool dg){
+bool is_upper_tri(NumericMatrix x,const bool dg){
   const int ncl=x.ncol(),nrw=x.nrow();
   int i,j;
   if(dg){
@@ -136,13 +136,13 @@ double is_lower_tri(NumericMatrix x,const bool dg){
   }
   return true;
 }
-RcppExport SEXP Rfast2_is_lower_tri(SEXP xSEXP,SEXP dgSEXP){
+RcppExport SEXP Rfast2_is_upper_tri(SEXP xSEXP,SEXP dgSEXP){
 BEGIN_RCPP
     RObject __result;
     RNGScope __rngScope;
     traits::input_parameter< NumericMatrix >::type x(xSEXP);
     traits::input_parameter< const bool >::type dg(dgSEXP);
-    __result = is_lower_tri(x,dg);
+    __result = is_upper_tri(x,dg);
     return __result;
 END_RCPP
 }
