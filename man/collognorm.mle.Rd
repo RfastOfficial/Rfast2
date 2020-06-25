@@ -4,6 +4,8 @@
 \alias{colborel.mle}
 \alias{colhalfnorm.mle}
 \alias{colordinal.mle}
+\alias{colcauchy.mle}
+\alias{colbeta.mle}
 
 \title{
 Column-wise MLE of some univariate distributions
@@ -19,6 +21,8 @@ collogitnorm.mle(x)
 colborel.mle(x)
 colhalfnorm.mle(x)
 colordinal.mle(x, link = "logit")
+colcauchy.mle(x, tol = 1e-09, maxiters = 100, parallel = FALSE)
+colcauchy.mle(x, tol = 1e-09, maxiters = 100, parallel = FALSE)
 }
 
 \arguments{
@@ -32,14 +36,16 @@ a numerical matrix with values 1, 2, 3,..., not zeros.
 \item{link}{
 This can either be "logit" or "probit". It is the link function to be used. 
 }
+\item{tol}{
+The tolerance value to terminate the Newton-Fisher algorithm.
 }
-%\item{tol}{
-%The tolerance value to terminate the Newton-Fisher algorithm.
-%}
-%\item{maxiters}{
-%The maximum number of iterations to implement.
-%}
-%}
+\item{maxiters}{
+The maximum number of iterations to implement.
+}
+\item{parallel}{
+Do you want to calculations to take place in parallel? The default value is FALSE
+}
+}
 
 \details{
 For each column, the same distribution is fitted and its parameters and log-likelihood are computed.
@@ -69,7 +75,8 @@ Agresti, A. (2002) Categorical Data. Second edition. Wiley.
 \author{
 Michail Tsagris 
 
-R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
+R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr} and Stefanos Fafalios
+\email{stefanosfafalios@gmail.com}.
 }
 
 %\note{
