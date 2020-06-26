@@ -19,14 +19,14 @@ NumericMatrix colbeta_mle(Rcpp::NumericMatrix X, const double tol = 1e-09, const
   NumericMatrix ret(d,3);
 
   if(parallel){
-    #ifdef _OPENMP
-    #pragma omp parallel
-    {
-    #endif
-      vec a(2);
-      vec::iterator xiter;
-      double sly1, sly2, sy, sy2,iniphi,lik1,lik2,phi,dera,derab,derb,dera2,derb2,down;
-      int k,j;
+  #ifdef _OPENMP
+  #pragma omp parallel
+  {
+  #endif
+    vec a(2);
+    vec::iterator xiter;
+    double sly1, sly2, sy, sy2,iniphi,lik1,lik2,phi,dera,derab,derb,dera2,derb2,down;
+    int k,j;
 
     #ifdef _OPENMP
     #pragma omp for
@@ -83,9 +83,9 @@ NumericMatrix colbeta_mle(Rcpp::NumericMatrix X, const double tol = 1e-09, const
       ret(i,1) = a[1];
       ret(i,2) = lik2;
     }
-    #ifdef _OPENMP
-    }
-    #endif
+  #ifdef _OPENMP
+  }
+  #endif
   }
   else{
     vec a(2);
