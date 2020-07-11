@@ -214,6 +214,8 @@ hellinger.countreg <- function(y, x, tol = 1e-07, maxiters = 100) {
 #[export]
 sclr <- function(y, x, full = FALSE, tol = 1e-07, maxiters = 100) {
   
+  oop <- options(warn = -1)
+  on.exit( options(oop) )
   x <- model.matrix( y ~ ., data.frame(x) )
   dm <- dim(x)
   n <- dm[1]    ;   d <- dm[2]

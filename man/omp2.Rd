@@ -79,7 +79,7 @@ R implementation and documentation: Michail Tsagris <mtsagris@yahoo.gr>.
 \examples{
 x <- matrnorm(100, 100)
 y <- rgamma(100, 4, 1)
-a <- omp(y, x)
+a <- omp2(y, x)
 a
 x <- NULL
 }

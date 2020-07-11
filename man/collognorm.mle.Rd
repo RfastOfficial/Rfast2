@@ -21,8 +21,8 @@ collogitnorm.mle(x)
 colborel.mle(x)
 colhalfnorm.mle(x)
 colordinal.mle(x, link = "logit")
-colcauchy.mle(x, tol = 1e-09, maxiters = 100, parallel = FALSE)
-colcauchy.mle(x, tol = 1e-09, maxiters = 100, parallel = FALSE)
+colcauchy.mle(x, tol = 1e-07, maxiters = 100, parallel = FALSE)
+colbeta.mle(x, tol = 1e-07, maxiters = 100, parallel = FALSE)
 }
 
 \arguments{

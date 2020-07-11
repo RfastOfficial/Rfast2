@@ -22,7 +22,7 @@ big.knn <- function(xnew, y, x, k = 2:100, type = "C") {
 
 
 #[export]
-bigknn.cv <- function(y, x, k = 2:100, type = "C", folds = NULL, nfolds = 10, 
+bigknn.cv <- function(y, x, k = 5:10, type = "C", folds = NULL, nfolds = 10, 
                       stratified = TRUE, seed = FALSE, pred.ret = FALSE) {
   
   crit <- matrix(nrow = nfolds, ncol = length(k))
