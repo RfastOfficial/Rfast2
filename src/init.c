@@ -31,6 +31,9 @@ SEXP Rfast2_mmp_c(SEXP target_varsSEXP,SEXP dsSEXP,SEXP max_kSEXP,SEXP thresSEXP
 
 SEXP Rfast2_add_term(SEXP YSEXP, SEXP XincSEXP, SEXP XoutSEXP, SEXP devi_0SEXP,SEXP typeSEXP,SEXP tolSEXP,SEXP logged,SEXP parallel,SEXP maxiters);
 SEXP Rfast2_colspml_mle(SEXP xSEXP, SEXP tolSEXP,SEXP maxitersSEXP,SEXP parallelSEXP);
+SEXP Rfast2_colcauchy_mle(SEXP XSEXP,SEXP tolSEXP,SEXP parallelSEXP,SEXP maxitersSEXP);
+SEXP Rfast2_colbeta_mle(SEXP XSEXP,SEXP tolSEXP,SEXP parallelSEXP,SEXP maxitersSEXP);
+SEXP Rfast2_censweib_reg(SEXP YSEXP,SEXP XSEXP,SEXP diSEXP,SEXP tolSEXP,SEXP maxitersSEXP);
 SEXP Rfast2_fbed_reg(SEXP ySEXP,SEXP xSEXP,SEXP sigSEXP,SEXP typeSEXP,SEXP idSEXP,SEXP kSEXP,SEXP backwardSEXP, SEXP tolSEXP,SEXP parallelSEXP,SEXP maxitersSEXP);
 SEXP Rfast2_multinom_reg(SEXP ySEXP,SEXP x0SEXP, SEXP tolSEXP,SEXP maxitersSEXP);
 SEXP Rfast2_weib_regs(SEXP ySEXP,SEXP xSEXP, SEXP tolSEXP,SEXP loggedSEXP,SEXP maxitersSEXP, SEXP parallelSEXP);
@@ -62,6 +65,9 @@ static const R_CallMethodDef CallEntries[] = {
 
   {"Rfast2_add_term", (DL_FUNC) &Rfast2_add_term, 9},
   {"Rfast2_colspml_mle", (DL_FUNC) &Rfast2_colspml_mle, 4},
+  {"Rfast2_colcauchy_mle", (DL_FUNC) &Rfast2_colcauchy_mle, 4},
+  {"Rfast2_colbeta_mle", (DL_FUNC) &Rfast2_colbeta_mle, 4},
+  {"Rfast2_censweib_reg", (DL_FUNC) &Rfast2_censweib_reg, 5},
   {"Rfast2_fbed_reg", (DL_FUNC) &Rfast2_fbed_reg, 10},
   {"Rfast2_multinom_reg", (DL_FUNC) &Rfast2_multinom_reg, 4},
   {"Rfast2_weib_regs", (DL_FUNC) &Rfast2_weib_regs, 6},

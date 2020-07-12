@@ -20,8 +20,8 @@ double calcylogy(vec y, int sz){
     if(y[i]>0){
       ret+=y[i]*log(y[i]);
     }
-    return ret;
   }
+  return ret;
 }
 
 double calcDevRes(mat p,vec y,mat est){

@@ -1,4 +1,6 @@
-censweib.reg <- function (y, x, di, tol = 1e-07, maxiters = 100) {
+
+#[export]
+censweib.reg <- function (y, x, di = NULL, tol = 1e-07, maxiters = 100) {
     X <- model.matrix(y ~ ., data.frame(x))
 	mod<-NULL
 	if ( is.null(di) ) {

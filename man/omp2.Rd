@@ -1,5 +1,5 @@
 \name{Orthogonal matching pursuit regression}
-\alias{omp}
+\alias{omp2}
 \title{
 Orthogonal matching pursuit regression
 }
@@ -9,7 +9,7 @@ Orthogonal matching pursuit regression.
 }
 
 \usage{
-omp(y, x, xstand = TRUE, tol = qchisq(0.95, 1), type = "gamma" ) 
+omp2(y, x, xstand = TRUE, tol = qchisq(0.95, 1), type = "gamma" ) 
 }
 
 \arguments{

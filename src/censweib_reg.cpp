@@ -198,3 +198,19 @@ List censweib_reg (NumericVector Y, NumericMatrix X, NumericVector di = NumericV
 
   return ret;
 }
+
+
+
+RcppExport SEXP Rfast2_censweib_reg(SEXP YSEXP,SEXP XSEXP,SEXP diSEXP,SEXP tolSEXP,SEXP maxitersSEXP) {
+  BEGIN_RCPP
+  RObject __result;
+  RNGScope __rngScope;
+  traits::input_parameter< NumericVector >::type Y(YSEXP);
+  traits::input_parameter< NumericMatrix >::type X(XSEXP);
+  traits::input_parameter< NumericVector >::type di(diSEXP);
+  traits::input_parameter< const double >::type tol(tolSEXP);
+  traits::input_parameter< const int >::type maxiters(maxitersSEXP);
+  __result = censweib_reg(Y,X,di,tol,maxiters);
+  return __result;
+  END_RCPP
+}
