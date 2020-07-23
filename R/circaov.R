@@ -104,11 +104,11 @@ lr.circaov <- function(u, ina) {
   mi <- rsi/ni
   mi <- mi/sqrt(Rfast::rowsums(mi^2))
   m <- Rfast::colmeans(x)
+  rs <- n * m
   m <- m/sqrt(sum(m^2))
   m <- matrix(rep(m, g), nrow = g, byrow = TRUE)
 
   n <- dim(x)[1]
-  rs <- Rfast::colsums(rsi)
   mu <- atan(rs[2]/rs[1]) + pi * (rs[1] < 0)
   con <- sum( cos(u - mu) )
   R <- sqrt( sum(rs^2) )
