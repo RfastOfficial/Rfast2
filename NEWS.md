@@ -58,7 +58,7 @@ Date release: **16/12/2019**
 >>  |                       |  											|
 
 
-> ####Version 
+> ####Version 0.0.4
 Date release: **28/07/2019**
 
 ***
@@ -115,7 +115,7 @@ Date release: **28/07/2019**
 >>  |  is.skew.symmetric    |  Checking if the given matrix is skew-symmetric. |
 
 
-> ####Version 0.03
+> ####Version 0.0.3
 Date release: **08/05/2019**
 
 ***
