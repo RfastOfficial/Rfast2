@@ -9,7 +9,7 @@ Censored Weibull regression model.
 }
 
 \usage{
-censweib.reg(y, x, di, tol = 1e-07, maxiters = 100)
+censweib.reg(y, x, di = NULL, tol = 1e-07, maxiters = 100)
 }
 
 \arguments{
