@@ -98,6 +98,7 @@ lr.circaov <- function(u, ina) {
   ina <- as.numeric(ina)
   g <- max(ina)
   x <- cbind(cos(u), sin(u))
+  n <- dim(x)[1]
   rsi <- rowsum(x, ina)
   Ri <- sqrt(Rfast::rowsums(rsi^2))
   ni <- tabulate(ina)

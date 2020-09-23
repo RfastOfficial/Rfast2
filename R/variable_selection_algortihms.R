@@ -158,8 +158,8 @@ omp2 <- function (y, x, xstand = TRUE, tol = qchisq(0.95, 1), type = "gamma") {
         names(sela) <- NULL
         mod <- Rfast2::gammareg(y, x[, sel])
         res <- y - exp(mod$be[1] + x[, sel] * mod$be[2])
-        rho[2] <- mod$info[2]
-        phi[2] <- mod$info[3]
+        rho[2] <- mod$deviance
+        phi[2] <- mod$phi
         ind[sel] <- 0
         i <- 2
         while ( (rho[i - 1] - rho[i])/phi[i] > tol ) {

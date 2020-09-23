@@ -83,6 +83,6 @@ R implementation and documentation: Michail Tsagris <mtsagris@uoc.gr>.
 \examples{
 x <- matrix(rnorm(100 * 2), ncol = 2)
 y <- rbinom(100, 1, 0.6)   ## binary logistic regression
-a <- sclr(y, x, full = TRUE) 
+a <- sclr(y, x) 
 }
 
