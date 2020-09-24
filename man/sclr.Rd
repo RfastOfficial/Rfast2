@@ -76,7 +76,7 @@ R implementation and documentation: Michail Tsagris <mtsagris@uoc.gr>.
 %}
 
 \seealso{
-\code{ \link{js.univreg}, \link{propols.reg}
+\code{ \link{propols.reg}
 }
 }
 
