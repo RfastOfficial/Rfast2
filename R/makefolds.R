@@ -1,4 +1,3 @@
-#[export]
 makefolds <- function(ina, nfolds = 10, stratified = TRUE, seed = FALSE) {
   names <- paste("Fold", 1:nfolds)
   runs <- sapply(names, function(x) NULL)
