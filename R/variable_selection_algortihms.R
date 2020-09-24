@@ -172,8 +172,8 @@ omp2 <- function (y, x, xstand = TRUE, tol = qchisq(0.95, 1), type = "gamma") {
             mod <- Rfast2::gammareg(y, x[, sela])
             res <- y - as.vector(exp(mod$be[1] + x[, sela] %*% 
                 mod$be[-1]))
-            rho[i] <- mod$info[2]
-            phi[i] <- mod$info[3]
+            rho[i] <- mod$deviance
+            phi[i] <- mod$phi
             ind[sela] <- 0
         }
 
