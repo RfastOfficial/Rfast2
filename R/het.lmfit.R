@@ -1,3 +1,4 @@
+#[export]
 het.lmfit <- function(x, y, type = 1) {
    if ( type == 1 )  {
      xxinvtx <- solve( crossprod(x), t(x) )
