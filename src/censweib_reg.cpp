@@ -50,7 +50,7 @@ List censweib_reg (NumericVector Y, NumericMatrix X, NumericVector di = NumericV
         tmp2 = tmp*ez;
         (*derbiter)+=tmp2-tmp;
         derb2jend = derb2.end_col(j);
-        for(derb2j = derb2.begin_col(j),xrij = xbegin; derb2j<derb2jend; ++xrij, ++derb2j){
+        for(derb2j = derb2.begin_col(j),xrij = xbegin; derb2j<derb2jend; xrij++, derb2j++){
           *derb2j -=(*xrij)*tmp2;
         }
       }
@@ -62,7 +62,7 @@ List censweib_reg (NumericVector Y, NumericMatrix X, NumericVector di = NumericV
         tmp2 = tmp*ez;
         (*derbiter)+=tmp2;
         derb2jend = derb2.end_col(j);
-        for(derb2j = derb2.begin_col(j),xrij = xbegin;derb2j<derb2jend; ++xrij, ++derb2j){
+        for(derb2j = derb2.begin_col(j),xrij = xbegin;derb2j<derb2jend; xrij++, derb2j++){
           *derb2j -=(*xrij)*tmp2;
         }
       }
@@ -101,7 +101,7 @@ List censweib_reg (NumericVector Y, NumericMatrix X, NumericVector di = NumericV
         tmp2 = tmp*ez;
         (*derbiter)+=(tmp2-tmp)/es;
         derb2jend = derb2.end_col(j);
-        for(derb2j = derb2.begin_col(j),xrij = xbegin;derb2j<derb2jend; ++xrij, ++derb2j){
+        for(derb2j = derb2.begin_col(j),xrij = xbegin;derb2j<derb2jend; xrij++, derb2j++){
           *derb2j -=(*xrij)*tmp2;
         }
       }
@@ -113,7 +113,7 @@ List censweib_reg (NumericVector Y, NumericMatrix X, NumericVector di = NumericV
         tmp2 = tmp*ez;
         (*derbiter)+=tmp2/es;
         derb2jend = derb2.end_col(j);
-        for(derb2j = derb2.begin_col(j),xrij = xbegin;derb2j<derb2jend; ++xrij, ++derb2j){
+        for(derb2j = derb2.begin_col(j),xrij = xbegin;derb2j<derb2jend; xrij++, derb2j++){
           *derb2j -=(*xrij)*tmp2;
         }
       }
@@ -154,7 +154,7 @@ List censweib_reg (NumericVector Y, NumericMatrix X, NumericVector di = NumericV
           tmp2 = tmp*ez;
           (*derbiter)+=(tmp2-tmp)/es;
           derb2jend = derb2.end_col(j);
-          for(derb2j = derb2.begin_col(j),xrij = xbegin;derb2j<derb2jend; ++xrij, ++derb2j){
+          for(derb2j = derb2.begin_col(j),xrij = xbegin;derb2j<derb2jend; xrij++, derb2j++){
             *derb2j -=(*xrij)*tmp2;
           }
         }
@@ -166,7 +166,7 @@ List censweib_reg (NumericVector Y, NumericMatrix X, NumericVector di = NumericV
           tmp2 = tmp*ez;
           (*derbiter)+=tmp2/es;
           derb2jend = derb2.end_col(j);
-          for(derb2j = derb2.begin_col(j),xrij = xbegin;derb2j<derb2jend; ++xrij, ++derb2j){
+          for(derb2j = derb2.begin_col(j),xrij = xbegin;derb2j<derb2jend; xrij++, derb2j++){
             *derb2j -=(*xrij)*tmp2;
           }
         }
