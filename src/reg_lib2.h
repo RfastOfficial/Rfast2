@@ -21,7 +21,7 @@ double weib_reg2(vec, mat, vec, const double, const double, const int);
 vec qpois_reg2(mat, vec,const double,const double,const double,const int);
 vec rint_regs2(mat, vec, vec, IntegerVector, int, int, vec, const double, const bool, const int);
 double glm_poisson3(mat, vec, const double, const double,int);
-List glm_poisson_2(mat, vec, const double,const double, const int);
+void glm_poisson_2(mat, vec, const double,const double, const int, vec *);
 vec prop_regs2(mat,vec,double *,vec,const double,const int);
 double spml_reg2(mat, mat, const double, const int);
 double multinom_reg2(mat, mat, mat, rowvec, rowvec, const double, const int);
