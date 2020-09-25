@@ -75,8 +75,8 @@ R implementation and documentation: Stefanos Fafalios <stefanosfafalios@gmail.co
 \dontrun{
 x <- matrix(rnorm(100 * 2), ncol = 2)
 y <- rexp(100, 1)
-id <- rbinom(100, 0.8, 1)
-mod <- censweib.reg(y, x, id)
+di <- rbinom(100, 1, 0.8)
+mod <- censweib.reg(y, x, di)
 x <- NULL
 }
 }
