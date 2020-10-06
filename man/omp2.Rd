@@ -77,7 +77,7 @@ R implementation and documentation: Michail Tsagris <mtsagris@yahoo.gr>.
 }
 
 \examples{
-x <- matrnorm(100, 100)
+x <- matrix( rnorm(100 * 50), ncol = 50 )
 y <- rgamma(100, 4, 1)
 a <- omp2(y, x)
 a

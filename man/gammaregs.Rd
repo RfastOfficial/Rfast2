@@ -66,7 +66,7 @@ R implementation and documentation: Stefanos Fafalios \email{stefanosfafalios@gm
 \examples{
 \dontrun{
 y <- rgamma(100, 3, 10)
-x <- matrnorm(100, 10)
+x <- matrix( rnorm( 100 * 10), ncol = 10 )
 b <- glm(y ~ x[, 1], family = Gamma(log) )
 anova(b, test= "F")
 a <- gammaregs(y, x)

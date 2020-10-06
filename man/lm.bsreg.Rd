@@ -1,11 +1,11 @@
-\name{Single terms deletion hypothesis testin in a linear regression model}
+\name{backward selection with the F test or the partial correlation coefficient}
 \alias{lm.bsreg}
 \title{
-Single terms deletion hypothesis testin in a linear regression model
+backward selection with the F test or the partial correlation coefficient
 }
 
 \description{
-Single terms deletion hypothesis testin in a linear regression model.
+backward selection with the F test or the partial correlation coefficient.
 }
 
 \usage{
