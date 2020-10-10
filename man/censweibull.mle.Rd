@@ -44,7 +44,6 @@ Type I Censored Weibull Data Including Covariates.
 Technical report. ISSTECH-96-022, Boeing Information & Support Services, P.O. Box 24346, MS-7L-22.
 
 \url{ http://faculty.washington.edu/fscholz/Reports/weibcensmle.pdf }
-
 }
 \author{
 Michail Tsagris
