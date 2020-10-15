@@ -28,12 +28,12 @@ List censweib_reg (NumericVector Y, NumericMatrix X, NumericVector di = NumericV
 
   vec::iterator yiter;
   vec::iterator derbiter;
-  for(i=0, yiter=y.begin();i<n;yiter++,i++){
+  for(i=0, yiter=y.begin();i<n;++yiter,++i){
     (*yiter) = std::log(Y[i]);
     m+=(*yiter);
   }
   m/=n;
-  for(i=0,yiter=y.begin();i<n;yiter++,i++){
+  for(i=0,yiter=y.begin();i<n;++yiter,++i){
     z = (*yiter)-m;
     ez = std::exp(z);
 
@@ -45,7 +45,7 @@ List censweib_reg (NumericVector Y, NumericMatrix X, NumericVector di = NumericV
       lik1+=z;
       ders-=z;
       xbegin = x.begin_row(i);
-      for(xrj = xbegin,derbiter=derb.begin(),j=0;j<p;j++,derbiter++,xrj++){
+      for(xrj = xbegin,derbiter=derb.begin(),j=0;j<p;++j,++derbiter,++xrj){
         tmp = *xrj;
         tmp2 = tmp*ez;
         (*derbiter)+=tmp2-tmp;
@@ -57,7 +57,7 @@ List censweib_reg (NumericVector Y, NumericMatrix X, NumericVector di = NumericV
     }
     else{
       xbegin = x.begin_row(i);
-      for(xrj = xbegin,derbiter=derb.begin(),j=0;j<p;j++,derbiter++,xrj++){
+      for(xrj = xbegin,derbiter=derb.begin(),j=0;j<p;++j,++derbiter,++xrj){
         tmp = *xrj;
         tmp2 = tmp*ez;
         (*derbiter)+=tmp2;
@@ -85,7 +85,7 @@ List censweib_reg (NumericVector Y, NumericMatrix X, NumericVector di = NumericV
   double lik2=0;
   derb.fill(0);
   derb2.fill(0);
-  for(i=0,xbeiter=xbe.begin(), yiter=y.begin();i<n;yiter++,xbeiter++,i++){
+  for(i=0,xbeiter=xbe.begin(), yiter=y.begin();i<n;++yiter,++xbeiter,++i){
     z = ((*yiter)-(*xbeiter))/es;
     ez = std::exp(z);
     lik2-=ez;
@@ -96,7 +96,7 @@ List censweib_reg (NumericVector Y, NumericMatrix X, NumericVector di = NumericV
 
       ders-=z;
       xbegin = x.begin_row(i);
-      for(xrj = xbegin,derbiter=derb.begin(),j=0;j<p;j++,derbiter++,xrj++){
+      for(xrj = xbegin,derbiter=derb.begin(),j=0;j<p;++j,++derbiter,++xrj){
         tmp = *xrj;
         tmp2 = tmp*ez;
         (*derbiter)+=(tmp2-tmp)/es;
@@ -108,7 +108,7 @@ List censweib_reg (NumericVector Y, NumericMatrix X, NumericVector di = NumericV
     }
     else{
       xbegin = x.begin_row(i);
-      for(xrj = xbegin,derbiter=derb.begin(),j=0;j<p;j++,derbiter++,xrj++){
+      for(xrj = xbegin,derbiter=derb.begin(),j=0;j<p;++j,++derbiter,++xrj){
         tmp = *xrj;
         tmp2 = tmp*ez;
         (*derbiter)+=tmp2/es;
@@ -124,9 +124,9 @@ List censweib_reg (NumericVector Y, NumericMatrix X, NumericVector di = NumericV
   ders2-=ders;
   ders-=n1;
 
-  int it = 2;
+  int it = 1;
 
-  while(it++<maxiters && std::abs(lik2 - lik1) > tol) {
+  while(++it<maxiters && std::abs(lik2 - lik1) > tol) {
     lik1=lik2;
 
     be = be-solve(derb2, derb);
@@ -138,7 +138,7 @@ List censweib_reg (NumericVector Y, NumericMatrix X, NumericVector di = NumericV
     ders2=0;
     derb.fill(0);
     derb2.fill(0);
-    for(i=0,xbeiter=xbe.begin(), yiter=y.begin();i<n;yiter++,xbeiter++,i++){
+    for(i=0,xbeiter=xbe.begin(), yiter=y.begin();i<n;++yiter,++xbeiter,++i){
       z = ((*yiter)-(*xbeiter))/es;
       ez = std::exp(z);
       lik2-=ez;
@@ -149,7 +149,7 @@ List censweib_reg (NumericVector Y, NumericMatrix X, NumericVector di = NumericV
 
         ders-=z;
         xbegin = x.begin_row(i);
-        for(xrj = xbegin,derbiter=derb.begin(),j=0;j<p;j++,derbiter++,xrj++){
+        for(xrj = xbegin,derbiter=derb.begin(),j=0;j<p;++j,++derbiter,++xrj){
           tmp = *xrj;
           tmp2 = tmp*ez;
           (*derbiter)+=(tmp2-tmp)/es;
@@ -161,7 +161,7 @@ List censweib_reg (NumericVector Y, NumericMatrix X, NumericVector di = NumericV
       }
       else{
         xbegin = x.begin_row(i);
-        for(xrj = xbegin,derbiter=derb.begin(),j=0;j<p;j++,derbiter++,xrj++){
+        for(xrj = xbegin,derbiter=derb.begin(),j=0;j<p;++j,++derbiter,++xrj){
           tmp = *xrj;
           tmp2 = tmp*ez;
           (*derbiter)+=tmp2/es;
@@ -182,7 +182,7 @@ List censweib_reg (NumericVector Y, NumericMatrix X, NumericVector di = NumericV
   // tmp = sum( la[di == 1] )
   // tmp2 = sum( ( ti / exp(la) )^k )
   tmp=0,tmp2=0;
-  for(i=0,xbeiter=xbe.begin();i<n;i++,xbeiter++){
+  for(i=0,xbeiter=xbe.begin();i<n;++i,++xbeiter){
     tmp2+=std::pow(Y[i]/std::exp(*xbeiter),k);
     if(disz>1&&di[i]==1){
       tmp+=*xbeiter;
