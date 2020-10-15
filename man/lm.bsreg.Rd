@@ -1,4 +1,4 @@
-\name{backward selection with the F test or the partial correlation coefficient}
+\name{Backward selection with the F test or the partial correlation coefficient}
 \alias{lm.bsreg}
 \title{
 backward selection with the F test or the partial correlation coefficient
