@@ -536,15 +536,8 @@ propols.reg <- function(y, x, cov = FALSE, tol = 1e-07 ,maxiters = 100) {
     covb <- B %*% A %*% B
     seb <- sqrt( diag(covb) ) 	
   }	
-  list(sse = a2, be = be, seb = seb, covb = covb, iters = i)
+  list(be = be, seb = seb, covb = covb, sse = a2, iters = i)
 }
-
-#ols <- function(be, y, x) {
-#  est <- 1 / ( 1 + exp( - x %*% be) )
-#  sum( ( y - est )^2 )
-#}
-
-
 
 #[export]
 propjs.reg <- function(y, x, tol = 1e-07, maxiters = 100) {
