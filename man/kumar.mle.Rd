@@ -4,10 +4,11 @@
 \alias{simplex.mle}
 
 \title{
-MLE of the Kumaraswamy distribution}
+MLE of distributions defined for proportions
+}
 
 \description{
-MLE of the Kumaraswamy distribution.
+MLE of distributions defined for proportions.
 }
 
 \usage{
