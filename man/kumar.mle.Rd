@@ -31,7 +31,7 @@ The maximum number of iterations the Newton-Raphson will perform.
 
 \details{
 Instead of maximising the log-likelihood via a numerical optimiser we have used a Newton-Raphson algorithm which is faster. 
-See wikipedia for the equations to be solved.    
+See wikipedia for the equations to be solved. The distributions are Kumaraswamy, zero inflated logistic normal and simplex.
 }
 
 \value{
@@ -52,9 +52,6 @@ Journal of Hydrology. 46 (1-2): 79-88.
 
 Jones, M.C. (2009). Kumaraswamy's distribution: A beta-type distribution with some tractability advantages. 
 Statistical Methodology. 6(1): 70-81. 
-
-Connie Stewart (2013). Zero-inflated beta distribution for modeling the proportions 
-in quantitative fatty acid signature analysis. Journal of Applied Statistics, 40(5): 985-992.
 
 Zhang, W. & Wei, H. (2008). Maximum likelihood estimation for simplex distribution nonlinear mixed models 
 via the stochastic approximation algorithm. The Rocky Mountain Journal of Mathematics, 38(5): 1863-1875.
