@@ -3,6 +3,7 @@
 \alias{normlognb.pred}
 \alias{laplacenb.pred}
 \alias{logitnormnb.pred}
+\alias{cauchynb.pred}
 
 \title{
 Prediction with some naive Bayes classifiers
@@ -17,6 +18,7 @@ weibullnb.pred(xnew, shape, scale, ni)
 normlognb.pred(xnew, expmu, sigma, ni)
 laplacenb.pred(xnew, location, scale, ni)
 logitnormnb.pred(xnew, m, s, ni) 
+cauchynb.pred(xnew, location, scale, ni)
 }
 
 \arguments{

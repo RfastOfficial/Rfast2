@@ -3,6 +3,7 @@
 \alias{normlog.nb}
 \alias{laplace.nb}
 \alias{logitnorm.nb}
+\alias{cauchy.nb}
 
 \title{
 Naive Bayes classifiers
@@ -17,6 +18,7 @@ weibull.nb(xnew = NULL, x, ina, tol = 1e-07)
 normlog.nb(xnew = NULL, x, ina)
 laplace.nb(xnew = NULL, x, ina)
 logitnorm.nb(xnew = NULL, x, ina) 
+cauchy.nb(xnew = NULL, x, ina)
 }
 
 \arguments{

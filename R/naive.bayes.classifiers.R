@@ -167,6 +167,46 @@ logitnormnb.pred <- function(xnew, m, s, ni) {
 
 
 #[export]
+cauchy.nb <- function(xnew = NULL, x, ina) {
+  est <- NULL
+  ni <- tabulate(ina)
+  ni <- ni[ni > 0]
+  k <- length(ni)
+  d <- dim(x)[2]
+  mx <- sigma <- matrix(0, k, d)
+  for (i in 1:k) {
+    res <- Rfast2::colcauchy.mle(x[ina == i, ])[, c(2, 3)]
+    mx[i, ] <- res[, 1]
+    sigma[i, ] <- res[, 2]
+  }
+  rownames(mx) <- rownames(sigma) <- paste("Group", 1:k)
+  if ( !is.null(xnew) ) {
+    score <- matrix(0, dim(xnew)[1], k)
+    xnew <- t(xnew)
+    com <-  Rfast::rowsums( log(sigma) ) + log(ni) 
+    ##  log( sigma/pi ) is the correct term, but we discard the constant pi and add the log(ni)
+    for (i in 1:k)  score[, i] <-  - Rfast::colsums( log( (xnew - mx[i, ])^2 + sigma[i, ]^2 ) )
+    score <- Rfast::eachrow(score, com, oper = "+")
+    est <- Rfast::rowMaxs(score)
+  }
+  list(location = mx, scale = sigma, ni = ni, est = est)
+}
+
+
+#[export]
+cauchynb.pred <- function(xnew, location, scale, ni) {
+  k <- dim(location)[1]
+  score <- matrix(0, dim(xnew)[1], k)
+  xnew <- t(xnew)
+  com <-  Rfast::rowsums( log(sigma) ) + log(ni) 
+  ##  log( sigma/pi ) is the correct term, but we discard the constant pi and add the log(ni)
+  for (i in 1:k)  score[, i] <-  - Rfast::colsums( log( (xnew - mx[i, ])^2 + sigma[i, ]^2 ) )
+  score <- Rfast::eachrow(score, com, oper = "+")
+  Rfast::rowMaxs(score)
+}
+
+
+#[export]
 vm.nb <- function(xnew = NULL, x, ina, tol = 1e-07) {
   est <- NULL
   ni <- tabulate(ina)

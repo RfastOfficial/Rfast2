@@ -14,8 +14,8 @@ nb.cv <- function(x, ina, type = "gaussian", folds = NULL, nfolds = 10,
     preds <- sapply(names, function(x) NULL)
   }
 
-  if ( type == "gaussian"  |  type == "gamma"  | type == "weibull"  |  
-       type == "normlog"  |  type == "laplace"  | type == "vm"  |  type == "spml" ) {
+  if ( type == "gaussian"  |  type == "gamma"  | type == "weibull"  |  type == "normlog" 
+       |  type == "laplace"  |  type == "cauchy"  |  type == "vm"  |  type == "spml" ) {
     if ( type == "gaussian" ) { 
       nb <- Rfast::gaussian.nb
     } else if ( type == "gamma" ) {
@@ -26,6 +26,8 @@ nb.cv <- function(x, ina, type = "gaussian", folds = NULL, nfolds = 10,
       nb <- Rfast2::normlog.nb
     } else if (type == "laplace" ) {
       nb <- Rfast2::laplace.nb
+	} else if (type == "cauchy" ) {
+      nb <- Rfast2::cauchy.nb
     } else if (type == "vm" ) {
       nb <- Rfast2::vm.nb
     } else if (type == "spml" ) {
