@@ -72,7 +72,7 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@yahoo.gr}.
 %}
 
 \seealso{
-\code{\link{weibullnb.pred}, \link{mle.lda}, \link{reg.mle.lda}, \link{multinom.reg}
+\code{\link{weibullnb.pred}, \link{weibull.nb}, \link{vm.nb}, \link{vmnb.pred}, \link{mle.lda}, \link{reg.mle.lda}, \link{multinom.reg}
 }
 }
 

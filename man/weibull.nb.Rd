@@ -91,7 +91,7 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@yahoo.gr}.
 %}
 
 \seealso{
-\code{ \link{weibullnb.pred} }
+\code{ \link{weibullnb.pred}, \link{vm.nb}, \link{nb.cv} }
 }
 
 \examples{

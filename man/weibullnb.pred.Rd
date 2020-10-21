@@ -75,7 +75,7 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@yahoo.gr}.
 %}
 
 \seealso{
-\code{ \link{weibull.nb} }
+\code{ \link{weibull.nb}, \link{vmnb.pred}, \link{nb.cv} }
 }
 
 \examples{

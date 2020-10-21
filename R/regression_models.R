@@ -7,12 +7,39 @@ cls <- function(y, x, R, ca) {
 }
 
 
+
+#[export]
+het.lmfit <- function(x, y, type = 1) {
+   if ( type == 1 )  {
+     xxinvtx <- solve( crossprod(x), t(x) )
+     be <- xxinvtx %*% y
+     u <- y - x %*% be
+     be <- xxinvtx %*% log(u^2)  
+     gi <- as.vector( x %*% be )
+   } else if ( type == 2 ) {
+     yhat <- x %*% be
+     u <- y - yhat
+     z <- cbind(1, yhat, yhat^2)  
+     be <- solve( crossprod(z), crossprod(z, log(u^2)) )
+     gi <- as.vector( z %*% be )
+   }
+   hi <- 1/sqrt( exp(gi) )
+   be <- solve(crossprod(x, hi * x), crossprod(x, hi * y))
+   e <- y - x %*% be
+   list(be = be, residuals = e)
+}
+
+
+
+
 #[export]
 gammareg <- function(y, x, tol = 1e-07, maxiters = 100) {
   mod <- Rfast::gammacon(y)
   x <- model.matrix( y~., data.frame(x) )
   .Call(Rfast2_gamma_reg, Y = y, X = x, mod = mod, tol = tol, maxiters = maxiters) 
 }
+
+
 
 
 #[export]
@@ -666,7 +693,21 @@ prophelling.reg <- function(y, x, tol = 1e-07, maxiters = 100) {
   list(be = be, der2 = der2, H = d2, iters = i) 
 }
 
+
   
+
+#[export]
+censweib.reg <- function (y, x, di, tol = 1e-07, maxiters = 100) {
+    X <- model.matrix(y ~ ., data.frame(x))
+	if ( is.null(di) ) {
+	  mod <- Rfast::weib.reg(y, X, tol = tol, maxiters =  maxiters)
+	} else {
+	  mod <- .Call(Rfast2_censweib_reg, y, X, di, tol, maxiters)
+	}
+	be <- as.vector(mod$be)
+    names(be) <- colnames(X)
+    list(iters = mod$iters, loglik = mod$loglik, shape = mod$shape, be = be)
+}
 
 
      
