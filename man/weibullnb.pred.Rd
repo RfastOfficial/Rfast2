@@ -3,6 +3,7 @@
 \alias{normlognb.pred}
 \alias{laplacenb.pred}
 \alias{logitnormnb.pred}
+\alias{betanb.pred}
 \alias{cauchynb.pred}
 
 \title{
@@ -18,6 +19,7 @@ weibullnb.pred(xnew, shape, scale, ni)
 normlognb.pred(xnew, expmu, sigma, ni)
 laplacenb.pred(xnew, location, scale, ni)
 logitnormnb.pred(xnew, m, s, ni) 
+betanb.pred(xnew, a, b, ni)
 cauchynb.pred(xnew, location, scale, ni)
 }
 
@@ -33,22 +35,28 @@ the data must be percentages strictly between 0 and 1.
 A matrix with the group shape parameters. Each row corresponds to a group.
 }
 \item{scale}{
-A matrix with the group scale parameters. Each row corresponds to a group.
+A matrix with the group scale parameters of the Laplace or the Cauchy distribution. Each row corresponds to a group.
 }
 \item{expmu}{
-A matrix with the mean parameters.
+A matrix with the group mean parameters. Each row corresponds to a group.
 }
 \item{m}{
-A matrix with the mean parameters.
+A matrix with the group mean parameters. Each row corresponds to a group.
 }
 \item{sigma}{
-A matrix with the (MLE, hence biased) variance parameters.
+A matrix with the group (MLE, hence biased) variance parameters. Each row corresponds to a group.
 }
 \item{s}{
-A matrix with the MLE variance parameters.
+A matrix with the group MLE variance parameters. Each row corresponds to a group.
 }
 \item{location}{
-A matrix with the location parameters (medians).
+A matrix with the group location parameters of the Laplace or of the Cauchy distribution. Each row corresponds to a group.
+}
+\item{a}{
+A matrix with the group "alpha" parameters of the beta distribution. Each row corresponds to a group.
+}
+\item{b}{
+A matrix with the group "beta" parameters of the beta distribution. Each row corresponds to a group.
 }
 \item{ni}{
 A vector with the frequencies of each group.

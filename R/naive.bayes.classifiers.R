@@ -60,7 +60,7 @@ normlog.nb <- function(xnew = NULL, x, ina) {
   if ( !is.null(xnew) ) {
     score <- matrix(0, dim(xnew)[1], k)
     xnew <- t(xnew)
-    com <-  - Rfast::rowsums( log(sigma) ) + 2 * log(ni)
+    com <-  - Rfast::rowsums( log(sigma) ) + log(ni)
     for (i in 1:k)  score[, i] <-  - Rfast::colsums( (xnew - mx[i, ])^2/sigma[i, ] )
     score <- Rfast::eachrow(score, com, oper = "+")
     est <- Rfast::rowMaxs(score)
@@ -74,7 +74,7 @@ normlognb.pred <- function(xnew, expmu, sigma, ni) {
   k <- dim(expmu)[1]
   score <- matrix(0, dim(xnew)[1], k)
   xnew <- t(xnew)
-  com <-  - Rfast::rowsums( log(sigma) ) + 2 * log(ni)
+  com <-  - Rfast::rowsums( log(sigma) ) + log(ni)
   for (i in 1:k)  score[, i] <-  - Rfast::colsums( (xnew - expmu[i, ])^2/sigma[i, ] )
   score <- Rfast::eachrow(score, com, oper = "+")
   Rfast::rowMaxs(score)
@@ -144,7 +144,7 @@ logitnorm.nb <- function(xnew = NULL, x, ina) {
     ynew <- t(ynew)
     score <- matrix(0, dim(xnew)[1], k)
     for (i in 1:k) { 
-      score[, i] <- Rfast::colsums( dnorm(ynew, m[i, ], sqrt(s[i, ]), log = TRUE) ) - Rfast::rowsums(lxnew1) - Rfast::rowsums(lxnew2)
+      score[, i] <- Rfast::colsums( dnorm(ynew, m[i, ], sqrt(s[i, ]), log = TRUE) ) - Rfast::rowsums(lxnew1) - Rfast::rowsums(lxnew2) + log(ni[i])
     }
     est <- Rfast::rowMaxs(score)
   }
@@ -166,6 +166,46 @@ logitnormnb.pred <- function(xnew, m, s, ni) {
 }
 
 
+
+#[export]
+beta.nb <- function(xnew = NULL, x, ina) {
+  est <- NULL
+  ni <- tabulate(ina)
+  ni <- ni[ni > 0]
+  k <- length(ni)
+  d <- dim(x)[2]
+  a <- b <- matrix(0, k, d)
+  for (i in 1:k) {
+    res <- Rfast2::colbeta.mle(x[ina == i, ])[, 1:2]
+    a[i, ] <- res[, 1]
+    b[i, ] <- res[, 2]
+  }
+  rownames(a) <- rownames(b) <- paste("Group", 1:k)
+  if ( !is.null(xnew) ) {
+    score <- matrix(0, dim(xnew)[1], k)
+    xnew <- t(xnew)
+    com <-  - Rfast::rowsums( lbeta(a, b) ) + log(ni)
+    for (i in 1:k)  score[, i] <- Rfast::colsums( (a[i, ] - 1) * log(xnew) + (b[i, ] - 1) * log(1 - xnew) )
+    score <- Rfast::eachrow(score, com, oper = "+")
+    est <- Rfast::rowMaxs(score)
+  }
+  list(a = a, b = b, ni = ni, est = est)
+}
+
+
+#[export]
+betanb.pred <- function(xnew, a, b, ni) {
+  k <- dim(a)[1]
+  score <- matrix(0, dim(xnew)[1], k)
+  xnew <- t(xnew)
+  com <-  - Rfast::rowsums( lbeta(a, b) ) + log(ni)
+  for (i in 1:k)  score[, i] <- Rfast::colsums( (a[i, ] - 1) * log(xnew) + (b[i, ] - 1) * log(1 - xnew) )
+  score <- Rfast::eachrow(score, com, oper = "+")
+  Rfast::rowMaxs(score)
+}
+
+
+
 #[export]
 cauchy.nb <- function(xnew = NULL, x, ina) {
   est <- NULL
@@ -175,7 +215,7 @@ cauchy.nb <- function(xnew = NULL, x, ina) {
   d <- dim(x)[2]
   mx <- sigma <- matrix(0, k, d)
   for (i in 1:k) {
-    res <- Rfast2::colcauchy.mle(x[ina == i, ])[, c(2, 3)]
+    res <- Rfast2::colcauchy.mle(x[ina == i, ])[, 1:2]
     mx[i, ] <- res[, 1]
     sigma[i, ] <- res[, 2]
   }
@@ -204,6 +244,7 @@ cauchynb.pred <- function(xnew, location, scale, ni) {
   score <- Rfast::eachrow(score, com, oper = "+")
   Rfast::rowMaxs(score)
 }
+
 
 
 #[export]
@@ -245,6 +286,7 @@ vmnb.pred <- function(xnew, mu, kappa, ni) {
 }
 
 
+
 #[export]
 spml.nb <- function(xnew = NULL, x, ina, tol = 1e-07) {
   est <- NULL
@@ -274,7 +316,7 @@ spml.nb <- function(xnew = NULL, x, ina, tol = 1e-07) {
     score <- Rfast::eachrow( score, com, oper = "+" ) 
     est <- Rfast::rowMaxs(score)
   }
-  list(mu1 = mu1, mu2 = mu2, mu = mu, gama = gam,ni = ni,  est = est)
+  list(mu1 = mu1, mu2 = mu2, mu = mu, gama = gam, ni = ni,  est = est)
 }
 
 
