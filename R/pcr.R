@@ -45,6 +45,10 @@ pcr <- function (y, x, k = 1, xnew = NULL) {
   if ( length(k) == 1 )  {
     colnames(be) <- paste("PC", k, sep = "")
   } else  colnames(be) <- paste("PC", k1, sep = "")
-  if ( !is.null(est) ) colnames(est) <- paste("PC", k1, sep = "")
+  if ( !is.null(est) ) {
+    if ( dim(est)[2] == 1 )  {
+      colnames(est) <- paste("PC", k, sep = "")
+    } else  colnames(est) <- paste("PC", k1, sep = "")
+  }
   list(be = be, per = per, vec = vec, est = est)
 }
