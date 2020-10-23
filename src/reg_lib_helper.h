@@ -1,8 +1,5 @@
 //Author: Stefanos Fafalios
-
-#ifndef _reg_lib_helper_
-#define _reg_lib_helper_
-
+ #pragma once
 // [[Rcpp::depends(RcppArmadillo)]]
 #include <RcppArmadillo.h>
 
@@ -44,4 +41,3 @@ mat create_id_mat(const int);
 double calc_multinom_ini(mat,vec);
 add_term_ini_vars* add_term_ini(const vec&, const std::string, const double, const int);
 
-#endif

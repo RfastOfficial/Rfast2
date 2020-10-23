@@ -1,7 +1,5 @@
 //Author: Stefanos Fafalios
-
-#ifndef _reg_lib_2_
-#define _reg_lib_2_
+#pragma once
 
 // [[Rcpp::depends(RcppArmadillo)]]
 #include <RcppArmadillo.h>
@@ -37,4 +35,3 @@ vec prop_reg2(mat, vec, double *,vec, const double,const int);
 vec glm_logistic2(mat, vec,double *, vec, const double, const int);
 mat add_term_c(const vec&, const mat&, const mat&, const double, add_term_ini_vars *, const double, const bool, const bool, const int, const double);
 
-#endif
