@@ -1787,7 +1787,8 @@ mat add_term_c(const vec &y, const mat &xinc, const mat &xout, const double devi
 #pragma omp parallel
 {
 #endif
-  mat tmpmat = resize(xinc, nrows, selectedColumnSize+1);
+  mat tmpmat = mat(xinc);
+  tmpmat.resize(nrows, selectedColumnSize+1);
   vec tmpvec;
   double out_0, out_1;
 #ifdef _OPENMP
@@ -1849,7 +1850,8 @@ mat add_term_c(const vec &y, const mat &xinc, const mat &xout, const double devi
 #endif
   }
   else{
-    mat tmpmat = resize(xinc, nrows, selectedColumnSize+1);
+    mat tmpmat = mat(xinc);
+	tmpmat.resize(nrows, selectedColumnSize+1);
     vec tmpvec;
     double out_0, out_1;
     for(int i = 0; i < idxsz; ++i){
