@@ -16,9 +16,11 @@ using namespace Rcpp;
 
 double calcylogy(const vec &y, int sz){
   double ret = 0.0;
-  for(int i = 0; i< sz; ++i)
-    if(y[i]>0)
+  for(int i = 0; i< sz; ++i){
+    if(y[i]>0){
       ret+=y[i]*log(y[i]);
+    }
+  }
     return ret;
 }
 
@@ -94,18 +96,21 @@ double calc_neg_ll(vec wx, vec expwx, vec y, int size){
   double sum = 0.0;
   vec::iterator wit = wx.begin(), yit = y.begin();
   for(int i=0;i<size;++i,++wit,++yit){
-    if(*wit<=30)
+    if(*wit<=30){
       sum+=(*yit-1)*(*wit)+log(expwx[i]);
-    else
+    }
+    else{
       sum+=(*yit)*(*wit);
+    }
   }
   return sum;
 }
 
 double bc2helper(double lambda, vec x, vec tmp, double vlx, double slx, double n2, double size) {
   double s;
-  if ( abs(lambda) < 1e-12 )
+  if ( abs(lambda) < 1e-12 ){
     s = vlx;
+  }
   else{
     my_pow2(x,&tmp[0],lambda,size);
     s = var(tmp) / (lambda*lambda);
@@ -115,23 +120,26 @@ double bc2helper(double lambda, vec x, vec tmp, double vlx, double slx, double n
 }
 
 void initXcols(double* xidxs, int size){
-  for(int i = 0; i < size; ++i)
+  for(int i = 0; i < size; ++i){
     xidxs[i] = i;
+  }
 }
 
 double* removeXColumn(int idx, double *xidxs, int size){
   // the vector x,column(idx) will always be located at xcols at an i such that i <= idx where xcols[i] = x,column(idx)
   int start;
-  if(idx > size - 1)
+  if(idx > size - 1){
     start = size-1;
-  else
+  }
+  else{
     start = idx;
-
-  for(int i = start; i > 0; --i)
+  }
+  for(int i = start; i > 0; --i){
     if(xidxs[i] == idx){
       start = i;
       break;
     }
+  }
 
     return removeIdx(start, xidxs, size);
 }
@@ -148,22 +156,26 @@ mat bindColsToMat(vec a, vec *vecs, int vecsz, mat ret){
 
 mat bindColsToMat2(int exept, mat vecs, int vecsz, mat ret){
   for(int i = 0; i < vecsz; ++i){
-    if(i < exept)
+    if(i < exept){
       ret.col(i) = vecs.col(i);
-    else if(i > exept)
+    }
+    else if(i > exept){
       ret.col(i-1) = vecs.col(i);
+    }
   }
   return ret;
 }
 
 double* removeDIdx(int start, double *array, int size){
   if(start >= size/2 ){
-    for(int i = start; i < size - 1; ++i)
+    for(int i = start; i < size - 1; ++i){
       array[i] = array[i+1];
+    }
     return array;
   }else{
-    for(int i = start; i > 0; --i)
+    for(int i = start; i > 0; --i){
       array[i] = array[i-1];
+    }
     array = &array[1];
     return array;
   }
@@ -171,12 +183,14 @@ double* removeDIdx(int start, double *array, int size){
 
 vec* removeVecIdx(int start, vec *array, int size){
   if(start >= size/2 ){
-    for(int i = start; i < size - 1; ++i)
+    for(int i = start; i < size - 1; ++i){
       array[i] = array[i+1];
+    }
     return array;
   }else{
-    for(int i = start; i > 0; --i)
+    for(int i = start; i > 0; --i){
       array[i] = array[i-1];
+    }
     array = &array[1];
     return array;
   }
@@ -184,12 +198,14 @@ vec* removeVecIdx(int start, vec *array, int size){
 
 double* removeIdx(int start, double *array, int size){
   if(start >= size/2 ){
-    for(int i = start; i < size - 1; ++i)
+    for(int i = start; i < size - 1; ++i){
       array[i] = array[i+1];
+    }
     return array;
   }else{
-    for(int i = start; i > 0; --i)
+    for(int i = start; i > 0; --i){
       array[i] = array[i-1];
+    }
     array = &array[1];
     return array;
   }
@@ -223,9 +239,11 @@ vec indexesOfNum(mat m, const int num){
   vec tmp(sz);
   int i,j = 0;
 
-  for(i=0; i<sz;++i)
-    if(m(i)==num)
+  for(i=0; i<sz;++i){
+    if(m(i)==num){
       tmp(j++)=i;
+    }
+  }
 
     tmp.resize(j);
 
