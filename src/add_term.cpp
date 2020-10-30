@@ -11,7 +11,7 @@ using namespace std;
 
 // [[Rcpp::export]]
 NumericMatrix add_term(Rcpp::NumericVector Y, Rcpp::NumericMatrix Xinc, Rcpp::NumericMatrix Xout, double devi_0,
-                       const std::string type = "logistic", const double tol = 1e-07, const bool logged = false, const bool parallel = 1, const int maxiters = 100) {
+                       const std::string type, const double tol, const bool logged, const bool parallel, const int maxiters) {
 
   // Xinc is a matrix with the selected columns
   // Xout is a matrix with the columns to be checked now
