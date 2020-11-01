@@ -15,7 +15,7 @@ using namespace Rcpp;
 //[[Rcpp::plugins(openmp)]]
 //[[Rcpp::plugins(cpp11)]]
 
-List glm_poisson_2(mat x, vec y, const double lgmy,const double tol, const int maxiters){
+void glm_poisson_2(mat x, vec y, const double lgmy,const double tol, const int maxiters, vec* ret){
   const unsigned int n=x.n_rows,pcols=x.n_cols,d=pcols;
   colvec b_old(d,fill::zeros),b_new(d),L1(d),yhat(n),m(n);
   mat L2,x_tr(n,pcols);
@@ -35,10 +35,9 @@ List glm_poisson_2(mat x, vec y, const double lgmy,const double tol, const int m
     if(++i==maxiters)
       break;
   }
-  List ret;
-  ret["m"] = m;
-  ret["be"] = b_old;
-  return ret;
+
+  ret[0] = m;
+  ret[1] = b_old;
 }
 
 vec glm_logistic2(mat x, vec y,double *ini, vec yminmy, const double tol, const int maxiters){
@@ -62,8 +61,8 @@ vec glm_logistic2(mat x, vec y,double *ini, vec yminmy, const double tol, const 
   p = 1/(1+m);
 
   d2 = -2*calcDevRes(p,y,est);
-  i=2;
-  while(i++<maxiters && d1-d2>tol){
+  i=1;
+  while(++i<maxiters && d1-d2>tol){
 
     d1 = d2;
 
@@ -84,7 +83,7 @@ vec glm_logistic2(mat x, vec y,double *ini, vec yminmy, const double tol, const 
   return be;
 }
 
-double glm_logistic3(mat x, vec y,double *ini, vec yminmy, const double tol, const int maxiters){
+double glm_logistic3(mat x, vec y,const double *ini, vec yminmy, const double tol, const int maxiters){
   int n = x.n_rows, d = x.n_cols,i;
 
   vec est(n),m(n),p(n),w(n),be(d,fill::zeros);
@@ -105,8 +104,8 @@ double glm_logistic3(mat x, vec y,double *ini, vec yminmy, const double tol, con
   p = 1/(1+m);
 
   d2 = -2*calcDevRes(p,y,est);
-  i=2;
-  while(i++<maxiters && d1-d2>tol){
+  i=1;
+  while(++i<maxiters && d1-d2>tol){
 
     d1 = d2;
 
@@ -162,8 +161,8 @@ vec logistic_only2(mat x, vec y, double *ini,vec yminmy,const double tol, const 
     p.col(0) = 1 / ( 1 + expyhat );
 
     d2 = -2*calcDevRes(p,y,yhat);
-    j=2;
-    while(j++<maxiters && d1-d2>tol){
+    j=1;
+    while(++j<maxiters && d1-d2>tol){
       d1=d2;
       W=p%(1-p);
       dera2=sum(W);
@@ -273,9 +272,9 @@ double weib_reg2(vec y, mat x, vec ini, const double sly, const double tol, cons
   my_pow2(y%yhat,&com[0],ek,n);
 
   lik2 = n*k+(ek-1)*sly+ek*sum(lam)-sum(com);
-  int i = 2;
+  int i = 1;
 
-  while (i++<maxiters && lik2-lik1 > tol ) {
+  while (++i<maxiters && lik2-lik1 > tol ) {
     lik1 = lik2;
 
 
@@ -327,7 +326,7 @@ vec qpois_reg2(mat x, vec y,const double lgmy, const double ylogy,const double t
   return ret;
 }
 
-vec prop_reg2(mat x, vec y, double *ini,vec yminmy, const double tol,const int maxiters){
+vec prop_reg2(mat x, vec y, const double *ini,vec yminmy, const double tol,const int maxiters){
   //ini = [d0,be0, my1minmy, ylogsums]
   const int n=x.n_rows,pcols=x.n_cols,d=pcols;
   colvec be(d,fill::zeros),yhat(n),expyhat,W(n,fill::zeros),p(n),u;
@@ -407,9 +406,9 @@ vec prop_regs2(mat x, vec y,double *ini, vec yminmy, const double tol, const int
     p = 1 / ( 1 + expyhat );
 
     d2 = calcDevRes(p,y,yhat);
-    ij=2;
+    ij=1;
 
-    while(ij++<maxiters && (d2-d1)>tol){
+    while(++ij<maxiters && (d2-d1)>tol){
       d1=d2;
       W=p%(1-p);
       dera2=sum(W);
@@ -534,77 +533,77 @@ vec rint_regs2(mat x, vec y, vec ni, IntegerVector id, int idmx, int idmn, vec s
   be.col(1) = b;
   vec stat(D);
   if(parallel){
-    #ifdef _OPENMP
-    #pragma omp parallel
-    {
-    #endif
-      vec Xi(n), sxy(2), b1(2), tmpvec(n), tmpvec2(idmx), hi2(idmx),b2(2),B(2), mx(idmx);
-      mat sx(idmx,2), temptcom(idmx,2), tcom(2,idmx), A(2,2);
-      vec oneplnid;
-      sx.col(0) = ni;
-      sx.col(1) = ni;
-      int ij=0;
-      sxy[0] = Sy;
-      double S=0,down=0,seb,se;
-      vec d(2);
-      mat  xx(2,2);
-      xx(0,0) = n;
-      #ifdef _OPENMP
-      #pragma omp for
-      #endif
-      for(int i = 0; i < D; i++) {
-        Xi = x.col(i);
-        xx(0,1) = xs[i];
-        xx(1,0) = xs[i];
-        xx(1,1) = xs2[i];
-        sx.col(1) = group_sum_helper<vec,vec,IntegerVector>(Xi, id, &idmn,&idmx);
-        sxy[1] = sum(Xi % y);
-        mx = sx.col(1)/ni;
-        b1[0] = be.row(i)[0];
-        b1[1] = be.row(i)[1];
-        tmpvec = y - b1(0) - b1(1) * Xi;
-        S = sum_with<square2<double>, vec>(tmpvec);
-        tmpvec2 = my - b1(0) - b1(1) * mx;
-        hi2 = tmpvec2%tmpvec2;
-        d = gold_rat3(n, ni, ni2, S, hi2,idmx, tol);
-        oneplnid = (1+ ni * d[0]);
-        temptcom.col(0) = sx.col(0)/oneplnid;
-        temptcom.col(1) = sx.col(1)/oneplnid;
-        tcom = -d[0] * temptcom.t();
+#ifdef _OPENMP
+#pragma omp parallel
+{
+#endif
+  vec Xi(n), sxy(2), b1(2), tmpvec(n), tmpvec2(idmx), hi2(idmx),b2(2),B(2), mx(idmx);
+  mat sx(idmx,2), temptcom(idmx,2), tcom(2,idmx), A(2,2);
+  vec oneplnid;
+  sx.col(0) = ni;
+  sx.col(1) = ni;
+  int ij=0;
+  sxy[0] = Sy;
+  double S=0,down=0,seb,se;
+  vec d(2);
+  mat  xx(2,2);
+  xx(0,0) = n;
+#ifdef _OPENMP
+#pragma omp for
+#endif
+  for(int i = 0; i < D; ++i) {
+    Xi = x.col(i);
+    xx(0,1) = xs[i];
+    xx(1,0) = xs[i];
+    xx(1,1) = xs2[i];
+    sx.col(1) = group_sum_helper<vec,vec,IntegerVector>(Xi, id, &idmn,&idmx);
+    sxy[1] = sum(Xi % y);
+    mx = sx.col(1)/ni;
+    b1[0] = be.row(i)[0];
+    b1[1] = be.row(i)[1];
+    tmpvec = y - b1(0) - b1(1) * Xi;
+    S = sum_with<square2<double>, vec>(tmpvec);
+    tmpvec2 = my - b1(0) - b1(1) * mx;
+    hi2 = tmpvec2%tmpvec2;
+    d = gold_rat3(n, ni, ni2, S, hi2,idmx, tol);
+    oneplnid = (1+ ni * d[0]);
+    temptcom.col(0) = sx.col(0)/oneplnid;
+    temptcom.col(1) = sx.col(1)/oneplnid;
+    tcom = -d[0] * temptcom.t();
 
-        A = xx + tcom * sx;
+    A = xx + tcom * sx;
 
-        B = sxy + tcom * sy;
+    B = sxy + tcom * sy;
 
-        down = A(0,0) * A(1,1) - A(0,1)*A(0,1);
-        b2(0) = (A(1,1) * B(0) - A(0,1) * B(1))/down;
-        b2(1) = (- A(0,1) * B(0) + A(0,0) * B(1))/down;
-        ij = 2;
+    down = A(0,0) * A(1,1) - A(0,1)*A(0,1);
+    b2(0) = (A(1,1) * B(0) - A(0,1) * B(1))/down;
+    b2(1) = (- A(0,1) * B(0) + A(0,0) * B(1))/down;
+    ij = 1;
 
-        while(ij++<maxiters && std::abs(b1[0]+b1[1]-b2[0]-b2[1])>tol){
-          b1 = b2;
-          tmpvec = y - b1(0) - b1(1) * Xi;
-          S = sum_with< square2<double>, vec>(tmpvec);
-          tmpvec2 = my - b1(0) - b1(1) * mx;
-          hi2 = tmpvec2%tmpvec2;
-          d = gold_rat3(n, ni, ni2, S, hi2, idmx,tol);
-          oneplnid = (1+ ni * d[0]);
-          temptcom.col(0) = sx.col(0)/oneplnid;
-          temptcom.col(1) = sx.col(1)/oneplnid;
-          tcom = -d[0] * temptcom.t();
-          A = xx + tcom * sx;
-          B = sxy + tcom * sy;
-          down = A(0,0) * A(1,1) - A(0,1) * A(0,1);
-          b2(0) = (A(1,1) * B(0) - A(0,1) * B(1))/down;
-          b2(1) = (- A(0,1) * B(0) + A(0,0) * B(1))/down;
-        }
-        se = (S - d[0] * sum(ni2 % hi2/ oneplnid ) )/n;
-        seb = A(0,0) / down * se;
-        stat(i) = -b2(1)*b2(1)/ seb;
-      }
-    #ifdef _OPENMP
+    while(++ij<maxiters && std::abs(b1[0]+b1[1]-b2[0]-b2[1])>tol){
+      b1 = b2;
+      tmpvec = y - b1(0) - b1(1) * Xi;
+      S = sum_with< square2<double>, vec>(tmpvec);
+      tmpvec2 = my - b1(0) - b1(1) * mx;
+      hi2 = tmpvec2%tmpvec2;
+      d = gold_rat3(n, ni, ni2, S, hi2, idmx,tol);
+      oneplnid = (1+ ni * d[0]);
+      temptcom.col(0) = sx.col(0)/oneplnid;
+      temptcom.col(1) = sx.col(1)/oneplnid;
+      tcom = -d[0] * temptcom.t();
+      A = xx + tcom * sx;
+      B = sxy + tcom * sy;
+      down = A(0,0) * A(1,1) - A(0,1) * A(0,1);
+      b2(0) = (A(1,1) * B(0) - A(0,1) * B(1))/down;
+      b2(1) = (- A(0,1) * B(0) + A(0,0) * B(1))/down;
     }
-    #endif
+    se = (S - d[0] * sum(ni2 % hi2/ oneplnid ) )/n;
+    seb = A(0,0) / down * se;
+    stat(i) = -b2(1)*b2(1)/ seb;
+  }
+#ifdef _OPENMP
+}
+#endif
   }
   else{
     vec Xi(n), sxy(2), b1(2), tmpvec(n), tmpvec2(idmx), hi2(idmx),b2(2),B(2), mx(idmx);
@@ -620,7 +619,7 @@ vec rint_regs2(mat x, vec y, vec ni, IntegerVector id, int idmx, int idmn, vec s
     mat  xx(2,2);
     xx(0,0) = n;
 
-    for(int i = 0; i < D; i++) {
+    for(int i = 0; i < D; ++i) {
       Xi = x.col(i);
       xx(0,1) = xs[i];
       xx(1,0) = xs[i];
@@ -648,9 +647,9 @@ vec rint_regs2(mat x, vec y, vec ni, IntegerVector id, int idmx, int idmn, vec s
       down = A(0,0) * A(1,1) - A(0,1)*A(0,1);
       b2(0) = (A(1,1) * B(0) - A(0,1) * B(1))/down;
       b2(1) = (- A(0,1) * B(0) + A(0,0) * B(1))/down;
-      ij = 2;
-      while(ij++<maxiters && std::abs(b1[0]+b1[1]-b2[0]-b2[1])>tol){
-      //while(ij++<maxiters && sum(abs(b1-b2))>tol){
+      ij = 1;
+      while(++ij<maxiters && std::abs(b1[0]+b1[1]-b2[0]-b2[1])>tol){
+        //while(ij++<maxiters && sum(abs(b1-b2))>tol){
         b1 = b2;
         tmpvec = y - b1(0) - b1(1) * Xi;
         S = sum_with< square2<double>, vec>(tmpvec);
@@ -701,7 +700,7 @@ double rint_reg2(mat x, vec y, vec ni, mat sx,vec sy, int idmx, const double tol
     d(0) * cross_x_y<mat,mat,vec>(sx, sy/oneplnid),solve_opts::fast);
   int i = 2;
 
-  while(i++<maxiters && apply_funcs<std::abs,mdiff<double>,double *,double *>(&b2[0],&b1[0],p,0) > tol) {
+  while(++i<maxiters && apply_funcs<std::abs,mdiff<double>,double *,double *>(&b2[0],&b1[0],p,0) > tol) {
     b1 = b2;
 
     tmp = y - x*b1;
@@ -742,7 +741,7 @@ double spml_reg2(mat pu, mat x, const double tol, const int maxiters){
   mat der, slv;
   int i = 2;
 
-  while(i++<maxiters && lik2 - lik1 > tol){
+  while(++i<maxiters && lik2 - lik1 > tol){
     lik1 = lik2;
 
     rat = ptau / ( exp(f * tau%tau)/con + tau % ptau );
@@ -795,13 +794,13 @@ double multinom_reg2(mat y, mat x, mat e, rowvec m0, rowvec b0, const double tol
   int pi,j,pj, ij;
   arma::span spani, spanj;
   mat::iterator slvit, b2it = b2.begin(), b1it;
-  for(int i = 0; i<d; i++){
+  for(int i = 0; i<d; ++i){
     pi = i*p;
     spani = span(pi,p-1+pi);
 
     der(spani) = sum(x.each_col()%e.col(i));
 
-    for(j = i; j < d; j++){
+    for(j = i; j < d; ++j){
       pj = j*p;
       spanj = span(pj,p-1+pj);
       if(i!=j){
@@ -823,10 +822,10 @@ double multinom_reg2(mat y, mat x, mat e, rowvec m0, rowvec b0, const double tol
 
   apply_funcs<madd<double>, mat::iterator, vec::iterator, mat::iterator>(b1it,slvit, b2it, pd);
 
-  ij=2;
+  ij=1;
   colvec one(n,fill::ones);
 
-  while(ij++<maxiters && apply_funcs<abs, mdiff<double>,
+  while(++ij<maxiters && apply_funcs<abs, mdiff<double>,
         mat::iterator, mat::iterator>(b1it,b2it,pd,0)> tol) {
     b1 = b2;
     m1 = clamp(exp(x*b1),0,exp20);
@@ -835,12 +834,12 @@ double multinom_reg2(mat y, mat x, mat e, rowvec m0, rowvec b0, const double tol
 
     e = y - m;
 
-    for(int i = 0; i<d; i++){
+    for(int i = 0; i<d; ++i){
       pi = i*p;
       spani = span(pi,p-1+pi);
       der(spani) = sum(x.each_col()%e.col(i));
 
-      for(j = i; j < d; j++){
+      for(j = i; j < d; ++j){
         pj = j*p;
         spanj = span(pj,p-1+pj);
         if(i!=j){
@@ -891,9 +890,9 @@ vec normlog_reg2(vec y,mat x, vec lgy01, const double tol, const int maxiters){
   mat der2 = xt*tmpmat;
 
   vec b2 = b1 - solve(der2, der,solve_opts::fast);
-  int i = 2;
+  int i = 1;
 
-  while(i++<maxiters && apply_funcs<std::abs,mdiff<double>,double *,double *>(&b1[0],&b2[0],d,0) > tol){
+  while(++i<maxiters && apply_funcs<std::abs,mdiff<double>,double *,double *>(&b1[0],&b2[0],d,0) > tol){
     b1 = b2;
     yhat = (exp(x * b1));
     com = x.each_col()%(yhat % yhat);
@@ -918,11 +917,11 @@ vec normlog_reg2(vec y,mat x, vec lgy01, const double tol, const int maxiters){
 double vmf_mle2(double nR, const int n, const double tol, const double maxiters){
   double apk, k2, r = nR/n, R2 = r*r, k1 = r * (2 - R2)/(1 - R2);
 
-  int i = 2;
+  int i = 1;
   if(k1 < 1e+05){
     apk = R::bessel_i(k1,1, 1)/R::bessel_i(k1,0, 1);
     k2 = k1 - (apk - r)/(1 - apk*apk - 1/k1 * apk);
-    while (i++<maxiters && std::abs(k2 - k1) > tol) {
+    while (++i<maxiters && std::abs(k2 - k1) > tol) {
       k1 = k2;
       apk = R::bessel_i(k1,1,1)/R::bessel_i(k1,0,1);
       k2 = k1 - (apk - r)/(1 - apk*apk - 1/k1 * apk);
@@ -961,8 +960,8 @@ double spml_mle2(mat u, vec ci2, vec cisi, vec si2, const int n, const double to
   mu2[0] = mu1[0] - (derb2 * dera - derab * derb)/down;
   mu2[1] = mu1[1] - (-derab * dera + dera2 * derb)/down;
 
-  int i = 2;
-  while (i++<maxiters && sum(abs(mu2 - mu1)) > tol) {
+  int i = 1;
+  while (++i<maxiters && sum(abs(mu2 - mu1)) > tol) {
     mu1 = mu2;
     tau = u*mu1;
     ptau = pnormc(tau);
@@ -994,38 +993,70 @@ vec spml_regs2(mat pu, mat x, const double tol, const int maxiters, const bool p
   vec ret(D);
 
   if(parallel){
-      #ifdef _OPENMP
-     #pragma omp parallel
-     {
-     #endif
-    double sumX, lik1, lik2;
-    int i;
-    mat xx(2,2,fill::zeros),X(n,2), B,mu,a11,a12,a22,der2(4,4),XX,der(4,1);
-    vec tau,ptau,psit,rat,psit2,slv;
-    mat::iterator tmpit = der2.begin(),it;
-    X.col(0) = one;
+#ifdef _OPENMP
+#pragma omp parallel
+{
+#endif
+  double sumX, lik1, lik2;
+  int i;
+  mat xx(2,2,fill::zeros),X(n,2), B,mu,a11,a12,a22,der2(4,4),XX,der(4,1);
+  vec tau,ptau,psit,rat,psit2,slv;
+  mat::iterator tmpit = der2.begin(),it;
+  X.col(0) = one;
 
-    xx(0) = n;
-    #ifdef _OPENMP
-    #pragma omp for
-    #endif
-    for(int j = 0; j < D; j++){
-      X.col(1) = x.col(j);
-      sumX = sum(X.col(1));
-      xx(1) = sumX;
-      xx(2) = sumX;
-      xx(3) = sum(X.col(1)%X.col(1));
-      XX = solve(xx, X.t());
-      B =  XX * u;
-      mu = X * B;
-      tau = sum(u % mu,1);
-      ptau = pnormc(tau);
+  xx(0) = n;
+#ifdef _OPENMP
+#pragma omp for
+#endif
+  for(int j = 0; j < D; ++j){
+    X.col(1) = x.col(j);
+    sumX = sum(X.col(1));
+    xx(1) = sumX;
+    xx(2) = sumX;
+    xx(3) = sum(X.col(1)%X.col(1));
+    XX = solve(xx, X.t());
+    B =  XX * u;
+    mu = X * B;
+    tau = sum(u % mu,1);
+    ptau = pnormc(tau);
 
-      lik1 = calc_spml_loglik(mu.begin_col(0),mu.begin_col(1),&tau[0],&ptau[0],n);
+    lik1 = calc_spml_loglik(mu.begin_col(0),mu.begin_col(1),&tau[0],&ptau[0],n);
 
+    rat = ptau / ( exp(f * (tau%tau))/con + tau%ptau );
+    psit = tau + rat;
+    psit2 = 2 -((tau+rat)%rat);
+    a11 = cross_x_y<mat,mat,vec>(X, u.each_col()%psit-mu);
+    der[0] = a11[0],der[1] = a11[1],der[2] = a11[2],der[3] = a11[3];
+    a11 = cross_x_y<mat,mat,vec>(X, X.each_col() % (psit2%ci2 - 1));
+    a12 = cross_x_y<mat,mat,vec>(X, X.each_col() % (psit2%cisi));
+    a22 = cross_x_y<mat,mat,vec>(X, X.each_col() % (psit2%si2 - 1));
+    it = tmpit;
+
+    // in our case equivalent to cbind( rbind(a11, a12), rbind(a12, a22) )
+    (*(it)) = a11[0], (*(++it)) = a11[2], (*(++it)) = a12[0], (*(++it)) = a12[2];
+    (*(++it)) = a11[1], (*(++it)) = a11[3], (*(++it)) = a12[1], (*(++it)) = a12[3];
+    (*(++it)) = a12[0], (*(++it)) = a12[2], (*(++it)) = a22[0], (*(++it)) = a22[2];
+    (*(++it)) = a12[1], (*(++it)) = a12[3], (*(++it)) = a22[1], (*(++it)) = a22[3];
+
+    slv = solve(der2,der);
+    B[0] = B[0]-slv[0];
+    B[1] = B[1]-slv[1];
+    B[2] = B[2]-slv[2];
+    B[3] = B[3]-slv[3];
+
+    mu = X*B;
+
+    tau = sum(u % mu,1);
+    ptau = pnormc(tau);
+
+    lik2 = calc_spml_loglik(mu.begin_col(0),mu.begin_col(1),&tau[0],&ptau[0],n);
+
+    i=2;
+    while(++i<maxiters && (lik2 - lik1) > tol){
+      lik1 = lik2;
       rat = ptau / ( exp(f * (tau%tau))/con + tau%ptau );
       psit = tau + rat;
-      psit2 = 2 -((tau+rat)%rat);
+      psit2 = 2 - tau % rat - rat%rat;
       a11 = cross_x_y<mat,mat,vec>(X, u.each_col()%psit-mu);
       der[0] = a11[0],der[1] = a11[1],der[2] = a11[2],der[3] = a11[3];
       a11 = cross_x_y<mat,mat,vec>(X, X.each_col() % (psit2%ci2 - 1));
@@ -1051,45 +1082,13 @@ vec spml_regs2(mat pu, mat x, const double tol, const int maxiters, const bool p
       ptau = pnormc(tau);
 
       lik2 = calc_spml_loglik(mu.begin_col(0),mu.begin_col(1),&tau[0],&ptau[0],n);
-
-      i=2;
-      while(i++<maxiters && (lik2 - lik1) > tol){
-        lik1 = lik2;
-        rat = ptau / ( exp(f * (tau%tau))/con + tau%ptau );
-        psit = tau + rat;
-        psit2 = 2 - tau % rat - rat%rat;
-        a11 = cross_x_y<mat,mat,vec>(X, u.each_col()%psit-mu);
-        der[0] = a11[0],der[1] = a11[1],der[2] = a11[2],der[3] = a11[3];
-        a11 = cross_x_y<mat,mat,vec>(X, X.each_col() % (psit2%ci2 - 1));
-        a12 = cross_x_y<mat,mat,vec>(X, X.each_col() % (psit2%cisi));
-        a22 = cross_x_y<mat,mat,vec>(X, X.each_col() % (psit2%si2 - 1));
-        it = tmpit;
-
-        // in our case equivalent to cbind( rbind(a11, a12), rbind(a12, a22) )
-        (*(it)) = a11[0], (*(++it)) = a11[2], (*(++it)) = a12[0], (*(++it)) = a12[2];
-        (*(++it)) = a11[1], (*(++it)) = a11[3], (*(++it)) = a12[1], (*(++it)) = a12[3];
-        (*(++it)) = a12[0], (*(++it)) = a12[2], (*(++it)) = a22[0], (*(++it)) = a22[2];
-        (*(++it)) = a12[1], (*(++it)) = a12[3], (*(++it)) = a22[1], (*(++it)) = a22[3];
-
-        slv = solve(der2,der);
-        B[0] = B[0]-slv[0];
-        B[1] = B[1]-slv[1];
-        B[2] = B[2]-slv[2];
-        B[3] = B[3]-slv[3];
-
-        mu = X*B;
-
-        tau = sum(u % mu,1);
-        ptau = pnormc(tau);
-
-        lik2 = calc_spml_loglik(mu.begin_col(0),mu.begin_col(1),&tau[0],&ptau[0],n);
-      }
-
-      ret(j) = 2 * (lik2 - n * 1.83787706640935 - ini);
     }
-    #ifdef _OPENMP
-    }
-    #endif
+
+    ret(j) = 2 * (lik2 - n * 1.83787706640935 - ini);
+  }
+#ifdef _OPENMP
+}
+#endif
   }
   else{
     double sumX, lik1, lik2;
@@ -1101,7 +1100,7 @@ vec spml_regs2(mat pu, mat x, const double tol, const int maxiters, const bool p
 
     xx(0) = n;
 
-    for(int j = 0; j < D; j++){
+    for(int j = 0; j < D; ++j){
       X.col(1) = x.col(j);
       sumX = sum(X.col(1));
       xx(1) = sumX;
@@ -1145,7 +1144,7 @@ vec spml_regs2(mat pu, mat x, const double tol, const int maxiters, const bool p
       lik2 = calc_spml_loglik(mu.begin_col(0),mu.begin_col(1),&tau[0],&ptau[0],n);
 
       i=2;
-      while(i++<maxiters && (lik2 - lik1) > tol){
+      while(++i<maxiters && (lik2 - lik1) > tol){
         lik1 = lik2;
         rat = ptau / ( exp(f * (tau%tau))/con + tau%ptau );
         psit = tau + rat;
@@ -1205,7 +1204,7 @@ vec multinom_regs2(mat Y, mat x, const double tol, const bool parallel, const in
   rowvec b0(d);
   m0.shed_col(0);
   /*for(int i = 0; i < d; i++)
-    m0[i] = tmpvec[i+1];*/
+   m0[i] = tmpvec[i+1];*/
 
   b0 = log(m0/(1-m0));
   b10.row(0) = b0;
@@ -1219,119 +1218,119 @@ vec multinom_regs2(mat Y, mat x, const double tol, const bool parallel, const in
   vec ret(D);
   colvec one(n,fill::ones);
   /*--------------------------------------------------------*/
-    if(parallel){
-    #ifdef _OPENMP
-    #pragma omp parallel
-    {
-    #endif
-      mat dera(n,dx2),der2(dx2,dx2,fill::zeros), b1,b2(2,d),m1,m,e1,crossress,X(n,2), xCrossx;
-      vec der(dx2),idcoli,idcolj,slv;
-      mat::iterator slvit, b2it, b1it;
-      int i=0,j=0,ij=0;
-      X.col(0) = one;
-      #ifdef _OPENMP
-      #pragma omp for
-      #endif
-      for(int l = 0; l < D; l++) {
-        X.col(1) = x.col(l);
-        xCrossx = cross_x_y<mat,mat,vec>(X, X);
-        for(i = 0; i < d; i++) {
-          idcoli = id.col(i);
+  if(parallel){
+#ifdef _OPENMP
+#pragma omp parallel
+{
+#endif
+  mat dera(n,dx2),der2(dx2,dx2,fill::zeros), b1,b2(2,d),m1,m,e1,crossress,X(n,2), xCrossx;
+  vec der(dx2),idcoli,idcolj,slv;
+  mat::iterator slvit, b2it, b1it;
+  int i=0,j=0,ij=0;
+  X.col(0) = one;
+#ifdef _OPENMP
+#pragma omp for
+#endif
+  for(int l = 0; l < D; ++l) {
+    X.col(1) = x.col(l);
+    xCrossx = cross_x_y<mat,mat,vec>(X, X);
+    for(i = 0; i < d; ++i) {
+      idcoli = id.col(i);
 
-          dera.col(idcoli[0]) = e0.col(i)%X.col(0);
-          dera.col(idcoli[1]) = X.col(1)%e0.col(i);
-          for (j = i; j < d; j++) {
-            if (i != j) {
-              idcolj = id.col(j);
-              crossress = -(m0(i) * m0(j))*xCrossx;
-              der2(idcolj[0], idcoli[0]) =  crossress(0,0);
-              der2(idcolj[0], idcoli[1]) =  crossress(0,1);
-              der2(idcolj[1], idcoli[0]) =  crossress(1,0);
-              der2(idcolj[1], idcoli[1]) =  crossress(1,1);
+      dera.col(idcoli[0]) = e0.col(i)%X.col(0);
+      dera.col(idcoli[1]) = X.col(1)%e0.col(i);
+      for (j = i; j < d; ++j) {
+        if (i != j) {
+          idcolj = id.col(j);
+          crossress = -(m0(i) * m0(j))*xCrossx;
+          der2(idcolj[0], idcoli[0]) =  crossress(0,0);
+          der2(idcolj[0], idcoli[1]) =  crossress(0,1);
+          der2(idcolj[1], idcoli[0]) =  crossress(1,0);
+          der2(idcolj[1], idcoli[1]) =  crossress(1,1);
 
-              der2(idcoli[0], idcolj[0]) =  crossress(0,0);
-              der2(idcoli[0], idcolj[1]) =  crossress(0,1);
-              der2(idcoli[1], idcolj[0]) =  crossress(1,0);
-              der2(idcoli[1], idcolj[1]) =  crossress(1,1);
-            }
-            else {
-              crossress = ((m0(i) * (1 - m0(i)))) * xCrossx;
+          der2(idcoli[0], idcolj[0]) =  crossress(0,0);
+          der2(idcoli[0], idcolj[1]) =  crossress(0,1);
+          der2(idcoli[1], idcolj[0]) =  crossress(1,0);
+          der2(idcoli[1], idcolj[1]) =  crossress(1,1);
+        }
+        else {
+          crossress = ((m0(i) * (1 - m0(i)))) * xCrossx;
 
-              der2(idcoli[0], idcoli[0]) =  crossress(0,0);
-              der2(idcoli[0], idcoli[1]) =  crossress(0,1);
-              der2(idcoli[1], idcoli[0]) =  crossress(1,0);
-              der2(idcoli[1], idcoli[1]) =  crossress(1,1);
-            }
+          der2(idcoli[0], idcoli[0]) =  crossress(0,0);
+          der2(idcoli[0], idcoli[1]) =  crossress(0,1);
+          der2(idcoli[1], idcoli[0]) =  crossress(1,0);
+          der2(idcoli[1], idcoli[1]) =  crossress(1,1);
+        }
+      }
+    }
+    der = conv_to<vec>::from(sum(dera));
+
+    b1 = b10;
+
+    slv = solve(der2, der);
+
+    b2it = b2.begin();
+    b1it = b1.begin();
+    slvit = slv.begin();
+    apply_funcs<madd<double>, mat::iterator, mat::iterator, mat::iterator>(b1it,slvit, b2it, dx2);
+
+    ij=2;
+    while(++ij<maxiters && apply_funcs<abs, mdiff<double>,
+          mat::iterator, mat::iterator>(b1it,b2it,dx2,0) > tol) {
+      b1 = b2;
+
+      m1 = clamp(exp(X*b1),0,exp20);
+
+      m = m1.each_col()/ (sum(m1,1) + 1);
+
+      e1 = Y - m;
+      for(i = 0; i<d; ++i) {
+        idcoli = id.col(i);
+        dera.col(idcoli[0]) = e1.col(i)%X.col(0);
+        dera.col(idcoli[1]) = e1.col(i)%X.col(1);
+
+        for (j = 0; j<d; ++j) {
+          if (i != j) {
+            idcolj = id.col(j);
+
+            crossress = -cross_x_y<mat,mat,vec>(X.each_col()%(m.col(i) % m.col(j)), X);
+            der2(idcoli[0], idcolj[0]) =  crossress(0,0);
+            der2(idcoli[0], idcolj[1]) =  crossress(0,1);
+            der2(idcoli[1], idcolj[0]) =  crossress(1,0);
+            der2(idcoli[1], idcolj[1]) =  crossress(1,1);
+
+            der2(idcolj[0], idcoli[0]) =  crossress(0,0);
+            der2(idcolj[0], idcoli[1]) =  crossress(0,1);
+            der2(idcolj[1], idcoli[0]) =  crossress(1,0);
+            der2(idcolj[1], idcoli[1]) =  crossress(1,1);
+          }
+          else {
+            crossress = cross_x_y<mat,mat,vec>(X.each_col()%(m.col(i) % (one - m.col(i))), X);
+
+            der2(idcoli[0], idcoli[0]) =  crossress(0,0);
+            der2(idcoli[0], idcoli[1]) =  crossress(0,1);
+            der2(idcoli[1], idcoli[0]) =  crossress(1,0);
+            der2(idcoli[1], idcoli[1]) =  crossress(1,1);
           }
         }
-        der = conv_to<vec>::from(sum(dera));
-
-        b1 = b10;
-
-        slv = solve(der2, der);
-
-        b2it = b2.begin();
-        b1it = b1.begin();
-        slvit = slv.begin();
-        apply_funcs<madd<double>, mat::iterator, mat::iterator, mat::iterator>(b1it,slvit, b2it, dx2);
-
-        ij=2;
-        while(ij++<maxiters && apply_funcs<abs, mdiff<double>,
-              mat::iterator, mat::iterator>(b1it,b2it,dx2,0) > tol) {
-          b1 = b2;
-
-          m1 = clamp(exp(X*b1),0,exp20);
-
-          m = m1.each_col()/ (sum(m1,1) + 1);
-
-          e1 = Y - m;
-          for(i = 0; i<d; i++) {
-            idcoli = id.col(i);
-            dera.col(idcoli[0]) = e1.col(i)%X.col(0);
-            dera.col(idcoli[1]) = e1.col(i)%X.col(1);
-
-            for (j = 0; j<d; j++) {
-              if (i != j) {
-                idcolj = id.col(j);
-
-                crossress = -cross_x_y<mat,mat,vec>(X.each_col()%(m.col(i) % m.col(j)), X);
-                der2(idcoli[0], idcolj[0]) =  crossress(0,0);
-                der2(idcoli[0], idcolj[1]) =  crossress(0,1);
-                der2(idcoli[1], idcolj[0]) =  crossress(1,0);
-                der2(idcoli[1], idcolj[1]) =  crossress(1,1);
-
-                der2(idcolj[0], idcoli[0]) =  crossress(0,0);
-                der2(idcolj[0], idcoli[1]) =  crossress(0,1);
-                der2(idcolj[1], idcoli[0]) =  crossress(1,0);
-                der2(idcolj[1], idcoli[1]) =  crossress(1,1);
-              }
-              else {
-                crossress = cross_x_y<mat,mat,vec>(X.each_col()%(m.col(i) % (one - m.col(i))), X);
-
-                der2(idcoli[0], idcoli[0]) =  crossress(0,0);
-                der2(idcoli[0], idcoli[1]) =  crossress(0,1);
-                der2(idcoli[1], idcoli[0]) =  crossress(1,0);
-                der2(idcoli[1], idcoli[1]) =  crossress(1,1);
-              }
-            }
-          }
-          der = conv_to<vec>::from(sum(dera));
-
-          slv = solve(der2, der);
-          b2it = b2.begin();
-          b1it = b1.begin();
-          slvit = slv.begin();
-          apply_funcs<madd<double>, mat::iterator, mat::iterator, mat::iterator>(b1it,slvit, b2it, dx2);
-        }
-
-        m1.insert_cols(0,one);
-        m1 = m1.each_col() / sum(m1,1);
-
-        ret(l) = 2 * calcSumLog(m1,poia,poiasize) - ini;
       }
-      #ifdef _OPENMP
-      }
-      #endif
+      der = conv_to<vec>::from(sum(dera));
+
+      slv = solve(der2, der);
+      b2it = b2.begin();
+      b1it = b1.begin();
+      slvit = slv.begin();
+      apply_funcs<madd<double>, mat::iterator, mat::iterator, mat::iterator>(b1it,slvit, b2it, dx2);
+    }
+
+    m1.insert_cols(0,one);
+    m1 = m1.each_col() / sum(m1,1);
+
+    ret(l) = 2 * calcSumLog(m1,poia,poiasize) - ini;
+  }
+#ifdef _OPENMP
+}
+#endif
   }
   else{
     mat dera(n,dx2),der2(dx2,dx2,fill::zeros), b1,b2(2,d),m1,m,e1,crossress,X(n,2),xCrossx;
@@ -1340,15 +1339,15 @@ vec multinom_regs2(mat Y, mat x, const double tol, const bool parallel, const in
     int i=0,j=0,ij=0;
     X.col(0) = one;
 
-    for(int l = 0; l < D; l++) {
+    for(int l = 0; l < D; ++l) {
       X.col(1) = x.col(l);
       xCrossx = cross_x_y<mat,mat,vec>(X, X);
-      for(i = 0; i < d; i++) {
+      for(i = 0; i < d; ++i) {
         idcoli = id.col(i);
 
         dera.col(idcoli[0]) = e0.col(i)%X.col(0);
         dera.col(idcoli[1]) = X.col(1)%e0.col(i);
-        for (j = i; j < d; j++) {
+        for (j = i; j < d; ++j) {
           if (i != j) {
             idcolj = id.col(j);
             crossress = -(m0(i) * m0(j))*xCrossx;
@@ -1384,7 +1383,7 @@ vec multinom_regs2(mat Y, mat x, const double tol, const bool parallel, const in
       apply_funcs<madd<double>, mat::iterator, mat::iterator, mat::iterator>(b1it,slvit, b2it, dx2);
 
       ij=2;
-      while(ij++<maxiters && apply_funcs<abs, mdiff<double>,
+      while(++ij<maxiters && apply_funcs<abs, mdiff<double>,
             mat::iterator, mat::iterator>(b1it,b2it,dx2,0) > tol) {
         b1 = b2;
 
@@ -1393,12 +1392,12 @@ vec multinom_regs2(mat Y, mat x, const double tol, const bool parallel, const in
         m = m1.each_col()/ (sum(m1,1) + 1);
 
         e1 = Y - m;
-        for(i = 0; i<d; i++) {
+        for(i = 0; i<d; ++i) {
           idcoli = id.col(i);
           dera.col(idcoli[0]) = e1.col(i)%X.col(0);
           dera.col(idcoli[1]) = e1.col(i)%X.col(1);
 
-          for (j = 0; j<d; j++) {
+          for (j = 0; j<d; ++j) {
             if (i != j) {
               idcolj = id.col(j);
 
@@ -1463,43 +1462,76 @@ vec weib_regs2(vec y, mat x, vec ini, const double sly, const double tol, const 
   vec ret(d);
   /*---------------------------------------*/
   if(parallel){
-    #ifdef _OPENMP
-    #pragma omp parallel
-    {
-    #endif
-    vec derb(2),derb2(3),xcolicom,slv(2), be(2), com,lam,logcom,comlogcom,yhat;
-    mat tmpX(n,2);//,xcom(n,2);
-    double scom,sxcolicom, sxcoli, ek,lik1,lik2,k,derk,derk2;
-    tmpX.col(0) = one;
-    int iters;
-    #ifdef _OPENMP
-    #pragma omp for
-    #endif
-    for(int i = 0; i < d; i++){
-      ek = ek0, lik1 = lik0, k=k0, derk = derk0, derk2 = derk20;
-      com=com0,logcom = logcom0,comlogcom=comlogcom0;
+#ifdef _OPENMP
+#pragma omp parallel
+{
+#endif
+  vec derb(2),derb2(3),xcolicom,slv(2), be(2), com,lam,logcom,comlogcom,yhat;
+  mat tmpX(n,2);//,xcom(n,2);
+  double scom,sxcolicom, sxcoli, ek,lik1,lik2,k,derk,derk2;
+  tmpX.col(0) = one;
+  int iters;
+#ifdef _OPENMP
+#pragma omp for
+#endif
+  for(int i = 0; i < d; ++i){
+    ek = ek0, lik1 = lik0, k=k0, derk = derk0, derk2 = derk20;
+    com=com0,logcom = logcom0,comlogcom=comlogcom0;
 
-      be[0] = be0;
-      be[1] = 0;
+    be[0] = be0;
+    be[1] = 0;
 
-      tmpX.col(1) = x.col(i);
-      sxcoli = sum(tmpX.col(1));
+    tmpX.col(1) = x.col(i);
+    sxcoli = sum(tmpX.col(1));
 
-      scom = sum(com);
+    scom = sum(com);
+    xcolicom = tmpX.col(1)%com;
+    sxcolicom = sum(xcolicom);
+
+    derb[0] = scom-n;
+    derb[1] = sxcolicom - sxcoli;
+
+
+    derb2(0) = -scom *ek;
+    derb2(1) = -sum(xcolicom) * ek;
+    derb2(2) = -sum(tmpX.col(1)%xcolicom) * ek;
+
+    slv[1] = (derb[1]*derb2[0]-derb2[1]*derb[0])/(derb2[2]*derb2[0]-derb2[1]*derb2[1]);
+    slv[0] = (derb[0]-derb2[1]*slv[1])/derb2[0];
+    be = be - slv;
+
+    lam = -(tmpX*be);
+    yhat = exp(lam);
+    ek = exp(k);
+
+    my_pow2(y%yhat,&com[0],ek,n);
+    scom = sum(com);
+    lik2 = n*k+(ek-1)*sly+ek*sum(lam)-scom;
+
+    iters = 2;
+
+    while (++iters<maxiters && lik2-lik1 > tol ) {
+      lik1 = lik2;
+
+      logcom = log(com);
+      comlogcom = com%logcom;
+      derk = n + ek * (sly + sum(lam)) - sum(comlogcom);
+      derk2 = derk - n - sum(comlogcom%logcom);
+
       xcolicom = tmpX.col(1)%com;
       sxcolicom = sum(xcolicom);
 
       derb[0] = scom-n;
       derb[1] = sxcolicom - sxcoli;
 
-
-      derb2(0) = -scom *ek;
-      derb2(1) = -sum(xcolicom) * ek;
-      derb2(2) = -sum(tmpX.col(1)%xcolicom) * ek;
+      derb2[0] = -scom *ek;
+      derb2[1] = -sum(xcolicom) * ek;
+      derb2[2] = -sum(tmpX.col(1)%xcolicom) * ek;
 
       slv[1] = (derb[1]*derb2[0]-derb2[1]*derb[0])/(derb2[2]*derb2[0]-derb2[1]*derb2[1]);
       slv[0] = (derb[0]-derb2[1]*slv[1])/derb2[0];
       be = be - slv;
+      k = k - derk/derk2;
 
       lam = -(tmpX*be);
       yhat = exp(lam);
@@ -1508,45 +1540,12 @@ vec weib_regs2(vec y, mat x, vec ini, const double sly, const double tol, const 
       my_pow2(y%yhat,&com[0],ek,n);
       scom = sum(com);
       lik2 = n*k+(ek-1)*sly+ek*sum(lam)-scom;
-
-      iters = 2;
-
-      while (iters++<maxiters && lik2-lik1 > tol ) {
-        lik1 = lik2;
-
-        logcom = log(com);
-        comlogcom = com%logcom;
-        derk = n + ek * (sly + sum(lam)) - sum(comlogcom);
-        derk2 = derk - n - sum(comlogcom%logcom);
-
-        xcolicom = tmpX.col(1)%com;
-        sxcolicom = sum(xcolicom);
-
-        derb[0] = scom-n;
-        derb[1] = sxcolicom - sxcoli;
-
-        derb2[0] = -scom *ek;
-        derb2[1] = -sum(xcolicom) * ek;
-        derb2[2] = -sum(tmpX.col(1)%xcolicom) * ek;
-
-        slv[1] = (derb[1]*derb2[0]-derb2[1]*derb[0])/(derb2[2]*derb2[0]-derb2[1]*derb2[1]);
-        slv[0] = (derb[0]-derb2[1]*slv[1])/derb2[0];
-        be = be - slv;
-        k = k - derk/derk2;
-
-        lam = -(tmpX*be);
-        yhat = exp(lam);
-        ek = exp(k);
-
-        my_pow2(y%yhat,&com[0],ek,n);
-        scom = sum(com);
-        lik2 = n*k+(ek-1)*sly+ek*sum(lam)-scom;
-      }
-      ret(i) = 2*(lik2-lik0);
     }
-    #ifdef _OPENMP
-    }
-    #endif
+    ret(i) = 2*(lik2-lik0);
+  }
+#ifdef _OPENMP
+}
+#endif
   }
   else{
     vec derb(2),derb2(3),xcolicom, be(2),slv(2), com,lam,logcom,comlogcom,yhat;
@@ -1554,7 +1553,7 @@ vec weib_regs2(vec y, mat x, vec ini, const double sly, const double tol, const 
     double scom,sxcolicom, sxcoli, ek,lik1,lik2,k,derk,derk2;
     int iters;
     tmpX.col(0) = one;
-    for(int i = 0; i < d; i++){
+    for(int i = 0; i < d; ++i){
       ek = ek0, lik1 = lik0, k=k0, derk = derk0, derk2 = derk20;
       com=com0,logcom = logcom0,comlogcom=comlogcom0;
 
@@ -1590,7 +1589,7 @@ vec weib_regs2(vec y, mat x, vec ini, const double sly, const double tol, const 
 
       iters = 2;
 
-      while (iters++<maxiters && lik2-lik1 > tol ) {
+      while (++iters<maxiters && lik2-lik1 > tol ) {
         lik1 = lik2;
 
         logcom = log(com);
@@ -1642,70 +1641,70 @@ vec normlog_regs2(vec y,mat x, vec ly, const double tol,const bool parallel,cons
 
   vec ret(D);
   if(parallel) {
-    #ifdef _OPENMP
-    #pragma omp parallel
-    {
-    #endif
-      vec tmpX, aold(2), tmpX2, yhat, com, com2, anew(2);
-      double dera, dera2, derb, derb2, derab, com3, sumcom2, divider, va;
-      rowvec berow(2);
-      int ij;
-      #ifdef _OPENMP
-      #pragma omp for
-      #endif
-        for(int j = 0; j<D; j++){
-          tmpX = x.col(j);
+#ifdef _OPENMP
+#pragma omp parallel
+{
+#endif
+  vec tmpX, aold(2), tmpX2, yhat, com, com2, anew(2);
+  double dera, dera2, derb, derb2, derab, com3, sumcom2, divider, va;
+  rowvec berow(2);
+  int ij;
+#ifdef _OPENMP
+#pragma omp for
+#endif
+  for(int j = 0; j<D; ++j){
+    tmpX = x.col(j);
 
-          aold[1] = (cov(ly,tmpX)/var(tmpX))[0];
-          aold[0] = my - aold[1]*sum(tmpX)/n;
+    aold[1] = (cov(ly,tmpX)/var(tmpX))[0];
+    aold[0] = my - aold[1]*sum(tmpX)/n;
 
-          tmpX2 = tmpX % tmpX;
+    tmpX2 = tmpX % tmpX;
 
-          yhat = exp(aold[0] + aold[1] * tmpX);
-          com = y % yhat;
-          com2 = yhat % yhat;
-          sumcom2 = sum(com2);
-          com3 = sum(com2 % tmpX);
-          dera = sum(com) - sumcom2;
-          dera2 = dera - sumcom2;
-          derb = sum(com % tmpX) - com3;
-          derb2 = sum(com % tmpX2) - 2 * sum(com2 % tmpX2);
-          derab = derb - com3;
+    yhat = exp(aold[0] + aold[1] * tmpX);
+    com = y % yhat;
+    com2 = yhat % yhat;
+    sumcom2 = sum(com2);
+    com3 = sum(com2 % tmpX);
+    dera = sum(com) - sumcom2;
+    dera2 = dera - sumcom2;
+    derb = sum(com % tmpX) - com3;
+    derb2 = sum(com % tmpX2) - 2 * sum(com2 % tmpX2);
+    derab = derb - com3;
 
-          divider = dera2 * derb2 - derab *derab;
+    divider = dera2 * derb2 - derab *derab;
 
-          anew[0] = aold[0] - (derb2 * dera - derab * derb)/divider;
-          anew[1] = aold[1] - (-derab * dera + dera2 * derb)/divider;
+    anew[0] = aold[0] - (derb2 * dera - derab * derb)/divider;
+    anew[1] = aold[1] - (-derab * dera + dera2 * derb)/divider;
 
-          ij =2;
-          while (ij++<maxiters && std::abs(anew[0]+anew[1] - aold[0]-aold[1])  > tol ){
-            aold = anew;
+    ij =2;
+    while (++ij<maxiters && std::abs(anew[0]+anew[1] - aold[0]-aold[1])  > tol ){
+      aold = anew;
 
-            yhat = exp(aold[0] + aold[1] * tmpX);
-            com = y % yhat;
-            com2 = yhat % yhat;
-            sumcom2 = sum(com2);
-            com3 = sum(com2 % tmpX);
-            dera = sum(com) - sumcom2;
-            dera2 = dera - sumcom2;
-            derb = sum(com % tmpX) - com3;
-            derb2 = sum(com % tmpX2) - 2*sum(com2 % tmpX2);
-            derab = derb - com3;
+      yhat = exp(aold[0] + aold[1] * tmpX);
+      com = y % yhat;
+      com2 = yhat % yhat;
+      sumcom2 = sum(com2);
+      com3 = sum(com2 % tmpX);
+      dera = sum(com) - sumcom2;
+      dera2 = dera - sumcom2;
+      derb = sum(com % tmpX) - com3;
+      derb2 = sum(com % tmpX2) - 2*sum(com2 % tmpX2);
+      derab = derb - com3;
 
-            divider = dera2 * derb2 - derab *derab;
+      divider = dera2 * derb2 - derab *derab;
 
-            anew[0] = aold[0] - (derb2 * dera - derab * derb)/divider;
-            anew[1] = aold[1] - (-derab * dera + dera2 * derb)/divider;
-          }
+      anew[0] = aold[0] - (derb2 * dera - derab * derb)/divider;
+      anew[1] = aold[1] - (-derab * dera + dera2 * derb)/divider;
+    }
 
-          va = apply_funcs<square2<double>,mdiff<double>,double *,double *>(&y[0],&yhat[0],n,0);
-          //va = sum_with< square2<double>, vec>(y - yhat);
+    va = apply_funcs<square2<double>,mdiff<double>,double *,double *>(&y[0],&yhat[0],n,0);
+    //va = sum_with< square2<double>, vec>(y - yhat);
 
-          ret(j) = (n-2)*(con/va - 1);
-        }
-      #ifdef _OPENMP
-      }
-      #endif
+    ret(j) = (n-2)*(con/va - 1);
+  }
+#ifdef _OPENMP
+}
+#endif
   }
   else{
     vec tmpX, aold(2), tmpX2, yhat, com, com2, anew(2);
@@ -1713,7 +1712,7 @@ vec normlog_regs2(vec y,mat x, vec ly, const double tol,const bool parallel,cons
     rowvec berow(2);
     int ij;
 
-    for(int j = 0; j<D; j++){
+    for(int j = 0; j<D; ++j){
       tmpX = x.col(j);
 
       aold[1] = (cov(ly,tmpX)/var(tmpX))[0];
@@ -1738,7 +1737,7 @@ vec normlog_regs2(vec y,mat x, vec ly, const double tol,const bool parallel,cons
       anew[1] = aold[1] - (-derab * dera + dera2 * derb)/divider;
 
       ij =2;
-      while (ij++<maxiters && std::abs(anew[0]+anew[1] - aold[0]-aold[1]) > tol ){
+      while (++ij<maxiters && std::abs(anew[0]+anew[1] - aold[0]-aold[1]) > tol ){
         aold = anew;
 
         yhat = exp(aold[0] + aold[1] * tmpX);
@@ -1769,126 +1768,130 @@ vec normlog_regs2(vec y,mat x, vec ly, const double tol,const bool parallel,cons
 }
 
 mat add_term_c(const vec &y, const mat &xinc, const mat &xout, const double devi_0,
-                add_term_ini_vars* ini_vars, const double tol = 1e-07, const bool logged = false, const bool parallel = 1, const int maxiters = 100, const double ret_stat = 0){
+              const add_term_ini_vars& ini_vars, const double tol = 1e-07, const bool logged = false, const bool parallel = 1, const int maxiters = 100, const double ret_stat = 0){
   int nrows = xinc.n_rows;
   int selectedColumnSize = xinc.n_cols;
 
-  int idxsz = xout.n_cols, inttype = ini_vars->inttype;
+  int idxsz = xout.n_cols, inttype = ini_vars.inttype;
   mat out;
 
-  if(ret_stat)
+  if(ret_stat){
     out = mat(idxsz, 2);
-  else
-    out = mat(idxsz, 1);
-
-  if(parallel){
-  #ifdef _OPENMP
-  #pragma omp parallel
-  {
-  #endif
-    mat tmpmat = resize(xinc, nrows, selectedColumnSize+1);
-    vec tmpvec;
-    double out_0, out_1;
-    #ifdef _OPENMP
-    #pragma omp for
-    #endif
-    for(int i = 0; i < idxsz; i++){
-      tmpmat.col(selectedColumnSize) = xout.col(i);
-      if(inttype == 1){
-        out_0 = devi_0 - glm_logistic3(tmpmat, y,&ini_vars->my[0],ini_vars->ini, tol,maxiters);
-
-        out_1 = R::pchisq(out_0, 1, false, logged);
-      }
-      else if(inttype == 2){//2.0*(ylogy-sum(y%yhat));
-        out_0 = devi_0 - (2*ini_vars->ylogy+glm_poisson3( tmpmat, y, ini_vars->D0, tol,maxiters));
-        out_1 = R::pchisq(out_0, 1, false, logged);
-      }
-      else if(inttype == 3){
-        // here ylogy is sum(log(y))
-        out_0 = 2*(weib_reg2(y, tmpmat, ini_vars->ini, ini_vars->ylogy, tol, maxiters) - devi_0);
-        out_1 = R::pchisq(out_0, 1, false, logged);
-      }
-      else if(inttype == 4){ // same normlog_reg
-        tmpvec = prop_reg2(tmpmat, y, &ini_vars->my[0], ini_vars->ini,tol, maxiters);
-        out_0 = tmpvec[2];
-        out_1 = R::pchisq(out_0, 1, false, logged);
-      }
-      else if(inttype == 5){
-        tmpvec = qpois_reg2(tmpmat, y, ini_vars->D0, ini_vars->ylogy,tol,maxiters);
-        out_0 = (devi_0 - tmpvec(0))/tmpvec(1);
-        out_1 = R::pf(out_0, 1, nrows-selectedColumnSize-1, false, logged);
-      }
-      else if(inttype == 6){ // spml
-        out_0 = 2*(spml_reg2(ini_vars->u, tmpmat, tol, maxiters) - devi_0);
-        out_1 = R::pchisq(out_0, 2, false, logged);
-      }
-      else if(inttype==7){ // multinom
-        out_0 = 2 * (multinom_reg2(ini_vars->my, tmpmat, ini_vars->u,ini_vars->m0, ini_vars->b0, tol, maxiters) - devi_0);
-
-        out_1 = R::pchisq(out_0, ini_vars->dof_mult, false, logged);
-      }
-      else{
-        // normlog_reg
-        tmpvec = normlog_reg2(y, tmpmat, ini_vars->ini, tol, maxiters);
-
-        out_0 = (devi_0 - tmpvec(0))/tmpvec(1);
-        out_1 = R::pf(out_0, 1, nrows-selectedColumnSize-1, false, logged);
-      }
-
-      if(ret_stat){
-        out(i,0) = out_0;
-        out(i,1) = out_1;
-      }
-      else{
-        out(i,0) = out_1;
-      }
-    }
-  #ifdef _OPENMP
-  }
-  #endif
   }
   else{
-    mat tmpmat = resize(xinc, nrows, selectedColumnSize+1);
+    out = mat(idxsz, 1);
+  }
+
+  if(parallel){
+#ifdef _OPENMP
+#pragma omp parallel
+{
+#endif
+  mat tmpmat = mat(xinc);
+  tmpmat.resize(nrows, selectedColumnSize+1);
+  vec tmpvec;
+  double out_0, out_1;
+#ifdef _OPENMP
+#pragma omp for
+#endif
+  for(int i = 0; i < idxsz; ++i){
+    tmpmat.col(selectedColumnSize) = xout.col(i);
+    if(inttype == 1){
+      out_0 = devi_0 - glm_logistic3(tmpmat, y,&ini_vars.my[0],ini_vars.ini, tol,maxiters);
+
+      out_1 = R::pchisq(out_0, 1, false, logged);
+    }
+    else if(inttype == 2){//2.0*(ylogy-sum(y%yhat));
+      out_0 = devi_0 - (2*ini_vars.ylogy+glm_poisson3( tmpmat, y, ini_vars.D0, tol,maxiters));
+      out_1 = R::pchisq(out_0, 1, false, logged);
+    }
+    else if(inttype == 3){
+      // here ylogy is sum(log(y))
+      out_0 = 2*(weib_reg2(y, tmpmat, ini_vars.ini, ini_vars.ylogy, tol, maxiters) - devi_0);
+      out_1 = R::pchisq(out_0, 1, false, logged);
+    }
+    else if(inttype == 4){ // same normlog_reg
+      tmpvec = prop_reg2(tmpmat, y, &ini_vars.my[0], ini_vars.ini,tol, maxiters);
+      out_0 = tmpvec[2];
+      out_1 = R::pchisq(out_0, 1, false, logged);
+    }
+    else if(inttype == 5){
+      tmpvec = qpois_reg2(tmpmat, y, ini_vars.D0, ini_vars.ylogy,tol,maxiters);
+      out_0 = (devi_0 - tmpvec(0))/tmpvec(1);
+      out_1 = R::pf(out_0, 1, nrows-selectedColumnSize-1, false, logged);
+    }
+    else if(inttype == 6){ // spml
+      out_0 = 2*(spml_reg2(ini_vars.u, tmpmat, tol, maxiters) - devi_0);
+      out_1 = R::pchisq(out_0, 2, false, logged);
+    }
+    else if(inttype==7){ // multinom
+      out_0 = 2 * (multinom_reg2(ini_vars.my, tmpmat, ini_vars.u,ini_vars.m0, ini_vars.b0, tol, maxiters) - devi_0);
+
+      out_1 = R::pchisq(out_0, ini_vars.dof_mult, false, logged);
+    }
+    else{
+      // normlog_reg
+      tmpvec = normlog_reg2(y, tmpmat, ini_vars.ini, tol, maxiters);
+
+      out_0 = (devi_0 - tmpvec(0))/tmpvec(1);
+      out_1 = R::pf(out_0, 1, nrows-selectedColumnSize-1, false, logged);
+    }
+
+    if(ret_stat){
+      out(i,0) = out_0;
+      out(i,1) = out_1;
+    }
+    else{
+      out(i,0) = out_1;
+    }
+  }
+#ifdef _OPENMP
+}
+#endif
+  }
+  else{
+    mat tmpmat = mat(xinc);
+	tmpmat.resize(nrows, selectedColumnSize+1);
     vec tmpvec;
     double out_0, out_1;
-    for(int i = 0; i < idxsz; i++){
+    for(int i = 0; i < idxsz; ++i){
       tmpmat.col(selectedColumnSize) = xout.col(i);
       if(inttype == 1){
-        out_0 = devi_0 - glm_logistic3(tmpmat, y,&ini_vars->my[0],ini_vars->ini, tol,maxiters);
+        out_0 = devi_0 - glm_logistic3(tmpmat, y,&ini_vars.my[0],ini_vars.ini, tol,maxiters);
 
         out_1 = R::pchisq(out_0, 1, false, logged);
       }
       else if(inttype == 2){//2.0*(ylogy-sum(y%yhat));
-        out_0 = devi_0 - (2*ini_vars->ylogy+glm_poisson3( tmpmat, y, ini_vars->D0, tol,maxiters));
+        out_0 = devi_0 - (2*ini_vars.ylogy+glm_poisson3( tmpmat, y, ini_vars.D0, tol,maxiters));
         out_1 = R::pchisq(out_0, 1, false, logged);
       }
       else if(inttype == 3){
         // here ylogy is sum(log(y))
-        out_0 = 2*(weib_reg2(y, tmpmat, ini_vars->ini, ini_vars->ylogy, tol, maxiters) - devi_0);
+        out_0 = 2*(weib_reg2(y, tmpmat, ini_vars.ini, ini_vars.ylogy, tol, maxiters) - devi_0);
         out_1 = R::pchisq(out_0, 1, false, logged);
       }
       else if(inttype == 4){ // same normlog_reg
-        tmpvec = prop_reg2(tmpmat, y, &ini_vars->my[0], ini_vars->ini,tol, maxiters);
+        tmpvec = prop_reg2(tmpmat, y, &ini_vars.my[0], ini_vars.ini,tol, maxiters);
         out_0 = tmpvec[2];
         out_1 = R::pchisq(out_0, 1, false, logged);
       }
       else if(inttype == 5){
-        tmpvec = qpois_reg2(tmpmat, y, ini_vars->D0, ini_vars->ylogy,tol,maxiters);
+        tmpvec = qpois_reg2(tmpmat, y, ini_vars.D0, ini_vars.ylogy,tol,maxiters);
         out_0 = (devi_0 - tmpvec(0))/tmpvec(1);
         out_1 = R::pf(out_0, 1, nrows-selectedColumnSize-1, false, logged);
       }
       else if(inttype == 6){ // spml
-        out_0 = 2*(spml_reg2(ini_vars->u, tmpmat, tol, maxiters) - devi_0);
+        out_0 = 2*(spml_reg2(ini_vars.u, tmpmat, tol, maxiters) - devi_0);
         out_1 = R::pchisq(out_0, 2, false, logged);
       }
       else if(inttype==7){ // multinom
-        out_0 = 2 * (multinom_reg2(ini_vars->my, tmpmat, ini_vars->u,ini_vars->m0, ini_vars->b0, tol, maxiters) - devi_0);
+        out_0 = 2 * (multinom_reg2(ini_vars.my, tmpmat, ini_vars.u,ini_vars.m0, ini_vars.b0, tol, maxiters) - devi_0);
 
-        out_1 = R::pchisq(out_0, ini_vars->dof_mult, false, logged);
+        out_1 = R::pchisq(out_0, ini_vars.dof_mult, false, logged);
       }
       else{
         // normlog_reg
-        tmpvec = normlog_reg2(y, tmpmat, ini_vars->ini, tol, maxiters);
+        tmpvec = normlog_reg2(y, tmpmat, ini_vars.ini, tol, maxiters);
 
         out_0 = (devi_0 - tmpvec(0))/tmpvec(1);
         out_1 = R::pf(out_0, 1, nrows-selectedColumnSize-1, false, logged);
@@ -1905,4 +1908,3 @@ mat add_term_c(const vec &y, const mat &xinc, const mat &xout, const double devi
   }
   return out;
 }
-

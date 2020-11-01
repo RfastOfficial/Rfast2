@@ -1,8 +1,5 @@
 //Author: Stefanos Fafalios
-
-#ifndef _reg_lib_helper_
-#define _reg_lib_helper_
-
+#pragma once
 // [[Rcpp::depends(RcppArmadillo)]]
 #include <RcppArmadillo.h>
 
@@ -35,13 +32,12 @@ mat bindColsToMat2(int, mat, int, mat);
 double calcDevRes(mat,vec,mat);
 void my_pow2(vec,double *,const double,const int);
 double mreg_loglic(mat, mat);
-double calcylogy(vec,int);
+double calcylogy(const vec&,int);
 double bc2helper(double, vec, vec, double, double, double, double);
 double calcSumLog(mat, vec, const int);
 double calc_spml_loglik(mat::col_iterator, mat::col_iterator, double *, double *, const int);
 vec indexesOfNum(mat, const int);
 mat create_id_mat(const int);
 double calc_multinom_ini(mat,vec);
-add_term_ini_vars* add_term_ini(const vec&, const std::string, const double, const int);
+add_term_ini_vars add_term_ini(const vec&, const std::string, const double, const int);
 
-#endif
