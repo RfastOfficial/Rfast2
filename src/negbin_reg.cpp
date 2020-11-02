@@ -12,7 +12,7 @@ using namespace arma;
 using namespace std;
 
 //[[Rcpp::export]]
-List negbin_reg(NumericVector Y, NumericMatrix X, const double tol = 1e-09, const int maxiters = 100){
+List negbin_reg(NumericVector Y, NumericMatrix X, const double tol, const int maxiters){
   int n = X.nrow(), p = X.ncol();
   mat x(X.begin(),n,p,false);
   vec y(Y.begin(),n,false);
@@ -21,11 +21,13 @@ List negbin_reg(NumericVector Y, NumericMatrix X, const double tol = 1e-09, cons
 
   vec sxy = conv_to<vec>::from(sum(x.each_col()%y,0));
 
-  double m = sxy(0)/n, m2 = sum(y%y)/n, d = 1 - m / (m2 - m*m), er = abs(m/d-m), lgmy = log(mean(y)), loger = log(er);
+  double m = sxy(0)/n, m2 = sum(y%y)/n, d = 1 - m / (m2 - m*m), er = std::abs(m/d-m), lgmy = std::log(mean(y)), loger = std::log(er);
 
-  List mod = glm_poisson_2(x,y,lgmy,tol,maxiters);
-  vec fit = mod["m"];
-  vec b1 = mod["be"];
+  vec* mod = new vec[2];
+  glm_poisson_2(x,y,lgmy,tol,maxiters, mod);
+  vec fit = mod[0];
+  vec b1 = mod[1];
+
 
   vec com = 1 / (er + fit), yer = y + er;
   mat koi = x.each_col() % (yer %fit%com);
@@ -73,14 +75,14 @@ List negbin_reg(NumericVector Y, NumericMatrix X, const double tol = 1e-09, cons
 }
 
 RcppExport SEXP Rfast2_negbin_reg(SEXP ySEXP, SEXP xSEXP, SEXP tolSEXP, SEXP maxitersSEXP) {
-BEGIN_RCPP
-    RObject __result;
-    RNGScope __rngScope;
-    traits::input_parameter< NumericVector >::type y(ySEXP);
-    traits::input_parameter< NumericMatrix >::type x(xSEXP);
-    traits::input_parameter< const double >::type tol(tolSEXP);
-    traits::input_parameter< const int >::type maxiters(maxitersSEXP);
-    __result = negbin_reg(y,x,tol,maxiters);
-    return __result;
-END_RCPP
+  BEGIN_RCPP
+  RObject __result;
+  RNGScope __rngScope;
+  traits::input_parameter< NumericVector >::type y(ySEXP);
+  traits::input_parameter< NumericMatrix >::type x(xSEXP);
+  traits::input_parameter< const double >::type tol(tolSEXP);
+  traits::input_parameter< const int >::type maxiters(maxitersSEXP);
+  __result = negbin_reg(y,x,tol,maxiters);
+  return __result;
+  END_RCPP
 }
