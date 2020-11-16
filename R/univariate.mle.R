@@ -601,3 +601,25 @@ ziweibull.mle <- function(x, tol = 1e-07) {
   names(param) <- c("prop1", "shape", "scale")
   list(iters = mod$iters, loglik = sum(lik0, mod$loglik, na.rm = TRUE), param = param)
 }
+
+
+#[export]
+gnormal0.mle <- function(x, tol = 1e-06) {
+  n <- length(x)
+  xabs <- abs(x)
+
+  fun <- function(b, xabs, n) {
+    y <- xabs^b
+    sy <- sum(y)
+    1 + digamma(1/b) / b - sum( y * log(xabs) ) / sy + log( b/n * sy ) / b
+  }
+  
+  b <- mean(xabs) / sqrt( mean(x^2) )
+  mod <- uniroot(fun, lower = max(1e-5, b - 100 * b), upper = b + min(30, 200 * b), tol = tol, xabs = xabs, n = n )
+  b <- mod$root
+  a <- ( b/n * sum( xabs^b ) ) ^ ( 1/b )
+  loglik <- n * log(b) - sum( xabs^b )/a^b - n * log(2 * a) - n * lgamma(1/b)        
+  param <- c(a, b)
+  names(param) <- c( "alpha", "beta" )
+  list(iters = mod$iter, loglik = loglik, param = param)
+}
