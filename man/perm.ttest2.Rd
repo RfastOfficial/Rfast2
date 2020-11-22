@@ -40,7 +40,7 @@ a practical guide to resampling methods for testing hypotheses. Springer 3rd Edi
 \author{
 Michail Tsagris 
 
-R implementation and documentation: Michail Tsagris \email{mtsagris@yahoo.gr}.
+R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 }
 %\note{
 %%  ~~further notes~~

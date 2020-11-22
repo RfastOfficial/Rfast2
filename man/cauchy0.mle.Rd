@@ -52,7 +52,7 @@ and Kullback-Leibler Distance. Transaction on Image Processing. 11(2): 146-158.
 \author{
 Michail Tsagris.
 
-R implementation and documentation: Michail Tsagris \email{mtsagris@yahoo.gr}.
+R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 }
 
 %\note{

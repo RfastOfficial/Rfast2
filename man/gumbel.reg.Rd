@@ -51,7 +51,7 @@ The iterations required by the Newton-Raphson.
 \author{
 Michail Tsagris
 
-R implementation and documentation: Michail Tsagris \email{mtsagris@yahoo.gr}.
+R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 }
 
 %\note{

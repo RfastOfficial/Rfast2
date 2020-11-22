@@ -50,7 +50,7 @@ hypothesis tests using R. Journal of Modern Applied Statistical Methods (To appe
 \author{
 Michail Tsagris 
 
-R implementation and documentation: Michail Tsagris \email{mtsagris@yahoo.gr}
+R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}
 }
 
 %\note{

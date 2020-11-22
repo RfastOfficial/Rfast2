@@ -45,7 +45,7 @@ Zeitschrift fur Wahrscheinlichkeitstheorie und Verwandte Gebiete. 57(4): 453-476
 \author{
 Michail Tsagris
 
-R implementation and documentation: Michail Tsagris <mtsagris@yahoo.gr>.
+R implementation and documentation: Michail Tsagris <mtsagris@uoc.gr>.
 }
 
 %\note{

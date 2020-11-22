@@ -50,7 +50,7 @@ equal to "rho", the test statistic and the $a/2\%$ lower and upper confidence li
 \author{
 Michail Tsagris
 
-R implementation and documentation: Michail Tsagris \email{mtsagris@yahoo.gr}.
+R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 }
 
 

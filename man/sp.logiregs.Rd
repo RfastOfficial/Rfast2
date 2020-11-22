@@ -48,7 +48,7 @@ https://bmcbioinformatics.biomedcentral.com/track/pdf/10.1186/1471-2105-14-166
 \author{
 Initial author Karolina Sikorska. Modifications by Michail Tsagris.
 
-R implementation and documentation: Michail Tsagris <mtsagris@yahoo.gr>
+R implementation and documentation: Michail Tsagris <mtsagris@uoc.gr>
 }
 
 %\note{
