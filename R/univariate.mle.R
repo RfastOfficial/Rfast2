@@ -623,3 +623,16 @@ gnormal0.mle <- function(x, tol = 1e-06) {
   names(param) <- c( "alpha", "beta" )
   list(iters = mod$iter, loglik = loglik, param = param)
 }
+
+
+#[export]
+unitweibull.mle <- function(y, tol = 1e-07, maxiters = 100) {
+  ly <-  - log(y)
+  mod <- Rfast::weibull.mle( ly, tol = tol, maxiters = maxiters )
+  param <- as.vector( mod$param )
+  names(param) <- c("alpha", "beta")
+  a <- mod$param[1]   ;   b <- mod$param[2]
+  n <- length(y)
+  loglik <- sum(ly) + n * log(a * b) + (b - 1) * sum( log(ly) ) - a * sum(ly^b)
+  list(iters = mod$iters, loglik = loglik, param = param)
+} 
