@@ -93,3 +93,15 @@ colbeta.mle <- function(x, tol = 1e-07, maxiters = 100, parallel = FALSE) {
 }
 
 
+#[export]
+colunitweibull.mle <- function(x, tol = 1e-07, maxiters = 100, parallel = FALSE) {
+  lx <-  - log(x)
+  mod <- Rfast::colweibull.mle( lx, tol = tol, maxiters = maxiters, parallel = parallel )
+  param <- mod[, 1:2]
+  colnames(param) <- c("alpha", "beta")
+  a <- param[, 1]   ;   b <- param[, 2]
+  n <- dim(x)[1]
+  loglik <- Rfast::colsums(lx) + n * log(a * b) + (b - 1) * Rfast::colsums( log(lx) ) - a * Rfast::rowsums( t(lx)^b )
+  param <- cbind(param, loglik)
+  param
+} 

@@ -2,6 +2,7 @@
 \alias{kumar.mle}
 \alias{zil.mle}
 \alias{simplex.mle}
+\alias{unitweibull.mle}
 
 \title{
 MLE of distributions defined for proportions
@@ -15,6 +16,7 @@ MLE of distributions defined for proportions.
 kumar.mle(x, tol = 1e-07, maxiters = 50)
 simplex.mle(x, tol = 1e-07)
 zil.mle(x)
+kumar.mle(x, tol = 1e-07, maxiters = 100)
 }
 
 \arguments{
@@ -55,6 +57,10 @@ Statistical Methodology. 6(1): 70-81.
 
 Zhang, W. & Wei, H. (2008). Maximum likelihood estimation for simplex distribution nonlinear mixed models 
 via the stochastic approximation algorithm. The Rocky Mountain Journal of Mathematics, 38(5): 1863-1875.
+
+J. Mazucheli, A. F. B. Menezes, L. B. Fernandes, R. P. de Oliveira & M. E. Ghitany (2020). 
+The unit-Weibull distribution as an alternative to the Kumaraswamy distribution for the modeling of
+quantiles conditional on covariates. Journal of Applied Statistics, DOI:10.1080/02664763.2019.1657813
 
 You can also check the relevant wikipedia pages.
 }
