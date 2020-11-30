@@ -49,11 +49,11 @@ For the zero inflated logistic normal, the probability of non zeros, the mean an
 }
 
 \references{
-Kumaraswamy, P. (1980). A generalized probability density function for double-bounded random processes. 
-Journal of Hydrology. 46 (1-2): 79-88.
+Kumaraswamy P. (1980). A generalized probability density function for double-bounded random processes. 
+Journal of Hydrology 46(1-2): 79-88.
 
-Jones, M.C. (2009). Kumaraswamy's distribution: A beta-type distribution with some tractability advantages. 
-Statistical Methodology. 6(1): 70-81. 
+Jones M.C. (2009). Kumaraswamy's distribution: A beta-type distribution with some tractability advantages. 
+Statistical Methodology, 6(1): 70-81. 
 
 Zhang, W. & Wei, H. (2008). Maximum likelihood estimation for simplex distribution nonlinear mixed models 
 via the stochastic approximation algorithm. The Rocky Mountain Journal of Mathematics, 38(5): 1863-1875.
