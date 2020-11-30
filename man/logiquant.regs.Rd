@@ -46,7 +46,7 @@ Statistics in Medicine, 23(16): 2587-2597
 \author{
 Author: Michail Tsagris.
 
-R implementation and documentation: Michail Tsagris <mtsagris@yahoo.gr>
+R implementation and documentation: Michail Tsagris <mtsagris@uoc.gr>
 }
 
 %\note{

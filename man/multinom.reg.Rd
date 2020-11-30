@@ -48,7 +48,7 @@ Institute of Statistical Mathematics, 44(1): 197-200.
 \author{
 Michail Tsagris and Stefanos Fafalios
 
-R implementation and documentation: Michail Tsagris \email{mtsagris@yahoo.gr} and 
+R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr} and 
 Stefanos Fafalios \email{stefanosfafalios@gmail.com}.
 }
 %\note{

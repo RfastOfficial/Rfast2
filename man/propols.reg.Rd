@@ -65,7 +65,7 @@ Econometric Reviews 35(4): 515-552.
 \author{
 Michail Tsagris
 
-R implementation and documentation: Michail Tsagris \email{mtsagris@yahoo.gr}.
+R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 }
 
 %\note{

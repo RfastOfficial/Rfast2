@@ -45,7 +45,7 @@ Statistical Methods in Medical Research, 26(3): 1500-1518.
 \author{
 Michail Tsagris
 
-R implementation and documentation: Michail Tsagris \email{mtsagris@yahoo.gr}.
+R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 }
 
 %\note{

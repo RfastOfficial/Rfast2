@@ -48,7 +48,7 @@ Hansen, B. E. (2019). Econometrics. \url{https://www.ssc.wisc.edu/~bhansen/econo
 \author{
 Michail Tsagris
 
-R implementation and documentation: Michail Tsagris <mtsagris@yahoo.gr>
+R implementation and documentation: Michail Tsagris <mtsagris@uoc.gr>
 }
 
 %\note{

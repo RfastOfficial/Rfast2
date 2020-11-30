@@ -39,7 +39,7 @@ Paine P.J., Preston S.P., Tsagris M and Wood A.T.A. (2018). An Elliptically Symm
 \author{
 Michail Tsagris
 
-R implementation and documentation: Michail Tsagris \email{mtsagris@yahoo.gr}.
+R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 }
 
 %\note{

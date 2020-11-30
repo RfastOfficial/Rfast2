@@ -6,6 +6,7 @@
 \alias{colordinal.mle}
 \alias{colcauchy.mle}
 \alias{colbeta.mle}
+\alias{colunitweibull.mle}
 
 \title{
 Column-wise MLE of some univariate distributions
@@ -23,6 +24,7 @@ colhalfnorm.mle(x)
 colordinal.mle(x, link = "logit")
 colcauchy.mle(x, tol = 1e-07, maxiters = 100, parallel = FALSE)
 colbeta.mle(x, tol = 1e-07, maxiters = 100, parallel = FALSE)
+colunitweibull.mle(x, tol = 1e-07, maxiters = 100, parallel = FALSE)
 }
 
 \arguments{
@@ -70,10 +72,14 @@ N.L. Johnson, S. Kotz \& N. Balakrishnan (1970). Distributions in statistics: co
 Volume 2.
 
 Agresti, A. (2002) Categorical Data. Second edition. Wiley. 
+
+J. Mazucheli, A. F. B. Menezes, L. B. Fernandes, R. P. de Oliveira & M. E. Ghitany (2020). 
+The unit-Weibull distribution as an alternative to the Kumaraswamy distribution for the modeling of
+quantiles conditional on covariates. Journal of Applied Statistics, DOI:10.1080/02664763.2019.1657813
 }
 
 \author{
-Michail Tsagris 
+Michail Tsagris.
 
 R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr} and Stefanos Fafalios
 \email{stefanosfafalios@gmail.com}.
