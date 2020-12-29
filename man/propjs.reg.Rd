@@ -1,16 +1,14 @@
-\name{Jensen-Shannon divergence and Hellinger distance based univariate regression for proportions}
-\alias{propjs.reg}
+\name{Hellinger distance based univariate regression for proportions}
 \alias{prophelling.reg}
 \title{
-Jensen-Shannon divergence and Hellinger distance based univariate regression for proportions
+Hellinger distance based univariate regression for proportions
 }
 
 \description{
-Jensen-Shannon divergence and Hellinger distance based univariate regression for proportions.
+Hellinger distance based univariate regression for proportions.
 }
 
 \usage{
-propjs.reg(y, x, cov = FALSE, tol = 1e-07, maxiters = 100) 
 prophelling.reg(y, x, cov = FALSE, tol = 1e-07, maxiters = 100) 
 }
 
@@ -83,6 +81,6 @@ R implementation and documentation: Michail Tsagris <mtsagris@uoc.gr>
 \examples{
 y <- rbeta(150, 3, 4)
 x <- iris
-a <- propjs.reg(y, x)
+a <- prophelling.reg(y, x)
 }
 

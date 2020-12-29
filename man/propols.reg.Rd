@@ -73,7 +73,7 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 %}
 
 \seealso{
-\code{\link{propjs.reg}, \link{simplex.mle}, \link{kumar.mle} }
+\code{\link{prophelling.reg}, \link{simplex.mle}, \link{kumar.mle} }
 }
 
 \examples{
