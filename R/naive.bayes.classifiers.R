@@ -238,9 +238,9 @@ cauchynb.pred <- function(xnew, location, scale, ni) {
   k <- dim(location)[1]
   score <- matrix(0, dim(xnew)[1], k)
   xnew <- t(xnew)
-  com <-  Rfast::rowsums( log(sigma) ) + log(ni) 
+  com <-  Rfast::rowsums( log(scale) ) + log(ni) 
   ##  log( sigma/pi ) is the correct term, but we discard the constant pi and add the log(ni)
-  for (i in 1:k)  score[, i] <-  - Rfast::colsums( log( (xnew - mx[i, ])^2 + sigma[i, ]^2 ) )
+  for (i in 1:k)  score[, i] <-  - Rfast::colsums( log( (xnew - location[i, ])^2 + scale[i, ]^2 ) )
   score <- Rfast::eachrow(score, com, oper = "+")
   Rfast::rowMaxs(score)
 }
