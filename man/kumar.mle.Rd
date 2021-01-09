@@ -17,6 +17,7 @@ kumar.mle(x, tol = 1e-07, maxiters = 50)
 simplex.mle(x, tol = 1e-07)
 zil.mle(x)
 kumar.mle(x, tol = 1e-07, maxiters = 100)
+unitweibull.mle(x, tol = 1e-07, maxiters = 100) 
 }
 
 \arguments{
