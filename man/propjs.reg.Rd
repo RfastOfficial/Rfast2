@@ -1,17 +1,15 @@
-\name{Jensen-Shannon divergence and Hellinger distance based univariate regression for proportions}
-\alias{propjs.reg}
+\name{Hellinger distance based univariate regression for proportions}
 \alias{prophelling.reg}
 \title{
-Jensen-Shannon divergence and Hellinger distance based univariate regression for proportions
+Hellinger distance based univariate regression for proportions
 }
 
 \description{
-Jensen-Shannon divergence and Hellinger distance based univariate regression for proportions.
+Hellinger distance based univariate regression for proportions.
 }
 
 \usage{
-propjs.reg(y, x, tol = 1e-07, maxiters = 100) 
-prophelling.reg(y, x, tol = 1e-07, maxiters = 100) 
+prophelling.reg(y, x, cov = FALSE, tol = 1e-07, maxiters = 100) 
 }
 
 \arguments{
@@ -20,6 +18,9 @@ The dependent variable, a numerical vector with percentages.
 }
 \item{x}{
 A numerical matrix with the indendent variables. We add, internally, the first column of ones.
+}
+\item{cov}{
+Should the sandwich covariance matrix and the standard errors be returned? If yes, set this equal to TRUE.
 }
 \item{tol}{
 The tolerance value to terminate the Newton-Raphson algorithm. 
@@ -40,8 +41,11 @@ A list including:
 \item{be}{
 The regression coefficients.
 }
-\item{der2}{
-The observed Hessian matrix.
+\item{seb}{
+The sandwich standard errors of the beta coefficients, if the input argument argument was set to TRUE.
+}
+\item{covb}{
+The sandwich covariance matrix of the beta coefficients, if the input argument argument was set to TRUE.
 }
 \item{js}{
 The final Jensen-Shannon divergence.
@@ -77,6 +81,6 @@ R implementation and documentation: Michail Tsagris <mtsagris@uoc.gr>
 \examples{
 y <- rbeta(150, 3, 4)
 x <- iris
-a <- propjs.reg(y, x)
+a <- prophelling.reg(y, x)
 }
 

@@ -47,10 +47,10 @@ The sum of squares of the raw residuals.
 The beta coefficients.
 }
 \item{seb}{
-The standard errors of the beta coefficients, if the input argument argument was set to TRUE.
+The sandwich standard errors of the beta coefficients, if the input argument argument was set to TRUE.
 }
 \item{covb}{
-The covariance matrix of the beta coefficients, if the input argument argument was set to TRUE.
+The sandwich covariance matrix of the beta coefficients, if the input argument argument was set to TRUE.
 }
 \item{iters}{
 The number of iterations required by the Newton-Raphson algorithm.
@@ -73,7 +73,7 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 %}
 
 \seealso{
-\code{\link{propjs.reg}, \link{simplex.mle}, \link{kumar.mle} }
+\code{\link{prophelling.reg}, \link{simplex.mle}, \link{kumar.mle} }
 }
 
 \examples{

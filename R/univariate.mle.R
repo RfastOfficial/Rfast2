@@ -308,7 +308,7 @@ halfcauchy.mle <- function(x, tol = 1e-07) {
 
 
 #[export]
-cauchy0.mle<-function(x, tol = 1e-07) {
+cauchy0.mle <- function(x, tol = 1e-07) {
    n <- length(x)
    es <- 0.5 * (Rfast::nth(x, 3 * n/4) - Rfast::nth(x, n/4))
    logs <- log(es)

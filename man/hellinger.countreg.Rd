@@ -39,10 +39,10 @@ A list including:
 The regression coefficients.
 }
 \item{seb}{
-The standard errors of the coefficients.
+The sandwich standard errors of the coefficients.
 }
 \item{covbe}{
-The covariance matrix of the regression coefficients.
+The sandwich covariance matrix of the regression coefficients.
 }
 \item{H}{
 The final Hellinger distance.
