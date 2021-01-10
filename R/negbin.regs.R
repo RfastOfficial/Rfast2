@@ -1,3 +1,5 @@
+
+#[export]
 negbin.regs <- function (y, x, tol = 1e-07, maxiters = 100, parallel = FALSE)
 {
   mod <- .Call(Rfast2_negbin_regs, y, x, tol, maxiters, parallel)

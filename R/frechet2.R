@@ -6,6 +6,7 @@
 #### compositional data. In Proceedings of the 4rth Compositional Data Analysis Workshop, Girona, Spain.
 #### mtsagris@yahoo.gr
 ################################
+#[export]
 frechet2 <- function(x, di, a, k1) {
   p <-  dim(di)[2]
 
