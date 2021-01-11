@@ -17,8 +17,8 @@ List negbin_regs(NumericVector Y, NumericMatrix X, const double tol, const int m
   mat x(X.begin(),n,p,false);
   vec y(Y.begin(),n,false);
 
-  NumericMatrix info(p,4);
-  NumericMatrix betas(p,2);
+  NumericMatrix info(p,1);
+  //NumericMatrix betas(p,2);
   double lg = sum(lgamma(y + 1)),lgmy = log(mean(y)), m2 = sum(y%y)/n;
 
   vec ones(n,1,fill::ones);
@@ -84,12 +84,13 @@ List negbin_regs(NumericVector Y, NumericMatrix X, const double tol, const int m
         }
 
         delete []mod;
-        info(j,0) = i-1;
-        info(j,2) = sum( lgamma(yer) ) + n * (er * loger - lgamma(er)) - lg  + sum(y % log(fit) ) + sum(yer % log(com) );
-        info(j,1) = -2*info(j,2)+(3)*log(n);
-        info(j,3) = exp(r2);
-        betas(j,0) = b2[0];
-        betas(j,1) = b2[1];
+        //info(j,0) = i-1;
+		//info(j,2) = sum( lgamma(yer) ) + n * (er * loger - lgamma(er)) - lg  + sum(y % log(fit) ) + sum(yer % log(com) );
+        info(j,0) = sum( lgamma(yer) ) + n * (er * loger - lgamma(er)) - lg  + sum(y % log(fit) ) + sum(yer % log(com) );
+        //info(j,1) = -2*info(j,2)+(3)*log(n);
+        //info(j,3) = exp(r2);
+        //betas(j,0) = b2[0];
+        //betas(j,1) = b2[1];
       }
     #ifdef _OPENMP
     }
@@ -150,19 +151,20 @@ List negbin_regs(NumericVector Y, NumericMatrix X, const double tol, const int m
       }
 
       delete []mod;
-      info(j,0) = i-1;
-      info(j,2) = sum( lgamma(yer) ) + n * (er * loger - lgamma(er)) - lg  + sum(y % log(fit) ) + sum(yer % log(com) );
-      info(j,1) = -2*info(j,2)+(3)*log(n);
-      info(j,3) = exp(r2);
-      betas(j,0) = b2[0];
-      betas(j,1) = b2[1];
+      //info(j,0) = i-1;
+	  //info(j,2) = sum( lgamma(yer) ) + n * (er * loger - lgamma(er)) - lg  + sum(y % log(fit) ) + sum(yer % log(com) );
+      info(j,0) = sum( lgamma(yer) ) + n * (er * loger - lgamma(er)) - lg  + sum(y % log(fit) ) + sum(yer % log(com) );
+      //info(j,1) = -2*info(j,2)+(3)*log(n);
+      //info(j,3) = exp(r2);
+      //betas(j,0) = b2[0];
+      //betas(j,1) = b2[1];
     }
 
   }
 
   List ret;
   ret["info"] = info;
-  ret["be"] = betas;
+  //ret["be"] = betas;
   return ret;
 }
 
