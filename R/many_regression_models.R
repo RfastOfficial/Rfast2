@@ -139,6 +139,7 @@ score.zipregs <- function(y, x, logged = FALSE) {
 #[export]
 negbin.regs <- function (y, x, tol = 1e-07, maxiters = 100, parallel = FALSE) {
   mod <- .Call(Rfast2_negbin_regs, y, x, tol, maxiters, parallel)
+  ini <- Rfast::negbin.mle(y)$loglik
   colnames(mod$info) <- c("iters", "BIC", "log-likelihood", "dispersion")
   row.names(mod$info) <- colnames(x)
   colnames(mod$be) <- c("(intercept)","be")
