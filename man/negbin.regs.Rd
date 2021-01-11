@@ -1,21 +1,20 @@
-\name{Many Gamma regressions}
-\alias{gammaregs}
+\name{Many negative binomial regressions}
+\alias{negbin.regs}
 \title{
-Many Gamma regressions
+Many negative binomial regressions
 }
 
 \description{
-Many Gamma regressions.
+Many negative binomial regressions.
 }
 
 \usage{
-gammaregs(y, x, tol = 1e-07, parallel = FALSE, maxiters = 100)
+negbin.regs(y, x, tol = 1e-07, parallel = FALSE, maxiters = 100)
 }
 
 \arguments{
 \item{y}{
-The dependent variable, a numerical variable with non negative numbers for the Gamma and inverse Gaussian regressions. 
-For the Gaussian with a log-link zero values are allowed.
+The dependent variable, a numerical variable with non negative numbers
 }
 \item{x}{
 A matrix with the indendent variables.
@@ -36,8 +35,7 @@ Many simple negative binomial regressions with a log-link are fitted.
 }
 
 \value{
-A list including:
-\item{info}.
+A matrix with the test statistic values and their relevant (logged) p-values.
 }
 
 \references{
@@ -48,9 +46,9 @@ using generalized linear model. International Journal of Advanced Statistics and
 }
 
 \author{
-Stefanos Fafalios and and Michail Tsagris
+Stefanos Fafalios and and Michail Tsagris.
 
-R implementation and documentation: Stefanos Fafalios \email{stefanosfafalios@gmail.com} and Michail Tsagris \email{mtsagris@uoc.gr}
+R implementation and documentation: Stefanos Fafalios \email{stefanosfafalios@gmail.com} and Michail Tsagris \email{mtsagris@uoc.gr}.
 }
 
 %\note{
@@ -58,16 +56,15 @@ R implementation and documentation: Stefanos Fafalios \email{stefanosfafalios@gm
 %}
 
 \seealso{
-\code{ \link{bic.regs}, \link{gammareg} }
+\code{ \link{bic.regs}, \link{negbin.reg}, \link{score.zipregs}, \link{ztp.reg} 
+}
 }
 
 \examples{
 \dontrun{
-y <- rgamma(100, 3, 10)
-x <- matrix( rnorm( 100 * 10), ncol = 10 )
-b <- glm(y ~ x[, 1], family = Gamma(log) )
-anova(b, test= "F")
-a <- gammaregs(y, x)
+rnbinom(100, 10, 0.6)
+x <- matrix( rnorm( 100 * 500), ncol = 500 )
+a <- negbin.regs(y, x)
 x <- NULL
 }
 }
