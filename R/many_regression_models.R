@@ -52,15 +52,17 @@ bic.regs <- function(y, x, family = "normal") {
 #[export]
 weib.regs <- function (y, x, tol = 1e-07, logged = FALSE, parallel = FALSE, maxiters = 100) {
    mod <- .Call( Rfast2_weib_regs,y, x, tol, logged, maxiters, parallel)
-    colnames(mod) <- c("stat", "pvalue")
-    mod
+   colnames(mod) <- c("stat", "pvalue")
+   mod
 }
 
 
 	
 #[export]
 gammaregs <- function(y, x, tol = 1e-07, logged = FALSE, parallel = FALSE, maxiters = 100) {
-  .Call(Rfast2_gamma_regs, Y = y, X = x, tol = tol, logged = logged, parallel = parallel, maxiters = maxiters)
+  mod <- .Call(Rfast2_gamma_regs, Y = y, X = x, tol = tol, logged = logged, parallel = parallel, maxiters = maxiters)
+  colnames(mod) <- c("stat", "pvalue")
+  mod
 }	
   
 
