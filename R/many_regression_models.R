@@ -52,15 +52,17 @@ bic.regs <- function(y, x, family = "normal") {
 #[export]
 weib.regs <- function (y, x, tol = 1e-07, logged = FALSE, parallel = FALSE, maxiters = 100) {
    mod <- .Call( Rfast2_weib_regs,y, x, tol, logged, maxiters, parallel)
-    colnames(mod) <- c("stat", "pvalue")
-    mod
+   colnames(mod) <- c("stat", "pvalue")
+   mod
 }
 
 
 	
 #[export]
 gammaregs <- function(y, x, tol = 1e-07, logged = FALSE, parallel = FALSE, maxiters = 100) {
-  .Call(Rfast2_gamma_regs, Y = y, X = x, tol = tol, logged = logged, parallel = parallel, maxiters = maxiters)
+  mod <- .Call(Rfast2_gamma_regs, Y = y, X = x, tol = tol, logged = logged, parallel = parallel, maxiters = maxiters)
+  colnames(mod) <- c("stat", "pvalue")
+  mod
 }	
   
 
@@ -132,3 +134,13 @@ score.zipregs <- function(y, x, logged = FALSE) {
 #   pval <- pchisq(stat, 1, lower.tail = FALSE, log.p = logged)
 #   cbind(stat, pval)
 #}	
+
+
+#[export]
+negbin.regs <- function (y, x, tol = 1e-07, logged = FALSE, parallel = FALSE, maxiters = 100) {
+  mod <- .Call(Rfast2_negbin_regs, y, x, tol, maxiters, parallel)
+  ini <- Rfast::negbin.mle(y)$loglik
+  stat <- 2 * (mod - ini)
+  pvalue <- pchisq(stat, 1, lower.tail = FALSE, log.p = logged)
+  cbind(stat, pvalue)
+}

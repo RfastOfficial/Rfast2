@@ -35,7 +35,8 @@ A list including:
 The number of iterations required by the Newton-Raphson algorithm.
 }
 \item{loglik}{
-The value of the maximissed log-likelihood.}
+The value of the maximised log-likelihood.
+}
 \item{scale}{
 The estimated scale parameter of the Cauchy distribution.
 }
