@@ -36,7 +36,9 @@ het.lmfit <- function(x, y, type = 1) {
 gammareg <- function(y, x, tol = 1e-07, maxiters = 100) {
   mod <- Rfast::gammacon(y)
   x <- model.matrix( y~., data.frame(x) )
-  .Call(Rfast2_gamma_reg, Y = y, X = x, mod = mod, tol = tol, maxiters = maxiters) 
+  mod <- .Call(Rfast2_gamma_reg, Y = y, X = x, mod = mod, tol = tol, maxiters = maxiters) 
+  colnames(mod$be) <- colnames(x)
+  mod  
 }
 
 
