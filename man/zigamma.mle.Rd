@@ -61,7 +61,7 @@ R implementation and documentation: Michail Tsagris <mtsagris@uoc.gr>
 %}
 
 \seealso{
-\code{ \link{gammapois.mle}
+\code{ \link{zigamma.reg}, \link{gammapois.mle}
 }
 }
 

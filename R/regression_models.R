@@ -643,6 +643,21 @@ censweib.reg <- function (y, x, di, tol = 1e-07, maxiters = 100) {
 }
 
 
+
+
+#[export]
+zigamma.reg <- function(y, x, full = FALSE, tol = 1e-07, maxiters = 100) {
+ y1 <- y
+ id <- which(y > 0)
+ y1[id] <- 1
+ prob <- Rfast::glm_logistic(x, y1, full = full, tol = tol, maxiters = maxiters)
+ mod <- Rfast2::gammareg(y[id], x[id, -1], tol = tol, maxiters = maxiters)
+ names(mod$be) <- c( "constant", colnames(x) )
+ list(prob = prob, mod = mod)
+}
+
+
+
      
    
   
