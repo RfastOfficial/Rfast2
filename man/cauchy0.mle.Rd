@@ -11,7 +11,7 @@ MLE of the Cauchy and generalised normal distributions with zero location.
 
 \usage{
 cauchy0.mle(x, tol = 1e-07) 
-gnormal0.mle(x, tol = 1e-6)
+gnormal0.mle(x, tol = 1e-06)
 }
 
 \arguments{
