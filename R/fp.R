@@ -4,7 +4,11 @@ fp <- function(y, x, a, di = NULL, type = "logistic", full = FALSE,
 			   
 			   
   if (type == "normal") {
+<<<<<<< HEAD
     fun <- function(a, y, x)  abs( cor(y, x^a) ) 
+=======
+    fun <- function(a, y, x)  abs( cor(y, x^a) )
+>>>>>>> 5fd02f889b7879e8c742923d2c0be90bc3410526
     mod <- optimize(fun, a, y = y, x = x, maximum = TRUE)
     a <- mod$maximum
     mod <- Rfast::lmfit(cbind(1, x^a), y)  
