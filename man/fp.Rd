@@ -1,5 +1,5 @@
 \name{Fractional polynomial regression with one independent variable}
-\alias{bic.regs}
+\alias{fp}
 \title{
 Fractional polynomial regression with one independent variable.
 }
