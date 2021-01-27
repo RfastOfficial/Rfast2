@@ -1242,35 +1242,4 @@ unitweibull.mle <- function(x, tol = 1e-07, maxiters = 100) {
   loglik <- sum(lx) + n * log(a * b) + (b - 1) * sum( log(lx) ) - a * sum(lx^b)
   list(iters = mod$iters, loglik = loglik, param = param)
 } 
- <- function(x, tol = 1e-06) {
-  n <- length(x)
-  xabs <- abs(x)
 
-  fun <- function(b, xabs, n) {
-    y <- xabs^b
-    sy <- sum(y)
-    1 + digamma(1/b) / b - sum( y * log(xabs) ) / sy + log( b/n * sy ) / b
-  }
-  
-  b <- mean(xabs) / sqrt( mean(x^2) )
-  mod <- uniroot(fun, lower = max(1e-5, b - 100 * b), upper = b + min(30, 200 * b), tol = tol, xabs = xabs, n = n )
-  b <- mod$root
-  a <- ( b/n * sum( xabs^b ) ) ^ ( 1/b )
-  loglik <- n * log(b) - sum( xabs^b )/a^b - n * log(2 * a) - n * lgamma(1/b)        
-  param <- c(a, b)
-  names(param) <- c( "alpha", "beta" )
-  list(iters = mod$iter, loglik = loglik, param = param)
-}
-
-
-#[export]
-unitweibull.mle <- function(x, tol = 1e-07, maxiters = 100) {
-  lx <-  - log(x)
-  mod <- Rfast::weibull.mle( lx, tol = tol, maxiters = maxiters )
-  param <- as.vector( mod$param )
-  names(param) <- c("alpha", "beta")
-  a <- mod$param[1]   ;   b <- mod$param[2]
-  n <- length(x)
-  loglik <- sum(lx) + n * log(a * b) + (b - 1) * sum( log(lx) ) - a * sum(lx^b)
-  list(iters = mod$iters, loglik = loglik, param = param)
-} 
