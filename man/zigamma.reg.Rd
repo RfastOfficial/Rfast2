@@ -46,7 +46,6 @@ Mills, Elizabeth Dastrup (2013).
 Adjusting for covariates in zero-inflated gamma and zero-inflated log-normal models for semicontinuous data.
 PhD thesis, University of Iowa.
 }
-}
 
 \author{
 Michail Tsagris.

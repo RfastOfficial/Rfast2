@@ -1,3 +1,4 @@
+#[export]
 fp <- function(y, x, a, di = NULL, type = "logistic", full = FALSE, 
                seb = FALSE, tol = 1e-07, maxiters = 100) {
 			   
