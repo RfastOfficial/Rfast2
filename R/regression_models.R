@@ -87,7 +87,7 @@ gumbel.reg <- function(y, x, tol = 1e-07, maxiters = 100) {
     exp_z <- exp(-z)  
     lik2 <-  - n * log(s) - sum(z) - sum(exp_z)
   }
-  names(mod$be) <- colnames(x)
+  names(be) <- colnames(x)
   list(be = be, sigma = s, loglik = lik2, iters = i)
 }
 
@@ -196,7 +196,7 @@ hp.reg <- function(y, x, full = FALSE, tol = 1e-07, maxiters = 100) {
   id <- which(y > 0)
   y1[id] <- 1
   prob <- Rfast::glm_logistic(x, y1, full = full, tol = tol, maxiters = maxiters)
-  mod <- Rfast2::ztp.reg(y[id], x[id, -1], full = full, tol = tol, maxiters = maxiters)
+  mod <- Rfast2::ztp.reg(y[id], x[id, ], full = full, tol = tol, maxiters = maxiters)
   names(mod$be) <- c( "constant", colnames(x) )
   list(prob = prob, mod = mod)
 }
@@ -235,7 +235,7 @@ hellinger.countreg <- function(y, x, tol = 1e-07, maxiters = 100) {
     com <- sqy - sqm
     d2 <- sum( com^2 )
   }
-  names(mod$be) <- colnames(x) 
+  names(be) <- colnames(x) 
   A <- crossprod( x * com * sqm )
   B <- solve(derb2)
   covbe <- B %*% A %*% B
@@ -307,7 +307,7 @@ sclr <- function(y, x, full = FALSE, tol = 1e-07, maxiters = 100) {
     etheta <- exp(theta)
     lik2 <- theta * sy - sum( log1p(eb) ) - n * log1p(etheta) + sum( y0 * log1p( eb * (1 + etheta) ) )
   } 
-  names(mod$be) <- colnames(x)
+  names(be) <- colnames(x)
   res <- list(theta = theta, be = be, loglik = lik2, iters = i)
   if (full) {
     se <- sqrt( diag( solve( abs( der2 ) ) ) )
@@ -467,7 +467,7 @@ tobit.reg <- function(y, x, ylow = 0, full = FALSE, tol = 1e-07, maxiters = 100)
     lik2 <-  - n1 * log(s) + sum( log( dnorm( e1 / s) ) ) + sum( log( pnorm( e0 / s) ) ) 
   }
   names(lik2) <- NULL
-  names(mod$be) <- colnames(x)
+  names(be) <- colnames(x)
   res <- list(be = be, s = s, loglik = lik2, iters = i)
   if ( full ) {
      se <- solve( der2 )
@@ -517,7 +517,7 @@ binom.reg <- function(y, ni, x, full = FALSE, tol = 1e-07, maxiters = 100) {
     d2 <-  sum( ni * log1p( exp(est) ) ) - sum(y * est)
   }
   devi <- 2 * d2 + con 
-  names(mod$be) <- colnames(x)
+  names(be) <- colnames(x)
   res <- list(be = be, devi = devi)
   if (full) {
     se <- solve(der2)
@@ -570,7 +570,7 @@ propols.reg <- function(y, x, cov = FALSE, tol = 1e-07 ,maxiters = 100) {
     covb <- B %*% A %*% B
     seb <- sqrt( diag(covb) ) 	
   }
-  names(mod$be) <- colnames(x)  
+  names(be) <- colnames(x)  
   list(be = be, seb = seb, covb = covb, sse = a2, iters = i)
 }
 
@@ -622,7 +622,7 @@ prophelling.reg <- function(y, x, cov = FALSE, tol = 1e-07, maxiters = 100) {
     covb <- B %*% A %*% B
     seb <- sqrt( diag(covb) ) 	
   }	
-  names(mod$be) <- colnames(x)
+  names(be) <- colnames(x)
   list(be = be, seb = seb, covb = covb, H = d2, iters = i) 
 }
 

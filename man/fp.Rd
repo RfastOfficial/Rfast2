@@ -9,7 +9,7 @@ Fractional polynomial regression with one independent variable.
 }
 
 \usage{
-fp(y, x, a, di = NULL, family = "logistic", full = FALSE, seb = FALSE, 
+fp(y, x, a, di = NULL, type = "logistic", full = FALSE, seb = FALSE, 
 tol = 1e-07, maxiters = 100) 
 }
 
@@ -24,8 +24,8 @@ A vector, the independent variable.
 This is valid only for the Weibull regression. A vector with 1s and 0s indicating the censored value. 
 The value of 1 means uncesored value, whereas the value of 0 means censored value.
 }
-\item{family}{
-The family of the regression models. "normal", "logistic", "poisson", "spml" (SPML regression),
+\item{type}{
+The type of regression model: "normal", "logistic", "poisson", "spml" (SPML regression),
 "gamma", "normlog", "weibull", "negbin".
 }
 \item{full}{
