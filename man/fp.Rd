@@ -9,7 +9,7 @@ Fractional polynomial regression with one independent variable.
 }
 
 \usage{
-fp(y, x, a, di = NULL, type = "logistic", full = FALSE, seb = FALSE, 
+fp(y, x, aa, di = NULL, type = "normal", full = FALSE, seb = FALSE, 
 tol = 1e-07, maxiters = 100) 
 }
 
@@ -19,6 +19,9 @@ The dependent variable, a numerical vector.
 }
 \item{x}{
 A vector, the independent variable.
+}
+\item{aa}{
+A vector with two values indicating the range of the optimal value of \eqn{\alpha} to search within.
 }
 \item{di}{
 This is valid only for the Weibull regression. A vector with 1s and 0s indicating the censored value. 
@@ -78,6 +81,6 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 \examples{
 y <- rnorm(100)
 x <- abs( rnorm(100) )
-fp()
+mod <- fp(y, x, c(-2, 2) )
 }
 
