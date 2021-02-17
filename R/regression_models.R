@@ -11,7 +11,7 @@ cls <- function(y, x, R, ca) {
   va <- sum(e^2) / (n - p + 1)
   covbe <- ( xxs - com %*% R %*% xxs ) * va  
   
-  list(bols = bols, bcls = bcls, covbe = cvobe, va = va, residuals = e)
+  list(bols = bols, bcls = bcls, covbcls = covbcls, va = va, residuals = e)
 }
 
 
