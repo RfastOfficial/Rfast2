@@ -9,7 +9,7 @@ cls <- function(y, x, R, ca) {
   bcls <- bols - com %*% R %*% bols - ca
   e <- y - x %*% bcls
   va <- sum(e^2) / (n - p + 1)
-  covbe <- (xxs - com %*% R %*% xxs) * va  
+  covbe <- ( xxs - com %*% R %*% xxs ) * va  
   
   list(bols = bols, bcls = bcls, covbe = cvobe, va = va, residuals = e)
 }
