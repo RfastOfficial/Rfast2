@@ -40,15 +40,6 @@ The OLS (Ordinary Least Squares) beta coefficients.
 \item{bcls}{
 The CLS (Constrained Least Squares) beta coefficients.
 }
-\item{covbcls}{
-The covariance matrix of the constrained betas.
-}
-\item{va}{
-The estimated regression variance.
-}
-\item{residuals}{
-The estimated residuals.
-}
 }
 
 \references{

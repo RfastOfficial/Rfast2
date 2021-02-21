@@ -1,17 +1,10 @@
 #[export]
 cls <- function(y, x, R, ca) {
 
-  dm <- dim(x)
-  n <- dm[1]  ;  p <- dm[2]
-  xxs <- solve( crossprod(x) )
+  xxs <- solve(crossprod(x))
   bols <- xxs %*% crossprod(x, y)
-  com <- xxs %*% R %*% solve( R %*% xxs %*% R)
-  bcls <- bols - com %*% R %*% bols - ca
-  e <- y - x %*% bcls
-  va <- sum(e^2) / (n - p + 1)
-  covbe <- ( xxs - com %*% R %*% xxs ) * va  
-  
-  list(bols = bols, bcls = bcls, covbcls = covbcls, va = va, residuals = e)
+  bcls <- bols - xxs %*% R %*% solve(R %*% xxs %*% R, R %*% bols - ca)
+  list(bols = bols, bcls = bcls)
 }
 
 
