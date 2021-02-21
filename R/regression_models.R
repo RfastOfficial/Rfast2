@@ -199,7 +199,7 @@ hp.reg <- function(y, x, full = FALSE, tol = 1e-07, maxiters = 100) {
   prob <- Rfast::glm_logistic(x, y1, full = full, tol = tol, maxiters = maxiters)
   x <- model.matrix(y~., data = as.data.frame(x) )
   mod <- Rfast2::ztp.reg(y[id], x[id, -1, drop = FALSE], full = full, tol = tol, maxiters = maxiters)
-  names(mod$be) <- c( "constant", colnames(x) )
+  names(mod$be) <- colnames(x)
   list(prob = prob, mod = mod)
 }
   
