@@ -35,9 +35,8 @@ the \eqn{\tau^2} estimate and the random effects mean estimate.
 
 
 \references{
-Annamaria Guolo1 and Cristiano Varin (2017). Random-effects meta-analysis: The number of studies matters. 
+Annamaria Guolo and Cristiano Varin (2017). Random-effects meta-analysis: The number of studies matters. 
 Statistical Methods in Medical Research, 26(3): 1500-1518.
-\url{https://pdfs.semanticscholar.org/8df4/e5f0daf0c3e643fc228f680ded3cb35ddb9c.pdf}
 
 \url{https://methods.cochrane.org/statistics/sites/methods.cochrane.org.statistics/files/public/uploads/SMG_training_course_2016/cochrane_smg_training_2016_viechtbauer.pdf}
 
