@@ -26,7 +26,8 @@ The tolerance level up to which the maximisation stops set to 1e-07 by default.
 \details{
 The Cauchy is the t distribution with 1 degree of freedom. The cauchy0.mle estimates the usual Cauchy 
 distribution, over the real line, but assumes a zero location. The gnormal0.mle estimates the generalised 
-normal distribution assuming a zero location.
+normal distribution assuming a zero location. The generalised normal distribution is also known as the 
+exponential power distribution or the generalized error distribution.
 }
 
 \value{
