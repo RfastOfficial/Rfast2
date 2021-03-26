@@ -648,16 +648,18 @@ censweib.reg <- function (y, x, di, tol = 1e-07, maxiters = 100) {
 
 
 #[export]
-zigamma.reg <- function(y, x, full = FALSE, tol = 1e-07, maxiters = 100) {
- y1 <- y
- id <- which(y > 0)
- y1[id] <- 1
- prob <- Rfast::glm_logistic(x, y1, full = full, tol = tol, maxiters = maxiters)
- rownames(prob$be) <- colnames(x)
- x <- model.matrix(y~., data = as.data.frame(x) )
- mod <- Rfast2::gammareg(y[id], x[id, -1, drop = FALSE], tol = tol, maxiters = maxiters)
- colnames(mod$be) <- colnames(x) 
- list(prob = prob, mod = mod)
+zigamma.reg <- function (y, x, full = FALSE, tol = 1e-07, maxiters = 100) {
+    y1 <- y
+    id <- which(y > 0)
+    y1[id] <- 1
+    x <- model.matrix(y ~ ., data = as.data.frame(x))
+    prob <- Rfast::glm_logistic(x[, -1], y1, full = full, tol = tol, 
+        maxiters = maxiters)
+    rownames(prob$be) <- colnames(x)
+    mod <- Rfast2::gammareg(y[id], x[id, -1, drop = FALSE], tol = tol, 
+        maxiters = maxiters)
+    colnames(mod$be) <- colnames(x)
+    list(prob = prob, mod = mod)
 }
 
 
