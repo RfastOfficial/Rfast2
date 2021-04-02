@@ -8,4 +8,5 @@ dcora <- function(x) {
     }
   }
   diag(a) <- 1
+  a
 }
