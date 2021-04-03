@@ -30,8 +30,7 @@ The number of folds to be used. This is taken into consideration only if "folds"
 }
 \item{stratified}{
 Do you want the folds to be selected using stratified random sampling? This preserves the analogy of the samples of each group. 
-Make this TRUE if you wish, but only for the classification. If you have regression (type = "R"), do not put this to TRUE as 
-it will cause problems or return wrong results.
+Make this TRUE if you wish. 
 }
 \item{seed}{
 If you set this to TRUE, the same folds will be created every time. 

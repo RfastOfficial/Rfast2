@@ -9,7 +9,7 @@ Many negative binomial regressions.
 }
 
 \usage{
-negbin.regs(y, x, tol = 1e-07, parallel = FALSE, maxiters = 100)
+negbin.regs(y, x, tol = 1e-07, logged = FALSE, parallel = FALSE, maxiters = 100)
 }
 
 \arguments{
@@ -21,6 +21,9 @@ A matrix with the indendent variables.
 }
 \item{tol}{
 The tolerance value to terminate the Newton-Raphson algorithm.
+}
+\item{logged}{
+If you want the logarithm of the p-values set this equal to TRUE.
 }
 \item{parallel}{
 Do you want this to be executed in parallel or not. The parallel takes place in C++, therefore you do not have the option to set the number of cores.

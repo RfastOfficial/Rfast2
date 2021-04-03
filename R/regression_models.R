@@ -1,8 +1,9 @@
 #[export]
 cls <- function(y, x, R, ca) {
-  xxs <- solve( crossprod(x) )
+
+  xxs <- solve(crossprod(x))
   bols <- xxs %*% crossprod(x, y)
-  bcls <- bols - xxs %*% R %*% solve( R %*% xxs %*% R, R %*% bols - ca )
+  bcls <- bols - xxs %*% R %*% solve(R %*% xxs %*% R, R %*% bols - ca)
   list(bols = bols, bcls = bcls)
 }
 
@@ -36,7 +37,9 @@ het.lmfit <- function(x, y, type = 1) {
 gammareg <- function(y, x, tol = 1e-07, maxiters = 100) {
   mod <- Rfast::gammacon(y)
   x <- model.matrix( y~., data.frame(x) )
-  .Call(Rfast2_gamma_reg, Y = y, X = x, mod = mod, tol = tol, maxiters = maxiters) 
+  mod <- .Call(Rfast2_gamma_reg, Y = y, X = x, mod = mod, tol = tol, maxiters = maxiters) 
+  colnames(mod$be) <- colnames(x)
+  mod  
 }
 
 
@@ -85,6 +88,7 @@ gumbel.reg <- function(y, x, tol = 1e-07, maxiters = 100) {
     exp_z <- exp(-z)  
     lik2 <-  - n * log(s) - sum(z) - sum(exp_z)
   }
+  names(be) <- colnames(x)
   list(be = be, sigma = s, loglik = lik2, iters = i)
 }
 
@@ -112,6 +116,7 @@ negbin.reg <- function(y, x, tol = 1e-07, maxiters = 100) {
   x <- model.matrix( y ~. , data.frame(x) )
   mod <- .Call( Rfast2_negbin_reg,y, x, tol, maxiters)
   names(mod$info) <- c( "iters", "BIC", "log-likelihood", "dispersion" )
+  names(mod$be) <- colnames(x)
   list(info = mod$info, be = mod$be)
 }  
 
@@ -153,6 +158,7 @@ ztp.reg <- function(y, x, full = FALSE, tol = 1e-07, maxiters = 100) {
     xexb <- x * exb
     lik2 <- sum(y * xb) - sum( log( expm1(exb) ) )
   }
+  names(be) <- colnames(x) 
   res <- list( be = be, loglik = lik2 - con, iter = i )
   if (full) {
     se <- chol2inv( chol(der2) )
@@ -191,8 +197,9 @@ hp.reg <- function(y, x, full = FALSE, tol = 1e-07, maxiters = 100) {
   id <- which(y > 0)
   y1[id] <- 1
   prob <- Rfast::glm_logistic(x, y1, full = full, tol = tol, maxiters = maxiters)
-  x <- model.matrix( y ~. , data.frame(x) )
-  mod <- Rfast2::ztp.reg(y[id], x[id, -1], full = full, tol = tol, maxiters = maxiters)
+  x <- model.matrix(y~., data = as.data.frame(x) )
+  mod <- Rfast2::ztp.reg(y[id], x[id, -1, drop = FALSE], full = full, tol = tol, maxiters = maxiters)
+  names(mod$be) <- colnames(x)
   list(prob = prob, mod = mod)
 }
   
@@ -230,6 +237,7 @@ hellinger.countreg <- function(y, x, tol = 1e-07, maxiters = 100) {
     com <- sqy - sqm
     d2 <- sum( com^2 )
   }
+  names(be) <- colnames(x) 
   A <- crossprod( x * com * sqm )
   B <- solve(derb2)
   covbe <- B %*% A %*% B
@@ -301,7 +309,7 @@ sclr <- function(y, x, full = FALSE, tol = 1e-07, maxiters = 100) {
     etheta <- exp(theta)
     lik2 <- theta * sy - sum( log1p(eb) ) - n * log1p(etheta) + sum( y0 * log1p( eb * (1 + etheta) ) )
   } 
-  
+  names(be) <- colnames(x)
   res <- list(theta = theta, be = be, loglik = lik2, iters = i)
   if (full) {
     se <- sqrt( diag( solve( abs( der2 ) ) ) )
@@ -461,6 +469,7 @@ tobit.reg <- function(y, x, ylow = 0, full = FALSE, tol = 1e-07, maxiters = 100)
     lik2 <-  - n1 * log(s) + sum( log( dnorm( e1 / s) ) ) + sum( log( pnorm( e0 / s) ) ) 
   }
   names(lik2) <- NULL
+  names(be) <- colnames(x)
   res <- list(be = be, s = s, loglik = lik2, iters = i)
   if ( full ) {
      se <- solve( der2 )
@@ -510,6 +519,7 @@ binom.reg <- function(y, ni, x, full = FALSE, tol = 1e-07, maxiters = 100) {
     d2 <-  sum( ni * log1p( exp(est) ) ) - sum(y * est)
   }
   devi <- 2 * d2 + con 
+  names(be) <- colnames(x)
   res <- list(be = be, devi = devi)
   if (full) {
     se <- solve(der2)
@@ -561,7 +571,8 @@ propols.reg <- function(y, x, cov = FALSE, tol = 1e-07 ,maxiters = 100) {
 	B <- solve(der2)
     covb <- B %*% A %*% B
     seb <- sqrt( diag(covb) ) 	
-  }	
+  }
+  names(be) <- colnames(x)  
   list(be = be, seb = seb, covb = covb, sse = a2, iters = i)
 }
 
@@ -613,7 +624,7 @@ prophelling.reg <- function(y, x, cov = FALSE, tol = 1e-07, maxiters = 100) {
     covb <- B %*% A %*% B
     seb <- sqrt( diag(covb) ) 	
   }	
-  
+  names(be) <- colnames(x)
   list(be = be, seb = seb, covb = covb, H = d2, iters = i) 
 }
 
@@ -632,6 +643,25 @@ censweib.reg <- function (y, x, di, tol = 1e-07, maxiters = 100) {
     names(be) <- colnames(X)
     list(iters = mod$iters, loglik = mod$loglik, shape = mod$shape, be = be)
 }
+
+
+
+
+#[export]
+zigamma.reg <- function (y, x, full = FALSE, tol = 1e-07, maxiters = 100) {
+    y1 <- y
+    id <- which(y > 0)
+    y1[id] <- 1
+    x <- model.matrix(y ~ ., data = as.data.frame(x))
+    prob <- Rfast::glm_logistic(x[, -1], y1, full = full, tol = tol, 
+        maxiters = maxiters)
+    rownames(prob$be) <- colnames(x)
+    mod <- Rfast2::gammareg(y[id], x[id, -1, drop = FALSE], tol = tol, 
+        maxiters = maxiters)
+    colnames(mod$be) <- colnames(x)
+    list(prob = prob, mod = mod)
+}
+
 
 
      

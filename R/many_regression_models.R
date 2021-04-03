@@ -138,7 +138,7 @@ score.zipregs <- function(y, x, logged = FALSE) {
 
 #[export]
 negbin.regs <- function (y, x, tol = 1e-07, logged = FALSE, parallel = FALSE, maxiters = 100) {
-  mod <- .Call(Rfast2_negbin_regs, y, x, tol, maxiters, parallel)
+  mod <- .Call(Rfast2_negbin_regs, y, x, tol, maxiters, parallel)$info
   ini <- Rfast::negbin.mle(y)$loglik
   stat <- 2 * (mod - ini)
   pvalue <- pchisq(stat, 1, lower.tail = FALSE, log.p = logged)
