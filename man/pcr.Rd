@@ -55,7 +55,7 @@ Jolliffe I.T. (2002). Principal Component Analysis.
 }
 
 \author{
-Michail Tsagris
+Michail Tsagris.
 
 R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 }

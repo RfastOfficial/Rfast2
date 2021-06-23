@@ -35,7 +35,7 @@ Mahalanobis P. (1936). On the generalized distance in statistics. Proceedings of
 Liu R.Y. (1992). Data depth and multivariate rank tests. In Dodge Y. (editors), L1-Statistics and Related Methods, 279--294.
 }
 \author{
-Michail Tsagris
+Michail Tsagris.
 
 R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 }

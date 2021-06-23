@@ -34,9 +34,9 @@ A vector with the simulated data.
 %}
 
 \author{
-Michail Tsagris
+Michail Tsagris.
 
-R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr} 
+R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 }
 
 %\note{

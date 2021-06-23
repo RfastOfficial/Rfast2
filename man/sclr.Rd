@@ -67,9 +67,9 @@ Statistics in Medicine, 25(9): 1485-1497. https://doi.org/10.1002/sim.2282.
 }
 
 \author{
-Michail Tsagris
+Michail Tsagris.
 
-R implementation and documentation: Michail Tsagris <mtsagris@uoc.gr>.
+R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 }
 %\note{
 %%  ~~further notes~~

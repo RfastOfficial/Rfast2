@@ -58,9 +58,9 @@ http://lagrange.math.siu.edu/Olive/ol-bookp.htm
 }
 
 \author{
-Michail Tsagris
+Michail Tsagris.
 
-R implementation and documentation: Michail Tsagris <mtsagris@uoc.gr> 
+R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}. 
 }
 
 \seealso{

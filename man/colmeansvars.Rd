@@ -35,9 +35,9 @@ A matrix with two rows. The first contains the means and the second contains the
 }
 
 \author{
-Michail Tsagris
+Michail Tsagris and Manos Papadakis.
 
-R implementation and documentation: Michail Tsagris <mtsagris@uoc.gr> and Manos Papadakis <papadakm95@gmail.com>.
+R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr} and Manos Papadakis \email{papadakm95@gmail.com}.
 }
 
 \seealso{

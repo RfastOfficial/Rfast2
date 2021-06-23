@@ -57,9 +57,9 @@ partially faithful distributions and the PC-simple algorithm. Biometrika, 97(2):
 }
 
 \author{
-Michail Tsagris
+Michail Tsagris.
 
-R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr} 
+R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}. 
 }
 
 %\note{
@@ -67,7 +67,7 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}
 %}
 
 \seealso{
-\code{ \link{pc.skel}, \link{omp}
+\code{ \link{pc.skel}, \link{omp2}
 }
 }
 

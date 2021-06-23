@@ -43,7 +43,7 @@ A matrix with the test statistic values and their associated (logged) p-values.
 }
 
 \author{
-Stefanos Fafalios
+Stefanos Fafalios.
 
 R implementation and documentation: Stefanos Fafalios \email{stefanosfafalios@gmail.com}.
 }

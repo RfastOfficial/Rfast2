@@ -97,7 +97,7 @@ Medinfo, 711-715.
 }
 
 \author{
-Manos Papadakis
+Manos Papadakis.
 
 R implementation and documentation: Manos Papadakis \email{papadakm95@gmail.com}. 
 }
