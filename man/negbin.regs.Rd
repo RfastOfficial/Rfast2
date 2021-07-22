@@ -65,8 +65,8 @@ R implementation and documentation: Stefanos Fafalios \email{stefanosfafalios@gm
 
 \examples{
 \dontrun{
-rnbinom(100, 10, 0.6)
-x <- matrix( rnorm( 100 * 500), ncol = 500 )
+y <- rnbinom(100, 10, 0.6)
+x <- matrix( rnorm( 100 * 200), ncol = 200 )
 a <- negbin.regs(y, x)
 x <- NULL
 }
