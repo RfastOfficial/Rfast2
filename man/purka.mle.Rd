@@ -51,9 +51,9 @@ Communications in Statistics-Theory and Methods, 19(6): 1973-1986.
 }
 
 \author{
-Michail Tsagris.
+Michail Tsagris
 
-R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}. 
+R implementation and documentation: Michail Tsagris <mtsagris@uoc.gr> 
 }
 
 %\note{

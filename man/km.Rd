@@ -26,7 +26,7 @@ The Kaplan-Meier estimate of the survival function takes place.
 
 \value{
 A matrix with 4 columns. The non censored times, the number of subjects at risk, 
-the number of events at each time and the estimated survival probability.
+the number of events at each time and the estimated survival 
 }
 
 \references{
@@ -35,9 +35,9 @@ Journal of the American Statistical Association, 53(282): 457-481.
 }
 
 \author{
-Michail Tsagris.
+Michail Tsagris
 
-R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
+R implementation and documentation: Michail Tsagris <mtsagris@uoc.gr> 
 }
 
 %\note{

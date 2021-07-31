@@ -111,9 +111,9 @@ Tsamardinos, Brown and Aliferis (2006). The max-min hill-climbing Bayesian netwo
 }
 
 \author{
-Marios Dimitriadis.
+Marios Dimitriadis
 
-R implementation and documentation: Marios Dimitriadis \email{kmdimitriadis@gmail.com}.
+R implementation and documentation: Marios Dimitriadis <kmdimitriadis@gmail.com>.
 }
 
 \seealso{

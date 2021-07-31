@@ -46,15 +46,15 @@ The residuals of the linear model(s).
 }
 
 \references{
-Jeffrey M. Wooldridge (2013). Introductory Econometrics. A modern approach. Mason, South-Western Cengage Learning, 5th Edition.
+Introductory Econometrics. A modern approach. Mason, South-Western Cengage Learning, 5th Edition.
 
 Draper, N.R. and Smith H. (1988). Applied regression analysis. New York, Wiley, 3rd edition. 
 }
 
 \author{
-Michail Tsagris.
+Michail Tsagris
 
-R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
+R implementation and documentation: Michail Tsagris <mtsagris@uoc.gr>.
 }
 %\note{
 %%  ~~further notes~~

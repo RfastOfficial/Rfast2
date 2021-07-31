@@ -37,9 +37,9 @@ Column wise of grouping variables. You can also include diagonal to the check.
 }
 
 \author{
-Manos Papadakis.
+Manos Papadakis
 
-R implementation and documentation: Manos Papadakis \email{papadakm95@gmail.com.
+R implementation and documentation: Manos Papadakis <papadakm95@gmail.com>.
 }
 
 \seealso{

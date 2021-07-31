@@ -58,9 +58,9 @@ McCullagh, Peter, and John A. Nelder. Generalized linear models. CRC press, USA,
 }
 
 \author{
-Stefanos Fafalios.
+Stefanos Fafalios
 
-R implementation and documentation: Stefanos Fafalios \email{stefanosfafalios@gmail.com}.
+R implementation and documentation: Stefanos Fafalios <stefanosfafalios@gmail.com>.
 }
 %\note{
 %%  ~~further notes~~

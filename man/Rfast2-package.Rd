@@ -25,7 +25,7 @@ License: \tab GPL-2\cr
 }
 
 \author{
-Manos Papadakis \email{papadakm95@gmail.com}, Michail Tsagris \email{mtsagris@uoc.gr}, Stefanos Fafalios <stefanosfafalios@gmail.com>, Marios Dimitriadis \email{kmdimitriadis@gmail.com}.
+Manos Papadakis <papadakm95@gmail.com>, Michail Tsagris <mtsagris@uoc.gr>, Stefanos Fafalios <stefanosfafalios@gmail.com>, Marios Dimitriadis <kmdimitriadis@gmail.com>.
 }
 
 \section{Maintainers }{

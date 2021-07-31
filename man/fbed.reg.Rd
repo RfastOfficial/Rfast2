@@ -99,9 +99,9 @@ Borboudakis G. and Tsamardinos I. (2019). Forward-backward selection with early 
 
 
 \author{
-Michail Tsagris and Stefanos Fafalios.
+Michail Tsagris and Stefanos Fafalios
 
-R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr} and Stefanos Fafalios \email{stefanosfafalios@gmail.com}.
+R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr} and Stefanos Fafalios \email{stefanosfafalios@gmail.com}
 }
 
 \seealso{

@@ -40,10 +40,10 @@ List gamma_reg(NumericVector Y, NumericMatrix X, List mod, const double tol = 1e
       d2 = (m0 + log(m2))*n - der2;
     }
     d1 = d2;
-    m0 = exp(m0);
+    //m0 = exp(m0);
   }
   else{
-    m0 = exp((double)mod["be"]);
+    m0 = (double)mod["be"];
     d1 = -0.5*((double)mod["deviance"])-n;
   }
 

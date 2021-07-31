@@ -62,9 +62,9 @@ Journal of the American Statistical Association, 93(443): 1068-1077.
 }
 
 \author{
-Michail Tsagris.
+Stefanos Fafalios
 
-R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}. 
+R implementation and documentation: Stefanos Fafalios <stefanosfafalios@gmail.com>. 
 }
 
 %\note{
