@@ -664,6 +664,35 @@ zigamma.reg <- function (y, x, full = FALSE, tol = 1e-07, maxiters = 100) {
 
 
 
+
+#[export]
+fe.lmfit <- function(y, x, id) {
+  x <- as.matrix(x)
+  id <- as.integer( as.numeric(id) )
+  z <- cbind(y, x)
+  z <- z[order(id), ]
+
+  fid <- as.vector( Rfast::Table(id) )
+  m <- Rfast2::colGroup(z, id) / fid
+  z <- NULL  ##  remove z from memory
+  my <- m[, 1]    ;    mx <- m[, -1, drop = FALSE]
+  
+  m1 <- rep(my, fid)
+  y <- y - m1 
+  Mx <- NULL
+  for ( i in 1:length(fid) ) {
+    a <- matrix( rep(mx[i, , drop = FALSE], fid[i] ), nrow = fid[i], byrow = TRUE )
+    Mx <- rbind(Mx, a)
+  }
+  x <- x - Mx 
+
+  mod <- Rfast::lmfit(x, y)
+  fe <- my - mean(my) - Rfast::eachrow(mx, Rfast::colmeans(mx), oper = "-") %*% mod$be   
+  list(be = mod$be, fe = as.vector(fe), residuals = mod$residuals )
+}
+
+
+
      
    
   
