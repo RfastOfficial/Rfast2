@@ -56,7 +56,7 @@ R implementation and documentation: Michail Tsagris <mtsagris@uoc.gr>
 %}
 
 \seealso{
-\code{ \link{gee.reg} }
+\code{ \link{gee.reg}, \link{fe.lmfit} }
 }
 
 \examples{
