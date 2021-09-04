@@ -1,6 +1,5 @@
 #[export]
-mmhc.skel <- function (x, method = "pearson", max_k = 3, alpha = 0.05, robust = FALSE,
-                             ini.stat = NULL, R = NULL, parallel=FALSE) {
+fedhc.skel <- function (x, method = "pearson", alpha = 0.05, robust = FALSE, ini.stat = NULL, R = NULL, parallel=FALSE) {
   dm <- dim(x)
   n <- dm[1]   ;    d <- dm[2]
 
@@ -59,7 +58,8 @@ mmhc.skel <- function (x, method = "pearson", max_k = 3, alpha = 0.05, robust = 
     R <- as.matrix(R)
   }
 
-  ret <- .Call( Rfast2_mmhc_skeleton, x, ini.pvalue,n,la,max_k,method=="pearson",R, parallel)
+  ret <- .Call( Rfast2_fedhc_skeleton, x, ini.pvalue,n,la,method=="pearson",R, parallel)
+  #ret <- fedhc_skeleton(x, ini.pvalue,n,la,method=="pearson",R, parallel)
   colnames(ret$G) <- nam    ;   rownames(ret$G) <- nam
   colnames(ret$pvalue) <- nam    ;   rownames(ret$pvalue) <- nam
   runtime <- proc.time() - runtime
