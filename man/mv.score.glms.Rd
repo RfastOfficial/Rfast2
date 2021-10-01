@@ -79,7 +79,7 @@ R implementation and documentation: Michail Tsagris <mtsagris@uoc.gr>.
 %}
 
 \seealso{
-\code{ \link{score.gipregs}, \link{gammaregs}, \link{weib.regs}
+\code{ \link{score.zipregs}, \link{gammaregs}, \link{weib.regs}
 }
 }
 

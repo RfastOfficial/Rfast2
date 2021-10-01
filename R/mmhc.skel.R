@@ -1,6 +1,5 @@
 #[export]
-mmhc.skel <- function (x, method = "pearson", max_k = 3, alpha = 0.05, robust = FALSE,
-                             ini.stat = NULL, R = NULL, parallel=FALSE) {
+mmhc.skel <- function (x, method = "pearson", max_k = 3, alpha = 0.05, ini.stat = NULL, R = NULL, parallel = FALSE) {
   dm <- dim(x)
   n <- dm[1]   ;    d <- dm[2]
 
@@ -51,5 +50,5 @@ mmhc.skel <- function (x, method = "pearson", max_k = 3, alpha = 0.05, robust = 
   colnames(ret$G) <- nam    ;   rownames(ret$G) <- nam
   colnames(ret$pvalue) <- nam    ;   rownames(ret$pvalue) <- nam
   runtime <- proc.time() - runtime
-  list(ini.stat = ini.stat, ini.pvalue = ini.pvalue, pvalue = ret$pvalue, runtime = runtime[3], n.tests = ret$ntests+ntests, G = ret$G)
+  list(ini.stat = ini.stat, ini.pvalue = ini.pvalue, pvalue = ret$pvalue, runtime = runtime[3], n.tests = ret$ntests + ntests, G = ret$G)
 }
