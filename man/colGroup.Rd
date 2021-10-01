@@ -50,9 +50,9 @@ R implementation and documentation: Manos Papadakis <papadakm95@gmail.com>.
 \examples{
 
 x <- matrix(runif(100 * 5), 100, 5)
-group <- sample(1:3, 100, TRUE)
+id <- sample(1:3, 100, TRUE)
 
-all.equal( colGroup(x, group), rowsum(x, group) )
+all.equal( colGroup(x, id), rowsum(x, id) )
 
 }
 

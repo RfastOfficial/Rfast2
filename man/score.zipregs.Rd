@@ -36,6 +36,9 @@ A matrix with two columns, the test statistic and its associated (logged) p-valu
 }
 
 \references{
+Tsagris M., Alenazi A. and Fafalios S. (2020). Computationally efficient univariate filtering for massive data. 
+Electronic Journal of Applied Statistical Analysis, 13(2):390-412.
+
 Lambert D. (1992). Zero-inflated Poisson regression, with an application to defects in manufacturing. Technometrics, 34(1):1-14.
 
 Campbell, M.J. (2001). Statistics at Square Two: Understand Modern Statistical Applications in Medicine, pg. 112.

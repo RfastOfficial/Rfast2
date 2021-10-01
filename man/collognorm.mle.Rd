@@ -75,11 +75,11 @@ Agresti, A. (2002) Categorical Data. Second edition. Wiley.
 
 J. Mazucheli, A. F. B. Menezes, L. B. Fernandes, R. P. de Oliveira & M. E. Ghitany (2020). 
 The unit-Weibull distribution as an alternative to the Kumaraswamy distribution for the modeling of
-quantiles conditional on covariates. Journal of Applied Statistics, DOI:10.1080/02664763.2019.1657813
+quantiles conditional on covariates. Journal of Applied Statistics, DOI:10.1080/02664763.2019.1657813.
 }
 
 \author{
-Michail Tsagris.
+Michail Tsagris and Stefanos Fafalios.
 
 R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr} and Stefanos Fafalios
 \email{stefanosfafalios@gmail.com}.

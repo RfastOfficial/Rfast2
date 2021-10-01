@@ -9,7 +9,7 @@ Many negative binomial regressions.
 }
 
 \usage{
-negbin.regs(y, x, tol = 1e-07, logged = FALSE, parallel = FALSE, maxiters = 100)
+negbin.regs(y, x, type = 1, tol = 1e-07, logged = FALSE, parallel = FALSE, maxiters = 100)
 }
 
 \arguments{
@@ -19,6 +19,9 @@ The dependent variable, a numerical variable with non negative numbers
 \item{x}{
 A matrix with the indendent variables.
 }
+\item{type}{
+You can choose which way your prefer. Type 1 is for smal sample sizes, whereas type 2 is for larger ones as is faster. 
+}
 \item{tol}{
 The tolerance value to terminate the Newton-Raphson algorithm.
 }
@@ -26,7 +29,8 @@ The tolerance value to terminate the Newton-Raphson algorithm.
 If you want the logarithm of the p-values set this equal to TRUE.
 }
 \item{parallel}{
-Do you want this to be executed in parallel or not. The parallel takes place in C++, therefore you do not have the option to set the number of cores.
+Do you want this to be executed in parallel or not. The parallel takes place in C++, therefore 
+you do not have the option to set the number of cores.
 }
 \item{maxiters}{
 The maximum number of iterations that can take place in each regression.
@@ -51,7 +55,8 @@ using generalized linear model. International Journal of Advanced Statistics and
 \author{
 Stefanos Fafalios and and Michail Tsagris.
 
-R implementation and documentation: Stefanos Fafalios \email{stefanosfafalios@gmail.com} and Michail Tsagris \email{mtsagris@uoc.gr}.
+R implementation and documentation: Stefanos Fafalios \email{stefanosfafalios@gmail.com} and 
+Michail Tsagris \email{mtsagris@uoc.gr}.
 }
 
 %\note{
@@ -65,8 +70,8 @@ R implementation and documentation: Stefanos Fafalios \email{stefanosfafalios@gm
 
 \examples{
 \dontrun{
-rnbinom(100, 10, 0.6)
-x <- matrix( rnorm( 100 * 500), ncol = 500 )
+y <- rnbinom(100, 10, 0.6)
+x <- matrix( rnorm( 100 * 200), ncol = 200 )
 a <- negbin.regs(y, x)
 x <- NULL
 }

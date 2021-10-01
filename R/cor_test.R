@@ -20,7 +20,7 @@ cor_test <- function(y, x, type = "pearson", rho = 0, a = 0.05) {
     ca <- cbind(b1, b2)
     ela <- exp(2 * ca)
     ci <- (ela - 1)/(ela + 1)
-    res <- cbind(r, ci, test, pvalue)
+    res <- as.vector( c(r, ci, test, pvalue) )
     names(res) <- c("correlation", paste(c(a/2 * 100, 
     (1 - a/2) * 100), "%", sep = ""), "t-stat", "p-value")
     res

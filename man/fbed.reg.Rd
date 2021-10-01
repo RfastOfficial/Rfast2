@@ -94,14 +94,16 @@ The runtime required.
 }
 
 \references{
-Borboudakis G. and Tsamardinos I. (2019). Forward-backward selection with early dropping. Journal of Machine Learning Research, 20(8): 1-39.
+Borboudakis G. and Tsamardinos I. (2019). Forward-backward selection with early dropping. 
+Journal of Machine Learning Research, 20(8): 1-39.
 }
 
 
 \author{
-Michail Tsagris and Stefanos Fafalios
+Michail Tsagris and Stefanos Fafalios.
 
-R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr} and Stefanos Fafalios \email{stefanosfafalios@gmail.com}
+R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr} and 
+Stefanos Fafalios \email{stefanosfafalios@gmail.com}.
 }
 
 \seealso{

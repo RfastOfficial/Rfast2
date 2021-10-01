@@ -4,18 +4,6 @@ mmhc.skel <- function (x, method = "pearson", max_k = 3, alpha = 0.05, robust = 
   dm <- dim(x)
   n <- dm[1]   ;    d <- dm[2]
 
-  if ( robust  &  method == "pearson" ) {
-    mod <- robustbase::covMcd( x, alpha = ceiling( 0.5 * (n + d + 1) )/n )
-    w <- sum( mod$mcd.wt )
-    d1 <- w / (w - 1)^2 * mod$mah[mod$mcd.wt == 1]
-    d0 <- w / (w + 1) * (w - d) / ( (w - 1) * d ) * mod$mah[mod$mcd.wt == 0]
-    ep1 <- which( d1 > qbeta(0.975, 0.5 * d, 0.5 * (w - d - 1) ) )
-    ep0 <- which( d0 > qf(0.975, d, w - d) )
-    poia <- c( which(mod$mcd.wt == 1)[ep1],  which(mod$mcd.wt == 0)[ep0] )
-    x <- x[-poia, ]
-    n <- dim(x)[1]
-  }
-
   G <- matrix(0, d, d)
   ntests <- 0
   nam <- colnames(x)
@@ -59,7 +47,7 @@ mmhc.skel <- function (x, method = "pearson", max_k = 3, alpha = 0.05, robust = 
     R <- as.matrix(R)
   }
 
-  ret <- .Call( Rfast2_mmhc_skeleton, x, ini.pvalue,n,la,max_k,method=="pearson",R, parallel)
+  ret <- .Call( Rfast2_mmhc_skeleton, x, ini.pvalue, n, la, max_k, method, R, parallel)
   colnames(ret$G) <- nam    ;   rownames(ret$G) <- nam
   colnames(ret$pvalue) <- nam    ;   rownames(ret$pvalue) <- nam
   runtime <- proc.time() - runtime
