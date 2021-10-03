@@ -46,7 +46,7 @@ fedhc.skel <- function(x, method = "pearson", alpha = 0.05, ini.stat = NULL, R =
     R <- as.matrix(R)
   }
 
-  ret <- .Call(Rfast2_fedhc_skeleton, x, ini.pvalue, n, la, method, R, parallel)
+  ret <- .Call(Rfast2_fedhc_skeleton, x, ini.pvalue, n, la, method=="pearson", R, parallel)
   #ret <- fedhc_skeleton(x, ini.pvalue,n,la,method=="pearson",R, parallel)
   colnames(ret$G) <- nam    ;   rownames(ret$G) <- nam
   colnames(ret$pvalue) <- nam    ;   rownames(ret$pvalue) <- nam
