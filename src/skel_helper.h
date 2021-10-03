@@ -8,7 +8,6 @@ using namespace std;
 using namespace arma;
 using namespace Rcpp;
 
-static double g2Statistic(unsigned int*, unsigned const int, unsigned const int);
 vec g2Test(mat&,unsigned const int, unsigned const int, double*);
 vec g2Test(mat&, unsigned const int, unsigned const int, int*, unsigned const int, double*);
 vec g2Test(mat&, unsigned const int, unsigned const int, ivec, mat);
