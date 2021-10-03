@@ -46,7 +46,7 @@ mmhc.skel <- function (x, method = "pearson", max_k = 3, alpha = 0.05, ini.stat 
     R <- as.matrix(R)
   }
 
-  ret <- .Call( Rfast2_mmhc_skeleton, x, ini.pvalue, n, la, max_k, method, R, parallel)
+  ret <- .Call( Rfast2_mmhc_skeleton, x, ini.pvalue, n, la, max_k, method == "pearson", R, parallel)
   colnames(ret$G) <- nam    ;   rownames(ret$G) <- nam
   colnames(ret$pvalue) <- nam    ;   rownames(ret$pvalue) <- nam
   runtime <- proc.time() - runtime
