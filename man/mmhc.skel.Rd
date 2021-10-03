@@ -10,7 +10,7 @@ The skeleton of a Bayesian network learned with the MMHC algorithm.
 
 \usage{
 mmhc.skel(x, method = "pearson", max_k = 3, alpha = 0.05,
-ini.stat = NULL, R = NULL)
+ini.stat = NULL, R = NULL, parallel = FALSE)
 }
 
 \arguments{
@@ -35,6 +35,9 @@ If the initial test statistics (univariate associations) are available, pass the
 }
 \item{R}{
 If the correlation matrix is available, pass it here.
+}
+\item{parallel}{
+Set this to TRUE for parallel computations.
 }
 }
 
@@ -91,7 +94,7 @@ Stefanos Fafalios \email{stefanosfafalios@gmail.com}.
 %%  ~~further notes~~
 %}
 \seealso{
-\code{ \link{mmpc}, \link{mmpc2}
+\code{ \link{fedhc.skel}, \link{mmpc}, \link{mmpc2}
 }
 }
 

@@ -64,6 +64,6 @@ R implementation and documentation: Michail Tsagris <mtsagris@uoc.gr>.
 \examples{
 y <- rnorm(100)
 x <- rnorm(100)
-id <- repeat(1:10, 10)
+id <- rep(1:10, 10)
 mod <- fe.lmfit(y, x, id)
 }
