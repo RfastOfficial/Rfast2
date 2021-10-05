@@ -46,7 +46,6 @@ List fedhc_skeleton_c(mat& x, mat& ini_pval, const double la, unsigned const int
           vars.reset();
         }
 
-        int whileiter = 0;
         while(vars.size() > 0) {
           unsigned int var_i;
           if(method==1){
@@ -111,9 +110,7 @@ List fedhc_skeleton_c(mat& x, mat& ini_pval, const double la, unsigned const int
         vars.reset();
       }
 
-      int whileiter = -1;
       while(vars.size() > 0) {
-        whileiter++;
         unsigned int var_i;
         if(method==1) {
           for(var_i=0; var_i < vars.size(); ++var_i) {

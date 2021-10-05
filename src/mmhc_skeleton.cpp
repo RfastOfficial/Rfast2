@@ -47,9 +47,8 @@ List mmhc_skeleton_c(mat& x, mat& ini_pval, const double la, unsigned const int 
       }
 
       unsigned int j;
-      int whileiter = 0;
       while(vars.size() > 0) {
-        for(unsigned int i = 0; i < std::min(maxk, (int)sela.n_elem); ++i) {
+        for(unsigned int i = 0; i < (unsigned int) std::min(maxk, (int)sela.n_elem); ++i) {
           if(sela.n_elem == 1){
             cand = imat(1, 1);
             cand[0] = sela[0];
@@ -142,9 +141,8 @@ List mmhc_skeleton_c(mat& x, mat& ini_pval, const double la, unsigned const int 
       }
 
       unsigned int j;
-      int whileiter = 0;
       while(vars.size() > 0) {
-        for(unsigned int i = 0; i< std::min(maxk, (int)sela.n_elem); ++i) {
+        for(unsigned int i = 0; i< (unsigned int) std::min(maxk, (int)sela.n_elem); ++i) {
           if(sela.n_elem == 1){
             cand = imat(1, 1);
             cand[0] = sela[0];
