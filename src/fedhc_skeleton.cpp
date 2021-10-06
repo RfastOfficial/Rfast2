@@ -35,7 +35,7 @@ List fedhc_skeleton_c(mat& x, mat& ini_pval, const double la, unsigned const int
           sela = ivec(1);
           sela[0] = arma::index_min(pval);
           for(unsigned int i=0;i<vars.n_elem;++i){
-            if(vars[i]==sela[0])  {
+            if((int)vars[i]==sela[0])  {
               vars.shed_row(i);
               break;
             }
@@ -99,7 +99,7 @@ List fedhc_skeleton_c(mat& x, mat& ini_pval, const double la, unsigned const int
         sela = ivec(1);
         sela[0] = arma::index_min(pval);
         for(unsigned int i=0;i<vars.n_elem;++i){
-          if(vars[i]==sela[0])  {
+          if((int)vars[i]==sela[0])  {
             vars.shed_row(i);
             break;
           }
