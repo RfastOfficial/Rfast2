@@ -28,25 +28,6 @@ Date release: **10/07/2019**
 >>  | mmhc.skel          | Skeleton of MMHC Bayesian network learning algorithm		|
 >>  | fedhc.skel   		 | Skeleton of FEDHC Bayesian network learning algorithm	|
 >>  | fe.lmfit   		 | Fixed effects linear regression for panel data			|
->>  |    		    				 | 																										|
->>  | 									 | 																										|
->>  | 						     	 | 																										|
->>  | 						    	 | 																										|
->>  | 						   	   | 																										|
->>  | 						   	   | 																										|
->>  | 						   	   | 																										|
->>  | 						   	   | 																										|
->>  | 						     	 | 																										|
->>  | 						     	 | 																										|
->>  | 						  	   | 																										|
->>  | 						     	 | 																										|
->>  | 						       | 																										|
->>  | 						     	 | 																										|
->>  | 						  	   | 																										|
->>  | 						     	 | 																										|
->>  | 						  	   | 																										|
->>  | 						     	 | 																										|
->>  | 						  	   | 																										|
 >
 >
 > ### **_Utility functions_**  
