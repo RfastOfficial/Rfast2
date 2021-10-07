@@ -23,11 +23,11 @@ Date release: **10/07/2019**
 >
 >>2. <u> **New** </u>
 >>
->>  | 	   Function 	   |                     What's new!                    |
+>>  | 	   Function 	 |                     What's new!                    |
 >>  | :----------------: | :------------------------------------------------: |
->>  |           				 | 																										|
->>  |           				 | 																										|
->>  |    		    				 | 																										|
+>>  | mmhc.skel          | Skeleton of MMHC Bayesian network learning algorithm		|
+>>  | fedhc.skel   		 | Skeleton of FEDHC Bayesian network learning algorithm	|
+>>  | fe.lmfit   		 | Fixed effects linear regression for panel data			|
 >>  |    		    				 | 																										|
 >>  | 									 | 																										|
 >>  | 						     	 | 																										|
