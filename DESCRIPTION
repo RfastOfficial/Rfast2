@@ -1,8 +1,8 @@
 Package: Rfast2
 Type: Package
 Title: A Collection of Efficient and Extremely Fast R Functions II
-Version: 0.1.0
-Date: 2021-10-07
+Version: 0.1.1
+Date: 2021-10-10
 Author: Manos Papadakis, Michail Tsagris, Stefanos Fafalios and Marios Dimitriadis.
 Maintainer: Manos Papadakis <rfastofficial@gmail.com>
 Depends: R (>= 3.5.0), Rcpp (>= 0.12.3)
@@ -13,5 +13,4 @@ BugReports: https://github.com/RfastOfficial/Rfast2/issues
 URL: https://github.com/RfastOfficial/Rfast2
 Description: A collection of fast statistical and utility functions for data analysis. Functions for regression, maximum likelihood, column-wise statistics and many more have been included. C++ has been utilized to speed up the functions.
 License: GPL (>= 2.0)
-LazyData: TRUE
 NeedsCompilation: yes

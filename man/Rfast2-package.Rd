@@ -18,8 +18,8 @@ Note 3: In general, make sure you give the correct input, in order to get the co
 \tabular{ll}{
 Package: \tab Rfast2\cr
 Type: \tab Package\cr
-Version: \tab 0.1.0 \cr
-Date: \tab 2021-10-07\cr
+Version: \tab 0.1.1 \cr
+Date: \tab 2021-10-10\cr
 License: \tab GPL-2\cr
 }
 }

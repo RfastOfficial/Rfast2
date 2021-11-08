@@ -1,7 +1,7 @@
 <h1 align="center"> _Rfast2_ </h1>
 
-### Version 0.1.0 
-#### Date release: **08/10/2021**
+### Version 0.1.1 
+#### Date release: **10/10/2021**
 ***
 ><u> **New** </u>
 >
