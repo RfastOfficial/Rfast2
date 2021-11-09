@@ -1,6 +1,6 @@
 <h1 align="center"> _Rfast2_ </h1>
 
-### Version 0.1.1 
+### **Version 0.1.1**
 #### Date release: **10/10/2021**
 ***
 ><u> **New** </u>
@@ -11,8 +11,10 @@
 >  | fedhc.skel   		 | Skeleton of FEDHC Bayesian network learning algorithm	|
 >  | fe.lmfit   		 | Fixed effects linear regression for panel data			|
 
-	
-### Version 0.0.8 
+</br>
+</br>
+
+### **Version 0.0.8**
 #### Date release: **16/12/2019**
 ***
 > <u> **New** </u>
@@ -42,8 +44,10 @@
 >  | spml.nb     	     | SPML NB classifier                                 |
 >  | spml.pred  	       | Prediction using SPML NB classifier                |
 
+</br>
+</br>
 
-### Version 0.0.4
+### **Version 0.0.4**
 #### Date release: **28/07/2019**
 ***
 > <u> **Improved** </u>(_**by speed, correctness or options**_) 
@@ -79,8 +83,10 @@
 >  |     mmpc2     		|  MMPC variable selection algorithm			   		|
 >  |  is.skew.symmetric  |  Checking if the given matrix is skew-symmetric. |
 
+</br>
+</br>
 
-### Version 0.0.3
+### **Version 0.0.3**
 #### Date release: **08/05/2019**
 ***
 ><u> **Improved** </u>(_**by speed, correctness or options**_) 
@@ -89,7 +95,10 @@
 >  | :-----------------: | :-----------------------------------------: |
 >  | benchmark						|	fix a bug in printing names. 			  |
 
-### Version 0.0.2
+</br>
+</br>
+
+### **Version 0.0.2**
 #### Date release: **08/05/2019**
 ***
 ><u> **New** </u>
@@ -104,8 +113,10 @@
 >  | walter.ci           | Confidence interval for the relative risk using Walter's method |
 >  | welch.tests         | Many Welch t-tests |
 
+</br>
+</br>
 
-### Version 0.0.1
+### **Version 0.0.1**
 #### Date release: **19/03/2019**
 ***
 ><u> **New** </u>
