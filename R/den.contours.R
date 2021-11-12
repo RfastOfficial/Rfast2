@@ -1,5 +1,5 @@
 ########################
-den.contours <- function(x, type = 'normal', v = 5) {
+den.contours <- function(x, type = "normal", v = 5) {
   n1 <- 100 
   n2 <- 100
   x1 <- seq( min(x[, 1]) - 0.5, max(x[, 1]) + 0.5, length = n1 )

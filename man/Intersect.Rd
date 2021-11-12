@@ -28,9 +28,9 @@ NAs will be removed.
 }
 
 \author{
-Marios Dimitriadis
+Marios Dimitriadis.
 
-R implementation and documentation: Marios Dimitriadis <kmdimitriadis@gmail.com>
+R implementation and documentation: Marios Dimitriadis <kmdimitriadis@gmail.com>.
 }
 
 %\note{

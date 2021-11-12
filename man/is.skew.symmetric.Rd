@@ -27,7 +27,7 @@ A boolean value, TRUE of FALSE.
 }
 
 \author{
-Manos Papadakis
+Manos Papadakis.
 
 R implementation and documentation: Manos Papadakis <papadakm95@gmail.com>.
 }

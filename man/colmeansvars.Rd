@@ -35,7 +35,7 @@ A matrix with two rows. The first contains the means and the second contains the
 }
 
 \author{
-Michail Tsagris
+Michail Tsagris.
 
 R implementation and documentation: Michail Tsagris <mtsagris@uoc.gr> and Manos Papadakis <papadakm95@gmail.com>.
 }

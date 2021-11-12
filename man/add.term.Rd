@@ -62,7 +62,7 @@ Journal of the American Statistical Association, 93(443): 1068-1077.
 }
 
 \author{
-Stefanos Fafalios
+Stefanos Fafalios.
 
 R implementation and documentation: Stefanos Fafalios <stefanosfafalios@gmail.com>. 
 }

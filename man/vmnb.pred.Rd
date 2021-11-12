@@ -53,7 +53,7 @@ A numerical vector with 1, 2, ... denoting the predicted group.
 %}
 
 \author{
-Michail Tsagris
+Michail Tsagris.
 
 R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 }

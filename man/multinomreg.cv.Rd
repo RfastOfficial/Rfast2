@@ -62,7 +62,7 @@ Annals of the Institute of Statistical Mathematics, 44(1): 197-200.
 }
 
 \author{
-Michail Tsagris
+Michail Tsagris.
 
 R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 }
