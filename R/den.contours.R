@@ -1,4 +1,4 @@
-########################
+#[export]
 den.contours <- function(x, type = "normal", v = 5) {
   n1 <- 100 
   n2 <- 100
