@@ -102,10 +102,10 @@ covmtest <- function(x, ina, a = 0.05) {
 
 
 #[export]
-cov.dist <- function(A, B) {
+cov.dist <- function(s1, s2) {
   ## A and B are two covariance matrices
-  ## the order is irrelevant, A, B or B, A is the same
-  S <- solve(B, A)
+  ## the order is irrelevant, s1, s2 or s2, s1 is the same
+  S <- solve(s1, s2)
   sqrt( sum( log( eigen(S)$values )^2 ) )
 }
 
