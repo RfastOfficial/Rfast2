@@ -93,3 +93,31 @@ mle.lda <- function(xnew, x, ina) {
   }
   Rfast::colMins(score)
 }
+
+
+
+#[export]
+fisher.da <- function(xnew, x, ina) {
+  n <- dim(z)[1]  ## sample size
+  d <- dim(z)[2]  ## dimensionality
+  xnew <- as.matrix(xnew)
+  xnew <- matrix(xnew, ncol = d)
+  nu <- dim(xnew)[1]
+  ni <- tabulate(ina)
+  k <- length(ni)  ## how many groups are there
+  xbar <- Rfast::colmeans(x)
+  mi <- rowsum(x, ina) / ni
+  B <- ni[1] * tcrossprod( mi[1, ] - xbar ) 
+  for (i in 2:k)  B <- B +  ni[i] * tcrossprod( mi[i, ] - xbar ) 
+  B <- B / (k - 1)  ## the between sum of squares
+  m <- sqrt(n) * xbar
+  W <- crossprod(x) - tcrossprod(m) - B
+  M <- solve(W, B)
+  lambda <- as.vector( eigen(M)$vectors[, 1] )  ## Fisher's discriminant
+  A <-  as.vector( tcrossprod( lambda, znew ) ) 
+  A <- matrix(rep(A, each = k), nrow = nu, byrow = TRUE)
+  ma <- tcrossprod( lambda, mi)
+  crit <- abs( eachrow(A, ma, oper = "-") )
+  pred <- Rfast::rowMins(crit)  ## the predicted group
+  list(lambda = lambda, pred = pred)
+}
