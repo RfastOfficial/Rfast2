@@ -23,7 +23,7 @@ A numerical matrix with the data whose covariance matrices will be tested for eq
 A vector with the grouping variable that defines the groups.
 }
 \item{a}{
-The level of significance, default value is equal to 0.05
+The level of significance, default value is equal to 0.05.
 }
 }
 \details{
@@ -58,7 +58,7 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 %}
 
 \seealso{
-\code{ \link{covdist}, \link{covar}, \link{cor_test} }
+\code{ \link{covequal}, \link{covdist}, \link{covar}, \link{cor_test} }
 }
 
 \examples{

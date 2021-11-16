@@ -47,7 +47,7 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 %}
 
 \seealso{
-\code{ \link{covlikel}, \link{covar}, \link{cor_test} }
+\code{ \link{covlikel}, \link{covequal}, \link{covar}, \link{cor_test} }
 }
 
 \examples{

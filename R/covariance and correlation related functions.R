@@ -117,6 +117,26 @@ covmtest <- function(x, ina, a = 0.05) {
 
 
 #[export]
+covequal <- function(x, sigma, a = 0.05) {
+  ## x is the data set
+  ## Sigma is the assumed covariance matrix
+  ## a is the level of significance set by default to 0.05
+  p <- dim(x)[2]  ## dimensionality of the data
+  n <- dim(x)[1]  ## sample size
+  s <- Rfast::cova(x)  ## sample covariance matrix
+  mesa <- solve(sigma, s)
+  test <- n * sum( diag(mesa) ) - n * log( det(mesa) ) - n * p  ## test statistic
+  dof <- 0.5 * p * (p + 1)  ## the degrees of freedom of the chi-square distribution
+  pvalue <- pchisq(test, dof, lower.tail = FALSE)  ## p-value of the test statistic
+  crit <- qchisq(1 - a, dof)  ## critical value of the chi-square distribution
+  res <- c(test, pvalue, dof, crit)
+  names(res) <- c("test", "p-value", "df", "critical")
+  res
+}
+
+
+
+#[export]
 cov.dist <- function(s1, s2) {
   ## A and B are two covariance matrices
   ## the order is irrelevant, s1, s2 or s2, s1 is the same
