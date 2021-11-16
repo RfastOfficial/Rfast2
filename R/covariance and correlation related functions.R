@@ -37,6 +37,20 @@ covar <- function(y, x) {
 
 
 #[export]
+pooled.colVars <- function (x, ina, std = FALSE) {
+    m <- rowsum(x, ina)
+    m2 <- rowsum(x^2, ina)
+    ni <- tabulate(ina)
+    ni <- ni[ni > 0]
+    s <- (m2 - m^2/ni)
+    s <- Rfast::colsums(s) / (sum(ni) - length(ni) )
+    if (std)  s <- sqrt(s)
+    s
+}
+
+
+
+#[export]
 covlikel <- function(x, ina, a = 0.05) {
   ## x is the data set
   ## ina is a numeric vector indicating the groups of the data set
@@ -65,6 +79,7 @@ covlikel <- function(x, ina, a = 0.05) {
   names(res) <- c('test', 'p-value', 'df', 'critical')
   res
 }
+
 
 #[export]
 covmtest <- function(x, ina, a = 0.05) {
@@ -108,4 +123,7 @@ cov.dist <- function(s1, s2) {
   S <- solve(s1, s2)
   sqrt( sum( log( eigen(S)$values )^2 ) )
 }
+
+
+
 
