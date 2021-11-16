@@ -67,7 +67,6 @@ regmlelda.cv <- function(x, ina, lambda = seq(0, 1, by = 0.1), folds = NULL, nfo
   
   if ( !pred.ret )  preds <- NULL
   list( preds = preds, crit = Rfast::colmeans(crit) )
-
 }
 
 
@@ -118,6 +117,5 @@ fisher.da <- function(xnew, x, ina) {
   A <- matrix(rep(A, each = k), nrow = nu, byrow = TRUE)
   ma <- tcrossprod( lambda, mi)
   crit <- abs( eachrow(A, ma, oper = "-") )
-  pred <- Rfast::rowMins(crit)  ## the predicted group
-  list(lambda = lambda, pred = pred)
+  Rfast::rowMins(crit)  ## the predicted group
 }

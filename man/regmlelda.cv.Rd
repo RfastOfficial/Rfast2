@@ -79,7 +79,7 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 %}
 
 \seealso{
-\code{ \link{reg.mle.lda}, \link{bigknn.cv}, \link{mle.lda}
+\code{ \link{reg.mle.lda}, \link{bigknn.cv}, \link{mle.lda}, \link{big.knn}, \link{weibull.nb}
 }
 }
 

@@ -1,15 +1,15 @@
-\name{Maximum likelihood linear discriminant analysis}
-\alias{mle.lda}
+\name{Fisher's linear discriminant analysis}
+\alias{fisher.da}
 
-\title{Maximum likelihood linear discriminant analysis
+\title{Fisher's linear discriminant analysis
 }
 
 \description{
-Maximum likelihood linear discriminant analysis.
+Fisher's linear discriminant analysis.
 }
 
 \usage{
-mle.lda(xnew, x, ina)
+fisher.da(xnew, x, ina)
 }
 
 \arguments{
@@ -48,12 +48,12 @@ R implementation and documentation: Michail Tsagris <mtsagris@uoc.gr>.
 %}
 
 \seealso{
-\code{ \link{fisher.da}, \link{reg.mle.lda}, \link{big.knn}, \link{weibull.nb} }
+\code{ \link{mle.lda}, \link{reg.mle.lda}, \link{big.knn}, \link{weibull.nb} }
 }
 
 \examples{
 x <- as.matrix(iris[, 1:4])
 ina <- iris[, 5]
-a <- mle.lda(x, x, ina)
+a <- fisher.da(x, x, ina)
 }
 
