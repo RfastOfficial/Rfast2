@@ -192,6 +192,25 @@ beta.nb <- function(xnew = NULL, x, ina) {
   list(a = a, b = b, ni = ni, est = est)
 }
 
+#[export]
+bernoulli.nb <- function(xnew = NULL, x, ina) {
+  est <- NULL
+  ni <- tabulate(ina)
+  ni <- ni[ni > 0]
+  k <- length(ni)
+  pi <- rowsum(x, ina) / ni
+  if ( !is.null(xnew) ) {
+    xnew <- t(xnew)
+    logpi <- log(pi)
+    log1pi <- log(1 - pi)
+    mat <- matrix(nrow = dim(xnew)[2], ncol = k)
+    for (j in 1:k)  mat[, j] <- Rfast::eachcol.apply(xnew, logpi[j, ]) + Rfast::eachcol.apply(1 - xnew, log1pi[j, ])
+    est <- Rfast::rowMaxs(mat)
+  }
+  rownames(pi) <- paste("Group", 1:k)
+  list(pi = pi, ni = ni, est = est)
+}
+
 
 #[export]
 betanb.pred <- function(xnew, a, b, ni) {
@@ -203,7 +222,6 @@ betanb.pred <- function(xnew, a, b, ni) {
   score <- Rfast::eachrow(score, com, oper = "+")
   Rfast::rowMaxs(score)
 }
-
 
 
 #[export]
@@ -337,6 +355,17 @@ spmlnb.pred <- function(xnew, mu1, mu2, ni) {
 }
 
 
+#[export]
+bernoullinb.pred <- function(xnew, pi, ni) {
+  xnew <- t(xnew)
+  k <- dim(xnew)[1]
+  pi <- rowsum(x, ina) / ni
+  logpi <- log(pi)
+  log1pi <- log(1 - pi)
+  mat <- matrix(nrow = dim(xnew)[2], ncol = k)
+  for (j in 1:k)  mat[, j] <- Rfast::eachcol.apply(xnew, logpi[j, ]) + Rfast::eachcol.apply(1 - xnew, log1pi[j, ])
+  Rfast::rowMaxs(mat)
+}
 
 
 #[export]
@@ -355,31 +384,31 @@ nb.cv <- function(x, ina, type = "gaussian", folds = NULL, nfolds = 10,
     preds <- sapply(names, function(x) NULL)
   }
 
-  if ( type == "gaussian"  |  type == "gamma"  | type == "weibull"  |  type == "normlog"  |
-       type == "logitnorm"  |  type == "beta"  | 
-       type == "laplace"  |  type == "cauchy"  |  type == "vm"  |  type == "spml" ) {
+  if ( type == "gaussian"  |  type == "gamma"  | type == "weibull"  |  type == "normlog" |
+       type == "logitnorm"  |  type == "beta"  | type == "laplace"  |  type == "cauchy"  |  
+	   type == "vm"  |  type == "spml" ) {
 	   
     if ( type == "gaussian" ) { 
       nb <- Rfast::gaussian.nb
     } else if ( type == "gamma" ) {
       nb <- Rfast::gammanb
-    } else if (type == "weibull" ) {
+    } else if ( type == "weibull" ) {
       nb <- Rfast2::weibull.nb
-    } else if (type == "normlog" ) {
+    } else if (t ype == "normlog" ) {
       nb <- Rfast2::normlog.nb
-    } else if (type == "laplace" ) {
+    } else if ( type == "laplace" ) {
       nb <- Rfast2::laplace.nb
-	} else if (type == "cauchy" ) {
+	} else if ( type == "cauchy" ) {
       nb <- Rfast2::cauchy.nb
 	} else if ( type == "logitnorm" ) {
 	  nb <- Rfast2::logitnorm.nb
 	} else if ( type == "beta" ) {
 	  nb <- Rfast2::beta.nb
-    } else if (type == "vm" ) {
+    } else if ( type == "vm" ) {
       nb <- Rfast2::vm.nb
-    } else if (type == "spml" ) {
+    } else if ( type == "spml" ) {
       nb <- Rfast2::spml.nb
-    }
+	} 
 
     for ( i in 1:nfolds ) {
       inatrain <- ina[ -folds[[ i ]] ]    
@@ -391,13 +420,15 @@ nb.cv <- function(x, ina, type = "gaussian", folds = NULL, nfolds = 10,
       crit[ i ] <- mean( est == inatest )
     } ##  end  for ( i in 1:nfolds ) {
  
-  } else if ( type == "poisson"  | type == "multinom"  |  type == "geom" ) {
+  } else if ( type == "poisson"  | type == "multinom"  |  type == "geom" | type == "bernoulli" ) {
     if ( type == "poisson" ) {
       nb <- Rfast::poisson.nb
     } else if ( type == "multinom" ) {
       nb <- Rfast::multinom.nb
     } else if ( type == "geom" ) {
       nb <- Rfast::geom.nb
+    } else if ( type == "bernoulli" ) {
+      nb <- Rfast2::bernoulli.nb	
     }
 
     for ( i in 1:nfolds ) {
