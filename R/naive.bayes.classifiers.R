@@ -192,25 +192,6 @@ beta.nb <- function(xnew = NULL, x, ina) {
   list(a = a, b = b, ni = ni, est = est)
 }
 
-#[export]
-bernoulli.nb <- function(xnew = NULL, x, ina) {
-  est <- NULL
-  ni <- tabulate(ina)
-  ni <- ni[ni > 0]
-  k <- length(ni)
-  pi <- rowsum(x, ina) / ni
-  if ( !is.null(xnew) ) {
-    xnew <- t(xnew)
-    logpi <- log(pi)
-    log1pi <- log(1 - pi)
-    mat <- matrix(nrow = dim(xnew)[2], ncol = k)
-    for (j in 1:k)  mat[, j] <- Rfast::eachcol.apply(xnew, logpi[j, ]) + Rfast::eachcol.apply(1 - xnew, log1pi[j, ])
-    est <- Rfast::rowMaxs(mat)
-  }
-  rownames(pi) <- paste("Group", 1:k)
-  list(pi = pi, ni = ni, est = est)
-}
-
 
 #[export]
 betanb.pred <- function(xnew, a, b, ni) {
@@ -356,6 +337,26 @@ spmlnb.pred <- function(xnew, mu1, mu2, ni) {
 
 
 #[export]
+bernoulli.nb <- function(xnew = NULL, x, ina) {
+  est <- NULL
+  ni <- tabulate(ina)
+  ni <- ni[ni > 0]
+  k <- length(ni)
+  pi <- rowsum(x, ina) / ni
+  if ( !is.null(xnew) ) {
+    xnew <- t(xnew)
+    logpi <- log(pi)
+    log1pi <- log(1 - pi)
+    mat <- matrix(nrow = dim(xnew)[2], ncol = k)
+    for (j in 1:k)  mat[, j] <- Rfast::eachcol.apply(xnew, logpi[j, ]) + Rfast::eachcol.apply(1 - xnew, log1pi[j, ])
+    est <- Rfast::rowMaxs(mat)
+  }
+  rownames(pi) <- paste("Group", 1:k)
+  list(pi = pi, ni = ni, est = est)
+}
+
+
+#[export]
 bernoullinb.pred <- function(xnew, pi, ni) {
   xnew <- t(xnew)
   k <- dim(xnew)[1]
@@ -366,6 +367,7 @@ bernoullinb.pred <- function(xnew, pi, ni) {
   for (j in 1:k)  mat[, j] <- Rfast::eachcol.apply(xnew, logpi[j, ]) + Rfast::eachcol.apply(1 - xnew, log1pi[j, ])
   Rfast::rowMaxs(mat)
 }
+
 
 
 #[export]
