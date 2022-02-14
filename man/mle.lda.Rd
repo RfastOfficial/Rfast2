@@ -38,9 +38,9 @@ Kanti V. Mardia, John T. Kent and John M. Bibby (1979). Multivariate analysis. A
 }
 
 \author{
-Michail Tsagris
+Michail Tsagris.
 
-R implementation and documentation: Michail Tsagris <mtsagris@uoc.gr> 
+R implementation and documentation: Michail Tsagris <mtsagris@uoc.gr>. 
 }
 
 %\note{
@@ -48,7 +48,7 @@ R implementation and documentation: Michail Tsagris <mtsagris@uoc.gr>
 %}
 
 \seealso{
-\code{ \link{welch.tests} }
+\code{ \link{fisher.da}, \link{reg.mle.lda}, \link{big.knn}, \link{weibull.nb} }
 }
 
 \examples{

@@ -96,7 +96,7 @@ see what is the predicted class of the new data.
 %}
 
 \author{
-Michail Tsagris
+Michail Tsagris.
 
 R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 }
@@ -105,7 +105,7 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 %}
 
 \seealso{
-\code{ \link{weibullnb.pred}, \link{vm.nb}, \link{nb.cv} }
+\code{ \link{weibullnb.pred}, \link{vm.nb}, \link{nb.cv}, \link{mle.lda}, \link{big.knn} }
 }
 
 \examples{

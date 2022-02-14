@@ -39,7 +39,7 @@ A list including:
 %}
 
 \author{
-Michail Tsagris
+Michail Tsagris.
 
 R implementation and documentation: Michail Tsagris <mtsagris@uoc.gr>.
 }

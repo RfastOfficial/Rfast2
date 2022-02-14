@@ -43,9 +43,9 @@ you will have one column only.
 %}
 
 \author{
-Michail Tsagris
+Michail Tsagris.
 
-R implementation and documentation: Michail Tsagris <mtsagris@uoc.gr> 
+R implementation and documentation: Michail Tsagris <mtsagris@uoc.gr>.
 }
 
 %\note{
@@ -53,7 +53,7 @@ R implementation and documentation: Michail Tsagris <mtsagris@uoc.gr>
 %}
 
 \seealso{
-\code{ \link{regmlelda.cv} \link{mle.lda}, \link{big.knn} }
+\code{ \link{regmlelda.cv} \link{mle.lda}, \link{fisher.da}, \link{big.knn}, \link{weibull.nb} }
 }
 
 \examples{

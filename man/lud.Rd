@@ -33,7 +33,7 @@ A list with 3 fields:
 }
 
 \author{
-Manos Papadakis
+Manos Papadakis.
 
 R implementation and documentation: Manos Papadakis <papadakm95@gmail.com>.
 }

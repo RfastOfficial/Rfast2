@@ -47,9 +47,9 @@ Johnson Norman L., Kotz Samuel and Kemp Adrienne W. (1992). Univariate Discrete 
 }
 
 \author{
-Michail Tsagris
+Michail Tsagris.
 
-R implementation and documentation: Michail Tsagris <mtsagris@uoc.gr> 
+R implementation and documentation: Michail Tsagris <mtsagris@uoc.gr>. 
 }
 
 %\note{

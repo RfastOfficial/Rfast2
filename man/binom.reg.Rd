@@ -61,7 +61,7 @@ McCullagh Peter and John A. Nelder. Generalized linear models. CRC Press, USA, 2
 }
 
 \author{
-Michail Tsagris <mtsagris@uoc.gr>
+Michail Tsagris.
 
 R implementation and documentation: Michail Tsagris <mtsagris@uoc.gr>.
 }

@@ -41,7 +41,7 @@ Ratio, weighted average, and product of means. Communications in Statistics-Theo
 }
 
 \author{
-Michail Tsagris
+Michail Tsagris.
 
 R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 }

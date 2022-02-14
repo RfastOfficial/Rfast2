@@ -6,7 +6,7 @@ Benchmark - Measure time
 }
 
 \description{
-Lower/upper triangular matrix.
+Benchmark - Measure time.
 }
 
 \usage{

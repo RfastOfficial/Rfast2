@@ -20,7 +20,8 @@ A matrix with the available data, the predictor variables.
 A vector of data. The response variable, which is categorical (factor is acceptable).  
 }
 \item{type}{
-The type of naive Bayes, "gaussian", "gamma", "weibull", "normlog", "laplace", "cauchy", "logitnorm", "beta", "vm" or "spml". 
+The type of naive Bayes, "gaussian", "gamma", "weibull", "normlog", "laplace", "cauchy", 
+"logitnorm", "beta", "vm" or "spml", "poisson", "multinom", "geom" or "bernoulli". 
 }
 \item{folds}{
 A list with the indices of the folds.
@@ -29,7 +30,8 @@ A list with the indices of the folds.
 The number of folds to be used. This is taken into consideration only if "folds" is NULL.
 }
 \item{stratified}{
-Do you want the folds to be selected using stratified random sampling? This preserves the analogy of the samples of each group. 
+Do you want the folds to be selected using stratified random sampling? This preserves the 
+analogy of the samples of each group. 
 Make this TRUE if you wish. 
 }
 \item{seed}{
@@ -61,7 +63,7 @@ New York: Springer.
 }
 
 \author{
-Michail Tsagris
+Michail Tsagris.
 
 R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 }
@@ -71,7 +73,8 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 %}
 
 \seealso{
-\code{\link{weibullnb.pred}, \link{weibull.nb}, \link{vm.nb}, \link{vmnb.pred}, \link{mle.lda}, \link{reg.mle.lda}, \link{multinom.reg}
+\code{\link{weibullnb.pred}, \link{weibull.nb}, \link{vm.nb}, \link{vmnb.pred}, \link{mle.lda}, 
+\link{reg.mle.lda}, \link{multinom.reg}
 }
 }
 

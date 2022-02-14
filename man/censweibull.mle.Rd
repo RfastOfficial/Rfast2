@@ -46,7 +46,7 @@ Technical report. ISSTECH-96-022, Boeing Information & Support Services, P.O. Bo
 \url{ http://faculty.washington.edu/fscholz/Reports/weibcensmle.pdf }
 }
 \author{
-Michail Tsagris
+Michail Tsagris.
 
 R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 }
