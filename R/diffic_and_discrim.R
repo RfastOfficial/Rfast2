@@ -1,4 +1,11 @@
 #[export]
+diffic <- function(x) {
+  Rfast::colmeans(x)
+}
+
+
+
+#[export]
 discrim <- function(x, frac = 1/3) {
   n <- dim(x)[1]
   N <- floor(n * frac)
