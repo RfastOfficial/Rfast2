@@ -45,7 +45,7 @@ A matrix with the test statistic, the degrees of freedom and the p-value
 
 \references{
 "Student" William Sealy Gosset (1908). The probable error of a mean. 
-Biometrika. 6(1): 1–25.  
+Biometrika. 6(1): 1-25.  
 }
 
 \author{

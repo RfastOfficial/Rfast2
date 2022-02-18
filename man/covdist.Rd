@@ -1,6 +1,5 @@
 \name{Distance between two covariance matrices}
-\alias{covlikel}
-\alias{covmtest}
+\alias{covdist}
 
 \title{
 Distance between two covariance matrices
@@ -34,7 +33,7 @@ The distance between the two covariance matrices.
 
 \references{
 Forstner W. and Moonen B. (2003). A metric for covariance matrices. 
-In Geodesy-The Challenge of the 3rd Millennium, pages 299–309. Springer.
+In Geodesy-The Challenge of the 3rd Millennium, pages 299-309. Springer.
 }
 
 \author{
