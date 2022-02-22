@@ -1,6 +1,5 @@
 \name{Distance between two covariance matrices}
-\alias{covlikel}
-\alias{covmtest}
+\alias{covdist}
 
 \title{
 Distance between two covariance matrices
