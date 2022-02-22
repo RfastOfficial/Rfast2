@@ -9,7 +9,7 @@ Repeated measures ANOVA (univariate data) using Hotelling's \eqn{T^2} test.
 }
 
 \usage{
-rm.hotel(x, a)
+rm.hotel(x, a = 0.05)
 }
 
 \arguments{
