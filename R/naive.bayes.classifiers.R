@@ -396,7 +396,7 @@ nb.cv <- function(x, ina, type = "gaussian", folds = NULL, nfolds = 10,
       nb <- Rfast::gammanb
     } else if ( type == "weibull" ) {
       nb <- Rfast2::weibull.nb
-    } else if (t ype == "normlog" ) {
+    } else if (type == "normlog" ) {
       nb <- Rfast2::normlog.nb
     } else if ( type == "laplace" ) {
       nb <- Rfast2::laplace.nb

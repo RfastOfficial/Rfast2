@@ -34,7 +34,7 @@ The distance between the two covariance matrices.
 
 \references{
 Forstner W. and Moonen B. (2003). A metric for covariance matrices. 
-In Geodesy-The Challenge of the 3rd Millennium, pages 299–309. Springer.
+In Geodesy-The Challenge of the 3rd Millennium, p. 299-309. Springer.
 }
 
 \author{

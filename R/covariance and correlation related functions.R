@@ -137,7 +137,7 @@ covequal <- function(x, sigma, a = 0.05) {
 
 
 #[export]
-cov.dist <- function(s1, s2) {
+covdist <- function(s1, s2) {
   ## A and B are two covariance matrices
   ## the order is irrelevant, s1, s2 or s2, s1 is the same
   S <- solve(s1, s2)

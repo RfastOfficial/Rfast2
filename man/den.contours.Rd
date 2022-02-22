@@ -1,6 +1,5 @@
 \name{Contour plots of some bivariate distributions}
-\alias{benchmark}
-\alias{print.benchmark}
+\alias{den.contours}
 \title{
 Contour plots of some bivariate distributions
 }

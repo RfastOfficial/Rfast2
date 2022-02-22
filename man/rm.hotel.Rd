@@ -1,11 +1,11 @@
-\name{Repeated measures ANOVA (univariate data) using Hotelling’s T2 test}
+\name{Repeated measures ANOVA (univariate data) using Hotelling's T2 test}
 \alias{rm.hotel}
 \title{
-Repeated measures ANOVA (univariate data) using Hotelling’s \eqn{T^2} test
+Repeated measures ANOVA (univariate data) using Hotelling's \eqn{T^2} test
 }
 
 \description{
-Repeated measures ANOVA (univariate data) using Hotelling’s \eqn{T^2} test.
+Repeated measures ANOVA (univariate data) using Hotelling's \eqn{T^2} test.
 }
 
 \usage{
