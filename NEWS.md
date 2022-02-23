@@ -22,7 +22,13 @@
 >  |	      Function	    |     What's new!     |
 >  | :-----------------: | :-----------------------------------------: |
 >  | Quantile, rowQuantile | Optimize algorithm |
->  | colQuantile | Optimize algorithm and new method for data.frames. |
+>  | colQuantile | Optimize algorithm and new method for data.frames |
+>  | colaccs     | Column-wise accuracies    |
+>  | colsens     | Column-wise sensitivities |
+>  | colspecs    | Column-wise specificities |
+>  | colprecs    | Column-wise precisions    |
+>  | colfscores  | Column-wise F-scores      |
+
 >
 >
 ><u> **New** </u>
