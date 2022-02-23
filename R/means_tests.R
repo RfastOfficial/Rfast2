@@ -200,6 +200,7 @@ boot.hotel2 <- function(y1, y2, R = 999) {
 
 
 
+#[export]
 rm.hotel <- function(x, a = 0.05) {
   ## x is the data set
   ## a is the level of significance set by default to 0.05
