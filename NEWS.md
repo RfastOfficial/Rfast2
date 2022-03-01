@@ -28,7 +28,8 @@
 >  | colspecs     | Column-wise specificities |
 >  | colprecs     | Column-wise precisions    |
 >  | colfscores   | Column-wise F-scores      |
->  | colfbscores  | Column-wise F-beta-scores      |
+>  | colfbscores  | Column-wise F-beta-scores  |
+>  | colfmis      | Column-wise Fowlkes–Mallows index  |
 >  | colfmses     | Column-wise MSEs      |
 >  | colmaes      | Column-wise MAEs      |
 >  | colpkl       | Column-wise Kullback-Leibler divergence for percentages  |
