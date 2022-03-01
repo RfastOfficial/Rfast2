@@ -28,7 +28,7 @@ A sorted vector of the 2 arguments.
 \author{
 Manos Papadakis.
 
-R implementation and documentation: Manos Papadakis <papadakm95@gmail.com>.
+R implementation and documentation: Manos Papadakis \email{papadakm95@gmail.com}.
 }
 
 \seealso{

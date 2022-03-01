@@ -67,7 +67,7 @@ https://arxiv.org/pdf/1511.07600.pdf
 \author{
 Michail Tsagris.
 
-R implementation and documentation: Michail Tsagris <mtsagris@uoc.gr>.
+R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 }
 
 %\note{

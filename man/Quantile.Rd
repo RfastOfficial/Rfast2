@@ -42,7 +42,7 @@ NAs will be removed.
 \author{
 Manos Papadakis.
 
-R implementation and documentation: Manos Papadakis <papadakm95@gmail.com>.
+R implementation and documentation: Manos Papadakis \email{papadakm95@gmail.com}.
 }
 
 %\note{

@@ -49,7 +49,7 @@ Journal of Econometrics, 33(3): 341--365.
 \author{
 Michail Tsagris.
 
-R implementation and documentation: Michail Tsagris <mtsagris@uoc.gr>.
+R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 }
 
 %\note{

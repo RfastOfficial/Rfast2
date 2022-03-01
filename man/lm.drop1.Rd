@@ -45,7 +45,7 @@ Hastie T., Tibshirani R. and Friedman J. (2008). The Elements of Statistical Lea
 \author{
 Michail Tsagris.
 
-R implementation and documentation: Michail Tsagris <mtsagris@uoc.gr>.
+R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 }
 
 %\note{
