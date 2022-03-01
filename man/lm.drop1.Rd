@@ -1,11 +1,11 @@
-\name{Single terms deletion hypothesis testin in a linear regression model}
+\name{Single terms deletion hypothesis testing in a linear regression model}
 \alias{lm.drop1}
 \title{
-Single terms deletion hypothesis testin in a linear regression model
+Single terms deletion hypothesis testing in a linear regression model
 }
 
 \description{
-Single terms deletion hypothesis testin in a linear regression model.
+Single terms deletion hypothesis testing in a linear regression model.
 }
 
 \usage{
