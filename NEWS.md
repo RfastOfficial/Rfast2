@@ -3,20 +3,15 @@
 ### **Version 0.1.2**
 #### Date release: **10/10/2021**
 ***
-><u> **New** </u>
+> <u> **New** </u>
 >
 >  | 	   Function 	 |                     What's new!                    |
 >  | :----------------: | :------------------------------------------------: |
 >  | mmhc.skel          | Skeleton of MMHC Bayesian network learning algorithm		|
 >  | fedhc.skel   		 | Skeleton of FEDHC Bayesian network learning algorithm	|
 >  | fe.lmfit   		 | Fixed effects linear regression for panel data			|
-
-</br>
-</br>
-
-### **Version 0.1.1**
-#### Date release: **10/10/2021**
-***
+>
+>
 > <u> **Improved** </u>(_**by speed, correctness or options**_) 
 >
 >  |	      Function	    |     What's new!     |
@@ -35,9 +30,13 @@
 >  | colpkl       | Column-wise Kullback-Leibler divergence for percentages  |
 >  | colukl       | Column-wise Kullback-Leibler divergence for non-negative or non-negative values  |
 
->
->
-><u> **New** </u>
+</br>
+</br>
+
+### **Version 0.1.1**
+#### Date release: **10/10/2021**
+***
+> <u> **New** </u>
 >
 >  | 	   Function 	 |                     What's new!                    |
 >  | :----------------: | :------------------------------------------------: |
