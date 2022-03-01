@@ -22,12 +22,17 @@
 >  |	      Function	    |     What's new!     |
 >  | :-----------------: | :-----------------------------------------: |
 >  | Quantile, rowQuantile | Optimize algorithm |
->  | colQuantile | Optimize algorithm and new method for data.frames |
->  | colaccs     | Column-wise accuracies    |
->  | colsens     | Column-wise sensitivities |
->  | colspecs    | Column-wise specificities |
->  | colprecs    | Column-wise precisions    |
->  | colfscores  | Column-wise F-scores      |
+>  | colQuantile  | Optimize algorithm and new method for data.frames |
+>  | colaccs      | Column-wise accuracies    |
+>  | colsens      | Column-wise sensitivities |
+>  | colspecs     | Column-wise specificities |
+>  | colprecs     | Column-wise precisions    |
+>  | colfscores   | Column-wise F-scores      |
+>  | colfbscores  | Column-wise F-beta-scores      |
+>  | colfmses     | Column-wise MSEs      |
+>  | colmaes      | Column-wise MAEs      |
+>  | colpkl       | Column-wise Kullback-Leibler divergence for percentages  |
+>  | colukl       | Column-wise Kullback-Leibler divergence for non-negative or non-negative values  |
 
 >
 >

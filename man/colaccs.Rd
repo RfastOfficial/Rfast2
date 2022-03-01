@@ -6,11 +6,11 @@
 \alias{colfscores}
 \alias{colfbscores}
 \title{
-Many are aunder the curve values
+Many binary classification metrics
 }
 
 \description{
-Many are aunder the curve values.
+Many binary classification metrics.
 }
 
 \usage{
@@ -36,7 +36,8 @@ The \eqn{\beta} parameter in the \eqn{F_{\beta}}-score.
 
 \details{
 The accuracies, sensitivities, specificities, precisions, F-scores and \eqn{F_{\beta}}-scores 
-are calculated column-wise. 
+are calculated column-wise. The \textit{colaccs} is the only that can also be used with a 
+multinomial response as well. 
 }
 
 \value{
@@ -57,7 +58,7 @@ R implementation and documentation: Michail Tsagris <mtsagris@uoc.gr>.
 %}
 
 \seealso{
-\code{ \link{ttests}, \link{ttest}, \link{ftests}
+\code{ \link{colmses}, \link{bernoulli.nb}, \link{bigknn.cv}
 }
 }
 
