@@ -5,6 +5,7 @@
 \alias{colprecs}
 \alias{colfscores}
 \alias{colfbscores}
+\alias{colfmis}
 \title{
 Many binary classification metrics
 }
@@ -20,6 +21,7 @@ colspecs(group, preds)
 colprecs(group, preds)
 colfscores(group, preds)
 colfbscores(group, preds)
+colfmis(group, preds)
 }
 
 \arguments{
@@ -35,9 +37,9 @@ The \eqn{\beta} parameter in the \eqn{F_{\beta}}-score.
 }
 
 \details{
-The accuracies, sensitivities, specificities, precisions, F-scores and \eqn{F_{\beta}}-scores 
-are calculated column-wise. The \textit{colaccs} is the only that can also be used with a 
-multinomial response as well. 
+The accuracies, sensitivities, specificities, precisions, F-scores, \eqn{F_{\beta}}-scores 
+and the Fowlkes–Mallows index are calculated column-wise. The \textit{colaccs} is the 
+only that can also be used with a multinomial response as well. 
 }
 
 \value{
@@ -45,8 +47,11 @@ A vector with length equal to the number of columns of the "preds" argument cont
 relevant values computed for each column. 
 }
 
-%\references{
-%}
+\references{
+https://en.wikipedia.org/wiki/Sensitivity_and_specificity
+
+https://en.wikipedia.org/wiki/Precision_and_recall
+}
 
 \author{
 Michail Tsagris.

@@ -37,6 +37,17 @@ colfscores <- function(group, preds) {
   2 * prec * rec / (prec + rec)
 }
 
+
+#[export]
+colfmis <- function(group, preds) {
+  res <- 2 * group - preds
+  tab <- Rfast::colTabulate(res + 2)
+  prec <- tab[3, ] / (tab[3, ] + tab[1, ])
+  rec <- tab[3, ] / (tab[3, ] + tab[4, ])
+  sqrt( prec * rec )
+}
+
+
 #[export]
 colfbscores <- function(group, preds, b) {
   res <- 2 * group - preds
