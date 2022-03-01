@@ -4,6 +4,7 @@
 \alias{colspecs}
 \alias{colprecs}
 \alias{colfscores}
+\alias{colfbscores}
 \title{
 Many are aunder the curve values
 }
@@ -18,7 +19,7 @@ colsens(group, preds)
 colspecs(group, preds)
 colprecs(group, preds)
 colfscores(group, preds)
-
+colfbscores(group, preds)
 }
 
 \arguments{
@@ -28,10 +29,14 @@ A numerical vector with two values, 0 and 1.
 \item{preds}{
 A numerical matrix with scores, probabilities or any other measure. 
 }
+\item{b}{
+The \eqn{\beta} parameter in the \eqn{F_{\beta}}-score. 
+}
 }
 
 \details{
-The accuracies, sensitivities, specificities, precisions and f-scores are calculated column-wise. 
+The accuracies, sensitivities, specificities, precisions, F-scores and \eqn{F_{\beta}}-scores 
+are calculated column-wise. 
 }
 
 \value{
