@@ -37,7 +37,7 @@ dependent variable differ across the different values.
 
 \value{
 A two-column matrix with the test statistics (F test statistic) and their 
-associated p-values (or their loggarithm).
+associated p-values (or their logarithm).
 }
 
 \references{
