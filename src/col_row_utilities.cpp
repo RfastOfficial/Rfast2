@@ -86,7 +86,7 @@ END_RCPP
 
 /***********************************************************************************/
 
-mat col_Quantile(NumericMatrix X,NumericVector Probs,const bool parallel){
+mat col_Quantile(NumericMatrix X,NumericVector Probs,const bool parallel = false){
     mat x(X.begin(),X.nrow(),X.ncol(),false);
     colvec probs(Probs.begin(),Probs.size(),false);
     mat f(probs.n_elem,x.n_cols);
@@ -101,14 +101,52 @@ mat col_Quantile(NumericMatrix X,NumericVector Probs,const bool parallel){
     return f;
 }
 
+DataFrame col_Quantile(DataFrame x,NumericVector Probs,const bool parallel = false){
+  int i=0;
+  DataFrame f(x.size());
+  colvec probs(Probs.begin(),Probs.size(),false);
+  if(parallel){
+    #pragma omp parallel for
+    for(DataFrame::iterator s = x.begin(); s < x.end(); ++s){
+      colvec y;
+      int i;
+      #pragma omp critical
+      {
+        NumericVector yy;
+        yy=*s;
+        y = colvec(yy.begin(),yy.size(),false);
+        i = s-x.begin();
+      }
+      y = Quantile<colvec,colvec>(y,probs);
+      #pragma omp critical
+      {
+        f[i]=y;
+      }
+    }
+  }else{
+    NumericVector y(x.nrows());
+    for(auto c : x){
+      y=c;
+      f[i++]=Quantile<colvec,colvec>(y,probs);
+    }
+  }
+  f.names() = x.names();
+  return f;
+}
+
 RcppExport SEXP Rfast2_col_Quantile(SEXP xSEXP,SEXP ProbsSEXP,SEXP parallelSEXP){
 BEGIN_RCPP
     RObject __result;
     RNGScope __rngScope;
-    traits::input_parameter< NumericMatrix  >::type x(xSEXP);
     traits::input_parameter< NumericVector  >::type Probs(ProbsSEXP);
     traits::input_parameter< const bool  >::type parallel(parallelSEXP);
-    __result = col_Quantile(x,Probs,parallel);
+    if(Rf_isNewList(xSEXP)){
+      DataFrame x(xSEXP);
+      __result = col_Quantile(x,Probs,parallel);
+    }else if(Rf_isMatrix(xSEXP)){
+      NumericMatrix x(xSEXP);
+      __result = col_Quantile(x,Probs,parallel);
+    }
     return __result;
 END_RCPP
 }
