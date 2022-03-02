@@ -35,7 +35,7 @@ response variable we want to test.
 
 \value{
 A two-column matrix with the test statistics (likelihood ratio test statistic) and their 
-associated p-values (or their loggarithm).
+associated p-values (or their logarithm).
 }
 
 \references{
@@ -46,7 +46,7 @@ Statistics in Medicine, 23(16): 2587-2597
 \author{
 Author: Michail Tsagris.
 
-R implementation and documentation: Michail Tsagris <mtsagris@uoc.gr>.
+R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 }
 
 %\note{

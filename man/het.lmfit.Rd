@@ -54,7 +54,7 @@ Draper, N.R. and Smith H. (1988). Applied regression analysis. New York, Wiley, 
 \author{
 Michail Tsagris.
 
-R implementation and documentation: Michail Tsagris <mtsagris@uoc.gr>.
+R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 }
 %\note{
 %%  ~~further notes~~

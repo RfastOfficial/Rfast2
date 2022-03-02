@@ -1,11 +1,11 @@
-\name{Single terms deletion hypothesis testin in a linear regression model}
+\name{Single terms deletion hypothesis testing in a linear regression model}
 \alias{lm.drop1}
 \title{
-Single terms deletion hypothesis testin in a linear regression model
+Single terms deletion hypothesis testing in a linear regression model
 }
 
 \description{
-Single terms deletion hypothesis testin in a linear regression model.
+Single terms deletion hypothesis testing in a linear regression model.
 }
 
 \usage{
@@ -45,7 +45,7 @@ Hastie T., Tibshirani R. and Friedman J. (2008). The Elements of Statistical Lea
 \author{
 Michail Tsagris.
 
-R implementation and documentation: Michail Tsagris <mtsagris@uoc.gr>.
+R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 }
 
 %\note{

@@ -1,11 +1,11 @@
-\name{ Split the matrix in lower,upper triangular and diagonal }
+\name{ Split the matrix in lower, upper triangular and diagonal }
 \alias{lud}
 \title{
-Split the matrix in lower,upper triangular and diagonal
+Split the matrix in lower, upper triangular and diagonal
 }
 
 \description{
-Split the matrix in lower,upper triangular and diagonal.
+Split the matrix in lower, upper triangular and diagonal.
 }
 
 \usage{
@@ -35,7 +35,7 @@ A list with 3 fields:
 \author{
 Manos Papadakis.
 
-R implementation and documentation: Manos Papadakis <papadakm95@gmail.com>.
+R implementation and documentation: Manos Papadakis \email{papadakm95@gmail.com}.
 }
 
 \seealso{
