@@ -1,16 +1,16 @@
-#export
+#[export]
 colmses <- function(y, yhat, parallel = FALSE) {
   Rfast::colmeans( (y - yhat)^2, parallel = parallel )
 }
 
 
-#export
+#[export]
 colmaes <- function(y, yhat, parallel = FALSE) {
   Rfast::colmeans( abs(y - yhat), parallel = parallel )
 }
 
 
-#export
+#[export]
 colpkl <- function(y, yhat, parallel = FALSE) {
  y1 <- 1 - y
  Rfast::colsums( y * log(y / hat), na.rm = TRUE, parallel = parallel ) +  
@@ -18,7 +18,7 @@ colpkl <- function(y, yhat, parallel = FALSE) {
 }
 
 
-#export
+#[export]
 colukl <- function(y, yhat, parallel = FALSE) {
  Rfast::colsum( y * log(y / hat), na.rm = TRUE, parallel = parallel )
 }
