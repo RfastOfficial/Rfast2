@@ -38,8 +38,8 @@ The \eqn{\beta} parameter in the \eqn{F_{\beta}}-score.
 
 \details{
 The accuracies, sensitivities, specificities, precisions, F-scores, \eqn{F_{\beta}}-scores 
-and the Fowlkes–Mallows index are calculated column-wise. The \textit{colaccs} is the 
-only that can also be used with a multinomial response as well. 
+and the Fowlkes–Mallows index are calculated column-wise. The colaccs is the 
+only metric that can be used with a multinomial response as well. 
 }
 
 \value{
