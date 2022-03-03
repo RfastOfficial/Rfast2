@@ -14,7 +14,7 @@ any metrics for a continuous response variable.
 \usage{
 colmses(y, yhat, parallel = FALSE)
 colmaes(y, yhat, parallel = FALSE)
-colpckl(y, yhat, parallel = FALSE)
+colpkl(y, yhat, parallel = FALSE)
 colukl(y, yhat, parallel = FALSE)
 }
 
