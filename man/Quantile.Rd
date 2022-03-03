@@ -1,6 +1,8 @@
 \name{Sample quantiles and col/row wise quantiles}
 \alias{Quantile}
 \alias{colQuantile}
+\alias{colQuantile.matrix}
+\alias{colQuantile.data.frame}
 \alias{rowQuantile}
 \title{
 Sample quantiles and col/row wise quantiles
@@ -12,6 +14,8 @@ Sample quantiles and col/row wise quantiles.
 
 \usage{
 colQuantile(x,probs,parallel=FALSE)
+\method{colQuantile}{matrix}(x,probs,parallel=FALSE)
+\method{colQuantile}{data.frame}(x,probs,parallel=FALSE)
 rowQuantile(x,probs,parallel=FALSE)
 Quantile(x,probs)
 }
