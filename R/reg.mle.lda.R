@@ -97,8 +97,8 @@ mle.lda <- function(xnew, x, ina) {
 
 #[export]
 fisher.da <- function(xnew, x, ina) {
-  n <- dim(z)[1]  ## sample size
-  d <- dim(z)[2]  ## dimensionality
+  n <- dim(x)[1]  ## sample size
+  d <- dim(x)[2]  ## dimensionality
   xnew <- as.matrix(xnew)
   xnew <- matrix(xnew, ncol = d)
   nu <- dim(xnew)[1]
