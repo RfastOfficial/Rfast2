@@ -5,19 +5,18 @@ Quantile <- function(x, probs) {
 
 #[export]
 rowQuantile <- function(x, probs, parallel = FALSE) {
-	.Call(Rfast2_row_Quantile, x, probs, parallel)
+	.Call(Rfast2_rowQuantile, x, probs, parallel)
 }
 
-
-#[export]
+#[export s3]
 colQuantile.data.frame<-function(x, probs, parallel = FALSE) {
-	.Call(Rfast2_col_Quantile, x, probs, parallel)
+	.Call(Rfast2_colQuantile, x, probs, parallel)
 }
 #[export]
 colQuantile<-function(x, probs, parallel = FALSE) {
-	useMethod("colQuantile")
+	UseMethod("colQuantile")
 }
-#[export]
+#[export s3]
 colQuantile.matrix<-function(x, probs, parallel = FALSE) {
-	.Call(Rfast2_col_Quantile, x, probs, parallel)
+	.Call(Rfast2_colQuantile, x, probs, parallel)
 }

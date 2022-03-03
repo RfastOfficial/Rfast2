@@ -29,7 +29,6 @@ void group_col_vars_h(SEXP& x,SEXP& gr,const int length_unique,Environment& resu
     UNPROTECT(2);
 }*/
 
-//[[Rcpp::export]]
 SEXP group_col(SEXP x,SEXP y,const int length_unique,const string method="sum"){
   if(method == "sum"){
     if(Rf_isInteger(x))
@@ -86,58 +85,100 @@ END_RCPP
 
 /***********************************************************************************/
 
-mat col_Quantile(NumericMatrix X,NumericVector Probs,const bool parallel){
+mat colQuantile(NumericMatrix X,NumericVector Probs,const bool parallel = false){
     mat x(X.begin(),X.nrow(),X.ncol(),false);
     colvec probs(Probs.begin(),Probs.size(),false);
     mat f(probs.n_elem,x.n_cols);
     if(parallel){
         #pragma omp parallel for
-        for(unsigned int i=0;i<f.n_cols;++i)
+        for(unsigned int i=0;i<f.n_cols;++i){
             f.col(i)=Quantile<colvec,colvec>(x.col(i),probs);
+        }
     }else{
-        for(unsigned int i=0;i<f.n_cols;++i)
+        for(unsigned int i=0;i<f.n_cols;++i){
             f.col(i)=Quantile<colvec,colvec>(x.col(i),probs);
+        }
     }
     return f;
 }
 
-RcppExport SEXP Rfast2_col_Quantile(SEXP xSEXP,SEXP ProbsSEXP,SEXP parallelSEXP){
+//[[Rcpp::export]]
+NumericMatrix colQuantile(DataFrame x,NumericVector Probs,const bool parallel = false){
+  colvec probs(Probs.begin(),Probs.size(),false);
+  NumericMatrix f(probs.n_elem,x.ncol());
+  mat ff(f.begin(),probs.n_elem,x.ncol(),false);
+  if(parallel){
+    #pragma omp parallel for
+    for(DataFrame::iterator s = x.begin(); s < x.end(); ++s){
+      colvec y;
+      int i;
+      #pragma omp critical
+      {
+        NumericVector yy;
+        yy=*s;
+        y = colvec(yy.begin(),yy.size(),false);
+        i = s-x.begin();
+      }
+      ff.col(i)=Quantile<colvec,colvec>(y,probs);
+    }
+  }else{
+    int i=0;
+    NumericVector y(x.nrows());
+    colvec yy;
+    for(auto c : x){
+      y=c;
+      yy = colvec(y.begin(),y.size(),false);
+      ff.col(i++)=Quantile<colvec,colvec>(yy,probs);
+    }
+  }
+  colnames(f) = as<CharacterVector>(x.names());
+  return f;
+}
+
+RcppExport SEXP Rfast2_colQuantile(SEXP xSEXP,SEXP ProbsSEXP,SEXP parallelSEXP){
 BEGIN_RCPP
     RObject __result;
     RNGScope __rngScope;
-    traits::input_parameter< NumericMatrix  >::type x(xSEXP);
     traits::input_parameter< NumericVector  >::type Probs(ProbsSEXP);
     traits::input_parameter< const bool  >::type parallel(parallelSEXP);
-    __result = col_Quantile(x,Probs,parallel);
+    if(Rf_isNewList(xSEXP)){
+      DataFrame x(xSEXP);
+      __result = colQuantile(x,Probs,parallel);
+    }else if(Rf_isMatrix(xSEXP)){
+      NumericMatrix x(xSEXP);
+      __result = colQuantile(x,Probs,parallel);
+    }
     return __result;
 END_RCPP
 }
 
 /***********************************************************************************/
 
-mat row_Quantile(NumericMatrix X,NumericVector Probs,const bool parallel){
+mat rowQuantile(NumericMatrix X,NumericVector Probs,const bool parallel){
     mat x(X.begin(),X.nrow(),X.ncol(),false);
     colvec probs(Probs.begin(),Probs.size(),false);
     mat f(x.n_rows,probs.n_elem);
     if(parallel){
-#pragma omp parallel for
-        for(unsigned int i=0;i<f.n_rows;++i)
+        #pragma omp parallel for
+        for(unsigned int i=0;i<f.n_rows;++i){
             f.row(i)=Quantile<rowvec,rowvec>(x.row(i),probs);
+        }
     }else{
-        for(unsigned int i=0;i<f.n_rows;++i)
+        for(unsigned int i=0;i<f.n_rows;++i){
             f.row(i)=Quantile<rowvec,rowvec>(x.row(i),probs);
+        }
     }
     return f;
 }
 
-RcppExport SEXP Rfast2_row_Quantile(SEXP xSEXP,SEXP ProbsSEXP,SEXP parallelSEXP){
+RcppExport SEXP Rfast2_rowQuantile(SEXP xSEXP,SEXP ProbsSEXP,SEXP parallelSEXP){
 BEGIN_RCPP
     RObject __result;
     RNGScope __rngScope;
     traits::input_parameter< NumericMatrix  >::type x(xSEXP);
     traits::input_parameter< NumericVector  >::type Probs(ProbsSEXP);
     traits::input_parameter< const bool  >::type parallel(parallelSEXP);
-    __result = row_Quantile(x,Probs,parallel);
+    __result = rowQuantile(x,Probs,parallel);
     return __result;
 END_RCPP
 }
@@ -159,14 +200,50 @@ NumericVector colTrimMean(NumericMatrix X,const double a=0.05,const bool paralle
     return f;
 }
 
+NumericVector colTrimMean(DataFrame x,const double a=0.05,const bool parallel=false){
+  NumericVector f(x.ncol());
+  colvec ff(f.begin(),f.size(),false);
+  if(parallel){
+    #pragma omp parallel for
+    for(DataFrame::iterator s = x.begin(); s < x.end(); ++s){
+      colvec y;
+      int i;
+      #pragma omp critical
+      {
+        NumericVector yy;
+        yy=*s;
+        y = colvec(yy.begin(),yy.size(),false);
+        i = s-x.begin();
+      }
+      ff[i]=trimmean_h<colvec>(y,a);
+    }
+  }else{
+    int i=0;
+    NumericVector y(x.nrows());
+    colvec yy;
+    for(auto c : x){
+      y=c;
+      yy = colvec(y.begin(),y.size(),false);
+      ff[i++]=trimmean_h<colvec>(yy,a);
+    }
+  }
+  f.names() = as<CharacterVector>(x.names());
+  return f;
+}
+
 RcppExport SEXP Rfast2_colTrimMean(SEXP xSEXP,SEXP aSEXP,SEXP parallelSEXP){
 BEGIN_RCPP
     RObject __result;
     RNGScope __rngScope;
-    traits::input_parameter< NumericMatrix >::type X(xSEXP);
     traits::input_parameter< const double >::type a(aSEXP);
     traits::input_parameter< const bool >::type parallel(parallelSEXP);
-    __result = colTrimMean(X,a,parallel);
+    if(Rf_isNewList(xSEXP)){
+      DataFrame x(xSEXP);
+      __result = colTrimMean(x,a,parallel);
+    }else if(Rf_isMatrix(xSEXP)){
+      NumericMatrix x(xSEXP);
+      __result = colTrimMean(x,a,parallel);
+    }
     return __result;
 END_RCPP
 }

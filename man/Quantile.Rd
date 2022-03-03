@@ -1,6 +1,8 @@
 \name{Sample quantiles and col/row wise quantiles}
 \alias{Quantile}
 \alias{colQuantile}
+\alias{colQuantile.matrix}
+\alias{colQuantile.data.frame}
 \alias{rowQuantile}
 \title{
 Sample quantiles and col/row wise quantiles
@@ -12,6 +14,8 @@ Sample quantiles and col/row wise quantiles.
 
 \usage{
 colQuantile(x,probs,parallel=FALSE)
+\method{colQuantile}{matrix}(x,probs,parallel=FALSE)
+\method{colQuantile}{data.frame}(x,probs,parallel=FALSE)
 rowQuantile(x,probs,parallel=FALSE)
 Quantile(x,probs)
 }
@@ -23,10 +27,10 @@ For the col/row versions a numerical matrix.
 }
 \item{probs}{
 Numeric vector of probabilities with values in [0,1], not missing values. 
-Values up to 2e-14 outside that range are accepted and moved to the nearby endpoint.
+Values up to 2e-14 outside that range are accepted and automatically moved to the nearby endpoint by C++.
 }
 \item{parallel}{
-Do you want to do it in parallel in C++? TRUE or FALSE.
+Do you want to do it in parallel, for column - row major, in C++? TRUE or FALSE.
 }
 }
 
