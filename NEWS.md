@@ -1,7 +1,7 @@
 <h1 align="center"> _Rfast2_ </h1>
 
 ### **Version 0.1.2**
-#### Date release: **10/10/2021**
+#### Date release: **03/03/2022**
 ***
 > <u> **New** </u>
 >
@@ -18,6 +18,7 @@
 >  | :-----------------: | :-----------------------------------------: |
 >  | Quantile, rowQuantile | Optimize algorithm |
 >  | colQuantile  | Optimize algorithm and new method for data.frames |
+>  | colTrimMean  | Optimize algorithm and new method for data.frames |
 >  | colaccs      | Column-wise accuracies    |
 >  | colsens      | Column-wise sensitivities |
 >  | colspecs     | Column-wise specificities |
