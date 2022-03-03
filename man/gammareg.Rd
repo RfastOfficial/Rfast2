@@ -68,9 +68,11 @@ R implementation and documentation: Stefanos Fafalios \email{stefanosfafalios@gm
 }
 
 \examples{
+\dontrun{
 y <- rgamma(100, 3, 4)
 x <- matrix( rnorm(100 * 2), ncol = 2)
 m1 <- glm(y ~ x, family = Gamma(log) )
 m2 <- gammareg(y, x)
+}
 }
 
