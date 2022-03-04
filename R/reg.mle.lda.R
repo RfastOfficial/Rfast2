@@ -113,7 +113,7 @@ fisher.da <- function(xnew, x, ina) {
   W <- crossprod(x) - tcrossprod(m) - B
   M <- solve(W, B)
   lambda <- as.vector( eigen(M)$vectors[, 1] )  ## Fisher's discriminant
-  A <-  as.vector( tcrossprod( lambda, znew ) ) 
+  A <-  as.vector( tcrossprod( lambda, xnew ) ) 
   A <- matrix(rep(A, each = k), nrow = nu, byrow = TRUE)
   ma <- tcrossprod( lambda, mi)
   crit <- abs( eachrow(A, ma, oper = "-") )
