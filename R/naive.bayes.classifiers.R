@@ -359,7 +359,7 @@ bernoulli.nb <- function(xnew = NULL, x, ina) {
 #[export]
 bernoullinb.pred <- function(xnew, pi, ni) {
   xnew <- t(xnew)
-  k <- dim(xnew)[1]
+  k <- dim(pi)[1]
   pi <- rowsum(x, ina) / ni
   logpi <- log(pi)
   log1pi <- log(1 - pi)
