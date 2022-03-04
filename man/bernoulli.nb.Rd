@@ -69,5 +69,4 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 x <- matrix( rbinom(50 * 4, 1, 0.5), ncol = 4 )
 ina <- rbinom(50, 1, 0.5) + 1
 a <- bernoulli.nb(x, x, ina)
-b <- bernoullinb.pred(x, a$pi, a$ni)
 }
