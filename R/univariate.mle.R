@@ -1243,3 +1243,22 @@ unitweibull.mle <- function(x, tol = 1e-07, maxiters = 100) {
   list(iters = mod$iters, loglik = loglik, param = param)
 } 
 
+
+#[export]
+cbern.mle <- function(x, tol = 1e-6) {
+  
+  n <- length(x)
+  sx <- sum(x)
+  sx1 <- sum(1 - x)
+  oop <- options(warn = -1)
+  on.exit(options(oop))
+
+  fun <- function(lam, sx, sx1, n) {
+    clam <- ( n * log( atanh(1 - 2 * lam) ) - n * log(1 - 2 * lam) ) * ( lam != 0.5 )
+    clam + sx * log(lam) + sx1 * log(1 - lam) 
+  }
+  mod <- optimize(fun, c(1e-10, 1-1e-10), sx = sx, sx1 = sx1, n = n, maximum = TRUE, tol = tol)
+   
+  list(lam = mod$maximum, loglik = n * log(2) + mod$objective)
+}  
+  
