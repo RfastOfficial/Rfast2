@@ -1,12 +1,12 @@
-\name{MLE of the Purkayashta distribution}
+\name{MLE of the Purkayastha distribution}
 \alias{purka.mle}
 
 \title{
-MLE of the Purkayashta distribution
+MLE of the Purkayastha distribution
 }
 
 \description{
-MLE of the Purkayashta distribution.
+MLE of the Purkayastha distribution.
 }
 
 \usage{
