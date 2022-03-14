@@ -17,7 +17,7 @@ covequal(x, sigma, a = 0.05)
 \item{x}{
 A numerical matrix with the data whose covariance matrix will be tested for equality.
 }
-\item{ina}{
+\item{sigma}{
 The covariance matrix that is to be tested for equality.
 }
 \item{a}{
