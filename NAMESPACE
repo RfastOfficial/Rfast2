@@ -13,6 +13,6 @@ export(.onAttach,Intersect,Merge,Quantile,Runif,Sample,Sample.int,add.term,bench
 
 S3method(colQuantile,data.frame)
 S3method(colQuantile,matrix)
-S3method(colTrimMean,data)
+S3method(colTrimMean,data.frame)
 S3method(colTrimMean,matrix)
 S3method(print,benchmark)
