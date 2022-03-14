@@ -43,6 +43,8 @@ Statistical Methods in Medical Research, 26(3): 1500-1518.
 
 \url{http://methods.cochrane.org/sites/methods.cochrane.org.statistics/files/uploads/SMG_training_course_2016/cochrane_smg_training_2016_viechtbauer.pdf
 }
+}
+
 \author{
 Michail Tsagris.
 
