@@ -1,5 +1,6 @@
 \name{Random integer values simulation}
 \alias{Sample.int}
+\alias{Sample}
 \title{
 Random integer values simulation
 }
@@ -10,9 +11,13 @@ Random integer values simulation.
 
 \usage{
 Sample.int(n, size = n, replace = FALSE) 
+Sample(x, size, replace = FALSE) 
 }
 
 \arguments{
+\item{x}{
+A numeric vector for sampling.
+}
 \item{n}{
 This must be an integer value. The function will then draw random integer values from 1:n. 
 }
@@ -38,7 +43,8 @@ A vector with integer values.
 \author{
 Manos Papadakis.
 
-R implementation and documentation: Manos Papadakis <papadakm95@gmail.com>.
+R implementation: Manos Papadakis <papadakm95@gmail.com>.
+R documentation: Michail Tsagris <mtsagris@yahoo.gr>.
 }
 %\note{
 %%  ~~further notes~~
@@ -51,4 +57,5 @@ R implementation and documentation: Manos Papadakis <papadakm95@gmail.com>.
 
 \examples{
 x <- Sample.int(10, 1000, replace = TRUE)
+Sample(x)
 }
