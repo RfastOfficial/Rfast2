@@ -5,7 +5,7 @@ Runif <- function(n, min = 0, max = 1){
 }
 #[export]
 Sample <- function(x, size, replace = FALSE){
-	.Call(Rfast2_Sample, n, size, replace)
+	.Call(Rfast2_Sample, x, size, replace)
 }
 #[export]
 Sample.int <- function(n, size = n, replace = FALSE){
