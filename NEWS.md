@@ -1,7 +1,7 @@
 <h1 align="center"> _Rfast2_ </h1>
 
 ### **Version 0.1.2**
-#### Date release: **03/03/2022**
+#### Date release: **14/03/2022**
 ***
 > <u> **New** </u>
 >
@@ -10,6 +10,9 @@
 >  | mmhc.skel          | Skeleton of MMHC Bayesian network learning algorithm		|
 >  | fedhc.skel   		 | Skeleton of FEDHC Bayesian network learning algorithm	|
 >  | fe.lmfit   		 | Fixed effects linear regression for panel data			|
+>  | Runif   		 | Like R's runif but faster.			|
+>  | Sample   		 | Like R's Sample but faster.			|
+>  | Sample.int   		 | Like R's Sample.int but faster.			|
 >
 >
 > <u> **Improved** </u>(_**by speed, correctness or options**_) 
