@@ -57,5 +57,5 @@ R documentation: Michail Tsagris <mtsagris@yahoo.gr>.
 
 \examples{
 x <- Sample.int(10, 1000, replace = TRUE)
-Sample(x)
+Sample(x,length(x))
 }
