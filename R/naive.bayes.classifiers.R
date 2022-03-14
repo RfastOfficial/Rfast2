@@ -185,7 +185,7 @@ beta.nb <- function(xnew = NULL, x, ina) {
     score <- matrix(0, dim(xnew)[1], k)
     xnew <- t(xnew)
     com <-  - Rfast::rowsums( lbeta(a, b) ) + log(ni)
-    for (i in 1:k)  score[, i] <- Rfast::colsums( (a[i, ] - 1) * log(xnew) + (b[i, ] - 1) * log(1 - xnew) )
+    for (i in 1:k)  score[, i] <- Rfast::colsums( (a[i, ] - 1) * log(xnew) + (b[i, ] - 1) * log(1 - xnew) ) 
     score <- Rfast::eachrow(score, com, oper = "+")
     est <- Rfast::rowMaxs(score)
   }
@@ -360,7 +360,6 @@ bernoulli.nb <- function(xnew = NULL, x, ina) {
 bernoullinb.pred <- function(xnew, pi, ni) {
   xnew <- t(xnew)
   k <- dim(pi)[1]
-  pi <- rowsum(x, ina) / ni
   logpi <- log(pi)
   log1pi <- log(1 - pi)
   mat <- matrix(nrow = dim(xnew)[2], ncol = k)

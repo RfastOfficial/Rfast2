@@ -25,21 +25,23 @@ The toleranve value to terminate Brent's algorithm.
 }
 
 \details{
-Random effects estimation, via restricted maximum likelihood estimation (REML), of the common mean.
+Random effects estimation, via restricted maximum likelihood estimation (REML), 
+of the common mean.
 }
 
 \value{
-A vector with many elements. The fixed effects mean estimate, the \eqn{\bar{v}} estimate, the \eqn{I^2}, the \eqn{H^2}, the Q test statistic and it's p-value,
+A vector with many elements. The fixed effects mean estimate, the \eqn{\bar{v}} 
+estimate, the \eqn{I^2}, the \eqn{H^2}, the Q test statistic and it's p-value,
 the \eqn{\tau^2} estimate and the random effects mean estimate.
 }
 
 
 \references{
-Annamaria Guolo and Cristiano Varin (2017). Random-effects meta-analysis: The number of studies matters. 
+Annamaria Guolo and Cristiano Varin (2017). Random-effects meta-analysis: 
+The number of studies matters. 
 Statistical Methods in Medical Research, 26(3): 1500-1518.
 
-\url{https://methods.cochrane.org/statistics/sites/methods.cochrane.org.statistics/files/public/uploads/SMG_training_course_2016/cochrane_smg_training_2016_viechtbauer.pdf}
-
+\url{http://methods.cochrane.org/sites/methods.cochrane.org.statistics/files/uploads/SMG_training_course_2016/cochrane_smg_training_2016_viechtbauer.pdf
 }
 \author{
 Michail Tsagris.
