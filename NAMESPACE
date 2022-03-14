@@ -2,6 +2,7 @@ useDynLib("Rfast2", .registration = TRUE)
 
 importFrom("stats", "pt", "cov", "pchisq", "pf", "cor", "qt", "sd","qnorm", "dpois", "pnorm", "rchisq", "rexp", ".lm.fit", "qf", "model.matrix", "aggregate", "prcomp", "qchisq", "optimise", "runif", "dnorm", "dbinom", "dexp", "dgeom", "nlm" , "optimize",
 "optim", "lm.fit", "uniroot")
+importFrom("graphics", "contour", "points")
 
 importFrom("Rfast", vm.mle, colvm.mle, colmeans, colsums, eachrow,group, colVars, spdinv, mediandir, colMins, nth,gammamle, weibull.mle, poisson_only, logistic_only, multinom.regs,multinom.mle, Var, normlog.regs, eachcol.apply, Sort,coldiffs,rowsums)
 

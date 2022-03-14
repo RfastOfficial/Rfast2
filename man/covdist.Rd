@@ -17,7 +17,7 @@ covdist(s1, s2)
 \item{s1}{
 The firt covariance matrix.
 }
-\item{ina}{
+\item{s2}{
 The second covariance matrix.
 }
 }

@@ -7,21 +7,9 @@
 >
 >  | 	   Function 	 |                     What's new!                    |
 >  | :----------------: | :------------------------------------------------: |
->  | mmhc.skel          | Skeleton of MMHC Bayesian network learning algorithm		|
->  | fedhc.skel   		 | Skeleton of FEDHC Bayesian network learning algorithm	|
->  | fe.lmfit   		 | Fixed effects linear regression for panel data			|
->  | Runif   		 | Like R's runif but faster.			|
->  | Sample   		 | Like R's Sample but faster.			|
->  | Sample.int   		 | Like R's Sample.int but faster.			|
->
->
-> <u> **Improved** </u>(_**by speed, correctness or options**_) 
->
->  |	      Function	    |     What's new!     |
->  | :-----------------: | :-----------------------------------------: |
->  | Quantile, rowQuantile | Optimize algorithm |
->  | colQuantile  | Optimize algorithm and new method for data.frames |
->  | colTrimMean  | Optimize algorithm and new method for data.frames |
+>  | Runif   	  | Like R's runif but faster.			|
+>  | Sample   	  | Like R's Sample but faster.			|
+>  | Sample.int   | Like R's Sample.int but faster.			|
 >  | colaccs      | Column-wise accuracies    |
 >  | colsens      | Column-wise sensitivities |
 >  | colspecs     | Column-wise specificities |
@@ -33,6 +21,17 @@
 >  | colmaes      | Column-wise MAEs      |
 >  | colpkl       | Column-wise Kullback-Leibler divergence for percentages  |
 >  | colukl       | Column-wise Kullback-Leibler divergence for non-negative or non-negative values  |
+>  | pina1        | Poisson INAR(1) model estimation  |
+>  | colpinar1    | Column-wise Poisson INAR(1) model estimation  |
+>
+>
+> <u> **Improved** </u>(_**by speed, correctness or options**_) 
+>
+>  |	      Function	    |     What's new!     |
+>  | :-----------------: | :-----------------------------------------: |
+>  | Quantile, rowQuantile | Optimize algorithm |
+>  | colQuantile  | Optimize algorithm and new method for data.frames |
+>  | colTrimMean  | Optimize algorithm and new method for data.frames |
 
 </br>
 </br>
