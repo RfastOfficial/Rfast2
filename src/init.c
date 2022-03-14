@@ -16,6 +16,9 @@ SEXP Rfast2_Quantile(SEXP xSEXP,SEXP ProbsSEXP);
 SEXP Rfast2_rowQuantile(SEXP xSEXP,SEXP ProbsSEXP,SEXP parallelSEXP);
 SEXP Rfast2_colTrimMean(SEXP xSEXP,SEXP ProbsSEXP,SEXP parallelSEXP);
 SEXP Rfast2_rowTrimMean(SEXP xSEXP,SEXP ProbsSEXP,SEXP parallelSEXP);
+SEXP Rfast2_Runif(SEXP nSEXP,SEXP minSEXP,SEXP maxSEXP);
+SEXP Rfast2_Sample_int(SEXP nSEXP,SEXP sizeSEXP,SEXP replaceSEXP);
+SEXP Rfast2_Sample(SEXP xSEXP,SEXP sizeSEXP,SEXP replaceSEXP);
 SEXP Rfast2_trimmean(SEXP xSEXP,SEXP aSEXP);
 
 //Manos
@@ -62,6 +65,9 @@ static const R_CallMethodDef CallEntries[] = {
   {"Rfast2_rowQuantile", (DL_FUNC) &Rfast2_rowQuantile, 3},
   {"Rfast2_rowTrimMean", (DL_FUNC) &Rfast2_rowTrimMean, 3},
   {"Rfast2_colTrimMean", (DL_FUNC) &Rfast2_colTrimMean, 3},
+  {"Rfast2_Runif", (DL_FUNC) &Rfast2_Runif, 3},
+  {"Rfast2_Sample_int", (DL_FUNC) &Rfast2_Sample_int, 3},
+  {"Rfast2_Sample", (DL_FUNC) &Rfast2_Sample, 3},
   {"Rfast2_trimmean", (DL_FUNC) &Rfast2_trimmean, 2},
 
   {"Rfast2_inter", (DL_FUNC) &Rfast2_inter, 2},
