@@ -20,6 +20,6 @@ colpkl <- function(y, yhat, parallel = FALSE) {
 
 #[export]
 colukl <- function(y, yhat, parallel = FALSE) {
- Rfast::colsum( y * log(y / yhat), na.rm = TRUE, parallel = parallel )
+ Rfast::colsums( y * log(y / yhat), na.rm = TRUE, parallel = parallel )
 }
 
