@@ -64,7 +64,7 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 
 \examples{
 ## 1000 variables, hence 20 t-tests will be performed
-x = matrix( norm(100 * 20), ncol = 20)
+x = matrix( rnorm(100 * 20), ncol = 20)
 ## 100 observations in total
 ina = rbinom(100, 1, 0.6) + 1   ## independent samples t-test
 system.time( stud.ttests(x, ina = ina) )
