@@ -1,7 +1,7 @@
 <h1 align="center"> _Rfast2_ </h1>
 
 ### **Version 0.1.2**
-#### Date release: **14/03/2022**
+#### Date release: **17/03/2022**
 ***
 > <u> **New** </u>
 >
@@ -21,7 +21,7 @@
 >  | colmaes      | Column-wise MAEs      |
 >  | colpkl       | Column-wise Kullback-Leibler divergence for percentages  |
 >  | colukl       | Column-wise Kullback-Leibler divergence for non-negative or non-negative values  |
->  | pina1        | Poisson INAR(1) model estimation  |
+>  | pinar1        | Poisson INAR(1) model estimation  |
 >  | colpinar1    | Column-wise Poisson INAR(1) model estimation  |
 >
 >
