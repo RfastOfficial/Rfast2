@@ -7,7 +7,7 @@
 #include <vector>
 #include <algorithm>
 
-namespace random {
+namespace Random {
 
 	using std::numeric_limits;
 	using real = std::false_type;
@@ -15,7 +15,7 @@ namespace random {
 	using std::vector;
 	using std::iota;
 
-	namespace details {
+	namespace internal {
 
 		static inline long long int get_current_nanoseconds(){
 			return std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
@@ -47,7 +47,7 @@ namespace random {
 	};
 	
 	template<class T, bool replace = false>
-	class uniform : public details::Integer_Core{
+	class uniform : public internal::Integer_Core{
 
 		vector<size_t> indices;
 
@@ -77,7 +77,7 @@ namespace random {
 	};
 
 	template<class T>
-	class uniform<T,true> : public details::Integer_Core{
+	class uniform<T,true> : public internal::Integer_Core{
 	// *Really* minimal PCG32 code / (c) 2014 M.E. O'Neill / pcg-random.org
 	// Licensed under Apache License 2.0 (NO WARRANTY, etc. see website)
 
@@ -94,7 +94,7 @@ namespace random {
 	};
 
 	template<>
-	class uniform<real,false> : public details::Integer_Core {
+	class uniform<real,false> : public internal::Integer_Core {
 
 		const double min,max;
 
@@ -102,7 +102,7 @@ namespace random {
 		uniform(const double min=0.0,const double max=1.0) : min(min), max(max){}
 
 		inline double operator()(){
-			return min + (this->pcg32_random_r() *  (max-min) / details::Integer_Core::max() ) ;
+			return min + (this->pcg32_random_r() *  (max-min) / internal::Integer_Core::max() ) ;
 		}
 
 	};

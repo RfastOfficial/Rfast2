@@ -1,7 +1,7 @@
 #include <Rcpp.h>
-#include "random_generators.h"
+#include "Random.h"
 
-using namespace random;
+using namespace Random;
 using namespace Rcpp;
 
 
