@@ -21,4 +21,34 @@ refmeta <- function(yi, vi, tol = 1e-07) {
   res 
 }
   
+  
  
+#[export]
+wlsmeta <- function(yi, vi) {
+  w <- 1/vi
+  fe <- sum(yi * w)/sum(w)
+  m <- length(yi)
+  phi <- sum( (yi - fe)^2 / vi ) / (m - 1)
+  H <- ( phi - 1 ) / phi 
+  se <- sqrt( phi / sum(w) ) 
+  res <- c( fe, se, fe - qt(0.975, m - 1) * se, fe + qt(0.975, m - 1) * se, 
+            2 * pt( abs(fe)/se, m - 2, lower.tail = FALSE ), phi, H )
+  names(res) <- c("fixed effects mean", "se", "2.5%", "97.5%", "p-value", "phi", "H")
+  res
+}
+
+
+#[export]
+colwlsmeta <- function(yi, vi) {
+  w <- 1/vi
+  sw <- Rfast::colsums(w)
+  fe <- Rfast::colsums(yi * w) / sw
+  m <- dim(yi)[1]
+  phi <- Rfast::colsums( t( ( t(yi) - fe)^2 ) / vi ) / (m - 1)
+  H <- ( phi - 1 ) / phi 
+  se <- sqrt( phi / sw ) 
+  res <- cbind( fe, se, fe - qt(0.975, m - 1) * se, fe + qt(0.975, m - 1) * se, 
+            2 * pt( abs(fe)/se, m - 2, lower.tail = FALSE ), phi, H )
+  colnames(res) <- c("fixed effects mean", "se", "2.5%", "97.5%", "p-value", "phi", "H")
+  res
+}

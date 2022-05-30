@@ -1,15 +1,17 @@
-\name{Random effects meta analysis}
+\name{Random effects and weighted least squares meta analysis}
 \alias{refmeta}
+\alias{wlsmeta}
 \title{
-Random effects meta analysis
+Random effects and weighted least squares meta analysis
 }
 
 \description{
-Random effects meta analysis.
+Random effects and weighted least squares meta analysis.
 }
 
 \usage{
 refmeta(yi, vi, tol = 1e-07) 
+wlsmeta(yi, vi) 
 }
 
 \arguments{
@@ -17,7 +19,7 @@ refmeta(yi, vi, tol = 1e-07)
 The observations.
 }
 \item{vi}{
-This variances of the observations.
+The variances of the observations.
 }
 \item{tol}{
 The toleranve value to terminate Brent's algorithm.
@@ -25,8 +27,9 @@ The toleranve value to terminate Brent's algorithm.
 }
 
 \details{
-Random effects estimation, via restricted maximum likelihood estimation (REML), 
-of the common mean.
+The refmeta command performs random effects estimation, via restricted maximum 
+likelihood estimation (REML), of the common mean. The wlsmeta command implements 
+weighted least squares (WLS) meta analysis. See references for this.
 }
 
 \value{
@@ -37,12 +40,15 @@ the \eqn{\tau^2} estimate and the random effects mean estimate.
 
 
 \references{
-Annamaria Guolo and Cristiano Varin (2017). Random-effects meta-analysis: 
-The number of studies matters. 
+Annamaria Guolo and Cristiano Varin (2017). 
+Random-effects meta-analysis: The number of studies matters. 
 Statistical Methods in Medical Research, 26(3): 1500-1518.
-
-\url{https://methods.cochrane.org/sites/methods.cochrane.org.statistics/files/uploads/SMG_training_course_2016/cochrane_smg_training_2016_viechtbauer.pdf
+\url{http://methods.cochrane.org/sites/methods.cochrane.org.statistics/files/uploads/SMG_training_course_2016/cochrane_smg_training_2016_viechtbauer.pdf
 }
+
+Stanley T. D. and Doucouliagos H. (2015). 
+Neither fixed nor random: weighted least squares meta-analysis. 
+Statistics in Medicine, 34(13), 2116-2127.
 }
 
 \author{
@@ -63,5 +69,6 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 y <- rnorm(30)
 vi <- rexp(30, 3)
 refmeta(y, vi)
+wlsmeta(y, vi)
 }
 
