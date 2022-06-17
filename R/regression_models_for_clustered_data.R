@@ -18,6 +18,30 @@ cluster.lm <- function(y, x, id) {
 }
 
 
+
+#[export]
+fe.lmfit <- function (y, x, id) {
+    x <- as.matrix(x)
+    id <- as.integer(as.numeric(id))
+    z <- cbind(y, x)
+    z <- z[order(id), ]
+    fid <- as.vector(Rfast::Table(id))
+    m <- Rfast2::colGroup(z, id)/fid
+    z <- NULL
+    my <- m[, 1]
+    mx <- m[, -1, drop = FALSE]
+    m1 <- rep(my, fid)
+    y <- y - m1
+    id <- rep(1:dim(mx)[1], fid)
+    Mx <- mx[id, ]
+    x <- x - Mx
+    mod <- Rfast::lmfit(x, y)
+    fe <- my - mean(my) - Rfast::eachrow(mx, Rfast::colmeans(mx), oper = "-") %*% mod$be
+    list(be = mod$be, fe = as.vector(fe), residuals = mod$residuals)
+}
+
+
+
 #[export]
 fipois.reg <- function(y, x, id, tol = 1e-07, maxiters = 100) {
   if ( !is.matrix(x))  x <- as.matrix(x)
