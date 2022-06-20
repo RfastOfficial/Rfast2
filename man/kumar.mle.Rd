@@ -4,6 +4,7 @@
 \alias{simplex.mle}
 \alias{unitweibull.mle}
 \alias{cbern.mle}
+\alias{sp.mle}
 
 \title{
 MLE of distributions defined for proportions
@@ -19,6 +20,7 @@ simplex.mle(x, tol = 1e-07)
 zil.mle(x)
 unitweibull.mle(x, tol = 1e-07, maxiters = 100) 
 cbern.mle(x, tol = 1e-6) 
+sp.mle(x)
 }
 
 \arguments{
@@ -35,10 +37,11 @@ The maximum number of iterations the Newton-Raphson will perform.
 }
 
 \details{
-Instead of maximising the log-likelihood via a numerical optimiser we have used a 
-Newton-Raphson algorithm which is faster. See wikipedia for the equations to be solved. 
-The distributions are Kumaraswamy, zero inflated logistic normal, simplex, unit Weibull
-and continuous Bernoulli.
+The distributions included are the Kumaraswamy, zero inflated logistic 
+normal, simplex, unit Weibull and continuous Bernoulli and standard power. 
+Instead of maximising the log-likelihood via a numerical optimiser we 
+have used a Newton-Raphson algorithm which is faster. 
+See wikipedia for the equations to be solved.  
 }
 
 \value{
@@ -61,14 +64,17 @@ random processes. Journal of Hydrology 46(1-2): 79-88.
 Jones M.C. (2009). Kumaraswamy's distribution: A beta-type distribution with some 
 tractability advantages. Statistical Methodology, 6(1): 70-81. 
 
-Zhang, W. & Wei, H. (2008). Maximum likelihood estimation for simplex distribution nonlinear 
+Zhang W. & Wei H. (2008). Maximum likelihood estimation for simplex distribution nonlinear 
 mixed models via the stochastic approximation algorithm. 
 The Rocky Mountain Journal of Mathematics, 38(5): 1863-1875.
 
-J. Mazucheli, A. F. B. Menezes, L. B. Fernandes, R. P. de Oliveira & M. E. Ghitany (2020). 
+Mazucheli J., Menezes A.F.B., Fernandes L.B., de Oliveira R.P.  & Ghitany M.E. (2020). 
 The unit-Weibull distribution as an alternative to the Kumaraswamy distribution for the 
 modeling of quantiles conditional on covariates. 
 Journal of Applied Statistics, DOI:10.1080/02664763.2019.1657813
+
+Leemis L.M. and McQueston J.T. (2008). Univariate Distribution Relationships.
+The American Statistician, 62(1): 45-53.
 
 You can also check the relevant wikipedia pages.
 }

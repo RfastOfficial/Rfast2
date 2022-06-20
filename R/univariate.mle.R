@@ -1261,4 +1261,13 @@ cbern.mle <- function(x, tol = 1e-6) {
    
   list(lam = mod$maximum, loglik = n * log(2) + mod$objective)
 }  
-  
+
+
+#[export]
+sp.mle <- function(x) {
+  n <- length(x)
+  slx <- sum( log(x) )
+  b <-  -n / slx
+  loglik <- n * log(b) + (b - 1) * slx
+  list(loglik = loglik, beta = b)
+}  
