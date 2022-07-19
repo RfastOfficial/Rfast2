@@ -66,9 +66,9 @@ The log-likelihood values.
 }
 
 \references{
-N.L. Johnson, S. Kotz \& N. Balakrishnan (1994). Continuous Univariate Distributions, Volume 1 (2nd Edition).
+N.L. Johnson, S. Kotz and N. Balakrishnan (1994). Continuous Univariate Distributions, Volume 1 (2nd Edition).
 
-N.L. Johnson, S. Kotz \& N. Balakrishnan (1970). Distributions in statistics: continuous univariate distributions,
+N.L. Johnson, S. Kotz and N. Balakrishnan (1970). Distributions in statistics: continuous univariate distributions,
 Volume 2.
 
 Agresti, A. (2002) Categorical Data. Second edition. Wiley. 

@@ -43,9 +43,9 @@ Usually a list with three elements, but this is not for all cases.
 }
 
 \references{
-N.L. Johnson, S. Kotz \& N. Balakrishnan (1994). Continuous Univariate Distributions, Volume 1 (2nd Edition).
+N.L. Johnson, S. Kotz and N. Balakrishnan (1994). Continuous Univariate Distributions, Volume 1 (2nd Edition).
 
-N.L. Johnson, S. Kotz \& N. Balakrishnan (1970). Distributions in statistics: continuous univariate 
+N.L. Johnson, S. Kotz and N. Balakrishnan (1970). Distributions in statistics: continuous univariate 
 distributions, Volume 2
 
 You can also check the relevant wikipedia pages for these distributions.

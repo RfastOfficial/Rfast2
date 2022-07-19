@@ -34,7 +34,7 @@ set of a bootstrap beta regression coefficients.
 }
 
 \references{
-Efron Bradley and Robert J. Tibshirani (1993). An introduction to the bootstrap. New York: Chapman \& Hall/CRC.
+Efron Bradley and Robert J. Tibshirani (1993). An introduction to the bootstrap. New York: Chapman & Hall/CRC.
 }
 
 \author{

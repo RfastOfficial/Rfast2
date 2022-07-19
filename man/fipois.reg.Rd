@@ -63,7 +63,7 @@ The number of iteration the Newton-Raphson required.
 
 \references{
 Eugene Demidenko (2013). Mixed Models: Theory and Applications with R, pages 388-389, 2nd Edition. 
-New Jersey: Wiley \& Sons (excellent book). 
+New Jersey: Wiley & Sons (excellent book). 
 }
 
 \author{

@@ -38,7 +38,7 @@ A vector with the test statistic and the bootstrap p-value.
 }
 
 \references{
-Efron Bradley and Robert J. Tibshirani (1993). An introduction to the bootstrap. New York: Chapman \& Hall/CRC.
+Efron Bradley and Robert J. Tibshirani (1993). An introduction to the bootstrap. New York: Chapman & Hall/CRC.
 
 Chatzipantsiou C., Dimitriadis M., Papadakis M. and Tsagris M. (2019). 
 Extremely efficient permutation and bootstrap hypothesis tests using R. 
