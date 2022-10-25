@@ -8,6 +8,24 @@ cls <- function(y, x, R, ca) {
 }
 
 
+#[export]
+covrob.lm <- function(y, x) { 
+  x <- cbind(1, x)
+  xx <- crossprod(x)
+  br <- solve( xx )
+  xy <- as.vector( crossprod(x, y) )
+  be <- br %*% xy
+  res <- as.vector(y - x %*% be)
+  robcov <- br %*% crossprod(x * res) %*% br 
+  s <- sqrt( diag(robcov) )
+  stat <- be/s
+  info <- cbind(be, s, stat, pchisq(stat^2, 1, lower.tail = FALSE) )
+  colnames(info) <- c("Estimate", "Rob se", "Stat", "p-value")
+  rownames(info) <- colnames(x) 
+  rownames(info)[1] <- "constant"
+  list(info = info, robcov = robcov)
+}
+
 
 #[export]
 het.lmfit <- function(x, y, type = 1) {
