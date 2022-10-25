@@ -19,7 +19,7 @@ You must supply the design matrix, with the column of 1s. This function is the a
 lm.fit and .lm.fit. 
 }
 \item{y}{
-A numerical vector or a numerical matrix. 
+A numerical vector with the response variable. 
 }
 \item{type}{
 The type of regression to be fit in order to find the weights. The type 1 is described in Wooldridge (2012, page 287), 
@@ -61,7 +61,7 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 %}
 
 \seealso{
-\code{ \link{cls}, \link{cluster.lm}, \link{lm.parboot}, \link{cor_test}, \link{lm.drop1}
+\code{ \link{covrob.lm}, \link{cls}, \link{cluster.lm}, \link{lm.parboot}, \link{cor_test}, \link{lm.drop1}
 }
 }
 
