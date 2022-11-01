@@ -1,13 +1,13 @@
 <h1 align="center"> _Rfast2_ </h1>
 
 ### **Version 0.1.4**
-#### Date release: **22/03/2022**
+#### Date release: **01/11/2022**
 ***
 > <u> **New** </u>
 >
 >  | 	   Function 	|                     What's new!                    |
 >  | :----------------: | :------------------------------------------------: |
->  | 				    | 													 |
+>  | covrob.lm   	    |   Linear regression with robust covariance matrix	 |
 >
 >
 > <u> **Improved** </u>(_**by speed, correctness or options**_) 
