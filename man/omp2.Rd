@@ -50,15 +50,18 @@ A matrix with two columns. The selected variable(s) and the criterion value at e
 }
 
 \references{
-Pati Y. C., Rezaiifar R. and Krishnaprasad P. S. (1993). Orthogonal matching pursuit: Recursive function approximation with applications to wavelet decomposition. In Signals, Systems and Computers. 1993 Conference Record of The Twenty-Seventh Asilomar Conference on. IEEE.
+Pati Y. C., Rezaiifar R. and Krishnaprasad P. S. (1993). Orthogonal matching pursuit: 
+Recursive function approximation with applications to wavelet decomposition. 
+In Signals, Systems and Computers. 1993 Conference Record of The Twenty-Seventh Asilomar Conference on. IEEE.
 
 Mazin Abdulrasool Hameed (2012). Comparative analysis of orthogonal matching pursuit and least angle regression. MSc thesis, Michigan State University.
 https://www.google.gr/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&ved=0ahUKEwik9P3Yto7XAhUiCZoKHQ8XDr8QFgglMAA&url=https%3A%2F%2Fd.lib.msu.edu%2Fetd%2F1711%2Fdatastream%2FOBJ%2Fdownload%2FComparative_analysis_of_orthogonal_matching_pursuit_and_least_angle_regression.pdf&usg=AOvVaw2fRcSemcbteyWUiAKYi-8B
 
-Lozano A., Swirszcz G. and Abe N. (2011). Group orthogonal matching pursuit for logistic regression. In Proceedings of the Fourteenth International Conference on Artificial Intelligence and Statistics.
+Lozano A., Swirszcz G. and Abe N. (2011). Group orthogonal matching pursuit for logistic regression. 
+In Proceedings of the Fourteenth International Conference on Artificial Intelligence and Statistics.
 
 The \eqn{\gamma}-OMP algorithm for feature selection with application to gene expression data. 
-IEEE/ACM Transactions on Computational Biology and Bioinformatics (Accepted for publication)
+IEEE/ACM Transactions on Computational Biology and Bioinformatics, 19(2): 1214-1224. 
 https://arxiv.org/pdf/2004.00281.pdf
 }
 

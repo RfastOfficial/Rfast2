@@ -73,7 +73,7 @@ Borboudakis G. and Tsamardinos I. (2019). Forward-backward selection with early 
 Journal of Machine Learning Research, 20(8): 1-39.
 
 Tsamardinos I., Brown E.L. and Aliferis F.C. (2006). The max-min hill-climbing Bayesian network 
-structure learning algorithm. Machine Learning 65(1):31-78.
+structure learning algorithm. Machine Learning 65(1): 31-78.
 }
 
 \author{
