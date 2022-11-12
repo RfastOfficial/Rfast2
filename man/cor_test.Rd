@@ -38,7 +38,7 @@ and produces a p-value for the hypothesis test.
 
 \value{
 A vector with 5 numbers; the correlation, the p-value for the hypothesis test that each of them is 
-equal to "rho", the test statistic and the $a/2\%$ lower and upper confidence limits.
+equal to "rho", the test statistic and the \eqn{a/2\%} lower and upper confidence limits.
 
 }
 
