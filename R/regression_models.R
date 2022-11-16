@@ -673,7 +673,7 @@ zigamma.reg <- function (y, x, full = FALSE, tol = 1e-07, maxiters = 100) {
     x <- model.matrix(y ~ ., data = as.data.frame(x))
     prob <- Rfast::glm_logistic(x[, -1], y1, full = full, tol = tol, 
         maxiters = maxiters)
-    rownames(prob$be) <- colnames(x)
+	if ( !full )  rownames(prob$be) <- colnames(x)
     mod <- Rfast2::gammareg(y[id], x[id, -1, drop = FALSE], tol = tol, 
         maxiters = maxiters)
     colnames(mod$be) <- colnames(x)
