@@ -189,7 +189,7 @@ double pcor_pval(mat& R, unsigned const int indx, unsigned const int indy, ivec 
     for(unsigned int i=0;i<indz.size();++i) {
       indices[i+2] = indz[i];
     }
-    if(solve(rho, R.submat(indices, indices),eye<mat>(indices.size(), indices.size()),solve_opts::fast)) {
+    if(inv(rho, R.submat(indices, indices))) {
       r = -rho(0,1)/std::sqrt(rho(0,0) * rho(1,1));
     }
     else{

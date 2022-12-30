@@ -322,7 +322,7 @@ vec qpois_reg2(mat x, vec y,const double lgmy, const double ylogy,const double t
   vec ret(3);
   ret(0) = 2.0*(ylogy-sum(y%yhat));
   ret(1) = pheta;
-  ret(2) = (b_new[d-1]*b_new[d-1])/(pheta*((mat)solve(L2,eye(d,d),solve_opts::fast))(d-1,d-1));
+  ret(2) = (b_new[d-1]*b_new[d-1])/(pheta*((mat)arma::inv(L2))(d-1,d-1));
   return ret;
 }
 
@@ -717,7 +717,7 @@ double rint_reg2(mat x, vec y, vec ni, mat sx,vec sy, int idmx, const double tol
   double info2 = (S-d(0)*sum(ni2%hi2/oneplnid))/n;
 
   double belast = b2(p-1);
-  vec seb = ((mat)solve(xx-d(0)*cross_x_y<mat,mat,vec>(sx.each_col()/oneplnid,sx),eye(p,p),solve_opts::fast)).diag()*info2;
+  vec seb = ((mat)arma::inv(xx-d(0)*cross_x_y<mat,mat,vec>(sx.each_col()/oneplnid,sx))).diag()*info2;
 
   return belast*belast/seb(p-1);
 }
