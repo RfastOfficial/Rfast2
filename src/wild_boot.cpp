@@ -82,7 +82,7 @@ vec diag_of_mult2(mat a, const mat &b){
 
 // [[Rcpp::export]]
 Rcpp::List wild_boot(const arma::mat &x, const arma::vec &y, arma::ivec cluster,
-                     const arma::uvec &ind, const int &R, const arma::uvec &tab,
+                     const arma::uvec &ind, const unsigned int &R, const arma::uvec &tab,
                      const bool &parallel) {
   List ret;
   
@@ -118,7 +118,7 @@ Rcpp::List wild_boot(const arma::mat &x, const arma::vec &y, arma::ivec cluster,
   {
   #endif
     vec statb2 = vec(R);
-    mat B, yb, res, beb, uj;
+    mat yb, res, beb, uj;
     uvec currInds;
     vec estb, resb, brcol;
     double vcovCL;
@@ -129,14 +129,16 @@ Rcpp::List wild_boot(const arma::mat &x, const arma::vec &y, arma::ivec cluster,
       j -= 1;
       brcol = br.col(j);
       currInds = cur_indices(d, j);
-      B = cr8B(R,M,tab);
+      yb = cr8B(R,M,tab);
       beb = arma::solve(xx.submat(currInds,currInds), xy.rows(currInds),solve_opts::fast);
       estb = (x.cols(currInds) * beb).as_col();
       resb = y - estb;
-      yb = (B.each_col()%resb).each_col() + estb;
+      for(unsigned int i=0;i<yb.n_cols;++i){
+        yb.col(i) = yb.col(i)%resb+estb;
+      }
       beb = br * cross_x_y<mat,mat,vec>(x, yb);
       res = yb - x * beb;
-      for(int i=0;i<R;++i){
+      for(unsigned int i=0;i<R;++i){
         uj = col_group_sum(x.each_col()%res.col(i), cluster, gmn, gmx);
         vcovCL = dfc * sum_with<square2<double>, mat>(uj*brcol);
         statb2[i] = square2<double>(beb(j, i)) / vcovCL;
@@ -148,7 +150,7 @@ Rcpp::List wild_boot(const arma::mat &x, const arma::vec &y, arma::ivec cluster,
   #endif
   } else {
     vec statb2 = vec(R);
-    mat B, yb, res, beb, uj;
+    mat yb, res, beb, uj;
     uvec currInds;
     vec estb, resb, brcol;
     double vcovCL;
@@ -156,14 +158,16 @@ Rcpp::List wild_boot(const arma::mat &x, const arma::vec &y, arma::ivec cluster,
       j -= 1;
       brcol = br.col(j);
       currInds = cur_indices(d, j);
-      B = cr8B(R,M,tab);
+      yb = cr8B(R,M,tab);
       beb = arma::solve(xx.submat(currInds,currInds), xy.rows(currInds),solve_opts::fast);
       estb = (x.cols(currInds) * beb).as_col();
       resb = y - estb;
-      yb = (B.each_col()%resb).each_col() + estb;
+      for(unsigned int i=0;i<yb.n_cols;++i){
+        yb.col(i) = yb.col(i)%resb+estb;
+      }
       beb = br * cross_x_y<mat,mat,vec>(x, yb);
       res = yb - x * beb;
-      for(int i=0;i<R;++i){
+      for(unsigned int i=0;i<R;++i){
         uj = col_group_sum(x.each_col()%res.col(i), cluster, gmn, gmx);
         vcovCL = dfc * sum_with<square2<double>, mat>(uj*brcol);
         statb2[i] = square2<double>(beb(j, i)) / vcovCL;
@@ -185,7 +189,7 @@ RcppExport SEXP Rfast2_wild_boot(SEXP xSEXP,SEXP ySEXP,SEXP clusterSEXP,SEXP ind
   traits::input_parameter< const arma::vec >::type y(ySEXP);
   traits::input_parameter< arma::ivec >::type cluster(clusterSEXP);
   traits::input_parameter< const arma::uvec >::type ind(indSEXP);
-  traits::input_parameter< const int >::type R(RSEXP);
+  traits::input_parameter< const unsigned int >::type R(RSEXP);
   traits::input_parameter< const arma::uvec >::type tab(tabSEXP);
   traits::input_parameter< const bool >::type parallel(parallelSEXP);
   __result = wild_boot(x,y,cluster,ind,R,tab,parallel);
