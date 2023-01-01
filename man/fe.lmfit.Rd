@@ -57,7 +57,7 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 %}
 
 \seealso{
-\code{ \link{cluster.lm}, \link{gee.reg}, \link{fipois.reg}
+\code{ \link{cluster.lm}, \link{gee.reg}, \link{fipois.reg}, \link{wild.boot}
 }
 }
 

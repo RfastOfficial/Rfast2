@@ -77,7 +77,7 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 %}
 
 \seealso{
-\code{ \link{cluster.lm}, \link{fe.lmfit}, \link{fipois.reg}, \link{covar}, \link{welch.tests} }
+\code{ \link{cluster.lm}, \link{fe.lmfit}, \link{wild.boot}, \link{fipois.reg} }
 }
 
 \examples{
