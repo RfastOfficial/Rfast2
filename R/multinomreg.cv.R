@@ -3,7 +3,7 @@ multinomreg.cv <- function(y, x, folds = NULL, nfolds = 10,
                       stratified = TRUE, seed = FALSE, pred.ret = FALSE) {
   
   y <- as.numeric(y)
-  if ( is.null( folds ) )   folds <- makefolds(y, nfolds = nfolds, stratified = stratified, seed = FALSE)
+  if ( is.null( folds ) )   folds <- .makefolds(y, nfolds = nfolds, stratified = stratified, seed = FALSE)
   nfolds <- length( folds )
   crit <- numeric( nfolds )
   

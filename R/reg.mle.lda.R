@@ -43,7 +43,7 @@ regmlelda.cv <- function(x, ina, lambda = seq(0, 1, by = 0.1), folds = NULL, nfo
   
   ina <- as.numeric(ina)
   if ( is.null(folds) ) { 
-    folds <- makefolds(ina, nfolds = nfolds, stratified = stratified, seed = seed)
+    folds <- .makefolds(ina, nfolds = nfolds, stratified = stratified, seed = seed)
   } 
   nfolds <- length(folds)
   crit <- matrix( nrow = nfolds, ncol = length(lambda) )

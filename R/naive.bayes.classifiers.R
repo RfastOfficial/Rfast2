@@ -375,7 +375,7 @@ nb.cv <- function(x, ina, type = "gaussian", folds = NULL, nfolds = 10,
 
   ina <- as.numeric(ina)
   if ( is.null(folds) ) { 
-    folds <- makefolds(ina, nfolds = nfolds, stratified = stratified, seed = seed)
+    folds <- .makefolds(ina, nfolds = nfolds, stratified = stratified, seed = seed)
   } 
   nfolds <- length(folds)
   crit <- numeric(nfolds)
@@ -447,5 +447,45 @@ nb.cv <- function(x, ina, type = "gaussian", folds = NULL, nfolds = 10,
   list( preds = preds, crit = mean(crit) )
 }  
   
-    
+
+
+.makefolds <- function (ina, nfolds = 10, stratified = TRUE, seed = NULL) {
+    names <- paste("Fold", 1:nfolds)
+    runs <- sapply(names, function(x) NULL)
+    if (!is.null(seed)) 
+        set.seed(seed)
+    oop <- options(warn = -1)
+    on.exit(options(oop))
+    if (!stratified) {
+        rat <- length(ina)%%nfolds
+        mat <- matrix(Rfast2::Sample.int(length(ina)), ncol = nfolds)
+        mat[-c(1:length(ina))] <- NA
+        for (i in 1:c(nfolds - 1)) runs[[i]] <- mat[, i]
+        a <- prod(dim(mat)) - length(ina)
+        runs[[nfolds]] <- mat[1:c(nrow(mat) - a), nfolds]
+    }
+    else {
+        labs <- unique(ina)
+        run <- list()
+        for (i in 1:length(labs)) {
+            names <- which(ina == labs[i])
+            run[[i]] <- sample(names)
+        }
+        run <- unlist(run)
+        for (i in 1:length(ina)) {
+            k <- i%%nfolds
+            if (k == 0) 
+                k <- nfolds
+            runs[[k]] <- c(runs[[k]], run[i])
+        }
+    }
+    for (i in 1:nfolds) {
+        if (any(is.na(runs[[i]]))) 
+            runs[[i]] <- runs[[i]][!is.na(runs[[i]])]
+    }
+    if (length(runs[[nfolds]]) == 0) 
+        runs[[nfolds]] <- NULL
+    runs
+}
+ 
 

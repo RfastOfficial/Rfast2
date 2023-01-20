@@ -26,7 +26,7 @@ bigknn.cv <- function(y, x, k = 5:10, type = "C", folds = NULL, nfolds = 10,
                       stratified = TRUE, seed = FALSE, pred.ret = FALSE) {
   
   crit <- matrix(nrow = nfolds, ncol = length(k))
-  if ( is.null( folds ) )   folds <- makefolds(y, nfolds = nfolds, stratified = stratified, seed = FALSE)
+  if ( is.null( folds ) )   folds <- .makefolds(y, nfolds = nfolds, stratified = stratified, seed = FALSE)
   preds <- list() 
   y <- as.numeric(y)
   for (i in 1:nfolds) {  
