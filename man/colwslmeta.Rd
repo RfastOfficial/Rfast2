@@ -1,6 +1,5 @@
 \name{Column-wise weighted least squares meta analysis}
-\alias{refmeta}
-\alias{wlsmeta}
+\alias{colwlsmeta}
 \title{
 Column-wise weighted least squares meta analysis
 }
