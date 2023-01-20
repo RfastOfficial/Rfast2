@@ -21,7 +21,9 @@ covrob.lm <- function(y, x) {
   stat <- be/s
   info <- cbind(be, s, stat, pchisq(stat^2, 1, lower.tail = FALSE) )
   colnames(info) <- c("Estimate", "Rob se", "Stat", "p-value")
-  rownames(info) <- colnames(x) 
+  nam <- colnames(x) 
+  if ( is.null( colnames(x) ) )  nam <- c("constant", paste("X", 1:(dim(x)[2] - 1), sep = "") )
+  rownames(info) <- nam
   rownames(info)[1] <- "constant"
   list(info = info, robcov = robcov)
 }
