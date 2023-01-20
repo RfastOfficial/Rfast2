@@ -63,6 +63,6 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr} and 
 y <- rnorm(200)
 id <- sample(1:20, 200, replace = TRUE)
 x <- matrix( rnorm(200 * 3), ncol = 3 )
-cluster.lm(y, x, cluster = id)
+wild.boot(y, x, cluster = id)
 }
 
