@@ -19,9 +19,6 @@ A matrix with the observations.
 \item{vi}{
 A matrix with the variances of the observations.
 }
-\item{tol}{
-The toleranve value to terminate Brent's algorithm.
-}
 }
 
 \details{

@@ -19,6 +19,9 @@ The dependent variable, a numerical vector with numbers.
 \item{x}{
 A matrix or a data.frame with the indendent variables.
 }
+\item{cluster}{
+A vector indicating the clusters. 
+}
 \item{ind}{
 A vector with the indices of the variables for which wild bootstrap p-values will be computed. If NULL (default value), 
 the p-values are computed for each variable.

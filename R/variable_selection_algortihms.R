@@ -194,7 +194,7 @@ omp2 <- function (y, x, xstand = TRUE, tol = qchisq(0.95, 1), type = "gamma") {
         sela <- sel
         names(sela) <- NULL
         mod <- try(Rfast2::multinom.reg(y, x[, sela]), silent = TRUE)
-        if (identical(class(mod), "try-error")) {
+        if ( identical(class(mod), "try-error") ) {
             rho[2] <- rho[1]
         }
         else {
