@@ -1,8 +1,8 @@
 Package: Rfast2
 Type: Package
 Title: A Collection of Efficient and Extremely Fast R Functions II
-Version: 0.1.3
-Date: 2022-03-22
+Version: 0.1.4
+Date: 2022-01-23
 Author: Manos Papadakis, Michail Tsagris, Stefanos Fafalios and Marios Dimitriadis.
 Maintainer: Manos Papadakis <rfastofficial@gmail.com>
 Depends: R (>= 3.5.0), Rcpp (>= 0.12.3)
