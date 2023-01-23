@@ -1,3 +1,4 @@
+#[export]
 wild.boot <- function(y, x, cluster, ind = NULL, R = 999, parallel=FALSE) {
   nam <- colnames(x)
   z <- cbind(cluster, y, 1, x)

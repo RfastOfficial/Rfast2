@@ -43,6 +43,7 @@ SEXP Rfast2_fedhc_skeleton(SEXP XSEXP, SEXP INI_PVALSEXP, SEXP nSEXP,SEXP laSEXP
 SEXP Rfast2_multinom_reg(SEXP ySEXP,SEXP x0SEXP, SEXP tolSEXP,SEXP maxitersSEXP);
 SEXP Rfast2_weib_regs(SEXP ySEXP,SEXP xSEXP, SEXP tolSEXP,SEXP loggedSEXP,SEXP maxitersSEXP, SEXP parallelSEXP);
 SEXP Rfast2_welch_tests(SEXP xSEXP, SEXP ySEXP, SEXP loggedSEXP, SEXP parallelSEXP);
+SEXP Rfast2_wild_boot(SEXP xSEXP, SEXP ySEXP, SEXP clusterSEXP, SEXP indSEXP, SEXP RSEXP, SEXP tabSEXP, SEXP parallelSEXP);
 SEXP Rfast2_mmhc_skeleton(SEXP XSEXP, SEXP INI_PVALSEXP, SEXP nSEXP,SEXP laSEXP,SEXP maxkSEXP,SEXP methodSEXP,SEXP RmatSEXP, SEXP parallelSEXP);
 SEXP Rfast2_negbin_reg(SEXP ySEXP, SEXP xSEXP, SEXP tolSEXP, SEXP maxitersSEXP);
 SEXP Rfast2_negbin_regs(SEXP ySEXP, SEXP xSEXP, SEXP tolSEXP, SEXP maxitersSEXP, SEXP parallelSEXP);
@@ -83,6 +84,7 @@ static const R_CallMethodDef CallEntries[] = {
   {"Rfast2_multinom_reg", (DL_FUNC) &Rfast2_multinom_reg, 4},
   {"Rfast2_weib_regs", (DL_FUNC) &Rfast2_weib_regs, 6},
   {"Rfast2_welch_tests", (DL_FUNC) &Rfast2_welch_tests, 4},
+  {"Rfast2_wild_boot", (DL_FUNC) &Rfast2_wild_boot, 7},
   {"Rfast2_mmhc_skeleton", (DL_FUNC) &Rfast2_mmhc_skeleton, 8},
   {"Rfast2_negbin_reg", (DL_FUNC) &Rfast2_negbin_reg, 4},
   {"Rfast2_negbin_regs", (DL_FUNC) &Rfast2_negbin_regs, 5},
