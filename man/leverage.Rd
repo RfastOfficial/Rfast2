@@ -28,7 +28,7 @@ A vector with the diagonal Hat matrix values, the leverage of each observation.
 }
 
 \references{
-Hansen, B. E. (2019). Econometrics. \url{https://www.ssc.wisc.edu/~bhansen/econometrics/Econometrics.pdf}
+Hansen, B. E. (2019). Econometrics. 
 }
 
 \author{
