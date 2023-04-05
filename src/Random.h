@@ -44,7 +44,7 @@ namespace Random {
 				return (xorshifted >> rot) | (xorshifted << ((-rot) & 31));
 			}
 		};
-	};
+	}
 	
 	template<class T, bool replace = false>
 	class uniform : public internal::Integer_Core{
@@ -106,6 +106,6 @@ namespace Random {
 		}
 
 	};
-};
+}
 
 #endif
