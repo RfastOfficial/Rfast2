@@ -1,7 +1,6 @@
 \name{MLE of distributions defined for proportions}
 \alias{kumar.mle}
 \alias{zil.mle}
-\alias{simplex.mle}
 \alias{unitweibull.mle}
 \alias{cbern.mle}
 \alias{sp.mle}
@@ -16,7 +15,6 @@ MLE of distributions defined for proportions.
 
 \usage{
 kumar.mle(x, tol = 1e-07, maxiters = 50)
-simplex.mle(x, tol = 1e-07)
 zil.mle(x)
 unitweibull.mle(x, tol = 1e-07, maxiters = 100) 
 cbern.mle(x, tol = 1e-6) 
@@ -49,9 +47,9 @@ Usually a list with three elements, but this is not for all cases.
 \item{iters}{The number of iterations required for the Newton-Raphson to converge.
 }
 \item{param}{
-The two parameters (shape and scale) of the Kumaraswamy distribution or the means 
-and sigma of the simpled distribution. For the zero inflated logistic normal, 
-the probability of non zeros, the mean and the unbiased variance. 
+The two parameters (shape and scale) of the Kumaraswamy distribution. 
+For the zero inflated logistic normal, the probability of non zeros, 
+the mean and the unbiased variance. 
 }
 \item{loglik}{The value of the maximised log-likelihood.
 }
@@ -64,11 +62,7 @@ random processes. Journal of Hydrology 46(1-2): 79-88.
 Jones M.C. (2009). Kumaraswamy's distribution: A beta-type distribution with some 
 tractability advantages. Statistical Methodology, 6(1): 70-81. 
 
-Zhang W. & Wei H. (2008). Maximum likelihood estimation for simplex distribution nonlinear 
-mixed models via the stochastic approximation algorithm. 
-The Rocky Mountain Journal of Mathematics, 38(5): 1863-1875.
-
-Mazucheli J., Menezes A.F.B., Fernandes L.B., de Oliveira R.P.  & Ghitany M.E. (2020). 
+Mazucheli J., Menezes A.F.B., Fernandes L.B., de Oliveira R.P. and Ghitany M.E. (2020). 
 The unit-Weibull distribution as an alternative to the Kumaraswamy distribution for the 
 modeling of quantiles conditional on covariates. 
 Journal of Applied Statistics, DOI:10.1080/02664763.2019.1657813
