@@ -7,124 +7,132 @@
 #include "templates.h"
 #include <chrono>
 
-using namespace std;
 using namespace std::chrono;
 using namespace Rcpp;
+
+namespace Memory
+{
 
 #include <windows.h>
 #include <psapi.h>
 
-class PC {
-    ULARGE_INTEGER lastCPU, lastSysCPU, lastUserCPU;
-    int numProcessors;
-    HANDLE self;
+    class PC
+    {
+        ULARGE_INTEGER lastCPU, lastSysCPU, lastUserCPU;
+        int numProcessors;
+        HANDLE self;
 
-public:
-    PC(){
-        SYSTEM_INFO sysInfo;
-        FILETIME ftime, fsys, fuser;
+    public:
+        PC()
+        {
+            SYSTEM_INFO sysInfo;
+            FILETIME ftime, fsys, fuser;
 
-        GetSystemInfo(&sysInfo);
-        numProcessors = sysInfo.dwNumberOfProcessors;
+            GetSystemInfo(&sysInfo);
+            numProcessors = sysInfo.dwNumberOfProcessors;
 
-        GetSystemTimeAsFileTime(&ftime);
-        memcpy(&lastCPU, &ftime, sizeof(FILETIME));
+            GetSystemTimeAsFileTime(&ftime);
+            memcpy(&lastCPU, &ftime, sizeof(FILETIME));
 
-        self = GetCurrentProcess();
-        GetProcessTimes(self, &ftime, &ftime, &fsys, &fuser);
-        memcpy(&lastSysCPU, &fsys, sizeof(FILETIME));
-        memcpy(&lastUserCPU, &fuser, sizeof(FILETIME));
+            self = GetCurrentProcess();
+            GetProcessTimes(self, &ftime, &ftime, &fsys, &fuser);
+            memcpy(&lastSysCPU, &fsys, sizeof(FILETIME));
+            memcpy(&lastUserCPU, &fuser, sizeof(FILETIME));
+        }
+        double getCurrentCPU()
+        {
+            FILETIME ftime, fsys, fuser;
+            ULARGE_INTEGER now, sys, user;
+            double percent;
+
+            GetSystemTimeAsFileTime(&ftime);
+            memcpy(&now, &ftime, sizeof(FILETIME));
+
+            GetProcessTimes(self, &ftime, &ftime, &fsys, &fuser);
+            memcpy(&sys, &fsys, sizeof(FILETIME));
+            memcpy(&user, &fuser, sizeof(FILETIME));
+            percent = (sys.QuadPart - lastSysCPU.QuadPart) +
+                      (user.QuadPart - lastUserCPU.QuadPart);
+            percent /= (now.QuadPart - lastCPU.QuadPart);
+            percent /= numProcessors;
+            lastCPU = now;
+            lastUserCPU = user;
+            lastSysCPU = sys;
+
+            return percent * 100;
+        }
+        Memory::SIZE_T getCurrentVirtualMemory()
+        {
+            return getMemoryInfo().PrivateUsage;
+        }
+        Memory::SIZE_T getCurrentPhysicalMemory()
+        {
+            return getMemoryInfo().WorkingSetSize;
+        }
+
+    private:
+        PROCESS_MEMORY_COUNTERS_EX getMemoryInfo()
+        {
+            PROCESS_MEMORY_COUNTERS_EX pmc;
+            GetProcessMemoryInfo(GetCurrentProcess(), (PROCESS_MEMORY_COUNTERS *)&pmc, sizeof(pmc));
+            return pmc;
+        }
+    };
+
+    Memory::SIZE_T distance(Memory::SIZE_T a, Memory::SIZE_T b)
+    {
+        return a > b ? a - b : b - a;
     }
-    double getCurrentCPU(){
-        FILETIME ftime, fsys, fuser;
-        ULARGE_INTEGER now, sys, user;
-        double percent;
 
-        GetSystemTimeAsFileTime(&ftime);
-        memcpy(&now, &ftime, sizeof(FILETIME));
-
-        GetProcessTimes(self, &ftime, &ftime, &fsys, &fuser);
-        memcpy(&sys, &fsys, sizeof(FILETIME));
-        memcpy(&user, &fuser, sizeof(FILETIME));
-        percent = (sys.QuadPart - lastSysCPU.QuadPart) +
-        (user.QuadPart - lastUserCPU.QuadPart);
-        percent /= (now.QuadPart - lastCPU.QuadPart);
-        percent /= numProcessors;
-        lastCPU = now;
-        lastUserCPU = user;
-        lastSysCPU = sys;
-
-        return percent * 100;
-    }
-    SIZE_T getCurrentVirtualMemory(){
-        return getMemoryInfo().PrivateUsage;
-    }
-    SIZE_T getCurrentPhysicalMemory(){
-        return getMemoryInfo().WorkingSetSize;
-    }
-
-private:
-
-    PROCESS_MEMORY_COUNTERS_EX getMemoryInfo(){
-        PROCESS_MEMORY_COUNTERS_EX pmc;
-        GetProcessMemoryInfo(GetCurrentProcess(), (PROCESS_MEMORY_COUNTERS*)&pmc, sizeof(pmc));
-        return pmc;
-    }
 };
 
-SIZE_T distance(SIZE_T a,SIZE_T b){
-    return a > b ? a-b : b-a;
-}
-
-static NumericVector measure_time(SEXP expr,SEXP env,const int tim,PC &pc){
+static NumericVector measure_time(SEXP expr, SEXP env, const int tim, Memory::PC &pc)
+{
     steady_clock sc;
     NumericVector times(tim);
-    SIZE_T memory = 0;
+    Memory::SIZE_T memory = 0;
     double cpu = 0.0;
-    double sum_t=0,max_t,min_t;
-    for (int i = 0; i < tim; ++i){
-        SIZE_T mem = pc.getCurrentPhysicalMemory();
+    double sum_t = 0, max_t, min_t;
+    for (int i = 0; i < tim; ++i)
+    {
+        Memory::SIZE_T mem = pc.getCurrentPhysicalMemory();
         auto start = sc.now();
-        Rf_eval(expr,env);
+        Rf_eval(expr, env);
         auto end = sc.now();
-        memory += distance(pc.getCurrentPhysicalMemory(),mem);
+        memory += Memory::distance(pc.getCurrentPhysicalMemory(), mem);
         cpu += pc.getCurrentCPU();
         times[i] = static_cast<chrono::duration<double>>(end - start).count();
-        sum_t+=times[i];
+        sum_t += times[i];
     }
-    min_max<double>(&times[0],&times[tim-1]+1,min_t,max_t);
-    return NumericVector::create(min_t,sum_t/tim,max_t,cpu/tim,memory/tim);
+    min_max<double>(&times[0], &times[tim - 1] + 1, min_t, max_t);
+    return NumericVector::create(min_t, sum_t / tim, max_t, cpu / tim, memory / tim);
 }
 
 //[[Rcpp::export]]
-NumericMatrix benchmark(List exprs,SEXP env,const int tim,IntegerVector indices){
-    NumericMatrix res(exprs.length(),5);
-    PC pc;
-    for(auto& index : indices){
-        res.row(index-1) = measure_time(exprs[index-1],env,tim,pc);
+NumericMatrix benchmark(List exprs, SEXP env, const int tim, IntegerVector indices)
+{
+    NumericMatrix res(exprs.length(), 5);
+    Memory::PC pc;
+    for (auto &index : indices)
+    {
+        res.row(index - 1) = measure_time(exprs[index - 1], env, tim, pc);
     }
     return res;
 }
 
-RcppExport SEXP Rfast2_benchmark(SEXP exprsSEXP,SEXP envSEXP,SEXP timSEXP,SEXP indicesSEXP){
+RcppExport SEXP Rfast2_benchmark(SEXP exprsSEXP, SEXP envSEXP, SEXP timSEXP, SEXP indicesSEXP)
+{
     BEGIN_RCPP
     RObject __result;
     RNGScope __rngScope;
-    traits::input_parameter< List  >::type exprs(exprsSEXP);
-    traits::input_parameter< SEXP  >::type env(envSEXP);
-    traits::input_parameter< const int  >::type tim(timSEXP);
-    traits::input_parameter< IntegerVector  >::type indices(indicesSEXP);
-    __result = benchmark(exprs,env,tim,indices);
+    traits::input_parameter<List>::type exprs(exprsSEXP);
+    traits::input_parameter<SEXP>::type env(envSEXP);
+    traits::input_parameter<const int>::type tim(timSEXP);
+    traits::input_parameter<IntegerVector>::type indices(indicesSEXP);
+    __result = benchmark(exprs, env, tim, indices);
     return __result;
     END_RCPP
 }
-
-
-
-
-
-
-
 
 /*
 using namespace chrono;
