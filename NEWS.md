@@ -1,7 +1,36 @@
 <h1 align="center"> _Rfast2_ </h1>
 
-### **Version 0.1.4**
-#### Date release: **01/11/2022**
+### **Version 0.1.5 - Theseus**
+***
+> <u> **New** </u>
+>
+>  | 	   Function 	|                     What's new!                    |
+>  | :----------------: | :------------------------------------------------: |
+>  | covrob.lm   	    |   Linear regression with robust covariance matrix	 |
+>
+>
+> <u> **Improved** </u>(_**by speed, correctness or options**_) 
+>
+>  |	   Function   	 |          		What's new!				 |
+>  | :-----------------: | :---------------------------------------: |
+>  | 					 | 											 |
+>
+>
+> <u> **LinkingTo** </u>(_**by speed, correctness or options**_) 
+>
+>  |	    Function/Structure	    |           What's new!             |
+>  | -------------------  | ------------------------------- |
+>  | Quantile                        | Exported for linking        |
+>  | rowQuantile                        | Exported for linking        |
+>  | colQuantile                        | Exported for linking        |
+>  | TrimMean                        | Exported for linking        |
+>  | rowTrimMean                        | Exported for linking        |
+>  | colTrimMean                        | Exported for linking        |
+
+</br>
+</br>
+
+### **Version 0.1.4 - Heracles**
 ***
 > <u> **New** </u>
 >
@@ -20,7 +49,6 @@
 </br>
 
 ### **Version 0.1.3**
-#### Date release: **22/03/2022**
 ***
 > <u> **New** </u>
 >
@@ -56,7 +84,6 @@
 </br>
 
 ### **Version 0.1.1**
-#### Date release: **10/10/2021**
 ***
 > <u> **New** </u>
 >
@@ -70,7 +97,6 @@
 </br>
 
 ### **Version 0.0.8**
-#### Date release: **16/12/2019**
 ***
 > <u> **New** </u>
 >
@@ -103,7 +129,6 @@
 </br>
 
 ### **Version 0.0.4**
-#### Date release: **28/07/2019**
 ***
 > <u> **Improved** </u>(_**by speed, correctness or options**_) 
 >
@@ -142,7 +167,6 @@
 </br>
 
 ### **Version 0.0.3**
-#### Date release: **08/05/2019**
 ***
 ><u> **Improved** </u>(_**by speed, correctness or options**_) 
 >
@@ -154,7 +178,6 @@
 </br>
 
 ### **Version 0.0.2**
-#### Date release: **08/05/2019**
 ***
 ><u> **New** </u>
 >
@@ -172,7 +195,6 @@
 </br>
 
 ### **Version 0.0.1**
-#### Date release: **19/03/2019**
 ***
 ><u> **New** </u>
 >
