@@ -1,6 +1,6 @@
 #[export]
-trim.mean <- function(x, a = 0.05) {
-  .Call(Rfast2_trimmean, x, a)
+trim.mean <- function(x, a = 0.05, parallel = FALSE) {
+  .Call(Rfast2_trimmean, x, a, parallel)
 }
 
 #[export]
