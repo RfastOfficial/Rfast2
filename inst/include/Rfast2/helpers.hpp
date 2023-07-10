@@ -12,7 +12,7 @@ using namespace std;
 using namespace arma;
 using namespace Rcpp;
 
-unsigned int get_num_of_threads()
+inline unsigned int get_num_of_threads()
 {
 #ifdef _OPENMP
 	return omp_get_max_threads();
