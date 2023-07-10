@@ -7,6 +7,7 @@
 #include <algorithm>
 #include <R.h>
 #include <Rinternals.h>
+#include "parallel.h"
 
 using namespace std;
 using namespace arma;
@@ -1175,119 +1176,119 @@ NumericVector negative_or_positive_min_max(NumericVector &x){
 }
 
 template<class T>
-double nth_simple(T& x,const int& elem){
-    nth_element(x.begin(),x.begin()+elem-1,x.end());
+double nth_simple(T& x,const int& elem,const bool parallel = false){
+    Rfast::nth_element(x.begin(),x.begin()+elem-1,x.end(),parallel);
     return x[elem-1];
 }
 
 template<class T>
-double nth_simple(T& x,const int& elem,const bool& descend){
+double nth_simple(T& x,const int& elem,const bool& descend,const bool parallel = false){
     descend ?
-    nth_element(x.begin(),x.begin()+elem-1,x.end(),[&](double a,double b){return a>b;})
+    Rfast::nth_element(x.begin(),x.begin()+elem-1,x.end(),[&](double a,double b){return a>b;},parallel)
     :
-    nth_element(x.begin(),x.begin()+elem-1,x.end());
+    Rfast::nth_element(x.begin(),x.begin()+elem-1,x.end(),parallel);
 
     return x[elem-1];
 }
 
 template<class T>
-double nth_na_rm(T& x,const int& elem,const bool& descend){
+double nth_na_rm(T& x,const int& elem,const bool& descend,const bool parallel = false){
     const int new_end=remove_if(x.begin(),x.end(),R_IsNA)-x.begin();
     descend ?
-    nth_element(x.begin(),x.begin()+elem-1,x.begin()+new_end,[&](double a,double b){return a>b;})
+    Rfast::nth_element(x.begin(),x.begin()+elem-1,x.begin()+new_end,[&](double a,double b){return a>b;},parallel)
     :
-    nth_element(x.begin(),x.begin()+elem-1,x.begin()+new_end);
+    Rfast::nth_element(x.begin(),x.begin()+elem-1,x.begin()+new_end,parallel);
     return x[elem-1];
 }
 
 template<class T>
-double nth_helper(T& x,const int elem,const bool descend,const bool na_rm){
-    return na_rm ? nth_na_rm<T>(x,elem,descend) : nth_simple<T>(x,elem,descend);
+double nth_helper(T& x,const int elem,const bool descend,const bool na_rm,const bool parallel = false){
+    return na_rm ? nth_na_rm<T>(x,elem,descend,parallel) : nth_simple<T>(x,elem,descend,parallel);
 }
 
 
 template<class T>
-int nth_index_simple(T& x,const int& elem,const bool& descend){
+int nth_index_simple(T& x,const int& elem,const bool& descend,const bool parallel = false){
     IntegerVector ind=seq(1,x.size());
     descend ?
-    nth_element(ind.begin(),ind.begin()+elem-1,ind.end(),[&](int i,int j){return x[i-1]>x[j-1];})
+    Rfast::nth_element(ind.begin(),ind.begin()+elem-1,ind.end(),[&](int i,int j){return x[i-1]>x[j-1];},parallel)
     :
-    nth_element(ind.begin(),ind.begin()+elem-1,ind.end(),[&](int i,int j){return x[i-1]<x[j-1];});
+    Rfast::nth_element(ind.begin(),ind.begin()+elem-1,ind.end(),[&](int i,int j){return x[i-1]<x[j-1];},parallel);
 
     return ind[elem-1];
 }
 
 template<class T>
-int nth_index_na_rm(T& x,const int& elem,const bool& descend){
+int nth_index_na_rm(T& x,const int& elem,const bool& descend,const bool parallel = false){
     const int new_end=remove_if(x.begin(),x.end(),R_IsNA)-x.begin();
     IntegerVector ind= seq(1,new_end);
     descend ?
-    nth_element(ind.begin(),ind.begin()+((elem<new_end) ? elem-1-new_end : elem-1),ind.end(),[&](int i,int j){return x[i-1]>x[j-1];})
+    Rfast::nth_element(ind.begin(),ind.begin()+((elem<new_end) ? elem-1-new_end : elem-1),ind.end(),[&](int i,int j){return x[i-1]>x[j-1];},parallel)
     :
-    nth_element(ind.begin(),ind.begin()+((elem<new_end) ? elem-1-new_end : elem-1),ind.end(),[&](int i,int j){return x[i-1]<x[j-1];});
+    Rfast::nth_element(ind.begin(),ind.begin()+((elem<new_end) ? elem-1-new_end : elem-1),ind.end(),[&](int i,int j){return x[i-1]<x[j-1];},parallel);
 
     return ind[elem-1];
 }
 
 template<class T>
-int nth_helper_index(T& x,const int elem,const bool descend,const bool na_rm){
-    return na_rm ? nth_index_na_rm<T>(x,elem,descend) : nth_index_simple<T>(x,elem,descend);
+int nth_helper_index(T& x,const int elem,const bool descend,const bool na_rm,const bool parallel = false){
+    return na_rm ? nth_index_na_rm<T>(x,elem,descend,parallel) : nth_index_simple<T>(x,elem,descend,parallel);
 }
 
 template<class T>
-T nth_simple_n_elems(T& x,const int& elem,const bool& descend){
+T nth_simple_n_elems(T& x,const int& elem,const bool& descend,const bool parallel = false){
     descend ?
-    nth_element(x.begin(),x.begin()+elem-1,x.end(),[&](double a,double b){return a>b;})
+    Rfast::nth_element(x.begin(),x.begin()+elem-1,x.end(),[&](double a,double b){return a>b;},parallel)
     :
-    nth_element(x.begin(),x.begin()+elem-1,x.end());
+    Rfast::nth_element(x.begin(),x.begin()+elem-1,x.end(),parallel);
 
     return x(span(0,elem-1));
 }
 
 template<class T>
-T nth_na_rm_n_elems(T& x,const int& elem,const bool& descend){
+T nth_na_rm_n_elems(T& x,const int& elem,const bool& descend,const bool parallel = false){
     const int new_end=remove_if(x.begin(),x.end(),R_IsNA)-x.begin();
     if(elem<new_end){
         descend ?
-        nth_element(x.begin(),x.begin()+elem-1,x.begin()+new_end,[&](double a,double b){return a>b;})
+        Rfast::nth_element(x.begin(),x.begin()+elem-1,x.begin()+new_end,[&](double a,double b){return a>b;},parallel)
         :
-        nth_element(x.begin(),x.begin()+elem-1,x.begin()+new_end);
+        Rfast::nth_element(x.begin(),x.begin()+elem-1,x.begin()+new_end,parallel);
     }
     return x(span(0,elem-1));
 }
 
 template<class T>
-T nth_helper_n_elems(T& x,const int elem,const bool descend,const bool na_rm){
-    return na_rm ? nth_na_rm_n_elems<T>(x,elem,descend) : nth_simple_n_elems<T>(x,elem,descend);
+T nth_helper_n_elems(T& x,const int elem,const bool descend,const bool na_rm,const bool parallel = false){
+    return na_rm ? nth_na_rm_n_elems<T>(x,elem,descend,parallel) : nth_simple_n_elems<T>(x,elem,descend,parallel);
 }
 
 
 template<class T>
-T nth_index_simple_n_elems(T& x,const int& elem,const bool& descend){
+T nth_index_simple_n_elems(T& x,const int& elem,const bool& descend,const bool parallel = false){
     vec ind= linspace(1,x.size(),x.size());
     descend ?
-    nth_element(ind.begin(),ind.begin()+elem-1,ind.end(),[&](int i,int j){return x[i-1]>x[j-1];})
+    Rfast::nth_element(ind.begin(),ind.begin()+elem-1,ind.end(),[&](int i,int j){return x[i-1]>x[j-1];},parallel)
     :
-    nth_element(ind.begin(),ind.begin()+elem-1,ind.end(),[&](int i,int j){return x[i-1]<x[j-1];});
+    Rfast::nth_element(ind.begin(),ind.begin()+elem-1,ind.end(),[&](int i,int j){return x[i-1]<x[j-1];},parallel);
 
     return ind(span(0,elem-1));
 }
 
 template<class T>
-T nth_index_na_rm_n_elems(T& x,const int& elem,const bool& descend){
+T nth_index_na_rm_n_elems(T& x,const int& elem,const bool& descend,const bool parallel = false){
     const int new_end=remove_if(x.begin(),x.end(),R_IsNA)-x.begin();
     vec ind= linspace(1,new_end,new_end);
     descend ?
-    nth_element(ind.begin(),ind.begin()+((elem<new_end) ? elem-1-new_end : elem-1),ind.end(),[&](int i,int j){return x[i-1]>x[j-1];})
+    Rfast::nth_element(ind.begin(),ind.begin()+((elem<new_end) ? elem-1-new_end : elem-1),ind.end(),[&](int i,int j){return x[i-1]>x[j-1];},parallel)
     :
-    nth_element(ind.begin(),ind.begin()+((elem<new_end) ? elem-1-new_end : elem-1),ind.end(),[&](int i,int j){return x[i-1]<x[j-1];});
+    Rfast::nth_element(ind.begin(),ind.begin()+((elem<new_end) ? elem-1-new_end : elem-1),ind.end(),[&](int i,int j){return x[i-1]<x[j-1];},parallel);
 
     return ind(span(0,elem-1));
 }
 
 template<class T>
-T nth_helper_index_n_elems(T& x,const int elem,const bool descend,const bool na_rm){
-    return na_rm ? nth_index_na_rm_n_elems<T>(x,elem,descend) : nth_index_simple_n_elems<T>(x,elem,descend);
+T nth_helper_index_n_elems(T& x,const int elem,const bool descend,const bool na_rm,const bool parallel = false){
+    return na_rm ? nth_index_na_rm_n_elems<T>(x,elem,descend,parallel) : nth_index_simple_n_elems<T>(x,elem,descend,parallel);
 }
 
 #endif
