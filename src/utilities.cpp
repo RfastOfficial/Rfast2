@@ -144,28 +144,30 @@ END_RCPP
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-RcppExport SEXP Rfast2_Quantile(SEXP xSEXP,SEXP ProbsSEXP){
+RcppExport SEXP Rfast2_Quantile(SEXP xSEXP,SEXP ProbsSEXP,SEXP parallelSEXP){
 BEGIN_RCPP
     RObject __result;
     RNGScope __rngScope;
+    traits::input_parameter< const bool >::type parallel(parallelSEXP);
     NumericVector x(xSEXP);
     NumericVector Probs(ProbsSEXP);
     
     colvec probs(Probs.begin(),Probs.size(),false);
-    __result = Rfast::Quantile<NumericVector,colvec>(x,probs);
+    __result = Rfast::Quantile<NumericVector,colvec>(x,probs,parallel);
     return __result;
 END_RCPP
 }
 
 /***********************************************************************************/
 
-RcppExport SEXP Rfast2_trimmean(SEXP xSEXP,SEXP aSEXP){
+RcppExport SEXP Rfast2_trimmean(SEXP xSEXP,SEXP aSEXP,SEXP parallelSEXP){
 BEGIN_RCPP
     RObject __result;
     RNGScope __rngScope;
     traits::input_parameter< colvec  >::type x(xSEXP);
     traits::input_parameter< const double >::type a(aSEXP);
-    __result = Rfast::TrimMean<colvec>(x,a);
+    traits::input_parameter< const bool >::type parallel(parallelSEXP);
+    __result = Rfast::TrimMean<colvec>(x,a,parallel);
     return __result;
 END_RCPP
 }
