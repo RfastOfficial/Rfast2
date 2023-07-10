@@ -64,8 +64,7 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 \examples{
 x <- rexp(40, 4)
 y <- rbeta(50, 2.5, 7.5)
-system.time(t.test(x, y, var.equal = TRUE) )
-system.time( a <- boot.student2(x, y, 9999) )
-a
+t.test(x, y, var.equal = TRUE)
+boot.student2(x, y, 9999)
 }
 
