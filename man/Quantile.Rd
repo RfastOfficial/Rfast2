@@ -17,7 +17,7 @@ colQuantile(x,probs,parallel=FALSE,cores=0)
 \method{colQuantile}{matrix}(x,probs,parallel=FALSE,cores=0)
 \method{colQuantile}{data.frame}(x,probs,parallel=FALSE,cores=0)
 rowQuantile(x,probs,parallel=FALSE,cores=0)
-Quantile(x,probs)
+Quantile(x,probs,parallel=FALSE)
 }
 
 \arguments{

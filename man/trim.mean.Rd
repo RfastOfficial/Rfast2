@@ -12,7 +12,7 @@ Trimmed mean.
 }
 
 \usage{
-trim.mean(x, a = 0.05)
+trim.mean(x, a = 0.05,parallel=FALSE)
 colTrimMean(x, a = 0.05,parallel=FALSE,cores=0)
 \method{colTrimMean}{matrix}(x,a = 0.05,parallel=FALSE,cores=0)
 \method{colTrimMean}{data.frame}(x,a = 0.05,parallel=FALSE,cores=0)
