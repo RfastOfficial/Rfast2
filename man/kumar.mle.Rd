@@ -1,5 +1,6 @@
 \name{MLE of distributions defined for proportions}
 \alias{kumar.mle}
+\alias{simplex.mle}
 \alias{zil.mle}
 \alias{unitweibull.mle}
 \alias{cbern.mle}
@@ -15,6 +16,7 @@ MLE of distributions defined for proportions.
 
 \usage{
 kumar.mle(x, tol = 1e-07, maxiters = 50)
+simplex.mle(x, tol = 1e-07)
 zil.mle(x)
 unitweibull.mle(x, tol = 1e-07, maxiters = 100) 
 cbern.mle(x, tol = 1e-6) 
