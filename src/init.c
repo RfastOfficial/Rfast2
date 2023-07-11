@@ -61,7 +61,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"Rfast2_is_skew_symmetric", (DL_FUNC)&Rfast2_is_skew_symmetric, 1},
     {"Rfast2_lud", (DL_FUNC)&Rfast2_lud, 1},
     {"Rfast2_merge", (DL_FUNC)&Rfast2_merge, 2},
-    {"Rfast2_Quantile", (DL_FUNC)&Rfast2_Quantile, 4},
+    {"Rfast2_Quantile", (DL_FUNC)&Rfast2_Quantile, 3},
     {"Rfast2_mmpc2", (DL_FUNC)&Rfast2_mmpc2, 10},
     {"Rfast2_rowQuantile", (DL_FUNC)&Rfast2_rowQuantile, 4},
     {"Rfast2_rowTrimMean", (DL_FUNC)&Rfast2_rowTrimMean, 4},
