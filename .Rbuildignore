@@ -4,3 +4,5 @@
 ^.todo
 ^.github
 ^.html
+^.gitignore
+^.vscode
