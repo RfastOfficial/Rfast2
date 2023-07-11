@@ -1,4 +1,4 @@
-#include "templates.h"
+#include "Rfast2/templates.h"
 
 using namespace std;
 

@@ -4,20 +4,15 @@
 // Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 #include <RcppArmadillo.h>
-#include <vector>
 #include <algorithm>
 #include <vector>
-#include "templates.h"
+#include "Rfast2.h"
 
 using namespace Rcpp;
 using namespace arma;
-using std::sort;
-using std::vector;
 
 using std::merge;
 using std::vector;
-using std::min;
-
 
 List lud(NumericMatrix x){
 	int ncl=x.ncol(),nrw=x.nrow(),i=0,j;
@@ -149,35 +144,30 @@ END_RCPP
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-NumericVector Quantile(colvec x,NumericVector Probs){
-  colvec probs(Probs.begin(),Probs.size(),false);
-  return Quantile<NumericVector,colvec>(x,probs);
-}
-
-RcppExport SEXP Rfast2_Quantile(SEXP xSEXP,SEXP ProbsSEXP){
+RcppExport SEXP Rfast2_Quantile(SEXP xSEXP,SEXP ProbsSEXP,SEXP parallelSEXP){
 BEGIN_RCPP
     RObject __result;
     RNGScope __rngScope;
-    traits::input_parameter< colvec  >::type x(xSEXP);
-    traits::input_parameter< NumericVector  >::type Probs(ProbsSEXP);
-    __result = Quantile(x,Probs);
+    traits::input_parameter< const bool >::type parallel(parallelSEXP);
+    NumericVector x(xSEXP);
+    NumericVector Probs(ProbsSEXP);
+    
+    colvec probs(Probs.begin(),Probs.size(),false);
+    __result = Rfast::Quantile<NumericVector,colvec>(x,probs,parallel);
     return __result;
 END_RCPP
 }
 
 /***********************************************************************************/
 
-double trimmean(colvec x,const double a){
-  return trimmean_h<colvec>(x,a);
-}
-
-RcppExport SEXP Rfast2_trimmean(SEXP xSEXP,SEXP aSEXP){
+RcppExport SEXP Rfast2_trimmean(SEXP xSEXP,SEXP aSEXP,SEXP parallelSEXP){
 BEGIN_RCPP
     RObject __result;
     RNGScope __rngScope;
     traits::input_parameter< colvec  >::type x(xSEXP);
     traits::input_parameter< const double >::type a(aSEXP);
-    __result = trimmean(x,a);
+    traits::input_parameter< const bool >::type parallel(parallelSEXP);
+    __result = Rfast::TrimMean<colvec>(x,a,parallel);
     return __result;
 END_RCPP
 }

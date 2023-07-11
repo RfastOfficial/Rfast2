@@ -5,7 +5,7 @@
 #include "reg_lib2.h"
 #include "reg_lib_helper.h"
 #include "mn.h"
-#include "templates.h"
+#include "Rfast2/templates.h"
 
 using namespace Rcpp;
 using namespace arma;

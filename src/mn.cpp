@@ -5,7 +5,7 @@
 #include <string>
 #include <algorithm>
 #include "mn.h"
-#include "templates.h"
+#include "Rfast2/templates.h"
 
 using namespace Rcpp;
 using namespace arma;

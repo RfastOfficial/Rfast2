@@ -2,7 +2,7 @@
 
 #include <RcppArmadillo.h>
 #include "mn.h"
-#include "templates.h"
+#include "Rfast2/templates.h"
 // [[Rcpp::depends(RcppArmadillo)]]
 
 using namespace arma;

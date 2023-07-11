@@ -4,7 +4,7 @@
 #include <Rinternals.h>
 #include <chrono>
 #include <string>
-#include "templates.h"
+#include "Rfast2/templates.h"
 #include <chrono>
 
 using namespace std;
