@@ -8,12 +8,6 @@
 
 ------------------------------------------------------------------------
 
-> <h3>**New**</h3>
->
-> | Function | What's new! |
-> |:--------:|:-----------:|
-> |          |             |
->
 > <h3>**Improved**</h3> (***by speed, correctness or options***)
 >
 > | Function |                                     What's new!                                     |
