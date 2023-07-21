@@ -13,17 +13,17 @@ Sample quantiles and col/row wise quantiles.
 }
 
 \usage{
-colQuantile(x,probs,parallel=FALSE)
-\method{colQuantile}{matrix}(x,probs,parallel=FALSE)
-\method{colQuantile}{data.frame}(x,probs,parallel=FALSE)
-rowQuantile(x,probs,parallel=FALSE)
-Quantile(x,probs)
+colQuantile(x,probs,parallel=FALSE,cores=0)
+\method{colQuantile}{matrix}(x,probs,parallel=FALSE,cores=0)
+\method{colQuantile}{data.frame}(x,probs,parallel=FALSE,cores=0)
+rowQuantile(x,probs,parallel=FALSE,cores=0)
+Quantile(x,probs,parallel=FALSE)
 }
 
 \arguments{
 \item{x}{
 Numeric vector whose sample quantiles are wanted. NA and NaN values are not allowed in numeric vectors.
-For the col/row versions a numerical matrix.	
+For the col/row versions a numerical matrix or data.frame.	
 }
 \item{probs}{
 Numeric vector of probabilities with values in [0,1], not missing values. 
@@ -31,6 +31,10 @@ Values up to 2e-14 outside that range are accepted and automatically moved to th
 }
 \item{parallel}{
 Do you want to do it in parallel, for column - row major, in C++? TRUE or FALSE.
+}
+\item{cores}{
+Number of cores to use for parallelism. Valid only when argument parallel is set to TRUE. 
+Default value is 0 and it means the maximum supported cores.
 }
 }
 
@@ -49,9 +53,6 @@ Manos Papadakis.
 R implementation and documentation: Manos Papadakis \email{papadakm95@gmail.com}.
 }
 
-%\note{
-%%  ~~further notes~~
-%}
 \seealso{
 \code{ \link{trim.mean} }
 }

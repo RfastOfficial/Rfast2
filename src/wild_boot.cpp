@@ -2,7 +2,7 @@
 
 #include <RcppArmadillo.h>
 #include <cmath>
-#include "templates.h"
+#include "Rfast2/templates.h"
 #include "mn.h"
 
 using namespace Rcpp;

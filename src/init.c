@@ -1,102 +1,99 @@
 #include <Rinternals.h>
 #include <R_ext/Rdynload.h>
 
-//Manos
+// Manos
 
-SEXP Rfast2_benchmark(SEXP exprsSEXP,SEXP envSEXP,SEXP timSEXP,SEXP indicesSEXP);
-SEXP Rfast2_col_group(SEXP x,SEXP y,SEXP length_uniqueSEXP,SEXP methodSEXP);
-SEXP Rfast2_colQuantile(SEXP xSEXP,SEXP ProbsSEXP,SEXP parallelSEXP);
-SEXP Rfast2_is_upper_tri(SEXP xSEXP,SEXP dgSEXP);
-SEXP Rfast2_is_lower_tri(SEXP xSEXP,SEXP dgSEXP);
-SEXP Rfast2_is_skew_symmetric(SEXP xSEXP);
-SEXP Rfast2_lud(SEXP xSEXP);
-SEXP Rfast2_merge(SEXP xSEXP,SEXP ySEXP);
-SEXP Rfast2_mmpc2(SEXP ySEXP,SEXP xSEXP,SEXP max_kSEXP,SEXP thresholdSEXP,SEXP testSEXP,SEXP Ini,SEXP parallelSEXP,SEXP maxitersSEXP,SEXP tolSEXP,SEXP backwardSEXP);
-SEXP Rfast2_Quantile(SEXP xSEXP,SEXP ProbsSEXP);
-SEXP Rfast2_rowQuantile(SEXP xSEXP,SEXP ProbsSEXP,SEXP parallelSEXP);
-SEXP Rfast2_colTrimMean(SEXP xSEXP,SEXP ProbsSEXP,SEXP parallelSEXP);
-SEXP Rfast2_rowTrimMean(SEXP xSEXP,SEXP ProbsSEXP,SEXP parallelSEXP);
-SEXP Rfast2_Runif(SEXP nSEXP,SEXP minSEXP,SEXP maxSEXP);
-SEXP Rfast2_Sample_int(SEXP nSEXP,SEXP sizeSEXP,SEXP replaceSEXP);
-SEXP Rfast2_Sample(SEXP xSEXP,SEXP sizeSEXP,SEXP replaceSEXP);
-SEXP Rfast2_trimmean(SEXP xSEXP,SEXP aSEXP);
+SEXP Rfast2_benchmark(SEXP, SEXP, SEXP, SEXP);
+SEXP Rfast2_col_group(SEXP, SEXP, SEXP, SEXP);
+SEXP Rfast2_colQuantile(SEXP, SEXP, SEXP, SEXP);
+SEXP Rfast2_is_upper_tri(SEXP, SEXP);
+SEXP Rfast2_is_lower_tri(SEXP, SEXP);
+SEXP Rfast2_is_skew_symmetric(SEXP);
+SEXP Rfast2_lud(SEXP);
+SEXP Rfast2_merge(SEXP, SEXP);
+SEXP Rfast2_mmpc2(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
+SEXP Rfast2_Quantile(SEXP, SEXP, SEXP);
+SEXP Rfast2_rowQuantile(SEXP, SEXP, SEXP, SEXP);
+SEXP Rfast2_colTrimMean(SEXP, SEXP, SEXP, SEXP);
+SEXP Rfast2_rowTrimMean(SEXP, SEXP, SEXP, SEXP);
+SEXP Rfast2_Runif(SEXP, SEXP, SEXP);
+SEXP Rfast2_Sample_int(SEXP, SEXP, SEXP);
+SEXP Rfast2_Sample(SEXP, SEXP, SEXP);
+SEXP Rfast2_trimmean(SEXP, SEXP, SEXP);
 
-//Manos
+// Manos
 
-//Marios
+// Marios
 
-SEXP Rfast2_inter(SEXP xSEXP,SEXP ySEXP);
-SEXP Rfast2_mmp_c(SEXP target_varsSEXP,SEXP dsSEXP,SEXP max_kSEXP,SEXP thresSEXP,SEXP methodSEXP,SEXP initsSEXP,SEXP hash_onSEXP,SEXP stats_kvSEXP,SEXP pvalues_kvSEXP,SEXP bws_onSEXP);
+SEXP Rfast2_inter(SEXP, SEXP);
+SEXP Rfast2_mmp_c(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 
-//Marios
+// Marios
 
-//Stefanos
+// Stefanos
 
-SEXP Rfast2_add_term(SEXP YSEXP, SEXP XincSEXP, SEXP XoutSEXP, SEXP devi_0SEXP,SEXP typeSEXP,SEXP tolSEXP,SEXP logged,SEXP parallel,SEXP maxiters);
-SEXP Rfast2_colspml_mle(SEXP xSEXP, SEXP tolSEXP,SEXP maxitersSEXP,SEXP parallelSEXP);
-SEXP Rfast2_colcauchy_mle(SEXP XSEXP,SEXP tolSEXP,SEXP parallelSEXP,SEXP maxitersSEXP);
-SEXP Rfast2_colbeta_mle(SEXP XSEXP,SEXP tolSEXP,SEXP parallelSEXP,SEXP maxitersSEXP);
-SEXP Rfast2_censweib_reg(SEXP YSEXP,SEXP XSEXP,SEXP diSEXP,SEXP tolSEXP,SEXP maxitersSEXP);
-//SEXP Rfast2_frechet2_c(SEXP XSEXP, SEXP DiSEXP, SEXP aSEXP, SEXP k1SEXP);
-SEXP Rfast2_fbed_reg(SEXP ySEXP,SEXP xSEXP,SEXP sigSEXP,SEXP typeSEXP,SEXP idSEXP,SEXP kSEXP,SEXP backwardSEXP, SEXP tolSEXP,SEXP parallelSEXP,SEXP maxitersSEXP);
-SEXP Rfast2_fedhc_skeleton(SEXP XSEXP, SEXP INI_PVALSEXP, SEXP nSEXP,SEXP laSEXP,SEXP methodSEXP,SEXP RmatSEXP, SEXP parallelSEXP);
-SEXP Rfast2_multinom_reg(SEXP ySEXP,SEXP x0SEXP, SEXP tolSEXP,SEXP maxitersSEXP);
-SEXP Rfast2_weib_regs(SEXP ySEXP,SEXP xSEXP, SEXP tolSEXP,SEXP loggedSEXP,SEXP maxitersSEXP, SEXP parallelSEXP);
-SEXP Rfast2_welch_tests(SEXP xSEXP, SEXP ySEXP, SEXP loggedSEXP, SEXP parallelSEXP);
-SEXP Rfast2_wild_boot(SEXP xSEXP, SEXP ySEXP, SEXP clusterSEXP, SEXP indSEXP, SEXP RSEXP, SEXP tabSEXP, SEXP parallelSEXP);
-SEXP Rfast2_mmhc_skeleton(SEXP XSEXP, SEXP INI_PVALSEXP, SEXP nSEXP,SEXP laSEXP,SEXP maxkSEXP,SEXP methodSEXP,SEXP RmatSEXP, SEXP parallelSEXP);
-SEXP Rfast2_negbin_reg(SEXP ySEXP, SEXP xSEXP, SEXP tolSEXP, SEXP maxitersSEXP);
-SEXP Rfast2_negbin_regs(SEXP ySEXP, SEXP xSEXP, SEXP tolSEXP, SEXP maxitersSEXP, SEXP parallelSEXP);
-SEXP Rfast2_gamma_regs(SEXP YSEXP, SEXP XSEXP,SEXP tolSEXP,SEXP loggedSEXP,SEXP parallelSEXP,SEXP maxitersSEXP);
-SEXP Rfast2_gamma_reg(SEXP YSEXP, SEXP XSEXP,SEXP modSEXP,SEXP tolSEXP,SEXP maxitersSEXP);
+SEXP Rfast2_add_term(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
+SEXP Rfast2_colspml_mle(SEXP, SEXP, SEXP, SEXP);
+SEXP Rfast2_colcauchy_mle(SEXP, SEXP, SEXP, SEXP);
+SEXP Rfast2_colbeta_mle(SEXP, SEXP, SEXP, SEXP);
+SEXP Rfast2_censweib_reg(SEXP, SEXP, SEXP, SEXP, SEXP);
+// SEXP Rfast2_frechet2_c(SEXP , SEXP , SEXP , SEXP k1SEXP);
+SEXP Rfast2_fbed_reg(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
+SEXP Rfast2_fedhc_skeleton(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
+SEXP Rfast2_multinom_reg(SEXP, SEXP, SEXP, SEXP);
+SEXP Rfast2_weib_regs(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
+SEXP Rfast2_welch_tests(SEXP, SEXP, SEXP, SEXP);
+SEXP Rfast2_wild_boot(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
+SEXP Rfast2_mmhc_skeleton(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
+SEXP Rfast2_negbin_reg(SEXP, SEXP, SEXP, SEXP);
+SEXP Rfast2_negbin_regs(SEXP, SEXP, SEXP, SEXP, SEXP);
+SEXP Rfast2_gamma_regs(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
+SEXP Rfast2_gamma_reg(SEXP, SEXP, SEXP, SEXP, SEXP);
 
-//Stefanos
+// Stefanos
 
 static const R_CallMethodDef CallEntries[] = {
-  {"Rfast2_benchmark", (DL_FUNC) &Rfast2_benchmark, 4},
-  {"Rfast2_col_group", (DL_FUNC) &Rfast2_col_group, 4},
-  {"Rfast2_colQuantile", (DL_FUNC) &Rfast2_colQuantile, 3},
-  {"Rfast2_is_upper_tri", (DL_FUNC) &Rfast2_is_upper_tri, 2},
-  {"Rfast2_is_lower_tri", (DL_FUNC) &Rfast2_is_lower_tri, 2},
-  {"Rfast2_is_skew_symmetric", (DL_FUNC) &Rfast2_is_skew_symmetric, 1},
-  {"Rfast2_lud", (DL_FUNC) &Rfast2_lud, 1},
-  {"Rfast2_merge", (DL_FUNC) &Rfast2_merge, 2},
-  {"Rfast2_Quantile", (DL_FUNC) &Rfast2_Quantile, 2},
-  {"Rfast2_mmpc2", (DL_FUNC) &Rfast2_mmpc2, 10},
-  {"Rfast2_rowQuantile", (DL_FUNC) &Rfast2_rowQuantile, 3},
-  {"Rfast2_rowTrimMean", (DL_FUNC) &Rfast2_rowTrimMean, 3},
-  {"Rfast2_colTrimMean", (DL_FUNC) &Rfast2_colTrimMean, 3},
-  {"Rfast2_Runif", (DL_FUNC) &Rfast2_Runif, 3},
-  {"Rfast2_Sample_int", (DL_FUNC) &Rfast2_Sample_int, 3},
-  {"Rfast2_Sample", (DL_FUNC) &Rfast2_Sample, 3},
-  {"Rfast2_trimmean", (DL_FUNC) &Rfast2_trimmean, 2},
+    {"Rfast2_benchmark", (DL_FUNC)&Rfast2_benchmark, 4},
+    {"Rfast2_col_group", (DL_FUNC)&Rfast2_col_group, 4},
+    {"Rfast2_colQuantile", (DL_FUNC)&Rfast2_colQuantile, 4},
+    {"Rfast2_is_upper_tri", (DL_FUNC)&Rfast2_is_upper_tri, 2},
+    {"Rfast2_is_lower_tri", (DL_FUNC)&Rfast2_is_lower_tri, 2},
+    {"Rfast2_is_skew_symmetric", (DL_FUNC)&Rfast2_is_skew_symmetric, 1},
+    {"Rfast2_lud", (DL_FUNC)&Rfast2_lud, 1},
+    {"Rfast2_merge", (DL_FUNC)&Rfast2_merge, 2},
+    {"Rfast2_Quantile", (DL_FUNC)&Rfast2_Quantile, 3},
+    {"Rfast2_mmpc2", (DL_FUNC)&Rfast2_mmpc2, 10},
+    {"Rfast2_rowQuantile", (DL_FUNC)&Rfast2_rowQuantile, 4},
+    {"Rfast2_rowTrimMean", (DL_FUNC)&Rfast2_rowTrimMean, 4},
+    {"Rfast2_colTrimMean", (DL_FUNC)&Rfast2_colTrimMean, 4},
+    {"Rfast2_Runif", (DL_FUNC)&Rfast2_Runif, 3},
+    {"Rfast2_Sample_int", (DL_FUNC)&Rfast2_Sample_int, 3},
+    {"Rfast2_Sample", (DL_FUNC)&Rfast2_Sample, 3},
+    {"Rfast2_trimmean", (DL_FUNC)&Rfast2_trimmean, 3},
 
-  {"Rfast2_inter", (DL_FUNC) &Rfast2_inter, 2},
-  {"Rfast2_mmp_c", (DL_FUNC) &Rfast2_mmp_c, 10},
+    {"Rfast2_inter", (DL_FUNC)&Rfast2_inter, 2},
+    {"Rfast2_mmp_c", (DL_FUNC)&Rfast2_mmp_c, 10},
 
-  {"Rfast2_add_term", (DL_FUNC) &Rfast2_add_term, 9},
-  {"Rfast2_colspml_mle", (DL_FUNC) &Rfast2_colspml_mle, 4},
-  {"Rfast2_colcauchy_mle", (DL_FUNC) &Rfast2_colcauchy_mle, 4},
-  {"Rfast2_colbeta_mle", (DL_FUNC) &Rfast2_colbeta_mle, 4},
-  {"Rfast2_censweib_reg", (DL_FUNC) &Rfast2_censweib_reg, 5},
-  {"Rfast2_fbed_reg", (DL_FUNC) &Rfast2_fbed_reg, 10},
-  {"Rfast2_fedhc_skeleton", (DL_FUNC) &Rfast2_fedhc_skeleton, 7},
-  {"Rfast2_multinom_reg", (DL_FUNC) &Rfast2_multinom_reg, 4},
-  {"Rfast2_weib_regs", (DL_FUNC) &Rfast2_weib_regs, 6},
-  {"Rfast2_welch_tests", (DL_FUNC) &Rfast2_welch_tests, 4},
-  {"Rfast2_wild_boot", (DL_FUNC) &Rfast2_wild_boot, 7},
-  {"Rfast2_mmhc_skeleton", (DL_FUNC) &Rfast2_mmhc_skeleton, 8},
-  {"Rfast2_negbin_reg", (DL_FUNC) &Rfast2_negbin_reg, 4},
-  {"Rfast2_negbin_regs", (DL_FUNC) &Rfast2_negbin_regs, 5},
-  {"Rfast2_gamma_regs", (DL_FUNC) &Rfast2_gamma_regs, 6},
-  {"Rfast2_gamma_reg", (DL_FUNC) &Rfast2_gamma_reg, 5},
-  {NULL, NULL, 0}
-};
-
+    {"Rfast2_add_term", (DL_FUNC)&Rfast2_add_term, 9},
+    {"Rfast2_colspml_mle", (DL_FUNC)&Rfast2_colspml_mle, 4},
+    {"Rfast2_colcauchy_mle", (DL_FUNC)&Rfast2_colcauchy_mle, 4},
+    {"Rfast2_colbeta_mle", (DL_FUNC)&Rfast2_colbeta_mle, 4},
+    {"Rfast2_censweib_reg", (DL_FUNC)&Rfast2_censweib_reg, 5},
+    {"Rfast2_fbed_reg", (DL_FUNC)&Rfast2_fbed_reg, 10},
+    {"Rfast2_fedhc_skeleton", (DL_FUNC)&Rfast2_fedhc_skeleton, 7},
+    {"Rfast2_multinom_reg", (DL_FUNC)&Rfast2_multinom_reg, 4},
+    {"Rfast2_weib_regs", (DL_FUNC)&Rfast2_weib_regs, 6},
+    {"Rfast2_welch_tests", (DL_FUNC)&Rfast2_welch_tests, 4},
+    {"Rfast2_wild_boot", (DL_FUNC)&Rfast2_wild_boot, 7},
+    {"Rfast2_mmhc_skeleton", (DL_FUNC)&Rfast2_mmhc_skeleton, 8},
+    {"Rfast2_negbin_reg", (DL_FUNC)&Rfast2_negbin_reg, 4},
+    {"Rfast2_negbin_regs", (DL_FUNC)&Rfast2_negbin_regs, 5},
+    {"Rfast2_gamma_regs", (DL_FUNC)&Rfast2_gamma_regs, 6},
+    {"Rfast2_gamma_reg", (DL_FUNC)&Rfast2_gamma_reg, 5},
+    {NULL, NULL, 0}};
 
 void R_init_Rfast2(DllInfo *info)
 {
   R_registerRoutines(info, NULL, CallEntries, NULL, NULL);
   R_useDynamicSymbols(info, FALSE);
 }
-

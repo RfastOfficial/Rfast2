@@ -1,7 +1,7 @@
 //Author: Stefanos Fafalios
 
 #include <RcppArmadillo.h>
-#include "templates.h"
+#include "Rfast2/templates.h"
 #include "apply_funcs_templates.h"
 #include <cmath>
 #include "reg_lib_helper.h"

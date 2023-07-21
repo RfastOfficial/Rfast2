@@ -28,7 +28,7 @@ The number of bootstrap samples to use.
 We bootstrap Student's (Gosset's) t-test statistic and not the Welch t-test statistic. For the latter case 
 see the "boot.ttest2" function in Rfast. The difference is that Gosset's test statistic assumes equaility of the 
 variances, which if violated leads to inlfated type I errors. Bootstrap calibration though takes care of this issue.
-As for the bootstrap calibration, instead of sampling B times from each sample, we sample \eqn{sqrt{B}} from each 
+As for the bootstrap calibration, instead of sampling B times from each sample, we sample \eqn{\sqrt{B}} from each 
 of them and then take all pairs. Each bootstrap sample is independent of each other, hence there is no violation 
 of the theory (Chatzipantsiou et al., 2019). 
 }
@@ -64,8 +64,7 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 \examples{
 x <- rexp(40, 4)
 y <- rbeta(50, 2.5, 7.5)
-system.time(t.test(x, y, var.equal = TRUE) )
-system.time( a <- boot.student2(x, y, 9999) )
-a
+t.test(x, y, var.equal = TRUE)
+boot.student2(x, y, 9999)
 }
 

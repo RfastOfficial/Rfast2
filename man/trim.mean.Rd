@@ -12,22 +12,26 @@ Trimmed mean.
 }
 
 \usage{
-trim.mean(x, a = 0.05)
-colTrimMean(x, a = 0.05,parallel=FALSE)
-\method{colTrimMean}{matrix}(x,a = 0.05,parallel=FALSE)
-\method{colTrimMean}{data.frame}(x,a = 0.05,parallel=FALSE)
-rowTrimMean(x, a = 0.05,parallel=FALSE)
+trim.mean(x, a = 0.05,parallel=FALSE)
+colTrimMean(x, a = 0.05,parallel=FALSE,cores=0)
+\method{colTrimMean}{matrix}(x,a = 0.05,parallel=FALSE,cores=0)
+\method{colTrimMean}{data.frame}(x,a = 0.05,parallel=FALSE,cores=0)
+rowTrimMean(x, a = 0.05,parallel=FALSE,cores=0)
 }
 
 \arguments{
 \item{x}{
-A numerical vector or a numerical matrix. 
+A numerical vector or a numerical matrix or data.frame. 
 }
 \item{a}{
 A number in (0, 1), the proportion of data to trim. 
 }
 \item{parallel}{
 Run the algorithm parallel in C++.
+}
+\item{cores}{
+Number of cores to use for parallelism. Valid only when argument parallel is set to TRUE. 
+Default value is 0 and it means the maximum supported cores.
 }
 }
 
@@ -50,10 +54,6 @@ Michail Tsagris and Manos Papadakis.
 
 R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr} and Manos Papadakis \email{papadakm95@gmail.com}.
 }
-
-%\note{
-%%  ~~further notes~~
-%}
 
 \seealso{
 \code{ \link{Quantile}

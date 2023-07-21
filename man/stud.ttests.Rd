@@ -67,10 +67,10 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 x = matrix( rnorm(100 * 20), ncol = 20)
 ## 100 observations in total
 ina = rbinom(100, 1, 0.6) + 1   ## independent samples t-test
-system.time( stud.ttests(x, ina = ina) )
+stud.ttests(x, ina = ina)
 x1 = x[ina == 1, ]
 x2 = x[ina == 2, ]
-system.time( stud.ttests(x1, x2) )
+stud.ttests(x1, x2)
 x <- NULL
 }
 

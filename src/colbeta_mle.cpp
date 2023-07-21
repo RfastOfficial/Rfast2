@@ -2,7 +2,7 @@
 
 #include <RcppArmadillo.h>
 #include "reg_lib2.h"
-#include "templates.h"
+#include "Rfast2/templates.h"
 #include "mn.h"
 // [[Rcpp::depends(RcppArmadillo)]]
 
