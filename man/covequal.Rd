@@ -1,12 +1,12 @@
-\name{Hypothesis tests for equality of a covariance matrix}
+\name{Hypothesis test for equality of a covariance matrix}
 \alias{covequal}
 
 \title{
-Hypothesis tests for equality of a covariance matrix
+Hypothesis test for equality of a covariance matrix
 }
 
 \description{
-Hypothesis tests for equality of a covariance matrix.
+Hypothesis test for equality of a covariance matrix.
 }
 
 \usage{
