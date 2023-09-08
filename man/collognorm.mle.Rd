@@ -7,6 +7,8 @@
 \alias{colcauchy.mle}
 \alias{colbeta.mle}
 \alias{colunitweibull.mle}
+\alias{colpoweralw.mle}
+\alias{colsp.mle}
 
 \title{
 Column-wise MLE of some univariate distributions
@@ -25,15 +27,17 @@ colordinal.mle(x, link = "logit")
 colcauchy.mle(x, tol = 1e-07, maxiters = 100, parallel = FALSE)
 colbeta.mle(x, tol = 1e-07, maxiters = 100, parallel = FALSE)
 colunitweibull.mle(x, tol = 1e-07, maxiters = 100, parallel = FALSE)
+colpoweralw.mle(x)
+colsp.mle(x)
 }
 
 \arguments{
 \item{x}{
 A numerical matrix with data. Each column refers to a different vector of observations of the same distribution. 
-The values of for Lognormal must be greater than zero, for the logitnormal they must by percentages, exluding 0 and 1, 
-whereas for the Borel distribution the x must contain integer values greater than 1. 
-For the halfnormal the numbers must be strictly positive, while for the ordinal this can be 
-a numerical matrix with values 1, 2, 3,..., not zeros. 
+The values of for lognormal must be greater than zero, for the logitnormal, beta, unit Weibull and sp they must be 
+numbers between 0 and 1, exluding 0 and 1, whereas for the Borel distribution the x must contain integer values 
+greater than 1.  For the halfnormal and powerlaw the numbers must be strictly positive, while for the ordinal 
+this can be a numerical matrix with values 1, 2, 3,..., not zeros. 
 }
 \item{link}{
 This can either be "logit" or "probit". It is the link function to be used. 
@@ -90,7 +94,7 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr} and 
 %}
 
 \seealso{
-\code{\link{censpois.mle}, \link{gammapois.mle}
+\code{\link{censpois.mle}, \link{gammapois.mle}, \link{powerlaw.mle}, \link{unitweibull.mle}
 }
 }
 
