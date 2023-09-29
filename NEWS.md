@@ -12,7 +12,9 @@
 >
 > | Function |                                     What's new!                                     |
 > |:--------:|:-----------------------------------------------------------------------------------:|
-> |   |   |
+> | jbtest   | Jarque–Bera normality test  |
+> | jbtestσ  | Many Jarque–Bera normality tests  |
+
 >
 > <h3>**LinkingTo**</h3> (***by speed, correctness or options***)
 >
