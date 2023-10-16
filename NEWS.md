@@ -13,7 +13,9 @@
 > | Function |                                     What's new!                                     |
 > |:--------:|:-----------------------------------------------------------------------------------:|
 > | jbtest   | Jarque–Bera normality test  |
-> | jbtestσ  | Many Jarque–Bera normality tests  |
+> | jbtests  | Many Jarque–Bera normality tests  |
+> | lm.nonparboot  | Non-parametric bootstrap for linear models  |
+
 
 >
 > <h3>**LinkingTo**</h3> (***by speed, correctness or options***)
