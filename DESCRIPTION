@@ -11,6 +11,6 @@ SystemRequirements: C++17
 Imports: Rfast, RANN
 BugReports: https://github.com/RfastOfficial/Rfast2/issues
 URL: https://github.com/RfastOfficial/Rfast2
-Description: A collection of fast statistical and utility functions for data analysis. Functions for regression, maximum likelihood, column-wise statistics and many more have been included. C++ has been utilized to speed up the functions.
+Description: A collection of fast statistical and utility functions for data analysis. Functions for regression, maximum likelihood, column-wise statistics and many more have been included. C++ has been utilized to speed up the functions. References: Tsagris M., Papadakis M. (2018). Taking R to its limits: 70+ tips. PeerJ Preprints 6:e26605v1 <doi:10.7287/peerj.preprints.26605v1>.
 License: GPL (>= 2.0)
 NeedsCompilation: yes
