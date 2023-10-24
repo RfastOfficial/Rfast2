@@ -15,7 +15,7 @@
 > | jbtest   | Jarque–Bera normality test  |
 > | jbtests  | Many Jarque–Bera normality tests  |
 > | lm.nonparboot  | Non-parametric bootstrap for linear models  |
-
+> | normal.etest  | Energy based normality test  |
 
 >
 > <h3>**LinkingTo**</h3> (***by speed, correctness or options***)

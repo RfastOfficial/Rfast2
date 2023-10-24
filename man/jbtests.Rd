@@ -48,7 +48,7 @@ R implementation and documentation: Michail Tsagris <mtsagris@uoc.gr>.
 %}
 
 \seealso{
-\code{ \link{collognorm.mle}
+\code{ \link{normal.etest}
 }
 }
 
