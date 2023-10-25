@@ -446,7 +446,7 @@ purka.mle <- function(x, tol = 1e-07) {
 #[export]
 trunccauchy.mle <- function (x, a, b, tol = 1e-07) {
     n <- length(x)
-    m <- Rfast::med(x)
+    m <- Rfast::Median(x)
     es <- 0.5 * (Rfast::nth(x, 3 * n/4) - Rfast::nth(x, n/4))
     logs <- log(es)
     y <- x - m

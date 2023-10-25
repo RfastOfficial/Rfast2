@@ -68,7 +68,7 @@ gammaregs <- function(y, x, tol = 1e-07, logged = FALSE, parallel = FALSE, maxit
 
 #[export]
 logiquant.regs <- function(y, x, logged = FALSE) {
-  m <- Rfast::med(y)
+  m <- Rfast::Median(y)
   y[y > m] <- 1
   y[y != 1] <- 0
   Rfast::univglms(y, x, oiko = "binomial", logged = logged)
