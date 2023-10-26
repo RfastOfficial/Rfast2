@@ -7,7 +7,7 @@
 \alias{colcauchy.mle}
 \alias{colbeta.mle}
 \alias{colunitweibull.mle}
-\alias{colpoweralw.mle}
+\alias{colpowerlaw.mle}
 \alias{colsp.mle}
 
 \title{
@@ -27,7 +27,7 @@ colordinal.mle(x, link = "logit")
 colcauchy.mle(x, tol = 1e-07, maxiters = 100, parallel = FALSE)
 colbeta.mle(x, tol = 1e-07, maxiters = 100, parallel = FALSE)
 colunitweibull.mle(x, tol = 1e-07, maxiters = 100, parallel = FALSE)
-colpoweralw.mle(x)
+colpowerlaw.mle(x)
 colsp.mle(x)
 }
 
