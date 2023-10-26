@@ -1,3 +1,4 @@
+#[export]
 normal.etest <- function(x, R = 999) {
   n <- length(x)
   s <- Rfast::Var(x, std = TRUE)
