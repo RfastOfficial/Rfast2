@@ -1,5 +1,6 @@
 \name{Parametric and non-parametric bootstrap for linear regression model}
 \alias{lm.parboot}
+\alias{lm.nonparboot}
 \title{
 Parametric and non-parametric bootstrap for linear regression model
 }
