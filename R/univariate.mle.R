@@ -5,7 +5,7 @@ censpois.mle <- function(x, tol = 1e-07) {
 
 #[export]
 colcenspois.mle <- function(x, tol = 1e-07, parallel = FALSE, cores = 0) {
-  .Call(Rfast2_colcenspois_mle,x,tol, parallel,cores)
+  t(.Call(Rfast2_colcenspois_mle,x,tol, parallel,cores))
 }
 
 #[export]
@@ -15,14 +15,13 @@ censweibull.mle <- function(x, di, tol = 1e-07) {
 
 #[export]
 colcensweibull.mle <- function(x, di, tol = 1e-07, parallel = FALSE, cores = 0) {
-  .Call(Rfast2_colcensweibull_mle,x, di, tol,parallel,cores)
+  t(.Call(Rfast2_colcensweibull_mle,x, di, tol,parallel,cores))
 }
 
 #[export]
 gammapois.mle <- function(x, tol = 1e-07) {
   
   n <- length(x)
-  #[export]
   slx <- sum( lgamma(x + 1) )
   sx <- sum(x) 
   m <- sx/n
@@ -199,7 +198,7 @@ halfcauchy.mle <- function(x, tol = 1e-07) {
 
 #[export]
 colhalfcauchy.mle <- function(x, tol = 1e-07, parallel = FALSE, cores = 0) {
-   .Call(Rfast2_colhalfcauchy_mle,x,tol,parallel,cores)
+   t(.Call(Rfast2_colhalfcauchy_mle,x,tol,parallel,cores))
 }
 
 

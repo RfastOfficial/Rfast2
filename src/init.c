@@ -57,7 +57,7 @@ SEXP Rfast2_gamma_reg(SEXP, SEXP, SEXP, SEXP, SEXP);
 SEXP Rfast2_colhalfcauchy_mle(SEXP, SEXP, SEXP, SEXP);
 SEXP Rfast2_halfcauchy_mle(SEXP, SEXP);
 SEXP Rfast2_colcenspois_mle(SEXP, SEXP, SEXP, SEXP);
-SEXP Rfast2_colcenspois(SEXP, SEXP);
+SEXP Rfast2_censpois_mle(SEXP, SEXP);
 SEXP Rfast2_colcensweibull_mle(SEXP, SEXP, SEXP, SEXP, SEXP);
 SEXP Rfast2_censweibull_mle(SEXP, SEXP, SEXP);
 
@@ -104,8 +104,8 @@ static const R_CallMethodDef CallEntries[] = {
 
     {"Rfast2_colhalfcauchy_mle", (DL_FUNC)&Rfast2_colhalfcauchy_mle, 4},
     {"Rfast2_halfcauchy_mle", (DL_FUNC)&Rfast2_halfcauchy_mle, 2},
-    {"Rfast2_colcolcenspois", (DL_FUNC)&Rfast2_colcenspois_mle, 4},
-    {"Rfast2_colcenspois", (DL_FUNC)&Rfast2_colcenspois_mle, 2},
+    {"Rfast2_colcenspois_mle", (DL_FUNC)&Rfast2_colcenspois_mle, 4},
+    {"Rfast2_censpois_mle", (DL_FUNC)&Rfast2_censpois_mle, 2},
     {"Rfast2_colcensweibull_mle", (DL_FUNC)&Rfast2_colcensweibull_mle, 5},
     {"Rfast2_censweibull_mle", (DL_FUNC)&Rfast2_censweibull_mle, 3},
     {NULL, NULL, 0}};

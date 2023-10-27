@@ -9,7 +9,7 @@ using namespace Rcpp;
 using namespace arma;
 using namespace std;
 
-NumericVector halfcauchy_mle(NumericVector x, const double tol = 1e-07)
+List halfcauchy_mle(NumericVector x, const double tol = 1e-07)
 {
 	const double logdp = log(2.0 / (atan(1) * 4));
 
@@ -53,7 +53,7 @@ NumericVector halfcauchy_mle(NumericVector x, const double tol = 1e-07)
 
 	double loglik = lik2 - x1.n_elem * logdp;
 
-	return NumericVector::create(Named("iters") = i, Named("loglik") = loglik, Named("scale") = es);
+	return List::create(Named("iters") = i, Named("loglik") = loglik, Named("scale") = es);
 }
 
 colvec halfcauchy_mle(colvec x1, const double tol = 1e-07)
@@ -153,7 +153,7 @@ static double expSumWithFactorial(double &a1, vec &z, vec &factorial)
 	return accu(exp(a1 * z) / factorial);
 }
 
-NumericVector censpois_mle(NumericVector x, const double tol = 1e-07)
+List censpois_mle(NumericVector x, const double tol = 1e-07)
 {
 
 	vec x1(x.begin(), x.size(), false);
@@ -198,8 +198,9 @@ NumericVector censpois_mle(NumericVector x, const double tol = 1e-07)
 
 	double loglik = sx * a1 - x1.n_elem * expa1 - accu(lgamma(x1 + 1)) + n2 * log(down);
 
-	return NumericVector::create(Named("iters") = i, Named("loglik") = loglik, Named("lamda") = exp(a2));
+	return List::create(Named("iters") = i, Named("loglik") = loglik, Named("lambda") = exp(a2));
 }
+
 colvec censpois_mle(colvec x1, const double tol = 1e-07)
 {
 
@@ -242,8 +243,12 @@ colvec censpois_mle(colvec x1, const double tol = 1e-07)
 	}
 
 	double loglik = sx * a1 - x1.n_elem * expa1 - accu(lgamma(x1 + 1)) + n2 * log(down);
+	colvec v(3);
+	v(0) = i;
+	v(1) = loglik;
+	v(2) = exp(a2);
 
-	return NumericVector::create(Named("iters") = i, Named("loglik") = loglik, Named("lamda") = exp(a2));
+	return v;
 }
 
 // [[Rcpp::export]]
@@ -298,37 +303,37 @@ static vec check(const vec x, const vec y)
 	return di;
 }
 
-vec weibull_mle(vec x, const double tol = 1e-09, const int maxiters = 100)
-{
-	int n = x.n_elem, i = 2;
-	vec lx = foreach<std::log, vec>(x);
-	vec lx2 = lx % lx;
-	vec y = x;
-	double mlx = sum(lx) / n, co = sum(y % lx), sy = sum(y), fb = 1 + mlx - co / sy, fb2 = -1 - (sum(y % lx2) * sy - co * co) / (sy * sy);
-	double b1 = 1, b2 = 1 - fb / fb2;
+// vec weibull_mle(vec x, const double tol = 1e-09, const int maxiters = 100)
+// {
+// 	int n = x.n_elem, i = 2;
+// 	vec lx = foreach<std::log, vec>(x);
+// 	vec lx2 = lx % lx;
+// 	vec y = x;
+// 	double mlx = sum(lx) / n, co = sum(y % lx), sy = sum(y), fb = 1 + mlx - co / sy, fb2 = -1 - (sum(y % lx2) * sy - co * co) / (sy * sy);
+// 	double b1 = 1, b2 = 1 - fb / fb2;
 
-	while (++i < maxiters && sum(abs(b2 - b1)) > tol)
-	{
-		b1 = b2;
-		my_pow2(x, y.memptr(), b1, n);
-		co = sum(y % lx);
-		sy = sum(y);
-		fb = 1 / b1 + mlx - co / sy;
-		fb2 = -1 / (b1 * b1) - (sum(y % lx2) * sy - co * co) / (sy * sy);
-		b2 = b1 - fb / fb2;
-	}
-	vec l(4);
-	l(0) = i - 1;
-	double theta = pow(sy / n, 1 / b2);
-	my_pow2(x / theta, y.memptr(), b2, n);
-	l(1) = n * log(b2) - n * b2 * log(theta) + (b2 - 1) * n * mlx - sum(y);
-	l(2) = b2;
-	l(3) = theta;
+// 	while (++i < maxiters && sum(abs(b2 - b1)) > tol)
+// 	{
+// 		b1 = b2;
+// 		my_pow2(x, y.memptr(), b1, n);
+// 		co = sum(y % lx);
+// 		sy = sum(y);
+// 		fb = 1 / b1 + mlx - co / sy;
+// 		fb2 = -1 / (b1 * b1) - (sum(y % lx2) * sy - co * co) / (sy * sy);
+// 		b2 = b1 - fb / fb2;
+// 	}
+// 	vec l(4);
+// 	l(0) = i - 1;
+// 	double theta = pow(sy / n, 1 / b2);
+// 	my_pow2(x / theta, y.memptr(), b2, n);
+// 	l(1) = n * log(b2) - n * b2 * log(theta) + (b2 - 1) * n * mlx - sum(y);
+// 	l(2) = b2;
+// 	l(3) = theta;
 
-	return l;
-}
+// 	return l;
+// }
 
-NumericVector censweibull_mle(NumericVector x, NumericVector di, const double tol = 1e-07)
+List censweibull_mle(NumericVector x, NumericVector di, const double tol = 1e-07)
 {
 
 	vec x1(x.begin(), x.size(), false);
@@ -347,15 +352,16 @@ NumericVector censweibull_mle(NumericVector x, NumericVector di, const double to
 	vec y1 = y.elem(find(di1 == 1));
 	vec y2 = y.elem(find(di1 == 0));
 
-	vec mod = weibull_mle(x1.elem(find(di1 == 1)), tol);
-
-	double n1 = y1.n_elem;
+	vec x1_in_di = x1.elem(find(di1 == 1));
+	vec mod = weibull_mle2(x1_in_di, x1_in_di.n_elem, tol, 100);
+	double m = 0.0, es = 0.0, s = 0.0, lik2 = 0.0, n1 = y1.n_elem;
+	int i = 0;
 	if (x1.n_elem - n1 > 0)
 	{
 
-		double m = log(mod(3));
-		double es = 1 / mod(2);
-		double s = log(es);
+		m = log(mod(1));
+		es = 1.0 / mod(0);
+		s = log(es);
 
 		vec z1 = (y1 - m) / es;
 		vec z2 = (y2 - m) / es;
@@ -389,8 +395,8 @@ NumericVector censweibull_mle(NumericVector x, NumericVector di, const double to
 		com1 = accu(ez1);
 		com2 = accu(ez2);
 
-		double lik2 = -n1 * s - com2;
-		int i = 2;
+		lik2 = -n1 * s - com2;
+		i = 2;
 		for (; abs(lik2 - lik1) > tol; ++i)
 		{
 
@@ -419,12 +425,8 @@ NumericVector censweibull_mle(NumericVector x, NumericVector di, const double to
 
 			lik2 = com - com1 - n1 * s - com2;
 		}
-		mod(0) = i;
-		mod(1) = lik2 - accu(y1);
-		mod(2) = exp(m);
-		mod(3) = es;
 	}
-	return NumericVector::create(Named("iters") = mod(0), Named("loglik") = mod(1), Named("param:scale") = mod(2), Named("param:1/shape") = mod(3));
+	return List::create(Named("iters") = i, Named("loglik") = lik2 - accu(y1), Named("param") = NumericVector::create(Named("scale") = exp(m), Named("1/shape") = es));
 }
 
 colvec censweibull_mle(colvec x1, colvec di1, const double tol = 1e-07)
@@ -443,15 +445,17 @@ colvec censweibull_mle(colvec x1, colvec di1, const double tol = 1e-07)
 	vec y1 = y.elem(find(di1 == 1));
 	vec y2 = y.elem(find(di1 == 0));
 
-	vec mod = weibull_mle(x1.elem(find(di1 == 1)), tol);
+	vec x1_in_di = x1.elem(find(di1 == 1));
+	vec mod = weibull_mle2(x1_in_di, x1_in_di.n_elem, tol, 100);
 
-	double n1 = y1.n_elem;
+	double m = 0.0, es = 0.0, s = 0.0, lik2 = 0.0, n1 = y1.n_elem;
+	int i = 0;
 	if (x1.n_elem - n1 > 0)
 	{
 
-		double m = log(mod(3));
-		double es = 1 / mod(2);
-		double s = log(es);
+		m = log(mod(1));
+		es = 1.0 / mod(0);
+		s = log(es);
 
 		vec z1 = (y1 - m) / es;
 		vec z2 = (y2 - m) / es;
@@ -485,8 +489,8 @@ colvec censweibull_mle(colvec x1, colvec di1, const double tol = 1e-07)
 		com1 = accu(ez1);
 		com2 = accu(ez2);
 
-		double lik2 = -n1 * s - com2;
-		int i = 2;
+		lik2 = -n1 * s - com2;
+		i = 2;
 		for (; abs(lik2 - lik1) > tol; ++i)
 		{
 
@@ -515,13 +519,9 @@ colvec censweibull_mle(colvec x1, colvec di1, const double tol = 1e-07)
 
 			lik2 = com - com1 - n1 * s - com2;
 		}
-		mod(0) = i;
-		mod(1) = lik2 - accu(y1);
-		mod(2) = exp(m);
-		mod(3) = es;
 	}
 
-	return mod;
+	return {(double)i, lik2 - accu(y1), exp(m), es};
 }
 
 // [[Rcpp::export]]
@@ -537,7 +537,7 @@ NumericMatrix colcensweibull_mle(NumericMatrix x, NumericMatrix di, const double
 	{
 		f.col(i) = censweibull_mle(x1.col(i), di1.col(i), tol);
 	}
-	rownames(ff) = CharacterVector::create("iters", "loglik", "param:scale", "param:1/shape");
+	rownames(ff) = CharacterVector::create("iters", "loglik", "scale", "1/shape");
 	return ff;
 }
 
