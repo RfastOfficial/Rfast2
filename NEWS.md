@@ -16,7 +16,15 @@
 > | jbtests  | Many Jarque–Bera normality tests  |
 > | lm.nonparboot  | Non-parametric bootstrap for linear models  |
 > | normal.etest  | Energy based normality test  |
+> | batch.logistic  | Logistic regression for large scale data  |
+> | colhalfcauchy.mle  | Column-wise MLE for the half Cauchy distribution  |
+> | colcenspois.mle  | Column-wise MLE for the censored Poisson distribution  |
+> | colcensweibull.mle  | Column-wise MLE for the censored Weibull distribution  |
 
+
+> | halfcauchy.mle  | Time improvement  |
+> | censpois.mle  | Time improvement  |
+> | censweibull.mle  | Time improvement  |
 >
 > <h3>**LinkingTo**</h3> (***by speed, correctness or options***)
 >
