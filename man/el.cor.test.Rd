@@ -30,7 +30,7 @@ The tolerance vlaue to terminate the Newton-Raphson algorithm.
 }
 
 \details{
-The empirical or the exponential empirical likelihood test is performed for the correlation coefficient.
+The empirical or the exponential empirical likelihood test is performed for the Pearson correlation coefficient.
 }
 
 \value{
