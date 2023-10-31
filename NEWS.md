@@ -20,6 +20,8 @@
 > | colhalfcauchy.mle  | Column-wise MLE for the half Cauchy distribution  |
 > | colcenspois.mle  | Column-wise MLE for the censored Poisson distribution  |
 > | colcensweibull.mle  | Column-wise MLE for the censored Weibull distribution  |
+> | el.cor.test  | Empirical likelihood test for the correlation coefficient  |
+> | eel.cor.test  | Exponential empirical likelihood test for the correlation coefficient  |
 
 
 > | halfcauchy.mle  | Time improvement  |
