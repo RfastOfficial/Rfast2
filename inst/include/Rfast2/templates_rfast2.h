@@ -64,4 +64,37 @@ SEXP group_col_med_h(SEXP x, SEXP gr, const int length_unique)
     return f;
 }
 
+
+template <class T>
+SEXP group_col_mean_h(SEXP x, SEXP gr, const int length_unique)
+{
+    const int ncl = Rf_ncols(x), nrw = Rf_nrows(x);
+    SEXP f = PROTECT(Rf_allocMatrix(TYPEOF(x), length_unique, ncl));
+    int *ggr = INTEGER(gr);
+    T *ff = (T *)DATAPTR(f), *xx = (T *)DATAPTR(x);
+    vector<vector<double>> eachcol_mat(length_unique, vector<double>());
+    for (int j = 0; j < length_unique * ncl; ++j)
+    {
+        ff[j] = 0;
+    }
+    for (int j = 0; j < ncl; ++j)
+    {
+        const int col_index_f = j * length_unique, col_index_x = j * nrw;
+        for (int i = 0; i < nrw; ++i)
+        {
+            int ind_gr = ggr[i] - 1;
+            eachcol_mat[ind_gr].push_back(xx[i + col_index_x]);
+        }
+        for (int i = 0; i < length_unique; ++i)
+        {
+            vector<double> &tmp = eachcol_mat[i];
+            colvec c(tmp.data(), tmp.size(),false);
+            ff[i + col_index_f] = mean(c);
+            tmp.clear();
+        }
+    }
+    UNPROTECT(1);
+    return f;
+}
+
 #endif
