@@ -16,11 +16,11 @@ Note 3: In general, make sure you give the correct input, in order to get the co
 
 \details{
 \tabular{ll}{
-Package: \tab Rfast2\cr
-Type: \tab Package\cr
-Version: \tab 0.1.5.1 \cr
-Date: \tab 2023-08-07\cr
-License: \tab GPL-2\cr
+Package: \tab \packageName{Rfast2}\cr
+Type: \tab \packageType{Rfast2}\cr
+Version: \tab \packageVersion{Rfast2} \cr
+Date: \tab \packageDate{Rfast2}\cr
+License: \tab \packageLicense{Rfast2}\cr
 }
 }
 
@@ -29,7 +29,7 @@ Manos Papadakis \email{papadakm95@gmail.com}, Michail Tsagris \email{mtsagris@uo
 }
 
 \section{Maintainers }{
-Manos Papadakis \email{rfastofficial@gmail.com}
+Maintainer: \packageMaintainer{Rfast2}
 }
 
 %\note{
