@@ -8,11 +8,10 @@
 
 ------------------------------------------------------------------------
 
-> <h3>**Improved**</h3> (***by speed, correctness or options***)
+> <h3>**New**</h3>
 >
 > | Function |                                     What's new!                                     |
 > |:--------:|:-----------------------------------------------------------------------------------:|
-> | jbtest   | Jarque–Bera normality test  |
 > | jbtests  | Many Jarque–Bera normality tests  |
 > | lm.nonparboot  | Non-parametric bootstrap for linear models  |
 > | normal.etest  | Energy based normality test  |
@@ -22,8 +21,12 @@
 > | colcensweibull.mle  | Column-wise MLE for the censored Weibull distribution  |
 > | el.cor.test  | Empirical likelihood test for the correlation coefficient  |
 > | eel.cor.test  | Exponential empirical likelihood test for the correlation coefficient  |
-
-
+> | jbtest   | Jarque–Bera normality test  |
+>
+> <h3>**Improved**</h3> (***by speed, correctness or options***)
+>
+> | Function |                                     What's new!                                     |
+> |:--------:|:-----------------------------------------------------------------------------------:|
 > | halfcauchy.mle  | Time improvement  |
 > | censpois.mle  | Time improvement  |
 > | censweibull.mle  | Time improvement  |
