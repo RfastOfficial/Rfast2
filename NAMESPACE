@@ -10,7 +10,7 @@ importFrom("Rfast", vm.mle, colvm.mle, colmeans, colsums, eachrow, group, colVar
 colMins, nth, gammamle, weibull.mle, poisson_only, logistic_only, multinom.regs, multinom.mle, Var, 
 normlog.regs, eachcol.apply, Sort, coldiffs, rowsums, rep_col, colShuffle)
 
-importFrom("RANN", nn2)
+importFrom("Rnanoflann", nn)
 
 importFrom(Rcpp, evalCpp)
 importFrom(RcppParallel, RcppParallelLibs)
