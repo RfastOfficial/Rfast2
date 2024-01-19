@@ -54,10 +54,10 @@ het.lmfit <- function(x, y, type = 1) {
 
 
 #[export]
-gammareg <- function(y, x, tol = 1e-07, maxiters = 100) {
+gammareg <- function(y, x, tol = 1e-07, maxiters = 100, warnings = FALSE) {
   mod <- Rfast::gammacon(y)
   x <- model.matrix( y~., data.frame(x) )
-  mod <- .Call(Rfast2_gamma_reg, Y = y, X = x, mod = mod, tol = tol, maxiters = maxiters) 
+  mod <- .Call(Rfast2_gamma_reg, Y = y, X = x, mod = mod, tol = tol, maxiters = maxiters, warnings = warnings) 
   colnames(mod$be) <- colnames(x)
   mod  
 }
@@ -132,9 +132,9 @@ gumbel.reg <- function(y, x, tol = 1e-07, maxiters = 100) {
 
 
 #[export]
-negbin.reg <- function(y, x, tol = 1e-07, maxiters = 100) {
+negbin.reg <- function(y, x, tol = 1e-07, maxiters = 100, warnings = FALSE) {
   x <- model.matrix( y ~. , data.frame(x) )
-  mod <- .Call( Rfast2_negbin_reg,y, x, tol, maxiters)
+  mod <- .Call( Rfast2_negbin_reg,y, x, tol, maxiters, warnings)
   names(mod$info) <- c( "iters", "BIC", "log-likelihood", "dispersion" )
   names(mod$be) <- colnames(x)
   list(info = mod$info, be = mod$be)
@@ -203,9 +203,9 @@ ztp.reg <- function(y, x, full = FALSE, tol = 1e-07, maxiters = 100) {
 
 
 #[export]
-multinom.reg <- function(y, x, tol = 1e-07, maxiters = 100) {
+multinom.reg <- function(y, x, tol = 1e-07, maxiters = 100, warnings = FALSE) {
   x <- model.matrix( y ~. , data.frame(x) )
-  .Call( Rfast2_multinom_reg,y, x, tol, maxiters)
+  .Call( Rfast2_multinom_reg,y, x, tol, maxiters,warnings)
 }  
 
 
@@ -652,12 +652,12 @@ prophelling.reg <- function(y, x, cov = FALSE, tol = 1e-07, maxiters = 100) {
   
 
 #[export]
-censweib.reg <- function (y, x, di, tol = 1e-07, maxiters = 100) {
+censweib.reg <- function (y, x, di, tol = 1e-07, maxiters = 100, warnings = FALSE) {
     X <- model.matrix(y ~ ., data.frame(x))
 	if ( is.null(di) ) {
 	  mod <- Rfast::weib.reg(y, X, tol = tol, maxiters =  maxiters)
 	} else {
-	  mod <- .Call(Rfast2_censweib_reg, y, X, di, tol, maxiters)
+	  mod <- .Call(Rfast2_censweib_reg, y, X, di, tol, maxiters, warnings)
 	}
 	be <- as.vector(mod$be)
     names(be) <- colnames(X)

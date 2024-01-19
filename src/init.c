@@ -36,19 +36,19 @@ SEXP Rfast2_add_term(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 SEXP Rfast2_colspml_mle(SEXP, SEXP, SEXP, SEXP);
 SEXP Rfast2_colcauchy_mle(SEXP, SEXP, SEXP, SEXP);
 SEXP Rfast2_colbeta_mle(SEXP, SEXP, SEXP, SEXP);
-SEXP Rfast2_censweib_reg(SEXP, SEXP, SEXP, SEXP, SEXP);
+SEXP Rfast2_censweib_reg(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 // SEXP Rfast2_frechet2_c(SEXP , SEXP , SEXP , SEXP k1SEXP);
-SEXP Rfast2_fbed_reg(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
+SEXP Rfast2_fbed_reg(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 SEXP Rfast2_fedhc_skeleton(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
-SEXP Rfast2_multinom_reg(SEXP, SEXP, SEXP, SEXP);
+SEXP Rfast2_multinom_reg(SEXP, SEXP, SEXP, SEXP, SEXP);
 SEXP Rfast2_weib_regs(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 SEXP Rfast2_welch_tests(SEXP, SEXP, SEXP, SEXP);
-SEXP Rfast2_wild_boot(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
+SEXP Rfast2_wild_boot(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 SEXP Rfast2_mmhc_skeleton(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
-SEXP Rfast2_negbin_reg(SEXP, SEXP, SEXP, SEXP);
-SEXP Rfast2_negbin_regs(SEXP, SEXP, SEXP, SEXP, SEXP);
+SEXP Rfast2_negbin_reg(SEXP, SEXP, SEXP, SEXP, SEXP);
+SEXP Rfast2_negbin_regs(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 SEXP Rfast2_gamma_regs(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
-SEXP Rfast2_gamma_reg(SEXP, SEXP, SEXP, SEXP, SEXP);
+SEXP Rfast2_gamma_reg(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 
 // Stefanos
 
@@ -89,18 +89,18 @@ static const R_CallMethodDef CallEntries[] = {
     {"Rfast2_colspml_mle", (DL_FUNC)&Rfast2_colspml_mle, 4},
     {"Rfast2_colcauchy_mle", (DL_FUNC)&Rfast2_colcauchy_mle, 4},
     {"Rfast2_colbeta_mle", (DL_FUNC)&Rfast2_colbeta_mle, 4},
-    {"Rfast2_censweib_reg", (DL_FUNC)&Rfast2_censweib_reg, 5},
-    {"Rfast2_fbed_reg", (DL_FUNC)&Rfast2_fbed_reg, 10},
+    {"Rfast2_censweib_reg", (DL_FUNC)&Rfast2_censweib_reg, 6},
+    {"Rfast2_fbed_reg", (DL_FUNC)&Rfast2_fbed_reg, 11},
     {"Rfast2_fedhc_skeleton", (DL_FUNC)&Rfast2_fedhc_skeleton, 7},
-    {"Rfast2_multinom_reg", (DL_FUNC)&Rfast2_multinom_reg, 4},
+    {"Rfast2_multinom_reg", (DL_FUNC)&Rfast2_multinom_reg, 5},
     {"Rfast2_weib_regs", (DL_FUNC)&Rfast2_weib_regs, 6},
     {"Rfast2_welch_tests", (DL_FUNC)&Rfast2_welch_tests, 4},
-    {"Rfast2_wild_boot", (DL_FUNC)&Rfast2_wild_boot, 7},
+    {"Rfast2_wild_boot", (DL_FUNC)&Rfast2_wild_boot, 8},
     {"Rfast2_mmhc_skeleton", (DL_FUNC)&Rfast2_mmhc_skeleton, 8},
-    {"Rfast2_negbin_reg", (DL_FUNC)&Rfast2_negbin_reg, 4},
-    {"Rfast2_negbin_regs", (DL_FUNC)&Rfast2_negbin_regs, 5},
+    {"Rfast2_negbin_reg", (DL_FUNC)&Rfast2_negbin_reg, 5},
+    {"Rfast2_negbin_regs", (DL_FUNC)&Rfast2_negbin_regs, 6},
     {"Rfast2_gamma_regs", (DL_FUNC)&Rfast2_gamma_regs, 6},
-    {"Rfast2_gamma_reg", (DL_FUNC)&Rfast2_gamma_reg, 5},
+    {"Rfast2_gamma_reg", (DL_FUNC)&Rfast2_gamma_reg, 6},
 
     {"Rfast2_colhalfcauchy_mle", (DL_FUNC)&Rfast2_colhalfcauchy_mle, 4},
     {"Rfast2_halfcauchy_mle", (DL_FUNC)&Rfast2_halfcauchy_mle, 2},

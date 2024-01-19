@@ -1,8 +1,8 @@
 #[export]
 fbed.reg <- function (y, x, alpha = 0.05, type = "logistic", K = 0, 
-    backward = FALSE, parallel = FALSE, tol = 1e-07, maxiters = 100) {
+    backward = FALSE, parallel = FALSE, tol = 1e-07, maxiters = 100, warnings = FALSE) {
     mod <- .Call(Rfast2_fbed_reg, y, x, alpha, type, id = integer(0), 
-        K, backward, tol, parallel, maxiters)
+        K, backward, tol, parallel, maxiters,warnings)
     mod$ini <- as.vector(mod$startmod)
     mod$startmod <- NULL
     mod$res <- mod$colsfound
