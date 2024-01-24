@@ -12,11 +12,12 @@ using namespace arma;
 using namespace std;
 
 //[[Rcpp::export]]
-List negbin_regs(NumericVector Y, NumericMatrix X, const double tol, const int maxiters, const bool parallel){
+List negbin_regs(NumericVector Y, NumericMatrix X, const double tol, const int maxiters, const bool parallel, const bool warnings = false){
   int n = X.nrow(), p = X.ncol();
   mat x(X.begin(),n,p,false);
   vec y(Y.begin(),n,false);
 
+  set_warnings(warnings);
   NumericMatrix info(p,1);
   //NumericMatrix betas(p,2);
   double lg = sum(lgamma(y + 1)),lgmy = log(mean(y)), m2 = sum(y%y)/n;
@@ -168,7 +169,7 @@ List negbin_regs(NumericVector Y, NumericMatrix X, const double tol, const int m
   return ret;
 }
 
-RcppExport SEXP Rfast2_negbin_regs(SEXP ySEXP, SEXP xSEXP, SEXP tolSEXP, SEXP maxitersSEXP, SEXP parallelSEXP) {
+RcppExport SEXP Rfast2_negbin_regs(SEXP ySEXP, SEXP xSEXP, SEXP tolSEXP, SEXP maxitersSEXP, SEXP parallelSEXP, SEXP warningsSEXP) {
   BEGIN_RCPP
   RObject __result;
   RNGScope __rngScope;
@@ -177,7 +178,8 @@ RcppExport SEXP Rfast2_negbin_regs(SEXP ySEXP, SEXP xSEXP, SEXP tolSEXP, SEXP ma
   traits::input_parameter< const double >::type tol(tolSEXP);
   traits::input_parameter< const int >::type maxiters(maxitersSEXP);
   traits::input_parameter< const bool >::type parallel(parallelSEXP);
-  __result = negbin_regs(y,x,tol,maxiters,parallel);
+  traits::input_parameter<const bool>::type warnings(warningsSEXP);
+  __result = negbin_regs(y,x,tol,maxiters,parallel,warnings);
   return __result;
   END_RCPP
 }
