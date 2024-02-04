@@ -22,7 +22,7 @@ den.contours <- function(x, type = "normal", v = 5) {
   } else  if ( type == "t" ) {
     ## we will use the previous function 'multivt' to 
     ## estimate the parameters of the bivariate t first
-    f <- Rfast::mvt.mle(x) 
+    f <- Rfast::mvt.mle(x, v = v) 
     m <- f$location
     s <- f$scatter
     r <- s[2] / sqrt(s[1] * s[4])
