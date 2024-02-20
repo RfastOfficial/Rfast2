@@ -10,17 +10,14 @@ Many Jarque–Bera normality tests.
 }
 
 \usage{
-jbtests(x, logged = FALSE)
-jbtest(x, logged = FALSE)
+jbtests(x)
+jbtest(x)
 }
 
 \arguments{
 \item{x}{
 A matrix with the data, where the rows denote the observations and the columns are the variables. 
 In the case of a single sample, then this must be a vector and "jbtest" is to be used.
-}
-\item{logged}{
-Should the p-values be returned (FALSE) or their logarithm (TRUE)?
 }
 }
 

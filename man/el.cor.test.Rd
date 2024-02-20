@@ -11,7 +11,7 @@ Empirical and exponential empirical likelihood test for a correlation coefficien
 
 \usage{
 el.cor.test(y, x, rho, tol = 1e-07)
-el.cor.test(y, x, rho, tol = 1e-07)
+eel.cor.test(y, x, rho, tol = 1e-07)
 }
 
 \arguments{
