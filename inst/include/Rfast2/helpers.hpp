@@ -12,6 +12,18 @@ using namespace std;
 using namespace arma;
 using namespace Rcpp;
 
+inline void set_warnings(const bool flag)
+{
+	if (flag)
+	{
+		arma::set_cerr_default();
+	}
+	else
+	{
+		arma::set_cerr_stream(arma::get_stream_null());
+	}
+}
+
 inline unsigned int get_num_of_threads()
 {
 #ifdef _OPENMP

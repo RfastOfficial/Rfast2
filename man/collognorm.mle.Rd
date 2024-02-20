@@ -11,7 +11,6 @@
 \alias{colsp.mle}
 \alias{colhalfcauchy.mle}
 \alias{colcensweibull.mle}
-\alias{colcenspois.mle}
 
 \title{
 Column-wise MLE of some univariate distributions

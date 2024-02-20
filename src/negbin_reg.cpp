@@ -12,13 +12,14 @@ using namespace arma;
 using namespace std;
 
 //[[Rcpp::export]]
-List negbin_reg(NumericVector Y, NumericMatrix X, const double tol, const int maxiters){
+List negbin_reg(NumericVector Y, NumericMatrix X, const double tol, const int maxiters, const bool warnings = false){
   int n = X.nrow(), p = X.ncol();
   mat x(X.begin(),n,p,false);
   vec y(Y.begin(),n,false);
   List l;
   double lg = sum(lgamma(y + 1));
 
+  set_warnings(warnings);
   vec sxy = conv_to<vec>::from(sum(x.each_col()%y,0));
 
   double m = sxy(0)/n, m2 = sum(y%y)/n, d = 1 - m / (m2 - m*m), er = std::abs(m/d-m), lgmy = std::log(mean(y)), loger = std::log(er);
@@ -74,7 +75,7 @@ List negbin_reg(NumericVector Y, NumericMatrix X, const double tol, const int ma
   return l;
 }
 
-RcppExport SEXP Rfast2_negbin_reg(SEXP ySEXP, SEXP xSEXP, SEXP tolSEXP, SEXP maxitersSEXP) {
+RcppExport SEXP Rfast2_negbin_reg(SEXP ySEXP, SEXP xSEXP, SEXP tolSEXP, SEXP maxitersSEXP, SEXP warningsSEXP) {
   BEGIN_RCPP
   RObject __result;
   RNGScope __rngScope;
@@ -82,7 +83,8 @@ RcppExport SEXP Rfast2_negbin_reg(SEXP ySEXP, SEXP xSEXP, SEXP tolSEXP, SEXP max
   traits::input_parameter< NumericMatrix >::type x(xSEXP);
   traits::input_parameter< const double >::type tol(tolSEXP);
   traits::input_parameter< const int >::type maxiters(maxitersSEXP);
-  __result = negbin_reg(y,x,tol,maxiters);
+  traits::input_parameter<const bool>::type warnings(warningsSEXP);
+  __result = negbin_reg(y,x,tol,maxiters,warnings);
   return __result;
   END_RCPP
 }

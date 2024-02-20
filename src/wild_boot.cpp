@@ -97,10 +97,11 @@ vec diag_of_mult2(mat a, const mat &b)
 // [[Rcpp::export]]
 Rcpp::List wild_boot(const arma::mat &x, const arma::vec &y, arma::ivec cluster,
 					 const arma::uvec &ind, const unsigned int &R, const arma::uvec &tab,
-					 const bool &parallel)
+					 const bool &parallel, const bool warnings = false)
 {
 	List ret;
 
+  set_warnings(warnings);
 	int d = x.n_cols, M = tab.n_elem, gmn, gmx;
 	double dfc = M / (M - 1.0);
 	min_max<int>(cluster.begin(), cluster.end(), gmn, gmx);
@@ -142,9 +143,9 @@ Rcpp::List wild_boot(const arma::mat &x, const arma::vec &y, arma::ivec cluster,
 #ifdef _OPENMP
 #pragma omp for
 #endif
-			for (unsigned int k=0; k < ind.n_elem; ++k)
+			for (unsigned int k = 0; k < ind.n_elem; ++k)
 			{
-				unsigned int j = ind(k)-1;
+				unsigned int j = ind(k) - 1;
 				brcol = br.col(j);
 				currInds = cur_indices(d, j);
 				yb = cr8B(R, M, tab);
@@ -205,7 +206,7 @@ Rcpp::List wild_boot(const arma::mat &x, const arma::vec &y, arma::ivec cluster,
 	return ret;
 }
 
-RcppExport SEXP Rfast2_wild_boot(SEXP xSEXP, SEXP ySEXP, SEXP clusterSEXP, SEXP indSEXP, SEXP RSEXP, SEXP tabSEXP, SEXP parallelSEXP)
+RcppExport SEXP Rfast2_wild_boot(SEXP xSEXP, SEXP ySEXP, SEXP clusterSEXP, SEXP indSEXP, SEXP RSEXP, SEXP tabSEXP, SEXP parallelSEXP, SEXP warningsSEXP)
 {
 	BEGIN_RCPP
 	RObject __result;
@@ -217,7 +218,8 @@ RcppExport SEXP Rfast2_wild_boot(SEXP xSEXP, SEXP ySEXP, SEXP clusterSEXP, SEXP 
 	traits::input_parameter<const unsigned int>::type R(RSEXP);
 	traits::input_parameter<const arma::uvec>::type tab(tabSEXP);
 	traits::input_parameter<const bool>::type parallel(parallelSEXP);
-	__result = wild_boot(x, y, cluster, ind, R, tab, parallel);
+  traits::input_parameter<const bool>::type warnings(warningsSEXP);
+	__result = wild_boot(x, y, cluster, ind, R, tab, parallel,warnings);
 	return __result;
 	END_RCPP
 }
