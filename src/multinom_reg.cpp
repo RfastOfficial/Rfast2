@@ -11,7 +11,7 @@ using namespace arma;
 using namespace std;
 
 //[[Rcpp::export]]
-List multinom_reg(NumericVector Y, NumericMatrix X0, const double tol, const int maxiters, const bool warnings = false){
+List multinom_reg(NumericVector Y, NumericMatrix X0, const double tol, const int maxiters){
   int n = X0.nrow(), p = X0.ncol();
   mat y = design_matrix_helper<mat,NumericVector>(Y);
   y.shed_col(0);
@@ -20,7 +20,6 @@ List multinom_reg(NumericVector Y, NumericMatrix X0, const double tol, const int
   List l;
   rowvec m0 = mean(y), b0 = log(m0/(1-m0));
 
-  set_warnings(warnings);
   b1.row(0) = b0;
 
   mat e = y.each_row()-m0;
@@ -113,7 +112,7 @@ List multinom_reg(NumericVector Y, NumericMatrix X0, const double tol, const int
 
 
 
-RcppExport SEXP Rfast2_multinom_reg(SEXP ySEXP,SEXP x0SEXP, SEXP tolSEXP,SEXP maxitersSEXP, SEXP warningsSEXP) {
+RcppExport SEXP Rfast2_multinom_reg(SEXP ySEXP,SEXP x0SEXP, SEXP tolSEXP,SEXP maxitersSEXP) {
 BEGIN_RCPP
     RObject __result;
     RNGScope __rngScope;
@@ -121,8 +120,7 @@ BEGIN_RCPP
     traits::input_parameter< NumericMatrix >::type x0(x0SEXP);
     traits::input_parameter< const double >::type tol(tolSEXP);
     traits::input_parameter< const int >::type maxiters(maxitersSEXP);
-  traits::input_parameter<const bool>::type warnings(warningsSEXP);
-    __result = multinom_reg(y,x0,tol,maxiters,warnings);
+    __result = multinom_reg(y,x0,tol,maxiters);
     return __result;
 END_RCPP
 }

@@ -10,7 +10,7 @@ using namespace Rcpp;
 using namespace std;
 
 // [[Rcpp::export]]
-List censweib_reg (NumericVector Y, NumericMatrix X, NumericVector di = NumericVector(1), const double tol = 1e-07, const int maxiters = 100, const bool warnings = false){
+List censweib_reg (NumericVector Y, NumericMatrix X, NumericVector di = NumericVector(1), const double tol = 1e-07, const int maxiters = 100){
   List ret;
   int n = X.nrow(), p = X.ncol(),i,j, n1=0,disz = di.size();
 
@@ -19,8 +19,6 @@ List censweib_reg (NumericVector Y, NumericMatrix X, NumericVector di = NumericV
   double es = 1,m = 0,sy1 = 0,lik1=0, tmp,tmp2, ders=0, ders2=0,ez,z;
   vec y(n);
   vec derb(p,fill::zeros);
-
-  set_warnings(warnings);
 
   mat::row_iterator xrj;
   mat::row_iterator xbegin;
@@ -203,7 +201,7 @@ List censweib_reg (NumericVector Y, NumericMatrix X, NumericVector di = NumericV
 
 
 
-RcppExport SEXP Rfast2_censweib_reg(SEXP YSEXP,SEXP XSEXP,SEXP diSEXP,SEXP tolSEXP,SEXP maxitersSEXP,SEXP warningsSEXP) {
+RcppExport SEXP Rfast2_censweib_reg(SEXP YSEXP,SEXP XSEXP,SEXP diSEXP,SEXP tolSEXP,SEXP maxitersSEXP) {
   BEGIN_RCPP
   RObject __result;
   RNGScope __rngScope;
@@ -212,8 +210,7 @@ RcppExport SEXP Rfast2_censweib_reg(SEXP YSEXP,SEXP XSEXP,SEXP diSEXP,SEXP tolSE
   traits::input_parameter< NumericVector >::type di(diSEXP);
   traits::input_parameter< const double >::type tol(tolSEXP);
   traits::input_parameter< const int >::type maxiters(maxitersSEXP);
-  traits::input_parameter< const bool >::type warnings(warningsSEXP);
-  __result = censweib_reg(Y,X,di,tol,maxiters,warnings);
+  __result = censweib_reg(Y,X,di,tol,maxiters);
   return __result;
   END_RCPP
 }
