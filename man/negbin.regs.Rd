@@ -35,6 +35,9 @@ you do not have the option to set the number of cores.
 \item{maxiters}{
 The maximum number of iterations that can take place in each regression.
 }
+\item{warnings}{
+Should warnings appear or not? Default is FALSE.
+}
 }
 
 \details{

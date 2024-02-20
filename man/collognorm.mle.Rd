@@ -31,7 +31,7 @@ colbeta.mle(x, tol = 1e-07, maxiters = 100, parallel = FALSE)
 colunitweibull.mle(x, tol = 1e-07, maxiters = 100, parallel = FALSE)
 colpowerlaw.mle(x)
 colsp.mle(x)
-colhafcauchy.mle(x, tol = 1e-07, parallel = FALSE, cores = 0)
+colhalfcauchy.mle(x, tol = 1e-07, parallel = FALSE, cores = 0)
 colcensweibull.mle(x, di, tol = 1e-07, parallel = FALSE, cores = 0)
 colcenspois.mle(x, tol = 1e-07, parallel = FALSE, cores = 0)
 }

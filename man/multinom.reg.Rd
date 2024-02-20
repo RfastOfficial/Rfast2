@@ -9,7 +9,7 @@ Multinomial regression.
 }
 
 \usage{
-multinom.reg(y, x, tol = 1e-07, maxiters = 100)
+multinom.reg(y, x, tol = 1e-07, maxiters = 100, warnings = FALSE)
 }
 
 \arguments{
@@ -24,6 +24,9 @@ The tolerance value to terminate the Newton-Raphson algorithm.
 }
 \item{maxiters}{
 The maximum number of iterations Newton-Raphson will perform.
+}
+\item{warnings}{
+Should warnings appear or not? Default is FALSE.
 }
 }
 

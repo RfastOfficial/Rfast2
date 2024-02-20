@@ -9,7 +9,7 @@ Negative binomial regression.
 }
 
 \usage{
-negbin.reg(y, x, tol = 1e-07, maxiters = 100)
+negbin.reg(y, x, tol = 1e-07, maxiters = 100, warnings = FALSE)
 }
 
 \arguments{
@@ -24,6 +24,9 @@ The tolerance value required by the Newton-Raphson to stop.
 }
 \item{maxiters}{
 The maximum iterations allowed.
+}
+\item{warnings}{
+Should warnings appear or not? Default is FALSE.
 }
 }
 

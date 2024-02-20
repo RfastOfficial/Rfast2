@@ -9,7 +9,7 @@ Censored Weibull regression model.
 }
 
 \usage{
-censweib.reg(y, x, di, tol = 1e-07, maxiters = 100)
+censweib.reg(y, x, di, tol = 1e-07, maxiters = 100, warnings = FALSE)
 }
 
 \arguments{
@@ -29,6 +29,9 @@ The tolerance value to terminate the Newton-Raphson algorithm.
 }
 \item{maxiters}{
 The max number of iterations that can take place in each regression.
+}
+\item{warnings}{
+Should warnings appear or not? Default is FALSE.
 }
 }
 

@@ -9,7 +9,7 @@ Cluster robust wild bootstrap for linear models.
 }
 
 \usage{
-wild.boot(y, x, cluster, ind = NULL, R = 999, parallel = FALSE)
+wild.boot(y, x, cluster, ind = NULL, R = 999, parallel = FALSE, warnings = FALSE)
 }
 
 \arguments{
@@ -31,6 +31,9 @@ The number of bootstrap replicates to perform.
 }
 \item{parallel}{
 Do you want the process to take place in parallel? If yes, then set this equal to TRUE.
+}
+\item{warnings}{
+Should warnings appear or not? Default is FALSE.
 }
 }
 

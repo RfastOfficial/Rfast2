@@ -9,7 +9,7 @@ Logistic regression for large scale data.
 }
 
 \usage{
-batch.logistic(y, x, k = 10))
+batch.logistic(y, x, k = 10)
 }
 
 \arguments{
