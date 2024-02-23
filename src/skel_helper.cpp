@@ -6,7 +6,7 @@ using namespace arma;
 using namespace Rcpp;
 
 double g2Statistic(unsigned int* counts, unsigned const int xdim, unsigned const int ydim) {
-  if (counts == NULL) {
+  if (counts == nullptr) {
     return 0;
   }
   double statistic = 0;
@@ -87,7 +87,7 @@ vec g2Test(mat& data, unsigned const int x, unsigned const int y, int* cs, unsig
     unsigned int curx = (unsigned int)data(i, x);
     unsigned int cury = (unsigned int)data(i, y);
 
-    if (counts[key] == NULL) {
+    if (counts[key] == nullptr) {
       counts[key] = new unsigned int[xdim * ydim];
       //safeFillZero(counts[key],counts[key]+xdim * ydim);
       memset(counts[key], 0, sizeof(unsigned int) * xdim * ydim);
@@ -101,7 +101,7 @@ vec g2Test(mat& data, unsigned const int x, unsigned const int y, int* cs, unsig
   unsigned int df = (xdim - 1) * (ydim - 1) * prod[ncs];
   delete[] prod;
   for (unsigned int i = 0; i < size; ++i) {
-    if (counts[i] != NULL)
+    if (counts[i] != nullptr)
       delete[] counts[i];
   }
   delete[] counts;
