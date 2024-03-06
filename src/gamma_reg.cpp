@@ -11,7 +11,7 @@ using namespace Rcpp;
 using namespace std;
 
 // [[Rcpp::export]]
-List gamma_reg(NumericVector Y, NumericMatrix X, List mod, const double tol = 1e-08, const int maxiters = 100, const bool warnings = false)
+List gamma_reg(NumericVector Y, NumericMatrix X, List mod, const double tol = 1e-08, const int maxiters = 100)
 {
   int p = X.ncol(), n = X.nrow();
   mat x(X.begin(), n, p, false);
@@ -19,7 +19,6 @@ List gamma_reg(NumericVector Y, NumericMatrix X, List mod, const double tol = 1e
   List ret;
   double m0, d1;
   int i;
-  set_warnings(warnings);
   if (mod.length() < 2)
   {
     vec ly = log(y);
@@ -94,7 +93,7 @@ List gamma_reg(NumericVector Y, NumericMatrix X, List mod, const double tol = 1e
   return ret;
 }
 
-RcppExport SEXP Rfast2_gamma_reg(SEXP YSEXP, SEXP XSEXP, SEXP modSEXP, SEXP tolSEXP, SEXP maxitersSEXP, SEXP warningsSEXP)
+RcppExport SEXP Rfast2_gamma_reg(SEXP YSEXP, SEXP XSEXP, SEXP modSEXP, SEXP tolSEXP, SEXP maxitersSEXP)
 {
   BEGIN_RCPP
   RObject __result;
@@ -104,8 +103,7 @@ RcppExport SEXP Rfast2_gamma_reg(SEXP YSEXP, SEXP XSEXP, SEXP modSEXP, SEXP tolS
   traits::input_parameter<List>::type mod(modSEXP);
   traits::input_parameter<const double>::type tol(tolSEXP);
   traits::input_parameter<const int>::type maxiters(maxitersSEXP);
-  traits::input_parameter<const bool>::type warnings(warningsSEXP);
-  __result = censweib_reg(Y,X,di,tol,maxiters,warnings);
+  __result = gamma_reg(Y,X,mod,tol,maxiters);
   return __result;
   END_RCPP
 }

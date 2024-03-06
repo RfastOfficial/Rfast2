@@ -9,7 +9,7 @@ Gamma regression with a log-link.
 }
 
 \usage{
-gammareg(y, x, tol = 1e-07, maxiters = 100, warnings = FALSE)
+gammareg(y, x, tol = 1e-07, maxiters = 100)
 }
 
 \arguments{
@@ -25,8 +25,8 @@ The tolerance value to terminate the Newton-Raphson algorithm.
 \item{maxiters}{
 The maximum number of iterations that can take place in the regression.
 }
-\item{warnings}{
-Should warnings appear or not? Default is FALSE.
+\item{}{
+Should  appear or not? Default is FALSE.
 }
 }
 

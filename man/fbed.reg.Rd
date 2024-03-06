@@ -10,7 +10,7 @@ Forward Backward Early Dropping selection regression.
 
 \usage{
 fbed.reg(y, x, alpha = 0.05, type = "logistic", K = 0, backward = FALSE, 
-         parallel = FALSE, tol = 1e-07, maxiters = 100, warnings = FALSE) 
+         parallel = FALSE, tol = 1e-07, maxiters = 100) 
 }
 
 \arguments{
@@ -52,9 +52,6 @@ The tolerance value to terminate the Newton-Raphson algorithm.
 }
 \item{maxiters}{
 The maximum number of iterations Newton-Raphson will perform.
-}
-\item{warnings}{
-Should warnings appear or not? Default is FALSE.
 }
 }
 

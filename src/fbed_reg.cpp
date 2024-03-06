@@ -15,9 +15,8 @@ using namespace std;
 
 // [[Rcpp::export]]
 List fbed_reg(Rcpp::NumericVector Y, Rcpp::NumericMatrix X,
-              const double sig = 0.05, const std::string type = "logistic", IntegerVector id = IntegerVector(1), int K = 0, bool backward = 1, const double tol = 1e-07, const bool parallel = 1, const int maxiters = 100, const bool warnings = false)
+              const double sig = 0.05, const std::string type = "logistic", IntegerVector id = IntegerVector(1), int K = 0, bool backward = 1, const double tol = 1e-07, const bool parallel = 1, const int maxiters = 100)
 {
-  set_warnings(warnings);
   Timer timer;
   timer.Start();
   // types are: logistic, poisson, rint, quasi logistic,
@@ -585,7 +584,7 @@ List fbed_reg(Rcpp::NumericVector Y, Rcpp::NumericMatrix X,
   return l;
 }
 
-RcppExport SEXP Rfast2_fbed_reg(SEXP ySEXP, SEXP xSEXP, SEXP sigSEXP, SEXP typeSEXP, SEXP idSEXP, SEXP kSEXP, SEXP backwardSEXP, SEXP tolSEXP, SEXP parallelSEXP, SEXP maxitersSEXP,SEXP warningsSEXP)
+RcppExport SEXP Rfast2_fbed_reg(SEXP ySEXP, SEXP xSEXP, SEXP sigSEXP, SEXP typeSEXP, SEXP idSEXP, SEXP kSEXP, SEXP backwardSEXP, SEXP tolSEXP, SEXP parallelSEXP, SEXP maxitersSEXP)
 {
   BEGIN_RCPP
   RObject __result;
@@ -600,8 +599,7 @@ RcppExport SEXP Rfast2_fbed_reg(SEXP ySEXP, SEXP xSEXP, SEXP sigSEXP, SEXP typeS
   traits::input_parameter<const double>::type tol(tolSEXP);
   traits::input_parameter<const bool>::type parallel(parallelSEXP);
   traits::input_parameter<const int>::type maxiters(maxitersSEXP);
-  traits::input_parameter< const bool >::type warnings(warningsSEXP);
-  __result = fbed_reg(y, x, sig, type, id, k, backward, tol, parallel, maxiters,warnings);
+  __result = fbed_reg(y, x, sig, type, id, k, backward, tol, parallel, maxiters);
   return __result;
   END_RCPP
 }

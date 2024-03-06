@@ -1,12 +1,12 @@
-\name{Many Jarque–Bera normality tests}
+\name{Many Jarque-Bera normality tests}
 \alias{jbtests}
 \alias{jbtest}
 \title{
-Many Jarque–Bera normality tests
+Many Jarque-Bera normality tests
 }
 
 \description{
-Many Jarque–Bera normality tests.
+Many Jarque-Bera normality tests.
 }
 
 \usage{
@@ -22,7 +22,7 @@ In the case of a single sample, then this must be a vector and "jbtest" is to be
 }
 
 \details{
-The Jarque–Bera univariate normality test is performed for each column (variable) of the matrix x. 
+The Jarque-Bera univariate normality test is performed for each column (variable) of the matrix x. 
 }
 
 \value{
