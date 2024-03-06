@@ -50,7 +50,7 @@ R implementation and documentation: Michail Tsagris <mtsagris@uoc.gr>.
 }
 
 \examples{
-x <- matrix( norm(100 * 20), ncol = 20 )
+x <- matrix( rnorm(100 * 20), ncol = 20 )
 a <- jbtests(x) 
 x <- rnorm(100)
 jbtest(x)
