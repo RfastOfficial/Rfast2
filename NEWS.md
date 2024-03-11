@@ -4,6 +4,41 @@
 
 </h1>
 
+### **Version 0.1.5.2 - Zagreus**
+
+------------------------------------------------------------------------
+
+> <h3>**New**</h3>
+>
+> | Function |                                     What's new!                                     |
+> |:--------:|:-----------------------------------------------------------------------------------:|
+> | jbtests  | Many Jarque–Bera normality tests  |
+> | lm.nonparboot  | Non-parametric bootstrap for linear models  |
+> | normal.etest  | Energy based normality test  |
+> | batch.logistic  | Logistic regression for large scale data  |
+> | colhalfcauchy.mle  | Column-wise MLE for the half Cauchy distribution  |
+> | colcenspois.mle  | Column-wise MLE for the censored Poisson distribution  |
+> | colcensweibull.mle  | Column-wise MLE for the censored Weibull distribution  |
+> | el.cor.test  | Empirical likelihood test for the correlation coefficient  |
+> | eel.cor.test  | Exponential empirical likelihood test for the correlation coefficient  |
+> | jbtest   | Jarque–Bera normality test  |
+>
+> <h3>**Improved**</h3> (***by speed, correctness or options***)
+>
+> | Function |                                     What's new!                                     |
+> |:--------:|:-----------------------------------------------------------------------------------:|
+> | halfcauchy.mle  | Time improvement  |
+> | censpois.mle  | Time improvement  |
+> | censweibull.mle  | Time improvement  |
+>
+> <h3>**LinkingTo**</h3> (***by speed, correctness or options***)
+>
+> | Function/Structure |     What's new!      |
+> |:------------------:|:--------------------:|
+> |             |   |
+
+</br> </br>
+
 ### **Version 0.1.5.1 - Theseus**
 
 ------------------------------------------------------------------------

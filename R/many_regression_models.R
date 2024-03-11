@@ -68,7 +68,7 @@ gammaregs <- function(y, x, tol = 1e-07, logged = FALSE, parallel = FALSE, maxit
 
 #[export]
 logiquant.regs <- function(y, x, logged = FALSE) {
-  m <- Rfast::med(y)
+  m <- Rfast::Median(y)
   y[y > m] <- 1
   y[y != 1] <- 0
   Rfast::univglms(y, x, oiko = "binomial", logged = logged)
@@ -138,7 +138,7 @@ score.zipregs <- function(y, x, logged = FALSE) {
 
 #[export]
 negbin.regs <- function (y, x, type = 1, tol = 1e-07, logged = FALSE, parallel = FALSE, maxiters = 100) {
-  mod <- .Call("Rfast2_negbin_regs", y, x, tol, maxiters, parallel)$info
+  mod <- .Call(Rfast2_negbin_regs, y, x, tol, maxiters, parallel)$info
   ini <- Rfast::negbin.mle(y, type = type)$loglik
   stat <- 2 * (mod - ini)
   pvalue <- pchisq(stat, 1, lower.tail = FALSE, log.p = logged)

@@ -685,6 +685,41 @@ zigamma.reg <- function (y, x, full = FALSE, tol = 1e-07, maxiters = 100) {
 
 
 
+#[export]
+batch.logistic <- function(y, x, k = 10) {
+  
+  dm <- dim(x)  ;  n <- dm[1]  ;  d <- dm[2]
+  options(warn = -1)
+  j <- matrix(1:n, ncol = k)
+  be <- matrix(nrow = k, ncol = d + 1)
+  se <- matrix(nrow = k, ncol = d + 1)
+ 
+  for (i in 1:k) { 
+    mod <- Rfast::glm_logistic(x[ j[, i], ], y[ j[, i] ], full = TRUE )
+    be[i, ] <- mod$info[, 1]
+    se[i, ] <- mod$info[, 2]^2
+  }
+  v <- 1 / Rfast::colsums(1/se)
+  b <- Rfast::colsums(be / se) * v  
+
+  p <- 1 / (1 + exp( - cbind(1, x) %*% b) )
+  devi <- 2 * sum( y * log(y / p), na.rm = TRUE ) + 
+          2 * sum( (1 - y) * log( (1 - y)/(1 - p) ), na.rm = TRUE )
+  
+  res <- cbind( b, sqrt(v) )
+  colnames(res) <- c("beta", "se")
+  nama <- colnames(x) 
+  if ( is.null(nama) ) {
+    rownames(res) <- c( "(Intercept)", paste("X", 1:d, sep = "") )
+  } else  rownames(res) <- c( "(Intercept)", colnames(x) )
+
+  list( res = res, devi = devi )  
+}
+
+
+
+
+
 
 
 

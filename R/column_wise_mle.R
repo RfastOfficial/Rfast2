@@ -80,7 +80,7 @@ colspml.mle <- function(x, tol = 1e-07, maxiters = 100, parallel = FALSE) {
 #[export]
 colcauchy.mle <- function (x, tol = 1e-07, maxiters = 100, parallel = FALSE) {
     res <- .Call(Rfast2_colcauchy_mle, x, tol, parallel, maxiters)
-    colnames(res) <- c("location", "scale", "loglik")
+    colnames(res) <- c("loglik", "location", "scale")
     res
 }
 
@@ -105,3 +105,29 @@ colunitweibull.mle <- function(x, tol = 1e-07, maxiters = 100, parallel = FALSE)
   param <- cbind(param, loglik)
   param
 } 
+
+
+#[export]
+colpowerlaw.mle <- function(x) {
+  n <- dim(x)[1]
+  x1 <- Rfast::colMins(x, TRUE)
+  com <- Rfast::colsums( log(x) ) - n * log(x1)
+  a <- 1 + n/com
+  loglik <- n * log((a - 1)/x1) - a * com
+  res <- cbind(a, loglik)
+  colnames(res) <- c("alpha", "loglik")
+  res
+}
+  
+
+#[export]
+colsp.mle <- function(x) {
+  n <- dim(x)[1]
+  slx <- Rfast::colsums( log(x) )
+  b <-  - n / slx
+  loglik <- n * log(b) + (b - 1) * slx
+  res <- cbind(b, loglik)
+  colnames(res) <- c("beta", "loglik")
+  res
+}  
+  

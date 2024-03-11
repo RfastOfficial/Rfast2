@@ -1,10 +1,10 @@
-\name{Covariance between a variable and a matrix of variables}
+\name{Covariance between a variable and a set of variables}
 \alias{covar}
 
-\title{Covariance between a variable and a matrix of variables}
+\title{Covariance between a variable and a set of variables}
 
 \description{
-Covariance between a variable and a matrix of variables.
+Covariance between a variable and a set of variables.
 }
 
 \usage{

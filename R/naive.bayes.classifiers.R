@@ -454,8 +454,8 @@ nb.cv <- function(x, ina, type = "gaussian", folds = NULL, nfolds = 10,
     runs <- sapply(names, function(x) NULL)
     if (!is.null(seed)) 
         set.seed(seed)
-    oop <- options(warn = -1)
-    on.exit(options(oop))
+    #oop <- options(warn = -1)
+    #on.exit(options(oop))
     if (!stratified) {
         rat <- length(ina)%%nfolds
         mat <- matrix(Rfast2::Sample.int(length(ina)), ncol = nfolds)

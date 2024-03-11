@@ -77,5 +77,6 @@
         "unordered_set": "cpp",
         "execution": "cpp",
         "numeric": "cpp"
-    }
+    },
+    "r.lsp.promptToInstall": false
 }

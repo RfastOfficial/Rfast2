@@ -52,6 +52,17 @@ SEXP Rfast2_gamma_reg(SEXP, SEXP, SEXP, SEXP, SEXP);
 
 // Stefanos
 
+// Lasithiotakis
+
+SEXP Rfast2_colhalfcauchy_mle(SEXP, SEXP, SEXP, SEXP);
+SEXP Rfast2_halfcauchy_mle(SEXP, SEXP);
+SEXP Rfast2_colcenspois_mle(SEXP, SEXP, SEXP, SEXP);
+SEXP Rfast2_censpois_mle(SEXP, SEXP);
+SEXP Rfast2_colcensweibull_mle(SEXP, SEXP, SEXP, SEXP, SEXP);
+SEXP Rfast2_censweibull_mle(SEXP, SEXP, SEXP);
+
+// Lasithiotakis
+
 static const R_CallMethodDef CallEntries[] = {
     {"Rfast2_benchmark", (DL_FUNC)&Rfast2_benchmark, 4},
     {"Rfast2_col_group", (DL_FUNC)&Rfast2_col_group, 4},
@@ -90,6 +101,13 @@ static const R_CallMethodDef CallEntries[] = {
     {"Rfast2_negbin_regs", (DL_FUNC)&Rfast2_negbin_regs, 5},
     {"Rfast2_gamma_regs", (DL_FUNC)&Rfast2_gamma_regs, 6},
     {"Rfast2_gamma_reg", (DL_FUNC)&Rfast2_gamma_reg, 5},
+
+    {"Rfast2_colhalfcauchy_mle", (DL_FUNC)&Rfast2_colhalfcauchy_mle, 4},
+    {"Rfast2_halfcauchy_mle", (DL_FUNC)&Rfast2_halfcauchy_mle, 2},
+    {"Rfast2_colcenspois_mle", (DL_FUNC)&Rfast2_colcenspois_mle, 4},
+    {"Rfast2_censpois_mle", (DL_FUNC)&Rfast2_censpois_mle, 2},
+    {"Rfast2_colcensweibull_mle", (DL_FUNC)&Rfast2_colcensweibull_mle, 5},
+    {"Rfast2_censweibull_mle", (DL_FUNC)&Rfast2_censweibull_mle, 3},
     {NULL, NULL, 0}};
 
 void R_init_Rfast2(DllInfo *info)

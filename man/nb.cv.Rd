@@ -54,6 +54,9 @@ If pred.ret is TRUE the predicted values for each fold are returned as elements 
 \item{crit}{
 A vector whose length is equal to the number of k and is the accuracy metric for each k. 
 For the classification case it is the percentage of correct classification. 
+If you want to compute other metrics of accuracy we suggest you choose "pred.ret = TRUE" 
+when running the function and then write a simple function to compute 
+more metrics. See .
 }
 }
 

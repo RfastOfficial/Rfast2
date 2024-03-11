@@ -1,15 +1,17 @@
-\name{Parametric bootstrap for linear regression model}
+\name{Parametric and non-parametric bootstrap for linear regression model}
 \alias{lm.parboot}
+\alias{lm.nonparboot}
 \title{
-Parametric bootstrap for linear regression model
+Parametric and non-parametric bootstrap for linear regression model
 }
 
 \description{
-Parametric bootstrap for linear regression model.
+Parametric and non-parametric bootstrap for linear regression model.
 }
 
 \usage{
 lm.parboot(x, y, R = 1000)
+lm.nonparboot(x, y, R = 1000)
 }
 
 \arguments{
@@ -25,7 +27,7 @@ The number of parametric bootstrap replications to perform.
 }
 
 \details{
-An efficient implementation of the parametric bootstrap for linear models is provided.
+An efficient implementation of parametric or non-parametric bootstrapping the residuals for linear models is provided.
 }
 
 \value{

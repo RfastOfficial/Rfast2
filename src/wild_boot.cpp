@@ -142,9 +142,9 @@ Rcpp::List wild_boot(const arma::mat &x, const arma::vec &y, arma::ivec cluster,
 #ifdef _OPENMP
 #pragma omp for
 #endif
-			for (unsigned int k=0; k < ind.n_elem; ++k)
+			for (unsigned int k = 0; k < ind.n_elem; ++k)
 			{
-				unsigned int j = ind(k)-1;
+				unsigned int j = ind(k) - 1;
 				brcol = br.col(j);
 				currInds = cur_indices(d, j);
 				yb = cr8B(R, M, tab);

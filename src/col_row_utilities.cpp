@@ -30,6 +30,35 @@ void group_col_vars_h(SEXP& x,SEXP& gr,const int length_unique,Environment& resu
     UNPROTECT(2);
 }*/
 
+
+NumericVector group_mean(NumericVector x,IntegerVector group,SEXP maxSEXP){
+	int n;
+	if(Rf_isNull(maxSEXP))
+		maximum<int>(group.begin(),group.end(),n);
+	else
+		n=Rf_asInteger(maxSEXP);
+  IntegerVector::iterator kk=group.begin();
+  pr<double,int> *f=new pr<double,int>[n];
+  NumericVector::iterator xx=x.begin(),rr;
+  int i;
+  for(;xx!=x.end();++xx,++kk){
+    f[*kk-1].first+=*xx;
+    f[*kk-1].second++;
+  }
+  int count_not_zero=0;
+  for(i=0;i<n;++i){
+    if(f[i].second!=0)
+      ++count_not_zero;
+  }
+  NumericVector res(count_not_zero);
+  for(i=0,rr=res.begin();i<n;++i){
+    if(f[i].second!=0)
+      *rr++=f[i].first/f[i].second;
+  }
+  delete[] f;
+  return res;
+}
+
 SEXP group_col(SEXP x, SEXP y, const int length_unique, const string method = "sum")
 {
   if (method == "sum")
@@ -73,6 +102,15 @@ SEXP group_col(SEXP x, SEXP y, const int length_unique, const string method = "s
       return group_col_med_h<int>(x, y, length_unique);
     else if (Rf_isReal(x))
       return group_col_med_h<double>(x, y, length_unique);
+    else
+      stop("Error: Unsupported type of matrix.");
+  }
+  else if (method == "mean")
+  {
+    if (Rf_isInteger(x))
+      return group_col_mean_h<int>(x, y, length_unique);
+    else if (Rf_isReal(x))
+      return group_col_mean_h<double>(x, y, length_unique);
     else
       stop("Error: Unsupported type of matrix.");
   }
