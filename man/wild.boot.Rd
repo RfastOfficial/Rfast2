@@ -32,9 +32,6 @@ The number of bootstrap replicates to perform.
 \item{parallel}{
 Do you want the process to take place in parallel? If yes, then set this equal to TRUE.
 }
-\item{}{
-Should  appear or not? Default is FALSE.
-}
 }
 
 \details{

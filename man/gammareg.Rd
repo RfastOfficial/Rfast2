@@ -25,9 +25,6 @@ The tolerance value to terminate the Newton-Raphson algorithm.
 \item{maxiters}{
 The maximum number of iterations that can take place in the regression.
 }
-\item{}{
-Should  appear or not? Default is FALSE.
-}
 }
 
 \details{

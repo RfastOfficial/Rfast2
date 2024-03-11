@@ -25,9 +25,6 @@ The tolerance value required by the Newton-Raphson to stop.
 \item{maxiters}{
 The maximum iterations allowed.
 }
-\item{}{
-Should  appear or not? Default is FALSE.
-}
 }
 
 \details{

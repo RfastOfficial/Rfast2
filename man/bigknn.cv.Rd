@@ -75,7 +75,7 @@ A vector whose length is equal to the number of k and is the accuracy metric for
 For the classification case it is the percentage of correct classification. For the regression
 case the mean square of prediction error. If you want to compute other metrics of accuracy we suggest
 you choose "pred.ret = TRUE" when running the function and then write a simple function to compute 
-more metrics. See \code{\link{col.accs}} or \code{\link{colmses}}.
+more metrics. See \code{\link{colmses}}.
 }
 }
 
