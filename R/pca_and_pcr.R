@@ -35,12 +35,10 @@ pcr <- function (y, x, k = 1, xnew = NULL) {
   m <- Rfast::colmeans(x)
   s <- Rfast::colVars(x, std = TRUE)
   x <- t( ( t(x) - m ) / s )
-
   #eig <- prcomp(x, center = FALSE, scale = FALSE)
   #values <- eig$sdev^2
   #vec <- eig$rotation[, k1, drop = FALSE]
   #z <- eig$x[, k1, drop = FALSE]
-
   eig <- Rfast2::pca(x, center = FALSE, scale = FALSE, k = max(k1), vectors = TRUE)
   k1 <- which( !is.na(eig$values) )
   values <- eig$values[k1]
