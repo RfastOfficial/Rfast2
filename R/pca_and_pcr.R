@@ -45,6 +45,7 @@ pcr <- function (y, x, k = 1, xnew = NULL) {
   if ( length(k1) == 1 ) {
     vec <- as.matrix( eig$vectors )
   } else vec <- eig$vectors[, k1]
+  
   per <- cumsum( values ) / p  ## cumulative proportion of each eigenvalue
   z <- x %*% vec  ## PCA scores
   zzk <- 1 / Rfast::colsums(z^2)
@@ -52,6 +53,7 @@ pcr <- function (y, x, k = 1, xnew = NULL) {
   a <- t(vec) * as.vector(com)
   be <- t( Rfast::colCumSums(a) )  ## PCA based coefficients
   est <- NULL
+  
   if ( length(k) == 1 )  {
     be <- be[, k, drop = FALSE]
   } else  be <- be[, k1, drop = FALSE]
@@ -60,11 +62,13 @@ pcr <- function (y, x, k = 1, xnew = NULL) {
     xnew <- t( ( t(xnew) - m ) / s )
     est <- my + xnew %*% be  ## predicted values for PCA model
   }
+  
   nam <- colnames(x)
   if ( is.null(nam) )  nam <- paste("X", 1:p, sep = "")
   rownames(be) <- nam
   rownames(vec) <- nam
   colnames(vec) <- paste("PC", k1, sep = "")
+  
   if ( length(k) == 1 )  {
     colnames(be) <- paste("PC", k, sep = "")
   } else  colnames(be) <- paste("PC", k1, sep = "")
@@ -73,5 +77,6 @@ pcr <- function (y, x, k = 1, xnew = NULL) {
       colnames(est) <- paste("PC", k, sep = "")
     } else  colnames(est) <- paste("PC", k1, sep = "")
   }
+  
   list(be = be, per = per, vec = vec, est = est)
 }
