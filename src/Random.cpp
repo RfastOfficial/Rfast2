@@ -46,6 +46,42 @@ NumericVector Sample(NumericVector x,const unsigned int size,const bool replace 
 	return res;
 }
 
+NumericVector Rbeta(size_t size, double alpha, double beta) {
+    NumericVector results(size);
+    Beta rng(alpha, beta);
+    for (size_t i = 0; i < size; ++i) {
+        results[i] = rng();
+    }
+    return results;
+}
+
+NumericVector Rexp(size_t size, double rate) {
+    NumericVector results(size);
+    Exp rng(rate);
+    for (size_t i = 0; i < size; ++i) {
+        results[i] = rng();
+    }
+    return results;
+}
+
+NumericVector Rchisq(size_t size, double df) {
+    NumericVector results(size);
+    Chisq rng(df);
+    for (size_t i = 0; i < size; ++i) {
+        results[i] = rng();
+    }
+    return results;
+}
+
+NumericVector Rgamma(size_t size, double shape, double rate = 1.0) {
+    NumericVector results(size);
+    Gamma rng(shape,rate);
+    for (size_t i = 0; i < size; ++i) {
+        results[i] = rng();
+    }
+    return results;
+}
+
 RcppExport SEXP Rfast2_Runif(SEXP nSEXP,SEXP minSEXP,SEXP maxSEXP){
 	BEGIN_RCPP
 	RObject __result;
@@ -81,3 +117,49 @@ RcppExport SEXP Rfast2_Sample(SEXP xSEXP,SEXP sizeSEXP,SEXP replaceSEXP){
 	return __result;
 	END_RCPP
 }
+
+RcppExport SEXP Rfast2_Rbeta(SEXP sizeSEXP, SEXP alphaSEXP, SEXP betaSEXP) {
+    BEGIN_RCPP
+    RObject __result;
+    RNGScope __rngScope;
+    traits::input_parameter< const size_t >::type size(sizeSEXP);
+    traits::input_parameter< const double >::type alpha(alphaSEXP);
+    traits::input_parameter< const double >::type beta(betaSEXP);
+    __result = Rbeta(size, alpha, beta);
+    return __result;
+    END_RCPP
+}
+
+RcppExport SEXP Rfast2_Rexp(SEXP sizeSEXP, SEXP rateSEXP) {
+    BEGIN_RCPP
+    RObject __result;
+    RNGScope __rngScope;
+    traits::input_parameter< const size_t >::type size(sizeSEXP);
+    traits::input_parameter< const double >::type rate(rateSEXP);
+    __result = Rexp(size, rate);
+    return __result;
+    END_RCPP
+}
+RcppExport SEXP Rfast2_Rchisq(SEXP sizeSEXP, SEXP dfSEXP) {
+    BEGIN_RCPP
+    RObject __result;
+    RNGScope __rngScope;
+    traits::input_parameter< const size_t >::type size(sizeSEXP);
+    traits::input_parameter< const double >::type df(dfSEXP);
+    __result = Rchisq(size, df);
+    return __result;
+    END_RCPP
+}
+
+RcppExport SEXP Rfast2_Rgamma(SEXP sizeSEXP, SEXP shapeSEXP, SEXP rateSEXP) {
+    BEGIN_RCPP
+    RObject __result;
+    RNGScope __rngScope;
+    traits::input_parameter< const size_t >::type size(sizeSEXP);
+    traits::input_parameter< const double >::type shape(shapeSEXP);
+    traits::input_parameter< const double >::type rate(rateSEXP);
+    __result = Rgamma(size, shape, rate);
+    return __result;
+    END_RCPP
+}
+

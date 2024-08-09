@@ -17,9 +17,14 @@ SEXP Rfast2_rowQuantile(SEXP, SEXP, SEXP, SEXP);
 SEXP Rfast2_colTrimMean(SEXP, SEXP, SEXP, SEXP);
 SEXP Rfast2_rowTrimMean(SEXP, SEXP, SEXP, SEXP);
 SEXP Rfast2_Runif(SEXP, SEXP, SEXP);
+SEXP Rfast2_Rbeta(SEXP, SEXP , SEXP);
+SEXP Rfast2_Rexp(SEXP, SEXP );
+SEXP Rfast2_Rchisq(SEXP, SEXP );
+SEXP Rfast2_Rgamma(SEXP, SEXP , SEXP);
 SEXP Rfast2_Sample_int(SEXP, SEXP, SEXP);
 SEXP Rfast2_Sample(SEXP, SEXP, SEXP);
 SEXP Rfast2_trimmean(SEXP, SEXP, SEXP);
+
 
 // Manos
 
@@ -78,6 +83,10 @@ static const R_CallMethodDef CallEntries[] = {
     {"Rfast2_rowTrimMean", (DL_FUNC)&Rfast2_rowTrimMean, 4},
     {"Rfast2_colTrimMean", (DL_FUNC)&Rfast2_colTrimMean, 4},
     {"Rfast2_Runif", (DL_FUNC)&Rfast2_Runif, 3},
+    {"Rfast2_Rbeta", (DL_FUNC)&Rfast2_Rbeta, 3},
+    {"Rfast2_Rexp", (DL_FUNC)&Rfast2_Rexp, 2},
+    {"Rfast2_Rchisq", (DL_FUNC)&Rfast2_Rchisq, 2},
+    {"Rfast2_Rgamma", (DL_FUNC)&Rfast2_Rgamma, 3},
     {"Rfast2_Sample_int", (DL_FUNC)&Rfast2_Sample_int, 3},
     {"Rfast2_Sample", (DL_FUNC)&Rfast2_Sample, 3},
     {"Rfast2_trimmean", (DL_FUNC)&Rfast2_trimmean, 3},

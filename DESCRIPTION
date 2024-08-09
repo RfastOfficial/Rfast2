@@ -6,7 +6,7 @@ Date: 2024-03-10
 Author: Manos Papadakis, Michail Tsagris, Stefanos Fafalios, Marios Dimitriadis and Manos Lasithiotakis.
 Maintainer: Manos Papadakis <rfastofficial@gmail.com>
 Depends: R (>= 3.5.0), Rcpp (>= 0.12.3), RcppParallel
-LinkingTo: Rcpp (>= 0.12.3), RcppArmadillo, RcppParallel
+LinkingTo: Rcpp (>= 0.12.3), RcppArmadillo, RcppParallel, RcppZiggurat
 SystemRequirements: C++17
 Imports: Rfast, Rnanoflann
 BugReports: https://github.com/RfastOfficial/Rfast2/issues
