@@ -33,3 +33,13 @@ Rchisq <- function(n, df) {
 Rgamma <- function(n, shape, rate = 1.0) {
     .Call(Rfast2_Rgamma, n, shape, rate)
 }
+
+#[export]
+Rgeom <- function(n, prob) {
+    .Call(Rfast2_Rgeom, n, prob)
+}
+
+#[export]
+Rcauchy <- function(n, location = 0, scale = 1) {
+    .Call(Rfast2_Rcauchy, n, location, scale)
+}

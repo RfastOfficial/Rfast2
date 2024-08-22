@@ -133,13 +133,13 @@ R bessel(R x, double nu, const char type = 'I', const bool expon_scaled = false)
     switch (type)
     {
     case 'I':
-        return Bessel<R>(x, nu, expon_scaled, boost::math::cyl_bessel_i<double, R::value_type>);
+        return Bessel<R>(x, nu, expon_scaled, boost::math::cyl_bessel_i<double, typename R::value_type>);
     case 'J':
-        return Bessel<R>(x, nu, expon_scaled, boost::math::cyl_bessel_j<double, R::value_type>);
+        return Bessel<R>(x, nu, expon_scaled, boost::math::cyl_bessel_j<double, typename R::value_type>);
     case 'K':
-        return Bessel<R>(x, nu, expon_scaled, boost::math::cyl_bessel_k<double, R::value_type>);
+        return Bessel<R>(x, nu, expon_scaled, boost::math::cyl_bessel_k<double, typename R::value_type>);
     case 'Y':
-        return Bessel<R>(x, nu, expon_scaled, boost::math::cyl_neumann<double, R::value_type>);
+        return Bessel<R>(x, nu, expon_scaled, boost::math::cyl_neumann<double, typename R::value_type>);
     default:
         stop("Wrong type. Type can be one of 'I, J, K, Y'.");
     }

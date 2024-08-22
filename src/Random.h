@@ -17,7 +17,6 @@ namespace Random
 	using std::iota;
 	using std::vector;
 	static Ziggurat::Ziggurat::Ziggurat zigg;
-	static uniform<Random::real> uniform_dist(0, 1);
 
 	namespace internal
 	{
@@ -121,6 +120,8 @@ namespace Random
 			return min + (this->pcg32_random_r() * (max - min) / internal::Integer_Core::max());
 		}
 	};
+	
+	static uniform<real> rng(0, 1);
 
 	class Gamma
 	{
@@ -186,6 +187,32 @@ namespace Random
 	public:
 		// rate must be 2 but Gamma divides with 1. So to undo it we need to divided first with 1 and pass it.
 		Chisq(double df) : Gamma(df / 2.0, 1.0 / 2.0) {}
+	};
+
+	class Geom : public uniform<real, false>
+	{
+		double lambda;
+
+	public:
+		Geom(double prob) : lambda(-log(1-prob)) {}
+
+		inline double operator()()
+		{
+			return std::floor(std::log(uniform<real, false>::operator()()) / lambda);
+		}
+	};
+
+	class Cauchy
+	{
+		double location, scale;
+
+	public:
+		Cauchy(double location, double scale) : location(location), scale(scale) {}
+
+		double operator()()
+		{
+			return location + scale * std::tan(M_PI * zigg.norm());
+		}
 	};
 }
 
