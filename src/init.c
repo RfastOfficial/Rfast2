@@ -2,7 +2,7 @@
 #include <R_ext/Rdynload.h>
 
 // Manos
-
+SEXP Rfast2_bessel(SEXP, SEXP, SEXP, SEXP);
 SEXP Rfast2_benchmark(SEXP, SEXP, SEXP, SEXP);
 SEXP Rfast2_col_group(SEXP, SEXP, SEXP, SEXP);
 SEXP Rfast2_colQuantile(SEXP, SEXP, SEXP, SEXP);
@@ -69,6 +69,7 @@ SEXP Rfast2_censweibull_mle(SEXP, SEXP, SEXP);
 // Lasithiotakis
 
 static const R_CallMethodDef CallEntries[] = {
+    {"Rfast2_bessel", (DL_FUNC)&Rfast2_bessel, 4},
     {"Rfast2_benchmark", (DL_FUNC)&Rfast2_benchmark, 4},
     {"Rfast2_col_group", (DL_FUNC)&Rfast2_col_group, 4},
     {"Rfast2_colQuantile", (DL_FUNC)&Rfast2_colQuantile, 4},

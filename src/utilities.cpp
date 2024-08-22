@@ -171,3 +171,19 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
+
+/***********************************************************************************/
+
+
+RcppExport SEXP Rfast2_bessel(SEXP xSEXP, SEXP nuSEXP, SEXP typeSEXP, SEXP expon_scaledSEXP)
+{
+    BEGIN_RCPP
+    RObject __result;
+    RNGScope __rngScope;
+    traits::input_parameter<NumericVector>::type x(xSEXP);
+    traits::input_parameter<double>::type nu(nuSEXP);
+    traits::input_parameter<const char>::type type(typeSEXP);
+    traits::input_parameter<const bool>::type expon_scaled(expon_scaledSEXP);
+    __result = bessel<NumericVector>(x, nu, type, expon_scale);
+    return 
+}

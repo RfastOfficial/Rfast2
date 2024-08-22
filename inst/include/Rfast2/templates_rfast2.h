@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <boost/math/special_functions/bessel.hpp>
 
 using namespace std;
 using namespace arma;
@@ -95,6 +96,53 @@ SEXP group_col_mean_h(SEXP x, SEXP gr, const int length_unique)
     }
     UNPROTECT(1);
     return f;
+}
+
+template <class R, class Func>
+R Bessel(R x, double nu, bool expon_scaled, Func bf)
+{
+    R result;
+    size_t n;
+    if constexpr (std::is_same<R, NumericVector>::value)
+    {
+        n = x.size();
+        result = NumericVector(n);
+    }
+    else
+    {
+        n = x.n_elems;
+        result = colvec(n, fill::none);
+    }
+
+    for (size_t i = 0; i < n; ++i)
+    {
+        double bessel_val = bf(nu, x[i]);
+        if (expon_scaled)
+        {
+            bessel_val *= std::exp(-x[i]); // Scale by exp(-x) to prevent overflow
+        }
+        result[i] = bessel_val;
+    }
+
+    return result;
+}
+
+template<class R>
+R bessel(R x, double nu, const char type = 'I', const bool expon_scaled = false)
+{
+    switch (type)
+    {
+    case 'I':
+        return Bessel<R>(x, nu, expon_scaled, boost::math::cyl_bessel_i<double, R::value_type>);
+    case 'J':
+        return Bessel<R>(x, nu, expon_scaled, boost::math::cyl_bessel_j<double, R::value_type>);
+    case 'K':
+        return Bessel<R>(x, nu, expon_scaled, boost::math::cyl_bessel_k<double, R::value_type>);
+    case 'Y':
+        return Bessel<R>(x, nu, expon_scaled, boost::math::cyl_neumann<double, R::value_type>);
+    default:
+        stop("Wrong type. Type can be one of 'I, J, K, Y'.");
+    }
 }
 
 #endif
