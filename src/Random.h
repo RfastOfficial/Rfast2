@@ -120,29 +120,50 @@ namespace Random
 			return min + (this->pcg32_random_r() * (max - min) / internal::Integer_Core::max());
 		}
 	};
-	
+
 	static uniform<real> rng(0, 1);
 
 	class Gamma
 	{
-		double shape, rate, d, c;
+		double init_shape, shape, rate, d, c;
+		bool boosted;
 
 	public:
-		Gamma(double shape, double rate) : shape(shape), rate(1.0 / rate), d(shape - 1.0 / 3.0), c(1.0 / std::sqrt(9.0 * d)) {}
+		Gamma(double shape, double rate) : shape(shape), rate(1.0 / rate)
+		{
+			if (shape < 1.0)
+			{
+				init_shape = shape;
+				++shape;
+				boosted = true;
+			}
+			d = shape - 1.0 / 3.0;
+			c = 1.0 / std::sqrt(9.0 * d);
+		}
 
 		double operator()()
 		{
-			// Marsaglia and Tsang method for rate >= 1
 			while (true)
 			{
-				double x = zigg.norm(), x2 = x * x;
+				double x = zigg.norm();
 				double v = 1.0 + c * x;
 				v = v * v * v;
-				double u = rng();
-
-				if (v > 0 && (u < 1.0 - 0.0331 * x2 * x2 || std::log(u) < 0.5 * x2 + d * (1.0 - v + std::log(v))))
+				if (v > 0)
 				{
-					return d * v * rate;
+					double u = rng();
+					double x2 = x * x;
+					if (u < 1.0 - 0.0331 * x2 * x2 || std::log(u) < 0.5 * x2 + d * (1.0 - v + std::log(v)))
+					{
+						double res = d * v * rate;
+						if (boosted)
+						{
+							return res * std::pow(rng(), 1.0 / shape);
+						}
+						else
+						{
+							return res;
+						}
+					}
 				}
 			}
 		}
@@ -194,7 +215,7 @@ namespace Random
 		double lambda;
 
 	public:
-		Geom(double prob) : lambda(-log(1-prob)) {}
+		Geom(double prob) : lambda(-log(1 - prob)) {}
 
 		inline double operator()()
 		{
@@ -207,11 +228,25 @@ namespace Random
 		double location, scale;
 
 	public:
-		Cauchy(double location, double scale) : location(location), scale(scale) {}
+		Cauchy(double location = 0, double scale = 1) : location(location), scale(scale) {}
 
 		double operator()()
 		{
 			return location + scale * std::tan(M_PI * zigg.norm());
+		}
+	};
+
+	class StudentT : public Chisq
+	{
+		double sqrt_df, ncp_sqrt_df;
+
+	public:
+		StudentT(double df, double ncp = 0) : Chisq(df), sqrt_df(std::sqrt(df)), ncp_sqrt_df(ncp * sqrt_df) {}
+
+		double operator()()
+		{
+			// return (zigg.norm() + ncp) / std::sqrt(Chisq::operator()() / df);
+			return (zigg.norm() * sqrt_df + ncp_sqrt_df) / std::sqrt(Chisq::operator()());
 		}
 	};
 }

@@ -23,6 +23,7 @@ SEXP Rfast2_Rbeta(SEXP, SEXP, SEXP);
 SEXP Rfast2_Rexp(SEXP, SEXP);
 SEXP Rfast2_Rchisq(SEXP, SEXP);
 SEXP Rfast2_Rgamma(SEXP, SEXP, SEXP);
+SEXP Rfast2_Rt(SEXP, SEXP, SEXP);
 SEXP Rfast2_Sample_int(SEXP, SEXP, SEXP);
 SEXP Rfast2_Sample(SEXP, SEXP, SEXP);
 SEXP Rfast2_trimmean(SEXP, SEXP, SEXP);
@@ -91,6 +92,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"Rfast2_Rgeom", (DL_FUNC)&Rfast2_Rgeom, 2},
     {"Rfast2_Rcauchy", (DL_FUNC)&Rfast2_Rcauchy, 3},
     {"Rfast2_Rgamma", (DL_FUNC)&Rfast2_Rgamma, 3},
+    {"Rfast2_Rt", (DL_FUNC)&Rfast2_Rt, 3},
     {"Rfast2_Sample_int", (DL_FUNC)&Rfast2_Sample_int, 3},
     {"Rfast2_Sample", (DL_FUNC)&Rfast2_Sample, 3},
     {"Rfast2_trimmean", (DL_FUNC)&Rfast2_trimmean, 3},

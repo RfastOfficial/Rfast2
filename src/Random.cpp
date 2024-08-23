@@ -114,10 +114,21 @@ NumericVector Rgeom(size_t size, double prob)
 	return results;
 }
 
-NumericVector Rcauchy(size_t size, double location, double scale)
+NumericVector Rcauchy(size_t size, double location = 0, double scale = 1)
 {
 	NumericVector results(size);
 	Cauchy rng(location, scale);
+	for (size_t i = 0; i < size; ++i)
+	{
+		results[i] = rng();
+	}
+	return results;
+}
+
+NumericVector Rt(size_t size, double df, double ncp = 0)
+{
+	NumericVector results(size);
+	StudentT rng(df, ncp);
 	for (size_t i = 0; i < size; ++i)
 	{
 		results[i] = rng();
@@ -234,6 +245,19 @@ RcppExport SEXP Rfast2_Rcauchy(SEXP sizeSEXP, SEXP locationSEXP, SEXP scaleSEXP)
 	traits::input_parameter<const double>::type location(locationSEXP);
 	traits::input_parameter<const double>::type scale(scaleSEXP);
 	__result = Rcauchy(size, location, scale);
+	return __result;
+	END_RCPP
+}
+
+RcppExport SEXP Rfast2_Rt(SEXP sizeSEXP, SEXP dfSEXP, SEXP ncpSEXP)
+{
+	BEGIN_RCPP
+	RObject __result;
+	RNGScope __rngScope;
+	traits::input_parameter<const size_t>::type size(sizeSEXP);
+	traits::input_parameter<const double>::type df(dfSEXP);
+	traits::input_parameter<const double>::type ncp(ncpSEXP);
+	__result = Rt(size, df, ncp);
 	return __result;
 	END_RCPP
 }

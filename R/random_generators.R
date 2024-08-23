@@ -43,3 +43,8 @@ Rgeom <- function(n, prob) {
 Rcauchy <- function(n, location = 0, scale = 1) {
     .Call(Rfast2_Rcauchy, n, location, scale)
 }
+
+#[export]
+Rt <- function(n, df, ncp = 0) {
+    .Call(Rfast2_Rt, n, df, ncp)
+}

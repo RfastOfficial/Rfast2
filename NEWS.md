@@ -18,6 +18,7 @@
 > | Rchisq   |   |
 > | Rgeom   |   |
 > | Rcauchy   |   |
+> | Rt   |   |
 > | bessel   |   |
 >
 > <h3>**Improved**</h3> (***by speed, correctness or options***)
