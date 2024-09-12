@@ -34,7 +34,7 @@ R implementation and documentation: Manos Papadakis \email{papadakm95@gmail.com}
 
 
 \seealso{
-\code{\link{cholesky}, \link{cora}, \link{cova}
+\code{\link{is.lower.tri}, \link{lud}
 }
 }
 

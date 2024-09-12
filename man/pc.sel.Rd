@@ -67,7 +67,7 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 %}
 
 \seealso{
-\code{ \link{pc.skel}, \link{omp}
+\code{ \link{mmpc}, \link{fbed.reg}
 }
 }
 

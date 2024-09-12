@@ -16,7 +16,7 @@ ini.stat = NULL, R = NULL, parallel = FALSE)
 \arguments{
 \item{x}{
 A numerical matrix with the variables. If you have a data.frame (i.e. categorical data) turn them into a matrix
-using \code{\link{data.frame.to_matrix}} from the R package \bold{Rfast}. Note, that for the categorical case data, 
+using \bold{data.frame.to_matrix} from the R package \bold{Rfast}. Note, that for the categorical case data, 
 the numbers must start from 0. No missing data are allowed.
 }
 \item{method}{

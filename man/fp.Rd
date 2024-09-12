@@ -75,7 +75,7 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 %}
 
 \seealso{
-\code{ \link{logistic_only}, \link{poisson_only} }
+\code{ \link{big.knn}, \link{cor_test} }
 }
 
 \examples{
