@@ -36,7 +36,7 @@ perm.ttest2 <- function(x, y, B = 999) {
   sy <- sum(y)
   sz <- sx + sy
   stat <- abs( sx/nx - sy/ny )
-  z <- matrix(z, ncol = B)
+  z <- Rfast::rep_col(z, B)
   z <- Rfast::colShuffle(z)
   psx <- Rfast::colsums(z[1:nx, ])
   psy <- sz - psx

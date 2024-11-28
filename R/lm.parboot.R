@@ -24,7 +24,7 @@ lm.nonparboot <- function (x, y, R = 1000) {
     est <- as.vector(x %*% be)
     res <- y - est
     s <- Rfast::Var(res) * (n - 1)/(n - p)
-    z <- matrix(res, ncol = R)
+    z <- Rfast::rep_col(res, R)
     z <- Rfast::colShuffle(z)
     booty <- sqrt(s) * z + est
     xx %*% booty
