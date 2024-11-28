@@ -14,7 +14,7 @@ boot.ttest1 <- function(x, m, R = 999) {
   s <- Rfast::Var(x, std = TRUE)
   stat <- (xbar - m)/s
   z <- x - xbar + m
-  zb <- matrix(sample(z, n * R, replace = TRUE), ncol = R)
+  zb <- matrix( Sample(z, n * R, replace = TRUE), ncol = R )
   xbar <- Rfast::colmeans(zb)
   s <- Rfast::colVars(zb, std = TRUE)
   bstat <- (xbar - m)/s
@@ -61,8 +61,8 @@ boot.student2 <- function(x, y, B = 999) {
     z1 <- x - m1 + mc
     z2 <- y - m2 + mc
     R <- round(sqrt(B))
-    z1 <- matrix(sample(z1, R * n1, replace = TRUE), ncol = R)
-    z2 <- matrix(sample(z2, R * n2, replace = TRUE), ncol = R)
+    z1 <- matrix( Sample(z1, R * n1, replace = TRUE), ncol = R )
+    z2 <- matrix( Sample(z2, R * n2, replace = TRUE), ncol = R )
     bm1 <- Rfast::colmeans(z1)
     bm2 <- Rfast::colmeans(z2)
     zx2 <- Rfast::colsums(z1^2)
@@ -136,8 +136,8 @@ boot.james <- function(y1, y2, R = 999) {
   sqn1 <- sqrt(n1)       ;     sqn2 <- sqrt(n2)
   f1 <- (n1 - 1) * n1    ;     f2 <- (n2 - 1) * n2
   for (i in 1:B) {
-    b1 <- sample(1:n1, n1, replace = TRUE)
-    b2 <- sample(1:n2, n2, replace = TRUE)
+    b1 <- Sample.int(n1, n1, replace = TRUE)
+    b2 <- Sample.int(n2, n2, replace = TRUE)
     yb1 <- x1[b1, ]    ;   yb2 <- x2[b2, ]
     bm1[i, ] <- Rfast::colmeans(yb1) 
     bm2[i, ] <- Rfast::colmeans(yb2)  
@@ -180,8 +180,8 @@ boot.hotel2 <- function(y1, y2, R = 999) {
   vb2 <- vector("list", B)
   tb <- matrix(0, B, B)
   for (i in 1:B) {
-    b1 <- sample(1:n1, n1, replace = TRUE)
-    b2 <- sample(1:n2, n2, replace = TRUE)
+    b1 <- Sample.int(n1, n1, replace = TRUE)
+    b2 <- Sample.int(n2, n2, replace = TRUE)
     yb1 <- x1[b1, ]    ;   yb2 <- x2[b2, ]
     bm1[i, ] <- Rfast::colmeans(yb1) 
     bm2[i, ] <- Rfast::colmeans(yb2)  ## difference of the mean vectors
