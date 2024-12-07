@@ -14,7 +14,8 @@ boot.ttest1 <- function(x, m, R = 999) {
   s <- Rfast::Var(x, std = TRUE)
   stat <- (xbar - m)/s
   z <- x - xbar + m
-  zb <- matrix( Sample(z, n * R, replace = TRUE), ncol = R )
+  zb <- Sample(z, n * R, replace = TRUE)
+  dim(zb) <- c(n, R)
   xbar <- Rfast::colmeans(zb)
   s <- Rfast::colVars(zb, std = TRUE)
   bstat <- (xbar - m)/s
@@ -60,10 +61,12 @@ boot.student2 <- function(x, y, B = 999) {
     mc <- 0.5 * (m1 + m2 )
     z1 <- x - m1 + mc
     z2 <- y - m2 + mc
-    R <- round(sqrt(B))
-    z1 <- matrix( Sample(z1, R * n1, replace = TRUE), ncol = R )
-    z2 <- matrix( Sample(z2, R * n2, replace = TRUE), ncol = R )
-    bm1 <- Rfast::colmeans(z1)
+    R <- round( sqrt(B) )
+    z1 <- Sample(z1, R * n1, replace = TRUE)
+	dim(z1) <- c(n1, R)  
+    z2 <- Sample(z2, R * n2, replace = TRUE)
+    dim(z2) <- c(n2, R)
+	bm1 <- Rfast::colmeans(z1)
     bm2 <- Rfast::colmeans(z2)
     zx2 <- Rfast::colsums(z1^2)
     zy2 <- Rfast::colsums(z2^2)

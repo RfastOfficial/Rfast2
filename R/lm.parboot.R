@@ -12,8 +12,8 @@ lm.boot <- function(x, y, R = 1000, type = "param") {
    if ( type == "param" ) {
      z <- Rfast::matrnorm(n, R)
    } else if ( type == "nonparam" ) {
-     z <- Rfast::rep_col(res, R)
-     z <- Rfast::colShuffle(z)
+     z <- Rfast2::Sample(res, n * R, replace = TRUE)
+     dim(z) <- c(n, R) 
    }	 
    booty <- sqrt(s) * z + est
    xx %*% booty
