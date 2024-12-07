@@ -41,7 +41,7 @@ Efron Bradley and Robert J. Tibshirani (1993). An introduction to the bootstrap.
 }
 
 \author{
-Michail Tsagris.
+Michail Tsagris with some help from Nikolaos Kontemeniotis.
 
 R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 }
