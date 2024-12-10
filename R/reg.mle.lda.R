@@ -114,7 +114,7 @@ fisher.da <- function(xnew, x, ina) {
   M <- solve(W, B)
   lambda <- as.vector( eigen(M)$vectors[, 1] )  ## Fisher's discriminant
   A <-  as.vector( tcrossprod( lambda, xnew ) ) 
-  A <- matrix(rep(A, each = k), nrow = nu, byrow = TRUE)
+  A <- matrix( rep(A, each = k), nrow = nu, byrow = TRUE )
   ma <- tcrossprod( lambda, mi)
   crit <- abs( Rfast::eachrow(A, ma, oper = "-") )
   Rfast::rowMins(crit)  ## the predicted group
