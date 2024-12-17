@@ -24,7 +24,21 @@ boot.ttest1 <- function(x, m, R = 999) {
   names(res) <- c("stat", "bootstrap p-value")
   res
 }
+
+
   
+#[export]
+perm.ttest1 <- function(x, m, R = 999) {
+  x <- x - m
+  n <- length(x)
+  stat <- abs( sum(x) )
+  X <- Rfast2::Sample( c(-1, 1), R * n, replace = TRUE )
+  dim(X) <- c(n, R)
+  pstat <- Rfast::eachcol.apply(X, x)
+  pvalue <- ( sum( abs(pstat) >= stat ) + 1) / (R + 1)
+  c( "stat" = stat, "p-value" = pvalue )
+}
+
 
 
 #[export]
