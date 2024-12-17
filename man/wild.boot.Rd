@@ -51,7 +51,8 @@ The Review of Economics and Statistics 90(3): 414-427.
 \author{
 Michail Tsagris and Stefanos Fafalios.
 
-R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr} and Stefanos Fafalios \email{stefanosfafalios@gmail.com}.
+R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr} 
+and Stefanos Fafalios \email{stefanosfafalios@gmail.com}.
 }
 
 %\note{

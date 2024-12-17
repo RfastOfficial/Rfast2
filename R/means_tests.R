@@ -36,7 +36,7 @@ perm.ttest1 <- function(x, m, R = 999) {
   dim(X) <- c(n, R)
   pstat <- Rfast::eachcol.apply(X, x)
   pvalue <- ( sum( abs(pstat) >= stat ) + 1) / (R + 1)
-  c( "stat" = stat, "p-value" = pvalue )
+  c( "stat" = stat, "permutation p-value" = pvalue )
 }
 
 

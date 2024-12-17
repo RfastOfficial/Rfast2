@@ -98,8 +98,8 @@ quantiles conditional on covariates. Journal of Applied Statistics, 47(6): 954--
 \author{
 Michail Tsagris and Stefanos Fafalios.
 
-R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr} and Stefanos Fafalios
-\email{stefanosfafalios@gmail.com}.
+R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr} 
+and Stefanos Fafalios \email{stefanosfafalios@gmail.com}.
 }
 
 %\note{

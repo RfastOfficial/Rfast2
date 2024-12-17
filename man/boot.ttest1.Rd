@@ -30,15 +30,14 @@ The usual one sample bootstrap t-test, or the permutation, is implemented, only 
 }
 
 \value{
-\item{res}{
 A two valued vector with the test statistic and its p-value.
-}
 }
 
 \author{
 Nikos Kontemeniotis Michail Tsagris.
 
-R implementation and documentation: Nikos Kontemeniotis \email{} and Michail Tsagris \email{mtsagris@uoc.gr}.
+R implementation and documentation: Nikos Kontemeniotis \email{kontemeniotisn@gmail.com} 
+and Michail Tsagris \email{mtsagris@uoc.gr}.
 }
 %\note{
 %%  ~~further notes~~
