@@ -6,6 +6,8 @@ SEXP Rfast2_bessel(SEXP, SEXP, SEXP, SEXP);
 SEXP Rfast2_benchmark(SEXP, SEXP, SEXP, SEXP);
 SEXP Rfast2_col_group(SEXP, SEXP, SEXP, SEXP);
 SEXP Rfast2_colQuantile(SEXP, SEXP, SEXP, SEXP);
+SEXP Rfast_kernel(SEXP, SEXP);
+SEXP Rfast_kernel_m(SEXP, SEXP);
 SEXP Rfast2_is_upper_tri(SEXP, SEXP);
 SEXP Rfast2_is_lower_tri(SEXP, SEXP);
 SEXP Rfast2_is_skew_symmetric(SEXP);
@@ -85,6 +87,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"Rfast2_rowQuantile", (DL_FUNC)&Rfast2_rowQuantile, 4},
     {"Rfast2_rowTrimMean", (DL_FUNC)&Rfast2_rowTrimMean, 4},
     {"Rfast2_colTrimMean", (DL_FUNC)&Rfast2_colTrimMean, 4},
+	  {"Rfast_kernel", (DL_FUNC)&Rfast_kernel, 2},
+	  {"Rfast_kernel_m", (DL_FUNC)&Rfast_kernel_m, 2},
     {"Rfast2_Runif", (DL_FUNC)&Rfast2_Runif, 3},
     {"Rfast2_Rbeta", (DL_FUNC)&Rfast2_Rbeta, 3},
     {"Rfast2_Rexp", (DL_FUNC)&Rfast2_Rexp, 2},
