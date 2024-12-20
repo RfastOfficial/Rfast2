@@ -36,7 +36,7 @@ perm.ttest <- function(x, y = NULL, m, B = 999) {
     X <- Rfast2::Sample( c(-1, 1), B * n, replace = TRUE )
     dim(X) <- c(n, B)
     pstat <- Rfast::eachcol.apply(X, x)
-    pvalue <- ( sum( abs(pstat) >= stat ) + 1) / (R + 1)
+    pvalue <- ( sum( abs(pstat) >= stat ) + 1) / (B + 1)
     res <- c( "stat" = stat, "permutation p-value" = pvalue )
   } else {
     nx <- length(x)   ;  ny <- length(y)
@@ -50,7 +50,7 @@ perm.ttest <- function(x, y = NULL, m, B = 999) {
     psx <- Rfast::colsums(z[1:nx, ])
     psy <- sz - psx
     pstat <- abs( psx/nx - psy/ny )
-    res <- c(stat, (sum(pstat > stat) + 1)/ (B + 1) )
+    res <- c(stat, (sum(pstat > stat) + 1) / (B + 1) )
     names(res) <- c("stat", "permutation p-value")
   }
   res  

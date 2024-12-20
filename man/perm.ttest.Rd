@@ -1,15 +1,15 @@
-\name{Permutation t-test for 2 independent samples}
-\alias{perm.ttest2}
+\name{Permutation t-test for one or two independent samples}
+\alias{perm.ttest}
 \title{
-Permutation t-test for 2 independent samples
+Permutation t-test for one or two independent samples
 }
 
 \description{
-Permutation t-test for 2 independent samples.
+Permutation t-test for one or two independent samples.
 }
 
 \usage{
-perm.ttest2(x, y, B = 999)
+perm.ttest(x, y = NULL, m, B = 999)
 }
 
 \arguments{
@@ -17,7 +17,10 @@ perm.ttest2(x, y, B = 999)
 A numerical vector with the data.
 }
 \item{y}{
-A numerical vector with the data.
+A numerical vector with the data. In case of one sample t-test this is NULL.
+}
+\item{m}{
+The hypothesized mean in the case of one sample t-test. 
 }
 \item{B}{
 The number of permutations to perform.
@@ -38,9 +41,9 @@ a practical guide to resampling methods for testing hypotheses. Springer 3rd Edi
 }
 
 \author{
-Michail Tsagris with the help of Nikolaos Kontemeniotis.
+Michail Tsagris and Nikolaos Kontemeniotis.
 
-R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
+R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr} and Nikolaos Kontemeniotis \email{kontemeniotisn@gmail.com}.
 }
 %\note{
 %%  ~~further notes~~
