@@ -28,6 +28,35 @@ boot.ttest1 <- function(x, m, R = 999) {
 
   
 #[export]
+perm.ttest <- function(x, y = NULL, m, B = 999) {
+  if ( is.null(y) ) {
+    x <- x - m
+    n <- length(x)
+    stat <- abs( sum(x) )
+    X <- Rfast2::Sample( c(-1, 1), B * n, replace = TRUE )
+    dim(X) <- c(n, B)
+    pstat <- Rfast::eachcol.apply(X, x)
+    pvalue <- ( sum( abs(pstat) >= stat ) + 1) / (R + 1)
+    res <- c( "stat" = stat, "permutation p-value" = pvalue )
+  } else {
+    nx <- length(x)   ;  ny <- length(y)
+    n <- nx + ny
+    z <- c(x, y)
+    sx <- sum(x)   ;   sy <- sum(y)
+    sz <- sx + sy
+    stat <- abs( sx/nx - sy/ny )
+    z <- Rfast::rep_col(z, B)
+    z <- Rfast::colShuffle(z)
+    psx <- Rfast::colsums(z[1:nx, ])
+    psy <- sz - psx
+    pstat <- abs( psx/nx - psy/ny )
+    res <- c(stat, (sum(pstat > stat) + 1)/ (B + 1) )
+    names(res) <- c("stat", "permutation p-value")
+  }
+  res  
+}
+
+#[export]
 perm.ttest1 <- function(x, m, R = 999) {
   x <- x - m
   n <- length(x)
@@ -38,8 +67,6 @@ perm.ttest1 <- function(x, m, R = 999) {
   pvalue <- ( sum( abs(pstat) >= stat ) + 1) / (R + 1)
   c( "stat" = stat, "permutation p-value" = pvalue )
 }
-
-
 
 #[export]
 perm.ttest2 <- function(x, y, B = 999) {
