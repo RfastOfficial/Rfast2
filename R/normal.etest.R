@@ -3,7 +3,7 @@ normal.etest <- function(x, R = 999) {
   n <- length(x)
   s <- Rfast::Var(x, std = TRUE)
   y <- ( x - mean(x) ) / s
-  y <- sort(y)
+  y <- Rfast::Sort(y)
   K <- seq(1 - n, n - 1, 2)
   stat <- 4 * sum( y * pnorm(y) + dnorm(y) ) - 2 * mean(K * y)  
   
