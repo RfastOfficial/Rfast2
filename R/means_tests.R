@@ -191,7 +191,6 @@ boot.james <- function(y1, y2, R = 999) {
   for (i in 1:B) {
     for (j in 1:B) {
       vb <- vb1[[ i ]] + vb2[[ j ]]
-      db <- bm1[i, ] - bm2[j, ] 
       tb[i, j] <- Rfast::mahala(bm1[i, ], bm2[j, ], vb)
     }
   }
@@ -235,8 +234,7 @@ boot.hotel2 <- function(y1, y2, R = 999) {
   for (i in 1:B) {
     for (j in 1:B) {
       vb <- vb1[[ i ]] + vb2[[ j ]]
-      db <- bm1[i, ] - bm2[j, ] 
-      tb[i, j] <- db %*% solve(vb, db)
+      tb[i, j] <- Rfast::mahala(bm1[i, ], bm2[j, ], vb)
     }
   }
   ( sum(tb > tobs) + 1 )/(B^2 + 1)
