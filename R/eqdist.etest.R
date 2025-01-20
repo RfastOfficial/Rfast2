@@ -24,11 +24,11 @@ eqdist.etest <- function(y, x, R = 999) {
 
     pstat <- numeric(R)
     for ( k in 1:R ) {
-      id <- Rfast2::Sample.int(n, ni)
-      xp <- Rfast::Sort(z[id])
+      id <- Rfast::Sort.int( Rfast2::Sample.int(n, ni) )
+      xp <- z[id]
       sxp <- sum(xp)
       pdii <- 2 * sum(i * xp) - (ni + 1) * sxp
-      yp <- Rfast::Sort(z[-id])
+      yp <- z[-id]
       syp <- s - sxp
       pdjj <- 2 * sum(j * yp) - (nj + 1) * syp
       pdij <- dtot - pdii - pdjj  
@@ -46,7 +46,7 @@ eqdist.etest <- function(y, x, R = 999) {
     }
   }
   ( sum( pstat >= stat ) + 1 ) / (R + 1)
-}  
+} 
   
 
 #total.vecdist <- function(x) {
