@@ -30,12 +30,6 @@ The silhouettes are computed.
 
 \value{
 A list including:
-stats <- cbind( tabulate(cl), stats)
-  colnames(stats)[1] <- c("cluster size")
-  si <- unlist(si)
-  si <- cbind( rep(1:g, tabulate(cl) ), si)
-  colnames(si) <- c("cluster", "silhouette")  
-  list(si = si, stats = stats) 
 \item{si}{
 A matrix with two columns, the clusters and the silhouette function, for each observation.
 }
@@ -46,8 +40,8 @@ the minimum, maximum and average silhouette for each cluster.
 }
 
 \references{
-Good P. I. (2005). Permutation, parametric and bootstrap tests of hypotheses: 
-a practical guide to resampling methods for testing hypotheses. Springer 3rd Edition.
+Rousseeuw P. J. (1987). Silhouettes: a graphical aid to the interpretation and validation of cluster analysis. 
+Journal of Computational and Applied Mathematics, 20, 53--65.
 }
 
 \author{
@@ -60,7 +54,7 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr} and 
 %}
 
 \seealso{
-\code{\link{jack.mean}, \link{trim.mean}, \link{moranI}
+\code{\link{big.knn}, \link{eqdist.etest}
 }
 }
 
