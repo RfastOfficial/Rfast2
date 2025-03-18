@@ -12,14 +12,17 @@
 >
 > | Function |                                     What's new!                                     |
 > |:--------:|:-----------------------------------------------------------------------------------:|
-> | Rgamma   |   |
-> | Rbeta    |   |
-> | Rexp     |   |
-> | Rchisq   |   |
-> | Rgeom   |   |
-> | Rcauchy   |   |
-> | Rt   |   |
-> | bessel   |   |
+> | Rgamma   | Random number generation from the Gamma distribution  |
+> | Rbeta    | Random number generation from the Beta distribution  |
+> | Rexp     | Random number generation from the Exponential distribution  |
+> | Rchisq   | Random number generation from the Chi-square distribution  |
+> | Rgeom   | Random number generation from the Geometric distribution  |
+> | Rcauchy   | Random number generation from the Cauchy distribution  |
+> | Rt   | Random number generation from the t distribution  |
+> | bessel   | Bessel function  |
+> | silhouette   | Silhouette function  |
+> | eqdist.etest   | Energy based equality of distributions test  |
+
 >
 > <h3>**Improved**</h3> (***by speed, correctness or options***)
 >
