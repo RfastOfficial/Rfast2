@@ -1,7 +1,7 @@
 \name{Many simple quantile regressions using logistic regressions}
 \alias{logiquant.regs}
 \title{
-Many simple quantile regressions using logistic regressions.
+Many simple quantile regressions using logistic regressions
 }
 
 \description{

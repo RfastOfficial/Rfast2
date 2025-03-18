@@ -1,7 +1,7 @@
 \name{Fractional polynomial regression with one independent variable}
 \alias{fp}
 \title{
-Fractional polynomial regression with one independent variable.
+Fractional polynomial regression with one independent variable
 }
 
 \description{

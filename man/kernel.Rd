@@ -9,7 +9,7 @@ Univariate and multivariate kernel density estimation.
 }
 
 \usage{
-kernel(x, h)
+kernel(x, h = "silverman", parallel = FALSE, cores = 0)
 }
 
 \arguments{

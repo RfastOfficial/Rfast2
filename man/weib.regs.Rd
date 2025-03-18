@@ -1,7 +1,7 @@
 \name{Many simple Weibull regressions}
 \alias{weib.regs}
 \title{
-Many simple Weibull regressions.
+Many simple Weibull regressions
 }
 
 \description{
