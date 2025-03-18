@@ -1,5 +1,6 @@
 #include <algorithm>
 #include <boost/math/special_functions/bessel.hpp>
+#include <Rfast/types.hpp>
 
 using namespace std;
 using namespace arma;
@@ -8,7 +9,9 @@ using namespace Rcpp;
 #ifndef TEMPLATES_RFAST2_H
 #define TEMPLATES_RFAST2_H
 
-#include "templates.h"
+//[[Rcpp::depends(Rfast)]]
+
+#include <Rfast/templates.h>
 
 template <class T, Mfunction<T, T, T> func, const int init_val = 0>
 SEXP group_col_h(SEXP x, SEXP gr, const int length_unique)
@@ -16,7 +19,7 @@ SEXP group_col_h(SEXP x, SEXP gr, const int length_unique)
     const int ncl = Rf_ncols(x), nrw = Rf_nrows(x);
     SEXP f = PROTECT(Rf_allocMatrix(TYPEOF(x), length_unique, ncl));
     int *ggr = INTEGER(gr);
-    T *ff = (T *)DATAPTR(f), *xx = (T *)DATAPTR(x);
+    T *ff = Rfast::asPtr<T>(f), *xx = Rfast::asPtr<T>(x);
     for (int j = 0; j < length_unique * ncl; ++j)
     {
         ff[j] = init_val;
@@ -40,7 +43,7 @@ SEXP group_col_med_h(SEXP x, SEXP gr, const int length_unique)
     const int ncl = Rf_ncols(x), nrw = Rf_nrows(x);
     SEXP f = PROTECT(Rf_allocMatrix(TYPEOF(x), length_unique, ncl));
     int *ggr = INTEGER(gr);
-    T *ff = (T *)DATAPTR(f), *xx = (T *)DATAPTR(x);
+    T *ff = Rfast::asPtr<T>(f), *xx = Rfast::asPtr<T>(x);
     vector<vector<double>> eachcol_mat(length_unique, vector<double>());
     for (int j = 0; j < length_unique * ncl; ++j)
     {
@@ -72,7 +75,7 @@ SEXP group_col_mean_h(SEXP x, SEXP gr, const int length_unique)
     const int ncl = Rf_ncols(x), nrw = Rf_nrows(x);
     SEXP f = PROTECT(Rf_allocMatrix(TYPEOF(x), length_unique, ncl));
     int *ggr = INTEGER(gr);
-    T *ff = (T *)DATAPTR(f), *xx = (T *)DATAPTR(x);
+    T *ff = Rfast::asPtr<T>(f), *xx = Rfast::asPtr<T>(x);
     vector<vector<double>> eachcol_mat(length_unique, vector<double>());
     for (int j = 0; j < length_unique * ncl; ++j)
     {
