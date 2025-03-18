@@ -6,7 +6,7 @@
 #include <chrono>
 #include <vector>
 #include <algorithm>
-#include <Ziggurat.h>
+#include <zigg/header>
 
 namespace Random
 {
@@ -16,7 +16,7 @@ namespace Random
 	using integer = std::true_type;
 	using std::iota;
 	using std::vector;
-	static Ziggurat::Ziggurat::Ziggurat zigg;
+	static zigg::Ziggurat ziggurat;
 
 	namespace internal
 	{
@@ -125,7 +125,7 @@ namespace Random
 
 	class Gamma
 	{
-		double init_shape, shape, rate, d, c;
+		double init_shape, shape, rate, d, c, boosted_shape, inv_init_shape;
 		bool boosted;
 
 	public:
@@ -133,11 +133,16 @@ namespace Random
 		{
 			if (shape < 1.0)
 			{
-				init_shape = shape;
-				++shape;
+				boosted_shape = shape + 1.0;
 				boosted = true;
+				inv_init_shape = 1.0 / shape; // Precompute to avoid division
 			}
-			d = shape - 1.0 / 3.0;
+			else
+			{
+				boosted_shape = shape;
+				boosted = false;
+			}
+			d = boosted_shape - 1.0 / 3.0;
 			c = 1.0 / std::sqrt(9.0 * d);
 		}
 
@@ -145,7 +150,7 @@ namespace Random
 		{
 			while (true)
 			{
-				double x = zigg.norm();
+				double x = ziggurat.rnorm();
 				double v = 1.0 + c * x;
 				v = v * v * v;
 				if (v > 0)
@@ -157,7 +162,7 @@ namespace Random
 						double res = d * v * rate;
 						if (boosted)
 						{
-							return res * std::pow(rng(), 1.0 / shape);
+							return res * std::exp(std::log(u) * inv_init_shape); // Faster than pow()
 						}
 						else
 						{
@@ -168,6 +173,31 @@ namespace Random
 			}
 		}
 	};
+
+	// class Gamma
+	// {
+	// 	double shape, rate, d, c;
+
+	// public:
+	// 	Gamma(double shape, double rate) : shape(shape), rate(1.0 / rate), d(shape - 1.0 / 3.0), c(1.0 / std::sqrt(9.0 * d)) {}
+
+	// 	double operator()()
+	// 	{
+	// 		// Marsaglia and Tsang method for rate >= 1
+	// 		while (true)
+	// 		{
+	// 			double x = ziggurat.rnorm(), x2 = x * x;
+	// 			double v = 1.0 + c * x;
+	// 			v = v * v * v;
+	// 			double u = rng();
+
+	// 			if (v > 0 && (u < 1.0 - 0.0331 * x2 * x2 || std::log(u) < 0.5 * x2 + d * (1.0 - v + std::log(v))))
+	// 			{
+	// 				return d * v * rate;
+	// 			}
+	// 		}
+	// 	}
+	// };
 
 	class BetaOne : public Gamma
 	{
@@ -232,7 +262,7 @@ namespace Random
 
 		double operator()()
 		{
-			return location + scale * std::tan(M_PI * zigg.norm());
+			return location + scale * std::tan(M_PI * ziggurat.rnorm());
 		}
 	};
 
@@ -245,8 +275,8 @@ namespace Random
 
 		double operator()()
 		{
-			// return (zigg.norm() + ncp) / std::sqrt(Chisq::operator()() / df);
-			return (zigg.norm() * sqrt_df + ncp_sqrt_df) / std::sqrt(Chisq::operator()());
+			// return (ziggurat.rnorm() + ncp) / std::sqrt(Chisq::operator()() / df);
+			return (ziggurat.rnorm() * sqrt_df + ncp_sqrt_df) / std::sqrt(Chisq::operator()());
 		}
 	};
 }
