@@ -21,6 +21,7 @@
 > | Rt   | Random number generation from the t distribution  |
 > | bessel   | Bessel function  |
 > | silhouette   | Silhouette function  |
+> | eqdist.etest   | Energy based equality of distributions test  |
 
 >
 > <h3>**Improved**</h3> (***by speed, correctness or options***)
