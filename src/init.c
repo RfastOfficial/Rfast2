@@ -46,7 +46,6 @@ SEXP Rfast2_colspml_mle(SEXP, SEXP, SEXP, SEXP);
 SEXP Rfast2_colcauchy_mle(SEXP, SEXP, SEXP, SEXP);
 SEXP Rfast2_colbeta_mle(SEXP, SEXP, SEXP, SEXP);
 SEXP Rfast2_censweib_reg(SEXP, SEXP, SEXP, SEXP, SEXP);
-// SEXP Rfast2_frechet2_c(SEXP , SEXP , SEXP , SEXP k1SEXP);
 SEXP Rfast2_fbed_reg(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 SEXP Rfast2_fedhc_skeleton(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 SEXP Rfast2_multinom_reg(SEXP, SEXP, SEXP, SEXP);
@@ -69,6 +68,7 @@ SEXP Rfast2_colcenspois_mle(SEXP, SEXP, SEXP, SEXP);
 SEXP Rfast2_censpois_mle(SEXP, SEXP);
 SEXP Rfast2_colcensweibull_mle(SEXP, SEXP, SEXP, SEXP, SEXP);
 SEXP Rfast2_censweibull_mle(SEXP, SEXP, SEXP);
+SEXP Rfast2_frechet_nn(SEXP , SEXP , SEXP , SEXP , SEXP , SEXP);
 
 // Lasithiotakis
 
@@ -127,6 +127,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"Rfast2_censpois_mle", (DL_FUNC)&Rfast2_censpois_mle, 2},
     {"Rfast2_colcensweibull_mle", (DL_FUNC)&Rfast2_colcensweibull_mle, 5},
     {"Rfast2_censweibull_mle", (DL_FUNC)&Rfast2_censweibull_mle, 3},
+    {"Rfast2_frechet_nn", (DL_FUNC)&Rfast2_frechet_nn, 6},
     {NULL, NULL, 0}};
 
 void R_init_Rfast2(DllInfo *info)
