@@ -9,7 +9,7 @@ Frechet mean for compositional data with k-nearest neighbours.
 }
 
 \usage{
-frechet.nn(x, di, a, k)
+frechet.nn(x, di, a, k, parallel = FALSE, cores = 0)
 }
 
 \arguments{
@@ -25,6 +25,12 @@ The value of the power transformation, it has to be between -1 and 1. If zero va
 }
 \item{k}{
 The number of nearest neighbours used for the computation of the Frechet means.
+}
+\item{parallel}{
+Should the computations take place in parallel? TRUE or FALSE.
+}
+\item{cores}{
+In case you set parallel = TRUE, then you need to specify the number of cores.
 }
 }
 
@@ -51,6 +57,8 @@ Statistics and Computing, 33(106).
 Michail Tsagris.
 
 R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
+C++ implementation: Manos Lasithiotakis.
+
 }
 
 %\note{
