@@ -12,8 +12,8 @@ Authors@R: c(
     person("Nikolaos Kontemeniotis", role = c("ctb"))
     )
 Maintainer: Manos Papadakis <rfastofficial@gmail.com>
-Depends: R (>= 3.5.0), Rcpp (>= 0.12.3), RcppParallel, BH
-LinkingTo: Rcpp (>= 0.12.3), RcppArmadillo, RcppParallel, zigg, Rfast
+Depends: R (>= 3.5.0), Rcpp (>= 0.12.3), RcppParallel
+LinkingTo: Rcpp (>= 0.12.3), RcppArmadillo, RcppParallel, zigg, Rfast, BH
 SystemRequirements: C++17
 Imports: Rfast, Rnanoflann
 BugReports: https://github.com/RfastOfficial/Rfast2/issues
