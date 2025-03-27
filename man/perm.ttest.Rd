@@ -1,5 +1,7 @@
 \name{Permutation t-test for one or two independent samples}
 \alias{perm.ttest}
+\alias{perm.ttest1}
+\alias{perm.ttest2}
 \title{
 Permutation t-test for one or two independent samples
 }
@@ -10,6 +12,8 @@ Permutation t-test for one or two independent samples.
 
 \usage{
 perm.ttest(x, y = NULL, m, B = 999)
+perm.ttest1(x, m, R = 999)
+perm.ttest2(x, y, B = 999)
 }
 
 \arguments{
