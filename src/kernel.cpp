@@ -66,7 +66,10 @@ NumericVector kernel(NumericVector X, string h) {
     double hd = 0.0;
     const double s = Rfast::var(X, true);
     if (h == "silverman") {
-        std::vector<double> probs = {0.25,0.75};
+        //std::vector<double> probs = {0.25,0.75};
+        colvec probs(2);
+        probs[0] = 0.25;
+        probs[1] = 0.75;
         colvec tmp = Rfast::Quantile<colvec>(clone(X), probs);
         colvec iqr = diff(tmp);
         hd = 0.9 * min(s, iqr(0) / 1.34) * std::pow(n, -0.2);
