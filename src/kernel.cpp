@@ -14,29 +14,6 @@
 using namespace Rcpp;
 using namespace arma;
 
-NumericVector kernel(NumericMatrix X, const double h) {
-    const size_t ncl = X.ncol(), nrw = X.nrow();
-    mat x(X.begin(), nrw, ncl, false);
-    NumericVector Res(ncl);
-    colvec res(Res.begin(), ncl, false);
-    const double h2 = 2*h*h, k = ( (ncl - 1) * h * sqrt(2 * datum::pi) );
-    for (size_t i = 0; i < ncl - 1; ++i) {
-        colvec xv(x.begin_col(i), nrw, false);
-        long double sv = 0.0;
-        for (size_t j = i + 1; j < ncl; ++j) {
-            colvec y(x.begin_col(j), nrw, false);
-            long double v = exp(-Rfast::Dist::euclidean<false>(xv, y) / h2);
-            sv+=v;
-            res[j] += v;
-        }
-        res[i] += sv;
-        res[i] /= k;
-    }
-    
-    res[ncl-1] /= k;
-    return Res;
-}
-
 NumericVector kernel(NumericVector X, const double h) {
     const size_t n = X.size();
     NumericVector Res(n);
@@ -61,16 +38,34 @@ NumericVector kernel(NumericVector X, const double h) {
     return Res;
 }
 
+NumericMatrix kernel(NumericVector X, NumericVector H) {
+    const size_t n = X.size();
+    NumericMatrix Res(H.size(), n);
+    mat res(Res.begin(), H.size(), n, false);
+    colvec x(X.begin(), n, false), h(H.begin(), H.size(), false), h2 = 2*square(h), k = ( (n - 1) * sqrt(2 * datum::pi) * h ), sv(h.n_elem, fill::none), yh(1, fill::none);
+
+    for (size_t i = 0; i < n - 1; ++i) {
+        double xv = x[i];
+        sv.fill(0);
+        for (size_t j = i + 1; j < n; ++j) {
+            yh[0] = x[j];
+            colvec v = exp(-Rfast::Dist::euclidean<false>(xv, yh) / h2);
+            sv+=v;
+            res.col(j) += v;
+        }
+        res.col(i) += sv;
+        res.col(i) /= k;
+    }
+    res.col(n-1) /= k;
+    return Res;
+}
+
 NumericVector kernel(NumericVector X, string h) {
     const size_t n = X.size();
     double hd = 0.0;
     const double s = Rfast::var(X, true);
     if (h == "silverman") {
-        //std::vector<double> probs = {0.25,0.75};
-        colvec probs(2);
-        probs.fill(0.0);
-        probs[0] = 0.25;
-        probs[1] = 0.75;
+        std::vector<double> probs = {0.25,0.75};
         colvec tmp = Rfast::Quantile<colvec>(clone(X), probs);
         colvec iqr = diff(tmp);
         hd = 0.9 * min(s, iqr(0) / 1.34) * std::pow(n, -0.2);
@@ -140,28 +135,29 @@ NumericMatrix kernel(NumericMatrix X, string h, const bool parallel = false, con
     return kernel(X,H2, parallel, cores);
 }
 
-NumericMatrix kernel(NumericVector X, NumericVector H) {
-    const size_t n = X.size();
-    NumericMatrix Res(H.size(), n);
-    mat res(Res.begin(), H.size(), n, false);
-    colvec x(X.begin(), n, false), h(H.begin(), H.size(), false), h2 = 2*square(h), k = ( (n - 1) * sqrt(2 * datum::pi) * h ), sv(h.n_elem, fill::none), yh(1, fill::none);
-
-    for (size_t i = 0; i < n - 1; ++i) {
-        double xv = x[i];
-        sv.fill(0);
-        for (size_t j = i + 1; j < n; ++j) {
-            yh[0] = x[j];
-            colvec v = exp(-Rfast::Dist::euclidean<false>(xv, yh) / h2);
+NumericVector kernel(NumericMatrix X, const double h) {
+    const size_t ncl = X.ncol(), nrw = X.nrow();
+    mat xx(X.begin(), nrw, ncl, false);
+    mat x = xx.t();
+    NumericVector Res(ncl);
+    colvec res(Res.begin(), ncl, false);
+    const double h2 = 2*h*h, k = ( (ncl - 1) * h * sqrt(2 * datum::pi) );
+    for (size_t i = 0; i < ncl - 1; ++i) {
+        colvec xv(x.begin_col(i), nrw, false);
+        long double sv = 0.0;
+        for (size_t j = i + 1; j < ncl; ++j) {
+            colvec y(x.begin_col(j), nrw, false);
+            long double v = exp(-Rfast::Dist::euclidean<false>(xv, y) / h2);
             sv+=v;
-            res.col(j) += v;
+            res[j] += v;
         }
-        res.col(i) += sv;
-        res.col(i) /= k;
+        res[i] += sv;
+        res[i] /= k;
     }
-    res.col(n-1) /= k;
+    
+    res[ncl-1] /= k;
     return Res;
 }
-
 
 RcppExport SEXP Rfast2_kernel(SEXP xSEXP, SEXP hSEXP, SEXP parallelSEXP, SEXP coresSEXP) {
 	BEGIN_RCPP
@@ -172,18 +168,22 @@ RcppExport SEXP Rfast2_kernel(SEXP xSEXP, SEXP hSEXP, SEXP parallelSEXP, SEXP co
     if(Rf_isVector(xSEXP)){
         if(Rf_length(hSEXP) == 1){
             if(Rf_isString(hSEXP)){
+                __result = kernel(NumericMatrix(xSEXP), Rcpp::as<string>(hSEXP), parallel, cores);
+            }else{
+                __result = kernel(NumericMatrix(xSEXP), Rcpp::as<double>(hSEXP));
+            }
+        }else{
+            __result = kernel(NumericMatrix(xSEXP), NumericVector(hSEXP), parallel, cores);
+        }
+    }else{
+        if(Rf_length(hSEXP) == 1){
+            if(Rf_isString(hSEXP)){
                 __result = kernel(NumericVector(xSEXP), Rcpp::as<string>(hSEXP));
             }else{
                 __result = kernel(NumericVector(xSEXP), Rcpp::as<double>(hSEXP));
             }
         }else{
             __result = kernel(NumericVector(xSEXP), NumericVector(hSEXP));
-        }
-    }else{
-        if(Rf_isVector(hSEXP)){
-	        __result = kernel(NumericMatrix(xSEXP), NumericVector(hSEXP), parallel, cores);
-        }else{
-	        __result = kernel(NumericMatrix(xSEXP), Rcpp::as<string>(hSEXP), parallel, cores);
         }
     }
 	return __result;
