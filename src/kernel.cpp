@@ -100,6 +100,8 @@ NumericMatrix kernel(NumericMatrix X, NumericVector H, const bool parallel = fal
 
     mat x = xx.t();
 
+    Rcout<<x.n_rows<<" "<<x.n_cols<<"\n";
+
     const double k = (ncl - 1) * prod(h) * std::pow(2 * datum::pi, 0.5 * nrw);
     h *= sqrt(2);
     for (size_t i = 0; i < nrw - 1; ++i) {
@@ -125,7 +127,7 @@ NumericMatrix kernel(NumericMatrix X, string h, const bool parallel = false, con
     if (h == "silverman") {
         mat iqr = Rfast::colQuantile(X, {0.25, 0.75}, parallel, cores);
         h2 = Rfast::colVars(xx, true, false, parallel, cores).t();
-        h2 = 0.9  * std::pow(xx.n_cols, -0.2) * min(h2, (iqr.row(1) - iqr.row(0)) / 1.34);
+        h2 = 0.9  * std::pow(xx.n_cols, -0.2) * min(h2, (iqr.row(1).t() - iqr.row(0).t()) / 1.34);
     } else if (h == "scott") {
         h2 = Rfast::colVars(xx, true, false, parallel, cores).t();
         h2 = 1.06 * std::pow(xx.n_cols, -0.2) * h2;
