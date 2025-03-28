@@ -10,7 +10,7 @@ using namespace Rcpp;
 using namespace std;
 
 List mmhc_skeleton_c(mat& x, mat& ini_pval, const double la, unsigned const int d, const int maxk, const int n, mat& r, unsigned const int method, const bool parallel) {
-  imat G(d,d,fill::zeros);
+  Mat<int> G(d,d,fill::zeros);
   mat pvalue(d,d,fill::zeros);
   List ret;
   unsigned long total_tests = 0;
@@ -23,7 +23,7 @@ List mmhc_skeleton_c(mat& x, mat& ini_pval, const double la, unsigned const int 
     rowvec pval;
     uvec vars, sela;
     vec sp;
-    imat cand;
+    Mat<int> cand;
     #ifdef _OPENMP
     #pragma omp for reduction(+:total_tests)
     #endif
@@ -51,7 +51,7 @@ List mmhc_skeleton_c(mat& x, mat& ini_pval, const double la, unsigned const int 
       while(vars.size() > 0) {
         for(unsigned int i = 0; i < (unsigned int) std::min(maxk, (int)sela.n_elem); ++i) {
           if(sela.n_elem == 1){
-            cand = imat(1, 1);
+            cand = Mat<int>(1, 1);
             cand[0] = sela[0];
           }
           else {
@@ -119,7 +119,7 @@ List mmhc_skeleton_c(mat& x, mat& ini_pval, const double la, unsigned const int 
     rowvec pval;
     uvec vars, sela;
     vec sp;
-    imat cand;
+    Mat<int> cand;
     for(unsigned int k = 0; k<d; ++k) {
       unsigned int ntests = 0;
       pval = ini_pval.row(k);
@@ -145,7 +145,7 @@ List mmhc_skeleton_c(mat& x, mat& ini_pval, const double la, unsigned const int 
       while(vars.size() > 0) {
         for(unsigned int i = 0; i< (unsigned int) std::min(maxk, (int)sela.n_elem); ++i) {
           if(sela.n_elem == 1){
-            cand = imat(1, 1);
+            cand = Mat<int>(1, 1);
             cand[0] = sela[0];
           }
           else {
