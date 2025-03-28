@@ -165,7 +165,7 @@ RcppExport SEXP Rfast2_kernel(SEXP xSEXP, SEXP hSEXP, SEXP parallelSEXP, SEXP co
 	RNGScope __rngScope;
 	traits::input_parameter<const bool>::type parallel(parallelSEXP);
 	traits::input_parameter<const unsigned int>::type cores(coresSEXP);
-    if(Rf_isVector(xSEXP)){
+    if(Rf_isMatrix(xSEXP)){
         if(Rf_length(hSEXP) == 1){
             if(Rf_isString(hSEXP)){
                 __result = kernel(NumericMatrix(xSEXP), Rcpp::as<string>(hSEXP), parallel, cores);
