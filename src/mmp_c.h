@@ -8,6 +8,7 @@
 #include <unordered_set>
 #include <map>
 #include <functional>
+#define ARMA_64BIT_WORD
 #include <RcppArmadillo.h>
 #include "cts.h"
 #include "Rfast2/templates.h"

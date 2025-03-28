@@ -2,6 +2,7 @@
 #ifndef __SKEL_HELPER__
 #define __SKEL_HELPER__
 // [[Rcpp::depends(RcppArmadillo)]]
+#define ARMA_64BIT_WORD
 #include <RcppArmadillo.h>
 
 using namespace std;

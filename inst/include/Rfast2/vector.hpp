@@ -2,6 +2,7 @@
 #ifndef VECTOR2_HPP
 #define VECTOR2_HPP
 
+#define ARMA_64BIT_WORD
 #include <RcppArmadillo.h>
 #include <algorithm>
 #ifdef _OPENMP

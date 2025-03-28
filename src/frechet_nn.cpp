@@ -1,6 +1,7 @@
 
 
 // [[Rcpp::depends(RcppArmadillo)]]
+#define ARMA_64BIT_WORD
 #include <RcppArmadillo.h>
 #ifdef _OPENMP
 #include <omp.h>
