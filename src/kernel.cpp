@@ -95,7 +95,7 @@ NumericVector kernel(NumericVector X, string h) {
 NumericMatrix kernel(NumericMatrix X, NumericVector H, const bool parallel = false, const unsigned int cores = get_num_of_threads()) {
     const size_t ncl = X.nrow(), nrw = X.ncol(); //X is not transpose yet
     NumericMatrix Res(nrw, ncl);
-    mat xx(X.begin(), nrw, ncl, false), res(Res.begin(), H.size(), nrw, false);
+    mat xx(X.begin(), ncl, nrw, false), res(Res.begin(), H.size(), nrw, false);
     colvec h(H.begin(), H.size(), false), sv(h.n_elem, fill::none);
 
     Rcout<<xx.n_rows<<" "<<xx.n_cols<<"\n";
