@@ -69,7 +69,7 @@ NumericVector kernel(NumericVector X, string h) {
         if (h == "silverman") {
             std::vector<double> probs = {0.25,0.75};
             NumericVector y = clone(X);
-            colvec tmp = Rfast::Quantile<colvec,NumericVector>(y, probs);
+            colvec tmp = Rfast::Quantile<colvec>(clone(X), probs);
             colvec iqr = diff(tmp);
             hd = 0.9 * min(s, iqr(0) / 1.34) * std::pow(n, -0.2);
         } else if (h == "scott") {
