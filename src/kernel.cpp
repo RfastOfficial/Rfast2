@@ -92,92 +92,60 @@ NumericVector kernel(NumericVector X, string h) {
 //     res.col(i) /= k;
 // }
 
-NumericMatrix kernel(NumericMatrix X, NumericVector H, const bool parallel = false, const unsigned int cores = get_num_of_threads()) {
-    const size_t ncl = X.nrow(), nrw = X.ncol(); //X is not transpose yet
-    NumericMatrix Res(nrw, ncl);
-    mat xx(X.begin(), ncl, nrw, false), res(Res.begin(), H.size(), nrw, false);
-    colvec h(H.begin(), H.size(), false), sv(h.n_elem, fill::none);
-
-    Rcout<<xx.n_rows<<" "<<xx.n_cols<<"\n";
-
+NumericVector kernel(NumericMatrix X, NumericVector H) {
+    const size_t ncl = X.ncol(), nrw = X.nrow(); //X is not transpose yet
+    NumericVector Res(nrw);
+    mat xx(X.begin(), nrw, ncl, false);
+    colvec h(H.begin(), H.size(), false), res(Res.begin(), nrw, false);
+    
     mat x = xx.t();
-
-    Rcout<<x.n_rows<<" "<<x.n_cols<<"\n";
-
-    const double k = (ncl - 1) * prod(h) * std::pow(2 * datum::pi, 0.5 * nrw);
+    
+    const double k = (nrw - 1) * prod(h) * std::pow(2 * datum::pi, 0.5 * ncl);
     h *= sqrt(2);
     for (size_t i = 0; i < nrw - 1; ++i) {
         colvec xv = x.col(i) / h;
-        sv.fill(0);
+        long double sv = 0.0;
         for (size_t j = i + 1; j < nrw; ++j) {
             colvec y = x.col(j) / h;
-            auto v = exp(-Rfast::Dist::euclidean<false>(xv, y));
-            sv+=v;
-            res.col(j) += v;
-        }
-        res.col(i) += sv;
-        res.col(i) /= k;
-    }
-    res.col(nrw-1) /= k;
-    return Res;
-}
-
-NumericMatrix kernel(NumericMatrix X, string h, const bool parallel = false, const unsigned int cores = get_num_of_threads()) {
-    mat xx(X.begin(), X.nrow(), X.ncol(), false);
-    NumericVector H2(xx.n_cols);
-    colvec h2(H2.begin(), H2.size(), false);
-    if (h == "silverman") {
-        mat iqr = Rfast::colQuantile(X, {0.25, 0.75}, parallel, cores);
-        h2 = Rfast::colVars(xx, true, false, parallel, cores).t();
-        h2 = 0.9  * std::pow(xx.n_cols, -0.2) * min(h2, (iqr.row(1).t() - iqr.row(0).t()) / 1.34);
-    } else if (h == "scott") {
-        h2 = Rfast::colVars(xx, true, false, parallel, cores).t();
-        h2 = 1.06 * std::pow(xx.n_cols, -0.2) * h2;
-    }else{
-        stop("Unsupported method. Only 'silverman' and 'scott' are supported.");
-    }
-    return kernel(X,H2, parallel, cores);
-}
-
-NumericVector kernel(NumericMatrix X, const double h) {
-    const size_t ncl = X.ncol(), nrw = X.nrow();
-    mat xx(X.begin(), nrw, ncl, false);
-    mat x = xx.t();
-    NumericVector Res(ncl);
-    colvec res(Res.begin(), ncl, false);
-    const double h2 = 2*h*h, k = ( (ncl - 1) * h * sqrt(2 * datum::pi) );
-    for (size_t i = 0; i < ncl - 1; ++i) {
-        colvec xv(x.begin_col(i), nrw, false);
-        long double sv = 0.0;
-        for (size_t j = i + 1; j < ncl; ++j) {
-            colvec y(x.begin_col(j), nrw, false);
-            long double v = exp(-Rfast::Dist::euclidean<false>(xv, y) / h2);
+            long double  v = exp(-Rfast::Dist::euclidean<false>(xv, y));
             sv+=v;
             res[j] += v;
         }
         res[i] += sv;
         res[i] /= k;
     }
-    
-    res[ncl-1] /= k;
+    res[nrw-1] /= k;
     return Res;
 }
 
+NumericVector kernel(NumericMatrix X, string h, const bool parallel = false, const unsigned int cores = get_num_of_threads()) {
+    mat xx(X.begin(), X.nrow(), X.ncol(), false);
+    NumericVector H2(xx.n_cols);
+    colvec h2(H2.begin(), H2.size(), false);
+    if (h == "silverman") {
+        mat iqr = Rfast::colQuantile(X, {0.25, 0.75}, parallel, cores);
+        h2 = Rfast::colVars(xx, true, false, parallel, cores).t();
+        h2 = 0.9  * std::pow(xx.n_rows, -0.2) * min(h2, (iqr.row(1).t() - iqr.row(0).t()) / 1.34);
+    } else if (h == "scott") {
+        h2 = Rfast::colVars(xx, true, false, parallel, cores).t();
+        h2 = 1.06 * std::pow(xx.n_rows, -0.2) * h2;
+    }else{
+        stop("Unsupported method. Only 'silverman' and 'scott' are supported.");
+    }
+    return kernel(X,H2);
+}
+
 RcppExport SEXP Rfast2_kernel(SEXP xSEXP, SEXP hSEXP, SEXP parallelSEXP, SEXP coresSEXP) {
-	BEGIN_RCPP
-	RObject __result;
-	RNGScope __rngScope;
-	traits::input_parameter<const bool>::type parallel(parallelSEXP);
-	traits::input_parameter<const unsigned int>::type cores(coresSEXP);
+    BEGIN_RCPP
+    RObject __result;
+    RNGScope __rngScope;
+    traits::input_parameter<const bool>::type parallel(parallelSEXP);
+    traits::input_parameter<const unsigned int>::type cores(coresSEXP);
     if(Rf_isMatrix(xSEXP)){
-        if(Rf_length(hSEXP) == 1){
-            if(Rf_isString(hSEXP)){
-                __result = kernel(NumericMatrix(xSEXP), Rcpp::as<string>(hSEXP), parallel, cores);
-            }else{
-                __result = kernel(NumericMatrix(xSEXP), Rcpp::as<double>(hSEXP));
-            }
+        if(Rf_isString(hSEXP)){
+            __result = kernel(NumericMatrix(xSEXP), Rcpp::as<string>(hSEXP), parallel, cores);
         }else{
-            __result = kernel(NumericMatrix(xSEXP), NumericVector(hSEXP), parallel, cores);
+            __result = kernel(NumericMatrix(xSEXP), NumericVector(hSEXP));
         }
     }else{
         if(Rf_length(hSEXP) == 1){
@@ -190,8 +158,8 @@ RcppExport SEXP Rfast2_kernel(SEXP xSEXP, SEXP hSEXP, SEXP parallelSEXP, SEXP co
             __result = kernel(NumericVector(xSEXP), NumericVector(hSEXP));
         }
     }
-	return __result;
-	END_RCPP
+    return __result;
+    END_RCPP
 }
 
 /////////////////////////////////////////////////////////////////////////////////////
