@@ -98,6 +98,8 @@ NumericMatrix kernel(NumericMatrix X, NumericVector H, const bool parallel = fal
     mat xx(X.begin(), nrw, ncl, false), res(Res.begin(), H.size(), nrw, false);
     colvec h(H.begin(), H.size(), false), sv(h.n_elem, fill::none);
 
+    Rcout<<xx.n_rows<<" "<<xx.n_cols<<"\n";
+
     mat x = xx.t();
 
     Rcout<<x.n_rows<<" "<<x.n_cols<<"\n";
