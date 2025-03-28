@@ -112,7 +112,7 @@ vec g2Test(mat& data, unsigned const int x, unsigned const int y, int* cs, unsig
   return ret;
 }
 
-vec g2Test(mat& data, unsigned const int x, unsigned const int y, ivec cs, mat dc){
+vec g2Test(mat& data, unsigned const int x, unsigned const int y, Col<int> cs, mat dc){
   vec result = g2Test(data, x, y, &cs[0], cs.size(), &dc[0]);
   return result;
 }
@@ -176,7 +176,7 @@ arma::imat find_combn(arma::uvec vals, unsigned const int n) {
   return combn_ds;
 }
 
-double pcor_pval(mat& R, unsigned const int indx, unsigned const int indy, ivec indz, unsigned const int n){
+double pcor_pval(mat& R, unsigned const int indx, unsigned const int indy, Col<int> indz, unsigned const int n){
   double r = 0.99999999;
   if(indz.size() == 1){
     double a1 = R(indx, indy), a2 = R(indx, indz[0]), a3 = R(indy, indz[0]);
