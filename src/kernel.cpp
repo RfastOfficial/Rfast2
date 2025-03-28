@@ -70,8 +70,8 @@ NumericVector kernel(NumericVector X, string h) {
     try {
     if (h == "silverman") {
         NumericVector probs = {0.25,0.75};
-        colvec y(x);
-        colvec tmp = Rfast::Quantile<colvec>(y, probs);
+        // colvec y(x);
+        colvec tmp = Rfast::Quantile<colvec>(x, probs);
         // colvec iqr = diff(tmp);
         // hd = 0.9 * min(s, iqr(0) / 1.34) * std::pow(n, -0.2);
     } else if (h == "scott") {
