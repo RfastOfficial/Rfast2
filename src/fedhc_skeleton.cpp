@@ -10,7 +10,7 @@ using namespace Rcpp;
 using namespace std;
 
 List fedhc_skeleton_c(mat& x, mat& ini_pval, const double la, unsigned const int d, const int n, mat& r, unsigned const int method, const bool parallel) {
-  imat G(d,d,fill::zeros);
+  Mat<int> G(d,d,fill::zeros);
   mat pvalue(d,d,fill::zeros);
   List ret;
 

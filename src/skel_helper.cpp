@@ -130,7 +130,7 @@ unsigned int choose(unsigned const int a, unsigned const int b){
 }
 
 int combn(arma::uvec& vals, unsigned const int n, unsigned const int start_idx,
-          double* combn_data, arma::imat& combn_ds, unsigned int combn_col) {
+          double* combn_data, Mat<int>& combn_ds, unsigned int combn_col) {
   if (!n) {
     for (unsigned int i = 0; i < combn_ds.n_rows && combn_col < combn_ds.n_cols; i++) {
       combn_ds(i, combn_col) = combn_data[i];
@@ -163,9 +163,9 @@ arma::uvec subvec(uvec data, uvec inds){
   return ret;
 }
 
-arma::imat find_combn(arma::uvec vals, unsigned const int n) {
+Mat<int> find_combn(arma::uvec vals, unsigned const int n) {
   const unsigned int ncols = choose(vals.size(), n);
-  arma::imat combn_ds(n, ncols);
+  Mat<int> combn_ds(n, ncols);
 
   vec combn_data(n,fill::zeros);
 
@@ -209,7 +209,7 @@ double pcor_pval(mat& R, unsigned const int indx, unsigned const int indy, Col<i
   return 0.6931472 + R::pt(std::abs(z), dm, false, true);
 }
 
-void finalize_G_pval(imat& G, mat& pvalue, unsigned const int d, const bool parallel){
+void finalize_G_pval(Mat<int>& G, mat& pvalue, unsigned const int d, const bool parallel){
   if(parallel){
     #ifdef _OPENMP
     #pragma omp for
