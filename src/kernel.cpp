@@ -65,22 +65,15 @@ NumericVector kernel(NumericVector X, string h) {
     const size_t n = X.size();
     double hd = 0.0;
     const double s = Rfast::var(X, true);
-    try {
-        if (h == "silverman") {
-            std::vector<double> probs = {0.25,0.75};
-            NumericVector y = clone(X);
-            colvec tmp = Rfast::Quantile<colvec>(clone(X), probs);
-            colvec iqr = diff(tmp);
-            hd = 0.9 * min(s, iqr(0) / 1.34) * std::pow(n, -0.2);
-        } else if (h == "scott") {
-            hd = 1.06 * s * std::pow(n, -0.2);
-        }else{
-            stop("Unsupported method. Only 'silverman' and 'scott' are supported.");
-        }
-    } catch (std::exception &e) {
-        ::Rf_error("Caught C++ error: %s", e.what());  // Report error to R
-    } catch (...) {
-        ::Rf_error("Unknown C++ error occurred");
+    if (h == "silverman") {
+        std::vector<double> probs = {0.25,0.75};
+        colvec tmp = Rfast::Quantile<colvec>(clone(X), probs);
+        colvec iqr = diff(tmp);
+        hd = 0.9 * min(s, iqr(0) / 1.34) * std::pow(n, -0.2);
+    } else if (h == "scott") {
+        hd = 1.06 * s * std::pow(n, -0.2);
+    }else{
+        stop("Unsupported method. Only 'silverman' and 'scott' are supported.");
     }
     return kernel(X, hd);
 }
