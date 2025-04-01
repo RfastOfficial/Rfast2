@@ -62,8 +62,8 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 }
 
 \examples{
-y <- rbinom(1000, 1, 0.5)
-x <- matrix( rnorm(1000 * 5), ncol = 5 )
+y <- rbinom(500, 1, 0.5)
+x <- matrix( rnorm(500 * 3), ncol = 3 )
 ## not a very good approximation since the data are not of large scale
 batch.logistic(y, x, k = 2) 
 }

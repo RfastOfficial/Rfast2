@@ -62,7 +62,7 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 }
 
 \examples{
-x <- as.matrix(iris[, 1:4])
-ina <- iris[, 5]
+x <- as.matrix(iris[1:100, 1:3])
+ina <- iris[1:100, 5]
 covlikel(x, ina)
 }

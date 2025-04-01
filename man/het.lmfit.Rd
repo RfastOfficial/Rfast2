@@ -66,8 +66,8 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 }
 
 \examples{
-x <- cbind(1, matrix( rnorm( 100 * 4), ncol = 4 ) )
-y <- rnorm(100)
+x <- cbind(1, matrix( rnorm( 50 * 4), ncol = 4 ) )
+y <- rnorm(50)
 a <- het.lmfit(x, y) 
 x <- NULL
 }

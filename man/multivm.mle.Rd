@@ -90,6 +90,5 @@ y <- rcauchy(100, 3, 1)
 x <- y %% (2 * pi)
 ina <- rep(1:2, 50)
 multivm.mle(x, ina)
-multispml.mle(x, ina)
 }
 

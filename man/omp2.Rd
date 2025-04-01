@@ -80,10 +80,9 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 }
 
 \examples{
-x <- matrix( rnorm(100 * 50), ncol = 50 )
+x <- matrix( rnorm(100 * 30), ncol = 30 )
 y <- rgamma(100, 4, 1)
 a <- omp2(y, x)
-a
 x <- NULL
 }
 

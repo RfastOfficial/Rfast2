@@ -93,7 +93,7 @@ Stefanos Fafalios \email{stefanosfafalios@gmail.com}.
 
 \examples{
 # simulate a dataset with continuous data
-x <- matrix( rnorm(200 * 50, 1, 10), nrow = 200 )
+x <- matrix( rnorm(200 * 20, 1, 10), nrow = 200 )
 a <- fedhc.skel(x)
 }
 

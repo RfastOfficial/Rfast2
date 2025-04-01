@@ -66,10 +66,7 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 }
 
 \examples{
-y <- as.vector(iris[, 1])
-x <- as.matrix(iris[, 2:4])
-mod1 <- pcr(y, x, 1)
-mod2 <- pcr(y, x, 2)
+x <- as.matrix(iris[, 1:4])
 mod <- pcr(y, x, k = 1:3)  ## all results at once
 }
 

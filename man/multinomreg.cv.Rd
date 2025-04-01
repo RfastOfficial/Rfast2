@@ -78,6 +78,6 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 
 \examples{
 x <- as.matrix(iris[, 1:2])
-mod <- multinomreg.cv(iris[, 5], x)
+mod <- multinomreg.cv(iris[, 5], x, nfolds = 5)
 }
 

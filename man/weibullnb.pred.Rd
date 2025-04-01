@@ -89,8 +89,8 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 }
 
 \examples{
-x <- matrix( rweibull( 100, 3, 4 ), ncol = 2 )
-ina <- rbinom(50, 1, 0.5) + 1
+x <- matrix( rweibull( 60, 3, 4 ), ncol = 2 )
+ina <- rbinom(30, 1, 0.5) + 1
 a <- weibull.nb(x, x, ina)
 est <- weibullnb.pred(x, a$shape, a$scale, a$ni)
 table(ina, est)

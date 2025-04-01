@@ -64,7 +64,7 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 }
 
 \examples{
-x <- matrix( rnorm(1000 * 20 ), ncol = 20)
+x <- matrix( rnorm(300 * 10 ), ncol = 10)
 a <- pca(x)
 x <- NULL
 }

@@ -65,6 +65,6 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 x <- rexp(40, 4)
 y <- rbeta(50, 2.5, 7.5)
 t.test(x, y, var.equal = TRUE)
-boot.student2(x, y, 9999)
+boot.student2(x, y, 299)
 }
 

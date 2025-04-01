@@ -100,7 +100,7 @@ Stefanos Fafalios \email{stefanosfafalios@gmail.com}.
 
 \examples{
 # simulate a dataset with continuous data
-x <- matrix( rnorm(300 * 30, 1, 100), nrow = 300 )
+x <- matrix( rnorm(200 * 30, 1, 100), nrow = 200 )
 a <- mmhc.skel(x)
 }
 

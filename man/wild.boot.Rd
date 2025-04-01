@@ -64,9 +64,9 @@ and Stefanos Fafalios \email{stefanosfafalios@gmail.com}.
 }
 
 \examples{
-y <- rnorm(200)
-id <- sample(1:20, 200, replace = TRUE)
-x <- matrix( rnorm(200 * 3), ncol = 3 )
+y <- rnorm(100)
+id <- sample(1:20, 100, replace = TRUE)
+x <- matrix( rnorm(100 * 3), ncol = 3 )
 wild.boot(y, x, cluster = id)
 }
 

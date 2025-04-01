@@ -87,8 +87,8 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 }
 
 \examples{
-x <- rnorm(100)
-y <- rnorm(100)
+x <- rnorm(50)
+y <- rnorm(50)
 y[y < 0] <- 0
 a <- tobit.reg(y, x, full = TRUE) 
 }

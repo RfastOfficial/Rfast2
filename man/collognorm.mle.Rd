@@ -112,7 +112,7 @@ and Stefanos Fafalios \email{stefanosfafalios@gmail.com}.
 }
 
 \examples{
-x <- matrix( exp( rnorm(500 * 50) ), ncol = 50)
+x <- matrix( exp( rnorm(300 * 30) ), ncol = 30)
 a <- collognorm.mle(x)
 x <- NULL
 }

@@ -63,8 +63,8 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 }
 
 \examples{
-x <- rnorm(50)
-w <- as.matrix( dist(iris[1:50, 1:4]) )
+x <- rnorm(30)
+w <- as.matrix( dist(iris[1:30, 1:3]) )
 w <- 1/w
 diag(w) <- 0
 moranI(x, w, scaled = FALSE)
