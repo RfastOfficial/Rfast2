@@ -30,7 +30,8 @@ List halfcauchy_mle(NumericVector x, const double tol = 1e-07)
 	double logs = log(es);
 	vec x2 = square(x1);
 	vec down = 1 / (x2 + es1);
-	Rcout<<sum(log(down))(0)<<"\n";
+	vec ddd = sum(log(down));
+	Rcout<<ddd(0)<<"\n";
 	double lik1 = x1.n_elem * logs + accu(log(down));
 	double der = x1.n_elem - 2 * (es1 * accu(down));
 
