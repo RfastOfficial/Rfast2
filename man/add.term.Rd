@@ -80,9 +80,5 @@ x <- matrix( rnorm(200 * 10), ncol = 10)
 y <- rpois(200, 10)
 devi_0 <- deviance( glm(y ~ x[, 1:2], poisson) )
 a <- add.term(y, xinc = x[,1:2], xout = x[, 3:10], devi_0 = devi_0, type= "poisson")
-
-y <- rbinom(200, 1, 0.5)
-devi_0 <- deviance( glm(y ~ x[, 1:2], binomial) )
-a <- add.term(y, xinc = x[,1:2], xout = x[, 3:10], devi_0 = devi_0, type= "logistic")
 }
 

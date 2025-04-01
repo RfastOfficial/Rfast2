@@ -61,8 +61,8 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 }
 
 \examples{
-y <- rpois(50, 4)
-x <- iris[1:50, 1]
+y <- rpois(40, 4)
+x <- iris[1:40, 1]
 a <- hp.reg(y, x)
 }
 
