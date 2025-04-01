@@ -23,13 +23,14 @@ List halfcauchy_mle(NumericVector x, const double tol = 1e-07)
 	double y1 = x1(k1 - 1);
 	nth_element(x1.begin(), x1.begin() + k - 1, x1.begin() + k1);
 	double y = x1(k - 1);
-
+	Rcout<<"y: "<<y<<"\n";
+	Rcout<<"y1: "<<y1<<"\n";
 	double es = 0.5 * (y1 - y);
 	double es1 = es * es;
 	double logs = log(es);
 	vec x2 = square(x1);
 	vec down = 1 / (x2 + es1);
-	down.t().print("down");
+	Rcout<<accu(log(down))<<"\n";
 	double lik1 = x1.n_elem * logs + accu(log(down));
 	double der = x1.n_elem - 2 * (es1 * accu(down));
 
