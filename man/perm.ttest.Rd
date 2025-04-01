@@ -61,6 +61,6 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr} and 
 \examples{
 x <- rexp(30, 4)
 y <- rbeta(30, 2.5, 7.5)
-perm.ttest(x = x, y = y, R = 299)
+perm.ttest(x = x, y = y, B = 299)
 }
 

@@ -59,7 +59,7 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr} and 
 }
 
 \examples{
-x <- as.matrix( iris[1:100, 1:4) )
+x <- as.matrix( iris[1:100, 1:4] )
 cl <- kmeans(x, 2)$cluster
 silhouette(x, cl)
 }
