@@ -62,8 +62,8 @@ R implementation and documentation: Michail Tsagris <mtsagris@uoc.gr>.
 }
 
 \examples{
-y <- iris[1:40, 1] 
-x <- iris[1:40, 2] 
+y <- iris[1:30, 1] 
+x <- iris[1:30, 2] 
 eqdist.etest(y, x, R = 99)
 }
 

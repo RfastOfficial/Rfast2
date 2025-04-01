@@ -79,8 +79,8 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 }
 
 \examples{
-y <- rbeta(100, 3, 4)
-x <- iris[1:100, ]
+y <- rbeta(50, 3, 4)
+x <- iris[1:50, 1:2]
 a <- prophelling.reg(y, x)
 }
 
