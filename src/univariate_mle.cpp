@@ -10,14 +10,6 @@ using namespace Rcpp;
 using namespace arma;
 using namespace std;
 
-vec mylog(vec x){
-	vec y(x.n_elem);
-	for(size_t i = 0;i<y.n_elem;++i){
-		y[i] = std::log(x[i]);
-	}
-	return y;
-}
-
 List halfcauchy_mle(NumericVector x, const double tol = 1e-07)
 {
 	const double logdp = log(2.0 / (atan(1) * 4));
