@@ -14,7 +14,8 @@ List halfcauchy_mle(NumericVector x, const double tol = 1e-07)
 {
 	const double logdp = log(2.0 / (atan(1) * 4));
 
-	vec x1(x.begin(), x.size(), true);
+	// vec x1(x.begin(), x.size(), true);
+	vec x1 = Rcpp::as<vec>(x);
 
 	int k = x1.n_elem / 4;
 	int k1 = 3 * x1.n_elem / 4;
