@@ -31,15 +31,12 @@ List halfcauchy_mle(NumericVector x, const double tol = 1e-07)
 	double y1 = x1(k1 - 1);
 	nth_element(x1.begin(), x1.begin() + k - 1, x1.begin() + k1);
 	double y = x1(k - 1);
-	Rcout<<"y: "<<y<<"\n";
-	Rcout<<"y1: "<<y1<<"\n";
 	double es = 0.5 * (y1 - y);
 	double es1 = es * es;
 	double logs = log(es);
 	vec x2 = square(x1);
 	vec down = 1 / (x2 + es1);
-	Rcout<<sum(mylog(down))<<"\n";
-	double lik1 = x1.n_elem * logs + accu(log(down));
+	double lik1 = x1.n_elem * logs + accu(foreach<std::log, vec>(down));
 	double der = x1.n_elem - 2 * (es1 * accu(down));
 
 	double der2 = -4 * (es1 * es1) * dot(down, down);
@@ -48,7 +45,7 @@ List halfcauchy_mle(NumericVector x, const double tol = 1e-07)
 	es = exp(logs);
 	es1 = es * es;
 	down = 1 / (x2 + es1);
-	double lik2 = x1.n_elem * logs + accu(log(down));
+	double lik2 = x1.n_elem * logs + accu(foreach<std::log, vec>(down));
 
 	int i = 2;
 	for (; lik2 - lik1 > tol; ++i)
@@ -60,7 +57,7 @@ List halfcauchy_mle(NumericVector x, const double tol = 1e-07)
 		es = exp(logs);
 		es1 = es * es;
 		down = 1 / (x2 + es1);
-		lik2 = x1.n_elem * logs + accu(log(down));
+		lik2 = x1.n_elem * logs + accu(foreach<std::log, vec>(down));
 	}
 
 	double loglik = lik2 - x1.n_elem * logdp;
