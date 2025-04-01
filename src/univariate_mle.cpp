@@ -11,8 +11,8 @@ using namespace arma;
 using namespace std;
 
 vec mylog(vec x){
-	vec y(x.n_elems);
-	for(size_t i = 0;i<y.n_elems;++i){
+	vec y(x.n_elem);
+	for(size_t i = 0;i<y.n_elem;++i){
 		y[i] = std::log(x[i]);
 	}
 	return y;
