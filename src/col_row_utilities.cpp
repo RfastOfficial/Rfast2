@@ -1,3 +1,4 @@
+#define ARMA_64BIT_WORD
 #include <RcppArmadillo.h>
 #include "Rfast2.h"
 #include "Rfast2/templates_rfast2.h"

@@ -22,6 +22,13 @@
 > | bessel   | Bessel function  |
 > | silhouette   | Silhouette function  |
 > | eqdist.etest   | Energy based equality of distributions test  |
+> | lm.boot   | Replaced the 'lm.parboot' and 'lm.nonparboot'.  |
+> | perm.ttest   | Replaced the 'perm.ttest1' and 'perm.ttest2'.  |
+> | lm.parboot   | Deprecated.  |
+> | lm.nonparboot   | Deprecated.  |
+> | perm.ttest1   | Deprecated.  |
+> | perm.ttest2   | Deprecated.  |
+> | eqdist.etest   | Energy based equality of distributions test  |
 
 >
 > <h3>**Improved**</h3> (***by speed, correctness or options***)

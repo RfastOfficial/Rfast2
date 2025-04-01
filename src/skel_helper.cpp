@@ -1,3 +1,4 @@
+#define ARMA_64BIT_WORD
 #include <RcppArmadillo.h>
 #include "skel_helper.h"
 
@@ -111,7 +112,7 @@ vec g2Test(mat& data, unsigned const int x, unsigned const int y, int* cs, unsig
   return ret;
 }
 
-vec g2Test(mat& data, unsigned const int x, unsigned const int y, ivec cs, mat dc){
+vec g2Test(mat& data, unsigned const int x, unsigned const int y, Col<int> cs, mat dc){
   vec result = g2Test(data, x, y, &cs[0], cs.size(), &dc[0]);
   return result;
 }
@@ -129,7 +130,7 @@ unsigned int choose(unsigned const int a, unsigned const int b){
 }
 
 int combn(arma::uvec& vals, unsigned const int n, unsigned const int start_idx,
-          double* combn_data, arma::imat& combn_ds, unsigned int combn_col) {
+          double* combn_data, Mat<int>& combn_ds, unsigned int combn_col) {
   if (!n) {
     for (unsigned int i = 0; i < combn_ds.n_rows && combn_col < combn_ds.n_cols; i++) {
       combn_ds(i, combn_col) = combn_data[i];
@@ -162,9 +163,9 @@ arma::uvec subvec(uvec data, uvec inds){
   return ret;
 }
 
-arma::imat find_combn(arma::uvec vals, unsigned const int n) {
+Mat<int> find_combn(arma::uvec vals, unsigned const int n) {
   const unsigned int ncols = choose(vals.size(), n);
-  arma::imat combn_ds(n, ncols);
+  Mat<int> combn_ds(n, ncols);
 
   vec combn_data(n,fill::zeros);
 
@@ -175,7 +176,7 @@ arma::imat find_combn(arma::uvec vals, unsigned const int n) {
   return combn_ds;
 }
 
-double pcor_pval(mat& R, unsigned const int indx, unsigned const int indy, ivec indz, unsigned const int n){
+double pcor_pval(mat& R, unsigned const int indx, unsigned const int indy, Col<int> indz, unsigned const int n){
   double r = 0.99999999;
   if(indz.size() == 1){
     double a1 = R(indx, indy), a2 = R(indx, indz[0]), a3 = R(indy, indz[0]);
@@ -208,7 +209,7 @@ double pcor_pval(mat& R, unsigned const int indx, unsigned const int indy, ivec 
   return 0.6931472 + R::pt(std::abs(z), dm, false, true);
 }
 
-void finalize_G_pval(imat& G, mat& pvalue, unsigned const int d, const bool parallel){
+void finalize_G_pval(Mat<int>& G, mat& pvalue, unsigned const int d, const bool parallel){
   if(parallel){
     #ifdef _OPENMP
     #pragma omp for

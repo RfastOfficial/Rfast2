@@ -1,6 +1,7 @@
 // Author:  Marios Dimitriadis
 // Contact: kmdimitriadis@gmail.com
 
+#define ARMA_64BIT_WORD
 #include <RcppArmadillo.h>
 #include "mmp_c.h"
 #include "cts.h"

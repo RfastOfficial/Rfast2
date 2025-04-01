@@ -6,8 +6,7 @@ SEXP Rfast2_bessel(SEXP, SEXP, SEXP, SEXP);
 SEXP Rfast2_benchmark(SEXP, SEXP, SEXP, SEXP);
 SEXP Rfast2_col_group(SEXP, SEXP, SEXP, SEXP);
 SEXP Rfast2_colQuantile(SEXP, SEXP, SEXP, SEXP);
-SEXP Rfast_kernel(SEXP, SEXP);
-SEXP Rfast_kernel_m(SEXP, SEXP);
+SEXP Rfast2_kernel(SEXP, SEXP,SEXP, SEXP);
 SEXP Rfast2_is_upper_tri(SEXP, SEXP);
 SEXP Rfast2_is_lower_tri(SEXP, SEXP);
 SEXP Rfast2_is_skew_symmetric(SEXP);
@@ -46,7 +45,6 @@ SEXP Rfast2_colspml_mle(SEXP, SEXP, SEXP, SEXP);
 SEXP Rfast2_colcauchy_mle(SEXP, SEXP, SEXP, SEXP);
 SEXP Rfast2_colbeta_mle(SEXP, SEXP, SEXP, SEXP);
 SEXP Rfast2_censweib_reg(SEXP, SEXP, SEXP, SEXP, SEXP);
-// SEXP Rfast2_frechet2_c(SEXP , SEXP , SEXP , SEXP k1SEXP);
 SEXP Rfast2_fbed_reg(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 SEXP Rfast2_fedhc_skeleton(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 SEXP Rfast2_multinom_reg(SEXP, SEXP, SEXP, SEXP);
@@ -69,6 +67,7 @@ SEXP Rfast2_colcenspois_mle(SEXP, SEXP, SEXP, SEXP);
 SEXP Rfast2_censpois_mle(SEXP, SEXP);
 SEXP Rfast2_colcensweibull_mle(SEXP, SEXP, SEXP, SEXP, SEXP);
 SEXP Rfast2_censweibull_mle(SEXP, SEXP, SEXP);
+SEXP Rfast2_frechet_nn(SEXP , SEXP , SEXP , SEXP , SEXP , SEXP);
 
 // Lasithiotakis
 
@@ -87,8 +86,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"Rfast2_rowQuantile", (DL_FUNC)&Rfast2_rowQuantile, 4},
     {"Rfast2_rowTrimMean", (DL_FUNC)&Rfast2_rowTrimMean, 4},
     {"Rfast2_colTrimMean", (DL_FUNC)&Rfast2_colTrimMean, 4},
-	  {"Rfast_kernel", (DL_FUNC)&Rfast_kernel, 2},
-	  {"Rfast_kernel_m", (DL_FUNC)&Rfast_kernel_m, 2},
+	  {"Rfast2_kernel", (DL_FUNC)&Rfast2_kernel, 4},
     {"Rfast2_Runif", (DL_FUNC)&Rfast2_Runif, 3},
     {"Rfast2_Rbeta", (DL_FUNC)&Rfast2_Rbeta, 3},
     {"Rfast2_Rexp", (DL_FUNC)&Rfast2_Rexp, 2},
@@ -127,6 +125,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"Rfast2_censpois_mle", (DL_FUNC)&Rfast2_censpois_mle, 2},
     {"Rfast2_colcensweibull_mle", (DL_FUNC)&Rfast2_colcensweibull_mle, 5},
     {"Rfast2_censweibull_mle", (DL_FUNC)&Rfast2_censweibull_mle, 3},
+    {"Rfast2_frechet_nn", (DL_FUNC)&Rfast2_frechet_nn, 6},
     {NULL, NULL, 0}};
 
 void R_init_Rfast2(DllInfo *info)

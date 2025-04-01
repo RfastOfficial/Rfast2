@@ -1,5 +1,7 @@
 \name{Parametric and non-parametric bootstrap for linear regression model}
 \alias{lm.boot}
+\alias{lm.parboot}
+\alias{lm.nonparboot}
 \title{
 Parametric and non-parametric bootstrap for linear regression model
 }
@@ -10,6 +12,8 @@ Parametric and non-parametric bootstrap for linear regression model.
 
 \usage{
 lm.boot(x, y, R = 1000, type = "param")
+lm.parboot(x, y, R = 1000)
+lm.nonparboot(x, y, R = 1000)
 }
 
 \arguments{
