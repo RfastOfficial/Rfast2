@@ -37,7 +37,7 @@ In case you set parallel = TRUE, then you need to specify the number of cores.
 \details{
 The power transformation is applied to the compositional data and the mean vector is calculated. Then the inverse of it is calculated and the inverse of the power transformation applied to the last vector is the Frechet mean.
 
-What this helper function do is to speed up the Frechet mean when used in the \eqn{\alpha}-k-NN regression. The \eqn{\alpha}-k-NN regression computes the Frechet mean of the k nearest neighbours for a value of \eqn{\alpha} and this function does exactly that. Suppose you want to predict the compositional value of some new predictors. For each predictor value you must use the Frechet mean computed at various nearest neighbours. This function performs these computations in a fast way. It is not the fastest way, yet it is a pretty fast way. This function is being called inside the function \link{aknn.reg}.
+What this helper function do is to speed up the Frechet mean when used in the \eqn{\alpha}-k-NN regression. The \eqn{\alpha}-k-NN regression computes the Frechet mean of the k nearest neighbours for a value of \eqn{\alpha} and this function does exactly that. Suppose you want to predict the compositional value of some new predictors. For each predictor value you must use the Frechet mean computed at various nearest neighbours. This function performs these computations in a fast way. It is not the fastest way, yet it is a pretty fast way. This function is being called inside the function aknn.reg.
 }
 
 \value{
@@ -71,7 +71,11 @@ C++ implementation: Manos Lasithiotakis.
 
 \examples{
 \donttest{
+<<<<<<< HEAD
 x <- as.matrix(iris[, 1:4])
+=======
+x <- as.matrix(fgl[, 2:9])
+>>>>>>> e29b0a7acf77b340a398b56b278ff2e93561a7d3
 x <- x / rowSums(x)
 xnew <- x[1:10, ]
 x <- x[-c(1:10), ]
