@@ -45,7 +45,7 @@ NumericVector toNumbers(string,char);
 IntegerVector combine(IntegerVector,IntegerVector);
 double total_euclidean_dist(NumericMatrix,const bool);
 NumericMatrix euclidean_dist(NumericMatrix,const bool);
-icolvec get_k_indices(rowvec,const int&);
+Col<int> get_k_indices(rowvec,const int&);
 SEXP eachrow_min_abs(SEXP,SEXP);
 SEXP eachcol_min_abs(SEXP,SEXP);
 IntegerVector Order(NumericVector,const bool,const bool);

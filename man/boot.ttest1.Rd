@@ -1,5 +1,6 @@
 \name{One sample bootstrap and permutation t-test for a vector}
 \alias{boot.ttest1}
+\alias{perm.ttest1}
 \title{
 One sample bootstrap permutation t-test for a vector
 }

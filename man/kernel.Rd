@@ -19,6 +19,12 @@ A numerical vector or a matrix with the data.
 \item{h}{
 The bandwidth, it can be a value, a vector of values or NULL, in which case Silverman's rule is applied.
 }
+\item{parallel}{
+A boolean value for parallel version.
+}
+\item{cores}{
+In case you set parallel = TRUE, then you need to specify the number of cores.
+}
 }
 
 \details{

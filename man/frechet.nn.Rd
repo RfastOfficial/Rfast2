@@ -71,11 +71,7 @@ C++ implementation: Manos Lasithiotakis.
 
 \examples{
 \donttest{
-<<<<<<< HEAD
 x <- as.matrix(iris[, 1:4])
-=======
-x <- as.matrix(fgl[, 2:9])
->>>>>>> e29b0a7acf77b340a398b56b278ff2e93561a7d3
 x <- x / rowSums(x)
 xnew <- x[1:10, ]
 x <- x[-c(1:10), ]

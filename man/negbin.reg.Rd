@@ -22,6 +22,12 @@ The dependent variable, a numerical vector with integer valued numbers.
 A matrix or a data.frame with the indendent variables.
 For the many regression models, a matrix with continuous variables.
 }
+\item{type}{
+This argument is for the negative binomial and the geometric distribution. 
+In the negative binomial you can choose which way your prefer. Type 1 is for smal sample sizes, whereas 
+type 2 is for larger ones as is faster. For the geometric it is related to its two forms. Type 1 refers to the case
+where the minimum is zero and type 2 for the case of the minimum being 1. 
+}
 \item{tol}{
 The tolerance value required by the Newton-Raphson to stop.
 }

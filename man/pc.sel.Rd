@@ -53,7 +53,7 @@ The runtime of the algorithm.
 \references{
 Buhlmann P., Kalisch M. and Maathuis M. H. (2010). Variable selection in high-dimensional linear models:
 partially faithful distributions and the PC-simple algorithm. Biometrika, 97(2): 261-278.
-\url{ https://arxiv.org/pdf/0906.3204.pdf }
+\url{ https://arxiv.org/abs/0906.3204 }
 }
 
 \author{

@@ -16,12 +16,12 @@ silhouette <- function(x, cl, type = "euclidean") {
       dist_mat <- Rfast::dista(y, x[cl == j, , drop = FALSE], type = type)
       
       mean_dist[[n_dist]] <- Rfast::rowmeans(dist_mat)
-      mean_dist[[total_pairs + n_dist]] <- Rfast::colmeans(dist_mat) #rowmeans(2,1)==colmeans(1,2)
-      n_dist <- n_dist + 1 # Τα index είναι τέτοια ώστε για 3 cluster φτιάχνουμε μια λίστα μέσων αποστάσεων
-                           # # που έχει τη μορφή: (1,2)(1,3)(2,3)(2,1)(3,1)(3,2). Αντίστοιχα και για άλλα g.
+      mean_dist[[total_pairs + n_dist]] <- Rfast::colmeans(dist_mat) 
+      n_dist <- n_dist + 1 
+                           
     }
-    j <- setdiff(1:g, i)   # Υπολογίζω τους κατάλλους δείκτες για την απόσταση (i,j)
-    indices <- numeric(g-1) #ανάλογα με το αν i<j
+    j <- setdiff(1:g, i)   
+    indices <- numeric(g-1) 
     j1 <- j[j < i]
     j2 <- j[j > i]
     if ( length(j1) > 0 ) {       
@@ -33,12 +33,12 @@ silhouette <- function(x, cl, type = "euclidean") {
       k <- (i - 1) * (2 * g - i) / 2 + (j2 - i)
       indices[j > i] <- k
     }
-    b <- do.call(rbind, mean_dist[indices])  #Χρησιμοποιώ τα index για να πάρω τα κατάλληλα διανύσματα και τα κάνω rbind
+    b <- do.call(rbind, mean_dist[indices]) 
     b <- Rfast::colMins(b, value = TRUE)
     si[[i]] <- (b - a) / Rfast::Pmax(a, b)
     stats[i, ] <- c( min( si[[ i ]] ), max( si[[ i ]] ), mean( si[[ i ]] ) )
   }
-  y <- x[cl == g, , drop = FALSE] #Εκτελώ τα ίδια για το τελευταίο cluster ξεχωριστά, γιατί πιο πάνω δε βόλευε.
+  y <- x[cl == g, , drop = FALSE] 
   a <- Rfast::rowsums( Rfast::Dist(y, method = type) ) / ( dim(y)[1] - 1 )
   j <- 1:(g - 1)
   k <- (j - 1) * (2 * g - j) / 2 + (g - j)
