@@ -71,9 +71,7 @@ C++ implementation: Manos Lasithiotakis.
 
 \examples{
 \donttest{
-library(MASS)
-library(Rfast)
-x <- as.matrix(fgl[, 2:9])
+x <- as.matrix(iris[, 1:4])
 x <- x / rowSums(x)
 xnew <- x[1:10, ]
 x <- x[-c(1:10), ]
