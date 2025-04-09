@@ -125,11 +125,11 @@ namespace Random
 
 	class Gamma
 	{
-		double init_shape, shape, rate, d, c, boosted_shape, inv_init_shape;
+		double rate, d, c, boosted_shape, inv_init_shape;
 		bool boosted;
 
 	public:
-		Gamma(double shape, double rate) : shape(shape), rate(1.0 / rate)
+		Gamma(double shape, double rate) : rate(1.0 / rate)
 		{
 			if (shape < 1.0)
 			{
@@ -214,11 +214,10 @@ namespace Random
 
 	class Beta : public BetaOne
 	{
-		double beta;
 		Gamma beta_d;
 
 	public:
-		Beta(double alpha, double beta) : BetaOne(alpha), beta(beta), beta_d(Gamma(beta, 1.0)) {}
+		Beta(double alpha, double beta) : BetaOne(alpha), beta_d(Gamma(beta, 1.0)) {}
 
 		inline double operator()()
 		{
