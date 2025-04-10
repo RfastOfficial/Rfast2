@@ -24,7 +24,8 @@ eqdist.etest <- function(y, x, R = 999) {
 
     pstat <- numeric(R)
     for ( k in 1:R ) {
-      id <- Rfast::Sort.int( Rfast2::Sample.int(n, ni) )
+      #id <- Rfast::Sort.int( Rfast2::Sample.int(n, ni) )
+	  id <- sort.int( Rfast2::Sample.int(n, ni) )
       xp <- z[id]
       sxp <- sum(xp)
       pdii <- 2 * sum(i * xp) - (ni + 1) * sxp
