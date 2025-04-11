@@ -1,7 +1,7 @@
 \name{Many approximate simple logistic regressions}
 \alias{sp.logiregs}
 \title{
-Many approximate simple logistic regressions.
+Many approximate simple logistic regressions
 }
 
 \description{

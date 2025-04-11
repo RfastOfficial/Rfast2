@@ -51,5 +51,5 @@ R implementation and documentation: Michail Tsagris <mtsagris@uoc.gr>.
 
 \examples{
 x <- rnorm(100)
-normal.etest(x)
+normal.etest(x, R = 299)
 }

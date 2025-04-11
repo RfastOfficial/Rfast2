@@ -1,5 +1,6 @@
 // Author: Stefanos Fafalios
 
+#define ARMA_64BIT_WORD
 #include <RcppArmadillo.h>
 #include <cmath>
 #include "Rfast2/templates.h"
@@ -49,12 +50,12 @@ uvec cur_indices(unsigned const int &size, unsigned const int &exceptIndex)
 	return ret;
 }
 
-mat col_group_sum(const mat &x, ivec &cluster, int idmn, int idmx)
+mat col_group_sum(const mat &x, Col<int> &cluster, int idmn, int idmx)
 {
 	mat ret(idmx - idmn + 1, x.n_cols);
 	for (unsigned int i = 0; i < x.n_cols; ++i)
 	{
-		ret.col(i) = group_sum_helper<vec, vec, arma::ivec>(x.col(i), cluster, &idmn, &idmx);
+		ret.col(i) = group_sum_helper<vec, vec, arma::Col<int>>(x.col(i), cluster, &idmn, &idmx);
 	}
 	return ret;
 }
@@ -95,7 +96,7 @@ vec diag_of_mult2(mat a, const mat &b)
 }
 
 // [[Rcpp::export]]
-Rcpp::List wild_boot(const arma::mat &x, const arma::vec &y, arma::ivec cluster,
+Rcpp::List wild_boot(const arma::mat &x, const arma::vec &y, arma::Col<int> cluster,
 					 const arma::uvec &ind, const unsigned int &R, const arma::uvec &tab,
 					 const bool &parallel)
 {
@@ -212,7 +213,7 @@ RcppExport SEXP Rfast2_wild_boot(SEXP xSEXP, SEXP ySEXP, SEXP clusterSEXP, SEXP 
 	RNGScope __rngScope;
 	traits::input_parameter<const arma::mat>::type x(xSEXP);
 	traits::input_parameter<const arma::vec>::type y(ySEXP);
-	traits::input_parameter<arma::ivec>::type cluster(clusterSEXP);
+	traits::input_parameter<arma::Col<int>>::type cluster(clusterSEXP);
 	traits::input_parameter<const arma::uvec>::type ind(indSEXP);
 	traits::input_parameter<const unsigned int>::type R(RSEXP);
 	traits::input_parameter<const arma::uvec>::type tab(tabSEXP);

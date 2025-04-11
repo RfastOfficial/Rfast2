@@ -1,7 +1,7 @@
 \name{Many Welch tests}
 \alias{welch.tests}
 \title{
-Many Welch tests.
+Many Welch tests
 }
 
 \description{

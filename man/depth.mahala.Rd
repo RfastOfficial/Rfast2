@@ -49,7 +49,7 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 }
 
 \examples{
-x <- as.matrix(iris[1:50, 1:4])
+x <- as.matrix(iris[1:25, 1:2])
 depth.mahala(x, x)
 }
 

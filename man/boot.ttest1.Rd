@@ -1,15 +1,17 @@
-\name{One sample bootstrap t-test for a vector}
+\name{One sample bootstrap and permutation t-test for a vector}
 \alias{boot.ttest1}
+\alias{perm.ttest1}
 \title{
-One sample bootstrap t-test for a vector
+One sample bootstrap permutation t-test for a vector
 }
 
 \description{
-One sample bootstrap t-test for a vector.
+One sample bootstrap permutation t-test for a vector.
 }
 
 \usage{
 boot.ttest1(x, m, R = 999)
+perm.ttest1(x, m, R = 999)
 }
 
 \arguments{
@@ -25,19 +27,18 @@ The number of bootstrap resamples to draw.
 }
 
 \details{
-The usual one sample bootstrap t-test is implemented, only faster.
+The usual one sample bootstrap t-test, or the permutation, is implemented, only faster.
 }
 
 \value{
-\item{res}{
 A two valued vector with the test statistic and its p-value.
-}
 }
 
 \author{
-Michail Tsagris.
+Nikos Kontemeniotis Michail Tsagris.
 
-R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr} 
+R implementation and documentation: Nikos Kontemeniotis \email{kontemeniotisn@gmail.com} 
+and Michail Tsagris \email{mtsagris@uoc.gr}.
 }
 %\note{
 %%  ~~further notes~~

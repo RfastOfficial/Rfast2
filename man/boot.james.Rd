@@ -68,6 +68,6 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 }
 
 \examples{
-boot.james( as.matrix(iris[1:25, 1:4]), as.matrix(iris[26:50, 1:4]) )
+boot.james( as.matrix(iris[1:25, 1:4]), as.matrix(iris[26:50, 1:4]), R = 199 )
 }
 

@@ -25,3 +25,4 @@
 \newcommand{\packageLicense}{\Sexpr[results=rd,stage=build]{utils::packageDescription("#1")[["License"]]}}
 \newcommand{\packageName}{\Sexpr[results=rd,stage=build]{utils::packageDescription("#1")[["Package"]]}}
 \newcommand{\packageAuthors}{\Sexpr[results=rd,stage=build]{utils::packageDescription("#1")[["Author"]]}}
+\newcommand{\packageMaintainer}{\Sexpr[results=rd,stage=build]{utils::packageDescription("#1")[["Maintainer"]]}}

@@ -50,7 +50,7 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 }
 
 \examples{
-s1 <- cov(iris[1:50, 1:4])
-s2 <- cov(iris[51:100, 1:4])
+s1 <- cov(iris[1:25, 1:4])
+s2 <- cov(iris[26:50, 1:4])
 covdist(s1, s2)
 }

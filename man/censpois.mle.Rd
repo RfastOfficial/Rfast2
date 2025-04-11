@@ -22,7 +22,7 @@ The tolerance level up to which the maximisation stops; set to 1e-07 by default.
 
 \details{
 Instead of maximising the log-likelihood via a numerical optimiser we have used a Newton-Raphson algorithm which is faster. 
-The lowest value in x is taken as the censored point. Values below are censored.
+The lowest value in x is taken as the censored point. Values below that value are considered censored values.
 }
 
 \value{
@@ -55,9 +55,8 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 \examples{
 
 
-x1 <- rpois(10000,15)
-x <- x1
-x[x<=10] = 10
+x <- rpois(500, 10)
+x[x <= 5] <- 5
 mean(x)
 censpois.mle(x)$lambda
 }

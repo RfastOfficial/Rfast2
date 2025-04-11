@@ -1,3 +1,4 @@
+#define ARMA_64BIT_WORD
 #include <RcppArmadillo.h>
 #ifdef _OPENMP
 #include <omp.h>
@@ -13,7 +14,8 @@ List halfcauchy_mle(NumericVector x, const double tol = 1e-07)
 {
 	const double logdp = log(2.0 / (atan(1) * 4));
 
-	vec x1(x.begin(), x.size(), true);
+	// vec x1(x.begin(), x.size(), true);
+	vec x1 = Rcpp::as<vec>(x);
 
 	int k = x1.n_elem / 4;
 	int k1 = 3 * x1.n_elem / 4;
@@ -21,13 +23,12 @@ List halfcauchy_mle(NumericVector x, const double tol = 1e-07)
 	double y1 = x1(k1 - 1);
 	nth_element(x1.begin(), x1.begin() + k - 1, x1.begin() + k1);
 	double y = x1(k - 1);
-
 	double es = 0.5 * (y1 - y);
 	double es1 = es * es;
 	double logs = log(es);
 	vec x2 = square(x1);
 	vec down = 1 / (x2 + es1);
-	double lik1 = x1.n_elem * logs + accu(log(down));
+	double lik1 = x1.n_elem * logs + accu(foreach<std::log, vec>(down));
 	double der = x1.n_elem - 2 * (es1 * accu(down));
 
 	double der2 = -4 * (es1 * es1) * dot(down, down);
@@ -36,7 +37,7 @@ List halfcauchy_mle(NumericVector x, const double tol = 1e-07)
 	es = exp(logs);
 	es1 = es * es;
 	down = 1 / (x2 + es1);
-	double lik2 = x1.n_elem * logs + accu(log(down));
+	double lik2 = x1.n_elem * logs + accu(foreach<std::log, vec>(down));
 
 	int i = 2;
 	for (; lik2 - lik1 > tol; ++i)
@@ -48,7 +49,7 @@ List halfcauchy_mle(NumericVector x, const double tol = 1e-07)
 		es = exp(logs);
 		es1 = es * es;
 		down = 1 / (x2 + es1);
-		lik2 = x1.n_elem * logs + accu(log(down));
+		lik2 = x1.n_elem * logs + accu(foreach<std::log, vec>(down));
 	}
 
 	double loglik = lik2 - x1.n_elem * logdp;

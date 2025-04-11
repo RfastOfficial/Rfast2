@@ -104,6 +104,6 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 
 \examples{
 x <- as.matrix(iris[, 1:4])
-mod <- bigknn.cv(y = iris[, 5], x = x, k = c(3, 4) )
+mod <- bigknn.cv(y = iris[, 5], x = x, k = c(3, 4), nfolds = 5 )
 }
 

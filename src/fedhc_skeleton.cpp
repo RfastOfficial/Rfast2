@@ -1,5 +1,6 @@
 //Author: Stefanos Fafalios
 
+#define ARMA_64BIT_WORD
 #include <RcppArmadillo.h>
 #include "skel_helper.h"
 // [[Rcpp::depends(RcppArmadillo)]]
@@ -9,7 +10,7 @@ using namespace Rcpp;
 using namespace std;
 
 List fedhc_skeleton_c(mat& x, mat& ini_pval, const double la, unsigned const int d, const int n, mat& r, unsigned const int method, const bool parallel) {
-  imat G(d,d,fill::zeros);
+  Mat<int> G(d,d,fill::zeros);
   mat pvalue(d,d,fill::zeros);
   List ret;
 
@@ -22,7 +23,7 @@ List fedhc_skeleton_c(mat& x, mat& ini_pval, const double la, unsigned const int
       rowvec pval;
       uvec vars;
       vec sp;
-      ivec sela;
+      Col<int> sela;
       #ifdef _OPENMP
       #pragma omp for reduction(+:total_tests)
       #endif
@@ -32,7 +33,7 @@ List fedhc_skeleton_c(mat& x, mat& ini_pval, const double la, unsigned const int
         vars = arma::find(pval < la);
 
         if(vars.n_elem  > 0) {
-          sela = ivec(1);
+          sela = Col<int>(1);
           sela[0] = arma::index_min(pval);
           for(unsigned int i=0;i<vars.n_elem;++i){
             if((int)vars[i]==sela[0])  {
@@ -42,7 +43,7 @@ List fedhc_skeleton_c(mat& x, mat& ini_pval, const double la, unsigned const int
           }
         }
         else {
-          sela = conv_to<ivec>::from(vars);
+          sela = conv_to<Col<int>>::from(vars);
           vars.reset();
         }
 
@@ -89,14 +90,14 @@ List fedhc_skeleton_c(mat& x, mat& ini_pval, const double la, unsigned const int
     rowvec pval;
     uvec vars;
     vec sp;
-    ivec sela;
+    Col<int> sela;
     for(unsigned int k = 0; k<d; ++k) {
       unsigned int ntests = 0;
       pval = ini_pval.row(k);
       vars = arma::find(pval < la);
 
       if(vars.n_elem  > 0) {
-        sela = ivec(1);
+        sela = Col<int>(1);
         sela[0] = arma::index_min(pval);
         for(unsigned int i=0;i<vars.n_elem;++i){
           if((int)vars[i]==sela[0])  {
@@ -106,7 +107,7 @@ List fedhc_skeleton_c(mat& x, mat& ini_pval, const double la, unsigned const int
         }
       }
       else {
-        sela = conv_to<ivec>::from(vars);
+        sela = conv_to<Col<int>>::from(vars);
         vars.reset();
       }
 

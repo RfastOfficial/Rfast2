@@ -44,10 +44,10 @@ The standard error of the concentration parameter.
 
 \references{
 Purkayastha S. (1991).  A Rotationally Symmetric Directional Distribution: Obtained through Maximum 
-Likelihood Characterization. The Indian Journal of Statistics, Series A, 53(1): 70-83
+Likelihood Characterization. The Indian Journal of Statistics, Series A, 53(1): 70--83
 
 Cabrera J. and Watson G. S. (1990). On a spherical median related distribution. 
-Communications in Statistics-Theory and Methods, 19(6): 1973-1986.
+Communications in Statistics-Theory and Methods, 19(6): 1973--1986.
 }
 
 \author{

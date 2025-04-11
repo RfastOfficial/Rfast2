@@ -315,7 +315,7 @@ static arma::uvec get_sort_idxs(arma::vec& vals, arma::uvec& idxs) {
 }
 
 static arma::uvec get_idxs_eq(arma::uvec vals, const unsigned int val) {
-	std::vector<unsigned int> vals_adj;
+	std::vector<typename arma::uvec::value_type> vals_adj;
 	for (unsigned int i = 0; i < vals.size(); ++i) {
 		if (vals[i] == val) {
 			vals_adj.push_back(i);

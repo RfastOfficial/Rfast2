@@ -23,7 +23,7 @@ The tolerance value to terminate the Newton-Raphson algorithm.
 
 \details{
 MLE of the gamma-Poisson distribution is fitted. When the rate in the Poisson follows a gamma 
-distribution with shape = r and scale \eqn{\theta}, the resulting distribution is the gamm-Poisson. 
+distribution with shape = r and scale \eqn{\theta}, the resulting distribution is the gamma-Poisson. 
 If the shape r is integer, the distribution is called negative binomial distribution. 
 }
 

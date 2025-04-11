@@ -1,7 +1,7 @@
 \name{BIC of many simple univariate regressions}
 \alias{bic.regs}
 \title{
-BIC of many simple univariate regressions.
+BIC of many simple univariate regressions
 }
 
 \description{
@@ -45,7 +45,7 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 %}
 
 \seealso{
-\code{ \link{logistic_only}, \link{poisson_only} }
+\code{ \link{negbin.regs}, \link{sp.logiregs} }
 }
 
 \examples{

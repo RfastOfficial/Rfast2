@@ -1,11 +1,11 @@
-\name{Random values simulation from the uniform distribution}
+\name{Random values simulation}
 \alias{Runif}
 \title{
-Random values simulation from the uniform distribution
+Random values simulation from various distributions
 }
 
 \description{
-Random values simulation from the uniform distribution.
+Functions to simulate random values from different probability distributions: uniform, beta, exponential, chi-squared, gamma, Cauchy, t-distribution, and geometric.
 }
 
 \usage{
@@ -17,38 +17,35 @@ Runif(n, min = 0, max = 1)
 The number of values to generate.
 }
 \item{min}{
-The lower value of the uniform distribution.
+For \code{Runif}: The lower value of the uniform distribution.
 }
 \item{max}{
-The upper value of the uniform distribution.
+For \code{Runif}: The upper value of the uniform distribution.
+}
+}
+\details{
+    
+\itemize{
+\item \code{Runif}: generates random values from the uniform distribution, similar to R's built-in \code{\link{runif}} function. The type used is \eqn{min + (max - min) \cdot U}, where \code{U} is a uniform random variable in the interval (0, 1).
+
 }
 }
 
-\details{
-This function does the same job as R's built-in function \code{\link{runif}}.
-}
 
 \value{
-A vector with simulated values.
+Each function returns a vector with simulated values from the respective distribution.
 }
-
-%\references{
-%}
 
 \author{
 Manos Papadakis.
 
 R implementation and documentation: Manos Papadakis <papadakm95@gmail.com>.
 }
-%\note{
-%%  ~~further notes~~
-%}
 
 \seealso{
-\code{\link{Sample.int}, \link{rbeta1}, \link{riag}
-}
+\code{\link{runif}}
 }
 
 \examples{
-x <- Runif(1000, 0, 1)
+x_unif <- Runif(1000, 0, 1)
 }

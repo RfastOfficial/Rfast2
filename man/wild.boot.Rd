@@ -51,7 +51,8 @@ The Review of Economics and Statistics 90(3): 414-427.
 \author{
 Michail Tsagris and Stefanos Fafalios.
 
-R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr} and Stefanos Fafalios \email{stefanosfafalios@gmail.com}.
+R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr} 
+and Stefanos Fafalios \email{stefanosfafalios@gmail.com}.
 }
 
 %\note{
@@ -63,9 +64,9 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr} and 
 }
 
 \examples{
-y <- rnorm(200)
-id <- sample(1:20, 200, replace = TRUE)
-x <- matrix( rnorm(200 * 3), ncol = 3 )
+y <- rnorm(50)
+id <- sample(1:10, 50, replace = TRUE)
+x <- matrix( rnorm(50 * 3), ncol = 3 )
 wild.boot(y, x, cluster = id)
 }
 

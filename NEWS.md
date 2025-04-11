@@ -4,6 +4,28 @@
 
 </h1>
 
+### **Version 0.1.5.3 - Asclepius**
+
+------------------------------------------------------------------------
+
+> <h3>**New**</h3>
+>
+> | Function |                                     What's new!                                     |
+> |:--------:|:-----------------------------------------------------------------------------------:|
+> | bessel   | Bessel function  |
+> | silhouette   | Silhouette function  |
+> | eqdist.etest   | Energy based equality of distributions test  |
+> | lm.boot   | Replaced the 'lm.parboot' and 'lm.nonparboot'.  |
+> | perm.ttest   | Replaced the 'perm.ttest1' and 'perm.ttest2'.  |
+> | lm.parboot   | Deprecated.  |
+> | lm.nonparboot   | Deprecated.  |
+> | perm.ttest1   | Deprecated.  |
+> | perm.ttest2   | Deprecated.  |
+> | eqdist.etest   | Energy based equality of distributions test  |
+
+
+</br> </br>
+
 ### **Version 0.1.5.2 - Zagreus**
 
 ------------------------------------------------------------------------

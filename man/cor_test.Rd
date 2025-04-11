@@ -55,7 +55,7 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 
 
 \seealso{
-\code{\link{allbetas}, \link{univglms}
+\code{\link{el.cor.test}, \link{fbed.reg}
 }
 }
 

@@ -214,7 +214,7 @@ cauchy.nb <- function(xnew = NULL, x, ina) {
   d <- dim(x)[2]
   mx <- sigma <- matrix(0, k, d)
   for (i in 1:k) {
-    res <- Rfast2::colcauchy.mle(x[ina == i, ])[, 1:2]
+    res <- Rfast2::colcauchy.mle(x[ina == i, ])[, 2:3]
     mx[i, ] <- res[, 1]
     sigma[i, ] <- res[, 2]
   }

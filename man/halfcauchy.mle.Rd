@@ -66,6 +66,6 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 }
 
 \examples{
-x <- abs( rcauchy(1000, 0, 2) )
+x <- abs( rcauchy(300, 0, 2) )
 halfcauchy.mle(x)
 }

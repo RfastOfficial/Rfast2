@@ -49,8 +49,8 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 \examples{
 ## compute the expectation of abs(x)
 fun <- function(x) abs(x)
-mci(fun, R = 10^5)
-a <- function(x)  abs(x)  * dnorm(x)
+mci(fun, R = 10^3)
+a <- function(x)  abs(x) * dnorm(x)
 integrate(a, -Inf, Inf)
 }
 

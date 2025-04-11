@@ -1,7 +1,7 @@
 \name{Many simple Weibull regressions}
 \alias{weib.regs}
 \title{
-Many simple Weibull regressions.
+Many simple Weibull regressions
 }
 
 \description{
@@ -58,7 +58,7 @@ R implementation and documentation: Stefanos Fafalios \email{stefanosfafalios@gm
 
 \examples{
 y <- rgamma(100, 3, 4)
-x <- matrix( rnorm( 100 * 30 ), ncol = 30 )
+x <- matrix( rnorm( 100 * 20 ), ncol = 20 )
 a <- weib.regs(y, x)
 x <- NULL
 }

@@ -3,6 +3,7 @@
 #define TEMPLATES_H
 
 // [[Rcpp::depends(RcppArmadillo)]]
+#define ARMA_64BIT_WORD
 #include <RcppArmadillo.h>
 #include <algorithm>
 #include <R.h>
@@ -1048,7 +1049,7 @@ NumericVector eachcol_apply_helper(NumericMatrix& x,NumericVector& y,SEXP ind = 
         }
     }else{
         IntegerVector indd(ind);
-        icolvec iind(indd.begin(),indd.size(),false);
+        Col<int> iind(indd.begin(),indd.size(),false);
         if(parallel){
             #pragma omp parallel for
             for(int i=0;i<n;++i){
@@ -1182,7 +1183,7 @@ double nth_simple(T& x,const int& elem,const bool parallel = false){
 }
 
 template<class T>
-double nth_simple(T& x,const int& elem,const bool& descend,const bool parallel = false){
+double nth_simple(T& x,const int& elem,const bool descend,const bool parallel = false){
     descend ?
     Rfast::nth_element(x.begin(),x.begin()+elem-1,x.end(),[&](double a,double b){return a>b;},parallel)
     :
@@ -1192,7 +1193,7 @@ double nth_simple(T& x,const int& elem,const bool& descend,const bool parallel =
 }
 
 template<class T>
-double nth_na_rm(T& x,const int& elem,const bool& descend,const bool parallel = false){
+double nth_na_rm(T& x,const int& elem,const bool descend,const bool parallel = false){
     const int new_end=remove_if(x.begin(),x.end(),R_IsNA)-x.begin();
     descend ?
     Rfast::nth_element(x.begin(),x.begin()+elem-1,x.begin()+new_end,[&](double a,double b){return a>b;},parallel)
@@ -1208,7 +1209,7 @@ double nth_helper(T& x,const int elem,const bool descend,const bool na_rm,const 
 
 
 template<class T>
-int nth_index_simple(T& x,const int& elem,const bool& descend,const bool parallel = false){
+int nth_index_simple(T& x,const int& elem,const bool descend,const bool parallel = false){
     IntegerVector ind=seq(1,x.size());
     descend ?
     Rfast::nth_element(ind.begin(),ind.begin()+elem-1,ind.end(),[&](int i,int j){return x[i-1]>x[j-1];},parallel)
@@ -1219,7 +1220,7 @@ int nth_index_simple(T& x,const int& elem,const bool& descend,const bool paralle
 }
 
 template<class T>
-int nth_index_na_rm(T& x,const int& elem,const bool& descend,const bool parallel = false){
+int nth_index_na_rm(T& x,const int& elem,const bool descend,const bool parallel = false){
     const int new_end=remove_if(x.begin(),x.end(),R_IsNA)-x.begin();
     IntegerVector ind= seq(1,new_end);
     descend ?
@@ -1236,7 +1237,7 @@ int nth_helper_index(T& x,const int elem,const bool descend,const bool na_rm,con
 }
 
 template<class T>
-T nth_simple_n_elems(T& x,const int& elem,const bool& descend,const bool parallel = false){
+T nth_simple_n_elems(T& x,const int& elem,const bool descend,const bool parallel = false){
     descend ?
     Rfast::nth_element(x.begin(),x.begin()+elem-1,x.end(),[&](double a,double b){return a>b;},parallel)
     :
@@ -1246,7 +1247,7 @@ T nth_simple_n_elems(T& x,const int& elem,const bool& descend,const bool paralle
 }
 
 template<class T>
-T nth_na_rm_n_elems(T& x,const int& elem,const bool& descend,const bool parallel = false){
+T nth_na_rm_n_elems(T& x,const int& elem,const bool descend,const bool parallel = false){
     const int new_end=remove_if(x.begin(),x.end(),R_IsNA)-x.begin();
     if(elem<new_end){
         descend ?
@@ -1264,7 +1265,7 @@ T nth_helper_n_elems(T& x,const int elem,const bool descend,const bool na_rm,con
 
 
 template<class T>
-T nth_index_simple_n_elems(T& x,const int& elem,const bool& descend,const bool parallel = false){
+T nth_index_simple_n_elems(T& x,const int& elem,const bool descend,const bool parallel = false){
     vec ind= linspace(1,x.size(),x.size());
     descend ?
     Rfast::nth_element(ind.begin(),ind.begin()+elem-1,ind.end(),[&](int i,int j){return x[i-1]>x[j-1];},parallel)
@@ -1275,7 +1276,7 @@ T nth_index_simple_n_elems(T& x,const int& elem,const bool& descend,const bool p
 }
 
 template<class T>
-T nth_index_na_rm_n_elems(T& x,const int& elem,const bool& descend,const bool parallel = false){
+T nth_index_na_rm_n_elems(T& x,const int& elem,const bool descend,const bool parallel = false){
     const int new_end=remove_if(x.begin(),x.end(),R_IsNA)-x.begin();
     vec ind= linspace(1,new_end,new_end);
     descend ?

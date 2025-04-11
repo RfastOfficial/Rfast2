@@ -14,7 +14,8 @@ boot.ttest1 <- function(x, m, R = 999) {
   s <- Rfast::Var(x, std = TRUE)
   stat <- (xbar - m)/s
   z <- x - xbar + m
-  zb <- matrix(sample(z, n * R, replace = TRUE), ncol = R)
+  zb <- Sample(z, n * R, replace = TRUE)
+  dim(zb) <- c(n, R)
   xbar <- Rfast::colmeans(zb)
   s <- Rfast::colVars(zb, std = TRUE)
   bstat <- (xbar - m)/s
@@ -23,27 +24,46 @@ boot.ttest1 <- function(x, m, R = 999) {
   names(res) <- c("stat", "bootstrap p-value")
   res
 }
-  
 
+
+  
+#[export]
+perm.ttest <- function(x, y = NULL, m, B = 999) {
+  if ( is.null(y) ) {
+    x <- x - m
+    n <- length(x)
+    stat <- abs( sum(x) )
+    X <- Rfast2::Sample( c(-1, 1), B * n, replace = TRUE )
+    dim(X) <- c(n, B)
+    pstat <- Rfast::eachcol.apply(X, x)
+    pvalue <- ( sum( abs(pstat) >= stat ) + 1) / (B + 1)
+    res <- c( "stat" = stat, "permutation p-value" = pvalue )
+  } else {
+    nx <- length(x)   ;  ny <- length(y)
+    n <- nx + ny
+    z <- c(x, y)
+    sx <- sum(x)   ;   sy <- sum(y)
+    sz <- sx + sy
+    stat <- abs( sx/nx - sy/ny )
+    z <- Rfast::rep_col(z, B)
+    z <- Rfast::colShuffle(z)
+    psx <- Rfast::colsums(z[1:nx, ])
+    psy <- sz - psx
+    pstat <- abs( psx/nx - psy/ny )
+    res <- c(stat, (sum(pstat > stat) + 1) / (B + 1) )
+    names(res) <- c("stat", "permutation p-value")
+  }
+  res  
+}
+
+#[export]
+perm.ttest1 <- function(x, m, R = 999) {
+   .Deprecated(new = "perm.ttest", old = "perm.ttest1")
+}
 
 #[export]
 perm.ttest2 <- function(x, y, B = 999) {
-  nx <- length(x)
-  ny <- length(y)
-  n <- nx + ny
-  z <- c(x, y)
-  sx <- sum(x)
-  sy <- sum(y)
-  sz <- sx + sy
-  stat <- abs( sx/nx - sy/ny )
-  z <- replicate(B, z )
-  z <- Rfast::colShuffle(z)
-  psx <- Rfast::colsums(z[1:nx, ])
-  psy <- sz - psx
-  pstat <- abs( psx/nx - psy/ny )
-  res <- c(stat, (sum(pstat > stat) + 1)/ (B + 1) )
-  names(res) <- c("stat", "permutation p-value")
-  res
+   .Deprecated(new = "perm.ttest", old = "perm.ttest2")
 }
 
 
@@ -60,10 +80,12 @@ boot.student2 <- function(x, y, B = 999) {
     mc <- 0.5 * (m1 + m2 )
     z1 <- x - m1 + mc
     z2 <- y - m2 + mc
-    R <- round(sqrt(B))
-    z1 <- matrix(sample(z1, R * n1, replace = TRUE), ncol = R)
-    z2 <- matrix(sample(z2, R * n2, replace = TRUE), ncol = R)
-    bm1 <- Rfast::colmeans(z1)
+    R <- round( sqrt(B) )
+    z1 <- Sample(z1, R * n1, replace = TRUE)
+	dim(z1) <- c(n1, R)  
+    z2 <- Sample(z2, R * n2, replace = TRUE)
+    dim(z2) <- c(n2, R)
+	bm1 <- Rfast::colmeans(z1)
     bm2 <- Rfast::colmeans(z2)
     zx2 <- Rfast::colsums(z1^2)
     zy2 <- Rfast::colsums(z2^2)
@@ -136,8 +158,8 @@ boot.james <- function(y1, y2, R = 999) {
   sqn1 <- sqrt(n1)       ;     sqn2 <- sqrt(n2)
   f1 <- (n1 - 1) * n1    ;     f2 <- (n2 - 1) * n2
   for (i in 1:B) {
-    b1 <- sample(1:n1, n1, replace = TRUE)
-    b2 <- sample(1:n2, n2, replace = TRUE)
+    b1 <- Sample.int(n1, n1, replace = TRUE)
+    b2 <- Sample.int(n2, n2, replace = TRUE)
     yb1 <- x1[b1, ]    ;   yb2 <- x2[b2, ]
     bm1[i, ] <- Rfast::colmeans(yb1) 
     bm2[i, ] <- Rfast::colmeans(yb2)  
@@ -147,8 +169,7 @@ boot.james <- function(y1, y2, R = 999) {
   for (i in 1:B) {
     for (j in 1:B) {
       vb <- vb1[[ i ]] + vb2[[ j ]]
-      db <- bm1[i, ] - bm2[j, ] 
-      tb[i, j] <- db %*% solve(vb, db)
+      tb[i, j] <- Rfast::mahala(bm1[i, ], bm2[j, ], vb)
     }
   }
   ( sum(tb > test) + 1 ) / (B^2 + 1)
@@ -180,8 +201,8 @@ boot.hotel2 <- function(y1, y2, R = 999) {
   vb2 <- vector("list", B)
   tb <- matrix(0, B, B)
   for (i in 1:B) {
-    b1 <- sample(1:n1, n1, replace = TRUE)
-    b2 <- sample(1:n2, n2, replace = TRUE)
+    b1 <- Sample.int(n1, n1, replace = TRUE)
+    b2 <- Sample.int(n2, n2, replace = TRUE)
     yb1 <- x1[b1, ]    ;   yb2 <- x2[b2, ]
     bm1[i, ] <- Rfast::colmeans(yb1) 
     bm2[i, ] <- Rfast::colmeans(yb2)  ## difference of the mean vectors
@@ -191,8 +212,7 @@ boot.hotel2 <- function(y1, y2, R = 999) {
   for (i in 1:B) {
     for (j in 1:B) {
       vb <- vb1[[ i ]] + vb2[[ j ]]
-      db <- bm1[i, ] - bm2[j, ] 
-      tb[i, j] <- db %*% solve(vb, db)
+      tb[i, j] <- Rfast::mahala(bm1[i, ], bm2[j, ], vb)
     }
   }
   ( sum(tb > tobs) + 1 )/(B^2 + 1)

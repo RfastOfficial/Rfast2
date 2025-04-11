@@ -61,7 +61,7 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 }
 
 \examples{
-x <- matrix( rnorm(1000 * 100), ncol = 100 )
+x <- matrix( rnorm(1000 * 30), ncol = 30 )
 y <- rpois(1000, 10)
 y[1:150] <- 0
 a <- score.zipregs(y, x)

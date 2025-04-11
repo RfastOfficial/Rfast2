@@ -76,7 +76,7 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 }
 
 \examples{
-x <- as.matrix(iris[, 1:4])
-mod <- big.knn(xnew = x, y = iris[, 5], x = x, k = c(6, 7) )
+x <- as.matrix(iris[1:100, 1:2])
+mod <- big.knn(xnew = x, y = iris[1:100, 5], x = x, k = c(6, 7) )
 }
 

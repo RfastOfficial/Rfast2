@@ -1,12 +1,19 @@
 Package: Rfast2
 Type: Package
 Title: A Collection of Efficient and Extremely Fast R Functions II
-Version: 0.1.5.2
-Date: 2024-03-10
-Author: Manos Papadakis, Michail Tsagris, Stefanos Fafalios, Marios Dimitriadis and Manos Lasithiotakis.
+Version: 0.1.5.3
+Date: 2025-04-08
+Authors@R: c(
+    person("Manos Papadakis", email = "rfastofficial@gmail.com", role = c("aut", "cre", "cph")),
+    person("Michail Tsagris", role = c("aut")),
+    person("Stefanos Fafalios", role = c("aut")),
+    person("Marios Dimitriadis", role = c("aut")),
+    person("Manos Lasithiotakis", role = c("aut")),
+    person("Nikolaos Kontemeniotis", role = c("ctb"))
+    )
 Maintainer: Manos Papadakis <rfastofficial@gmail.com>
 Depends: R (>= 3.5.0), Rcpp (>= 0.12.3), RcppParallel
-LinkingTo: Rcpp (>= 0.12.3), RcppArmadillo, RcppParallel
+LinkingTo: Rcpp (>= 0.12.3), RcppArmadillo, RcppParallel, zigg, Rfast, BH
 SystemRequirements: C++17
 Imports: Rfast, Rnanoflann
 BugReports: https://github.com/RfastOfficial/Rfast2/issues

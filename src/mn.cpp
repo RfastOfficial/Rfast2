@@ -1,5 +1,6 @@
 // [[Rcpp::depends(RcppArmadillo)]]
 //[[Rcpp::plugins(cpp11)]]
+#define ARMA_64BIT_WORD
 #include <RcppArmadillo.h>
 #include <vector>
 #include <string>
@@ -337,8 +338,8 @@ IntegerVector combine(IntegerVector x,IntegerVector y){
 }
 
 //dista
-icolvec get_k_indices(rowvec x,const int& k){
-  icolvec ind=linspace<icolvec>(1,x.size(),x.size());
+Col<int> get_k_indices(rowvec x,const int& k){
+  Col<int> ind=linspace<Col<int>>(1,x.size(),x.size());
   std::sort(ind.begin(),ind.end(),[&](int i,int j){return x[i-1]<x[j-1];});
   return ind(span(0,k-1));
 }

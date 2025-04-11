@@ -86,7 +86,7 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 }
 
 \examples{
-x <- as.matrix(iris[, 1:4])
-mod <- regmlelda.cv(x, iris[, 5])
+x <- as.matrix(iris[1:100, 1:2])
+mod <- regmlelda.cv(x, iris[1:100, 5], nfolds = 5)
 }
 

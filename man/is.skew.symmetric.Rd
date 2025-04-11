@@ -34,15 +34,15 @@ R implementation and documentation: Manos Papadakis \email{papadakm95@gmail.com}
 
 
 \seealso{
-\code{\link{cholesky}, \link{cora}, \link{cova}
+\code{\link{is.lower.tri}, \link{lud}
 }
 }
 
 \examples{
-x <-matrix( rnorm( 100 * 400), ncol = 400 )
+x <-matrix( rnorm( 10 * 40), ncol = 40 )
 s1 <- cor(x)
 is.skew.symmetric(s1)
-x <- x[1:100, ]
+x <- x[1:10, ]
 is.skew.symmetric(x)
 
 x<-s1<-NULL

@@ -1,4 +1,5 @@
 \name{Parametric and non-parametric bootstrap for linear regression model}
+\alias{lm.boot}
 \alias{lm.parboot}
 \alias{lm.nonparboot}
 \title{
@@ -10,6 +11,7 @@ Parametric and non-parametric bootstrap for linear regression model.
 }
 
 \usage{
+lm.boot(x, y, R = 1000, type = "param")
 lm.parboot(x, y, R = 1000)
 lm.nonparboot(x, y, R = 1000)
 }
@@ -23,6 +25,9 @@ The response variable, a numerical vector with data.
 }
 \item{R}{
 The number of parametric bootstrap replications to perform.
+}
+\item{type}{
+This is either "param" for parametric bootstrap, or "nonparam" for non-parametric bootstrap.
 }
 }
 
@@ -40,7 +45,7 @@ Efron Bradley and Robert J. Tibshirani (1993). An introduction to the bootstrap.
 }
 
 \author{
-Michail Tsagris.
+Michail Tsagris with some help from Nikolaos Kontemeniotis.
 
 R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 }
@@ -57,7 +62,7 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 \donttest{
 y <- rnorm(50)
 x <- matrix( rnorm( 50 * 2), ncol = 2 )
-a <- lm.parboot(x, y, 500)
+a <- lm.boot(x, y, 500)
 }
 }
 

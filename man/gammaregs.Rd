@@ -52,7 +52,8 @@ using generalized linear model. International Journal of Advanced Statistics and
 \author{
 Stefanos Fafalios and and Michail Tsagris.
 
-R implementation and documentation: Stefanos Fafalios \email{stefanosfafalios@gmail.com} and Michail Tsagris \email{mtsagris@uoc.gr}.
+R implementation and documentation: Stefanos Fafalios \email{stefanosfafalios@gmail.com} 
+and Michail Tsagris \email{mtsagris@uoc.gr}.
 }
 
 %\note{

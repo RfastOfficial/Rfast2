@@ -96,10 +96,11 @@ quantiles conditional on covariates. Journal of Applied Statistics, 47(6): 954--
 }
 
 \author{
-Michail Tsagris and Stefanos Fafalios.
+Michail Tsagris, Stefanos Fafalios, Manos Lasithiotakis.
 
-R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr} and Stefanos Fafalios
-\email{stefanosfafalios@gmail.com}.
+R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr} 
+and Stefanos Fafalios \email{stefanosfafalios@gmail.com}.
+C++ implementations: Stefanos Fafalios \email{stefanosfafalios@gmail.com}, Manos Lasithiotakis.
 }
 
 %\note{
@@ -112,7 +113,7 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr} and 
 }
 
 \examples{
-x <- matrix( exp( rnorm(500 * 50) ), ncol = 50)
+x <- matrix( exp( rnorm(300 * 30) ), ncol = 30)
 a <- collognorm.mle(x)
 x <- NULL
 }

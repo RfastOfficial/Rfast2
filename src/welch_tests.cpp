@@ -1,5 +1,6 @@
 //Author: Stefanos Fafalios
 
+#define ARMA_64BIT_WORD
 #include <RcppArmadillo.h>
 #include <cmath>
 #include "Rfast2/templates.h"
@@ -25,7 +26,7 @@ NumericMatrix welch_tests(NumericMatrix X, NumericVector Y, const bool logged, c
   #endif
     vec s,w,m;
 
-    ivec ina,ni;
+    Col<int> ina,ni;
     double W,H,mesi,tmps, stat;
     int idmx,idmn,k,k2min1,j;
     double *witer, *miter, *siter;
@@ -36,19 +37,19 @@ NumericMatrix welch_tests(NumericMatrix X, NumericVector Y, const bool logged, c
     #pragma omp for
     #endif
     for(int i = 0; i<D; i++){
-      ina = conv_to<ivec>::from(x.col(i));
+      ina = conv_to<Col<int>>::from(x.col(i));
       min_max<int>(ina.begin(),ina.end(),idmn,idmx);
 
-      ni = Tabulate<ivec,ivec>(ina,idmx);
+      ni = Tabulate<Col<int>,Col<int>>(ina,idmx);
 
       ni = ni(find(ni));
       //ni <- ni[ni > 0]
 
       k = ni.size();
 
-      m = group_sum_helper<vec,vec,ivec>(y, ina, &idmn,&idmx);
+      m = group_sum_helper<vec,vec,Col<int>>(y, ina, &idmn,&idmx);
 
-      s = group_sum_helper<vec,vec,ivec>(y2, ina, &idmn,&idmx);
+      s = group_sum_helper<vec,vec,Col<int>>(y2, ina, &idmn,&idmx);
 
       w = vec(k);
       W = 0;
@@ -89,26 +90,26 @@ NumericMatrix welch_tests(NumericMatrix X, NumericVector Y, const bool logged, c
   else{
     vec s,w,m;
 
-    ivec ina,ni;
+    Col<int> ina,ni;
     double W,H,mesi,tmps, stat;
     int idmx,idmn,k,k2min1,j;
     double *witer, *miter, *siter;
     int *niiter;
 
     for(int i = 0; i<D; i++){
-      ina = conv_to<ivec>::from(x.col(i));
+      ina = conv_to<Col<int>>::from(x.col(i));
       min_max<int>(ina.begin(),ina.end(),idmn,idmx);
 
-      ni = Tabulate<ivec,ivec>(ina,idmx);
+      ni = Tabulate<Col<int>,Col<int>>(ina,idmx);
 
       ni = ni(find(ni));
       //ni <- ni[ni > 0]
 
       k = ni.size();
 
-      m = group_sum_helper<vec,vec,ivec>(y, ina, &idmn,&idmx);
+      m = group_sum_helper<vec,vec,Col<int>>(y, ina, &idmn,&idmx);
 
-      s = group_sum_helper<vec,vec,ivec>(y2, ina, &idmn,&idmx);
+      s = group_sum_helper<vec,vec,Col<int>>(y2, ina, &idmn,&idmx);
 
       w = vec(k);
       W = 0;

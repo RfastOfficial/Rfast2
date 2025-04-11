@@ -60,8 +60,8 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 }
 
 \examples{
-y <- rnorm(150)
-x <- as.matrix(iris[, 1:4])
+y <- rnorm(100)
+x <- as.matrix(iris[1:100, 1:4])
 a <- lm(y ~., data.frame(x) )
 lm.bsreg(y, x)
 }

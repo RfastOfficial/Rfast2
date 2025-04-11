@@ -1,3 +1,4 @@
+#define ARMA_64BIT_WORD
 #include <RcppArmadillo.h>
 #include "Rfast2.h"
 #include "Rfast2/templates_rfast2.h"
@@ -10,7 +11,7 @@ void group_col_vars_h(SEXP& x,SEXP& gr,const int length_unique,Environment& resu
     SEXP f=PROTECT(Rf_allocMatrix(TYPEOF(x),length_unique,ncl));
     SEXP f2=PROTECT(Rf_allocMatrix(TYPEOF(x),length_unique,ncl));
     int *ggr=INTEGER(gr);
-    T *ff=(T*)DATAPTR(f),*ff2=(T*)DATAPTR(f2),*xx=(T*)DATAPTR(x);
+    T *ff=Rfast::asPtr<T>(f),*ff2=Rfast::asPtr<T>(f2),*xx=Rfast::asPtr<T>(x);
     for(int j=0;j<length_unique*ncl;++j){
         ff[j]=0;
         ff2[j]=0;

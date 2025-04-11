@@ -66,7 +66,7 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 %}
 
 \seealso{
-\code{ \link{permcor}
+\code{ \link{cor_test}
 }
 }
 
