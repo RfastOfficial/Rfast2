@@ -24,7 +24,7 @@ bool adj_med_NAs(arma::mat& ds) {
 		bool found_NA_col = false;
 		double med = 0;
 		for (unsigned int j = 0; j < ds.n_cols; j++) {
-			if (!arma::is_finite(ds.at(i, j))) {
+			if (!std::isfinite(ds.at(i, j))) {
 				if (!found_NA) { found_NA = true; }
 				if (!found_NA_col) {
 					found_NA_col = true;
@@ -60,7 +60,7 @@ bool adj_freq_NAs(arma::mat& ds) {
 		bool found_NA_col = false;
 		double freq = 0;
 		for (unsigned int j = 0; j < ds.n_cols; j++) {
-			if (!arma::is_finite(ds.at(i, j))) {
+			if (!std::isfinite(ds.at(i, j))) {
 				if (!found_NA) { found_NA = true; }
 				if (!found_NA_col) {
 					found_NA_col = true;
@@ -325,7 +325,7 @@ bool are_equal(arma::mat& ds, arma::vec& vals,
 std::vector<unsigned int> rm_lt_nan(arma::uvec& idxs, const unsigned int limit) {
 	std::vector<unsigned int> idxs_adj;
 	for (unsigned int i = 0; i < idxs.size(); ++i) {
-		if (arma::is_finite(idxs[i]) || idxs[i] >= limit) {
+		if (std::isfinite(idxs[i]) || idxs[i] >= limit) {
 			idxs_adj.push_back(idxs[i]);
 		}
 	}
