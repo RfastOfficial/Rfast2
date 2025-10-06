@@ -212,8 +212,8 @@ void calc_pearson(arma::vec& target_vars, arma::mat& ds,
 
 bool cmp_pvalues(const double stat_lh, const double stat_rh, 
 		const double pvalue_lh, const double pvalue_rh) {
-	if (!arma::is_finite(stat_lh) || !arma::is_finite(stat_rh) || 
-			!arma::is_finite(pvalue_lh) || !arma::is_finite(pvalue_rh)) { 
+	if (!std::isfinite(stat_lh) || !std::isfinite(stat_rh) || 
+			!std::isfinite(pvalue_lh) || !std::isfinite(pvalue_rh)) { 
 		return false;
 	}
 	if (pvalue_lh == pvalue_rh) {

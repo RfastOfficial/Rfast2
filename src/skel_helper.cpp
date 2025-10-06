@@ -198,7 +198,7 @@ double pcor_pval(mat& R, unsigned const int indx, unsigned const int indy, Col<i
     }
   }
 
-  if(std::abs(r) >=1 || !arma::is_finite(r)){
+  if(std::abs(r) >=1 || !std::isfinite(r)){
     r = 0.99999999;
   }
 
