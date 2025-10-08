@@ -19,7 +19,7 @@ NumericVector kernel(NumericVector X, const double h) {
     NumericVector Res(n);
     colvec x(X.begin(), n, false),res(Res.begin(), n, false);
     
-    const double h2 = 2*h*h, k = ( (n - 1) * h * sqrt(2 * datum::pi) );
+    const double h2 = 2*h*h, k = ( n * h * sqrt(2 * datum::pi) );
     colvec yh(1, fill::none);
     for (size_t i = 0; i < n - 1; ++i) {
         double xv = x[i];
@@ -42,7 +42,7 @@ NumericMatrix kernel(NumericVector X, NumericVector H) {
     const size_t n = X.size();
     NumericMatrix Res(H.size(), n);
     mat res(Res.begin(), H.size(), n, false);
-    colvec x(X.begin(), n, false), h(H.begin(), H.size(), false), h2 = 2*square(h), k = ( (n - 1) * sqrt(2 * datum::pi) * h ), sv(h.n_elem, fill::none), yh(1, fill::none);
+    colvec x(X.begin(), n, false), h(H.begin(), H.size(), false), h2 = 2*square(h), k = ( n * sqrt(2 * datum::pi) * h ), sv(h.n_elem, fill::none), yh(1, fill::none);
 
     for (size_t i = 0; i < n - 1; ++i) {
         double xv = x[i];
@@ -100,7 +100,7 @@ NumericVector kernel(NumericMatrix X, NumericVector H) {
     
     mat x = xx.t();
     
-    const double k = (nrw - 1) * prod(h) * std::pow(2 * datum::pi, 0.5 * ncl);
+    const double k = nrw * prod(h) * std::pow(2 * datum::pi, 0.5 * ncl);
     h *= sqrt(2);
     for (size_t i = 0; i < nrw - 1; ++i) {
         colvec xv = x.col(i) / h;
