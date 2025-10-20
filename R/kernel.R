@@ -25,6 +25,7 @@ kernel <- function(x, h = "silverman", parallel = FALSE, cores = 0) {
       h2 <- 2 * h^2
       d <- Rfast::Dist(x, square = TRUE) / h2
       f <- ( Rfast::colsums( exp(-d) ) - 1) / ( (n - 1) * h * sqrt(2 * pi) )
+	  ## f <- Rfast::colsums( exp(-d) ) / ( n * h * sqrt(2 * pi) )
 
     } else {  ## h is a vector
       f <- matrix( nrow = n, ncol = lenh )         
@@ -32,6 +33,7 @@ kernel <- function(x, h = "silverman", parallel = FALSE, cores = 0) {
       d <- Rfast::Dist(x, square = TRUE) 
       for ( j in 1:lenh ) {
         f[, j] <- ( Rfast::colsums( exp(-d / h2[j]) ) - 1) / ( (n - 1) * h[j] * sqrt(2 * pi) )
+		## f[, j] <- Rfast::colsums( exp(-d / h2[j]) ) / ( n * h[j] * sqrt(2 * pi) ) 
       } 
     }
 
@@ -52,6 +54,7 @@ kernel <- function(x, h = "silverman", parallel = FALSE, cores = 0) {
     x <- t( t(x) / ( sqrt(2) * h ) )
     d <- Rfast::Dist(x, square = TRUE)
     f <- ( Rfast::colsums( exp(-d) ) - 1) / ( (n - 1) * prod(h) * (2 * pi)^(0.5 * p) )
+    ##  f <- Rfast::colsums( exp(-d) ) / ( n * prod(h) * (2 * pi)^(0.5 * p) )
   }
  
   f
