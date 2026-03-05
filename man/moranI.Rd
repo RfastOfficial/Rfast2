@@ -42,9 +42,10 @@ and the second element is "NA".
 \references{
 Moran, P. A. P. (1950). Notes on Continuous Stochastic Phenomena. Biometrika. 37(1): 17-23. 
 
-Chatzipantsiou C., Dimitriadis M., Papadakis M. and Tsagris M. (2019). Extremely efficient permutation and bootstrap 
-hypothesis tests using R. Journal of Modern Applied Statistical Methods (To appear).
-\url{ https://arxiv.org/ftp/arxiv/papers/1806/1806.10947.pdf }
+Chatzipantsiou C., Dimitriadis M., Papadakis M. and Tsagris M. (2019). 
+Extremely efficient permutation and bootstrap hypothesis tests using R. 
+Journal of Modern Applied Statistical Methods, 18(2), eP2898.
+https://arxiv.org/pdf/1806.10947
 }
 
 \author{

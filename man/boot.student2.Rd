@@ -42,9 +42,8 @@ Efron Bradley and Robert J. Tibshirani (1993). An introduction to the bootstrap.
 
 Chatzipantsiou C., Dimitriadis M., Papadakis M. and Tsagris M. (2019). 
 Extremely efficient permutation and bootstrap hypothesis tests using R. 
-To appear in the Journal of Modern Applied Statistical Methods.
-
-\url{ https://arxiv.org/ftp/arxiv/papers/1806/1806.10947.pdf }
+Journal of Modern Applied Statistical Methods, 18(2), eP2898.
+https://arxiv.org/pdf/1806.10947
 }
 
 \author{

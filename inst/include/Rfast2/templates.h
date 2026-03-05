@@ -1082,8 +1082,8 @@ template<Binary_Function oper,class T,class RETURN_TYPE,int type>
 SEXP eachrow_helper(SEXP x,SEXP y){
     int ncol=Rf_ncols(x),nrow=Rf_nrows(x);
     SEXP mat=PROTECT(Rf_allocMatrix(type,nrow,ncol));
-    T *xx=(T *) DATAPTR(x),*xend=xx+ncol*nrow,*yy=(T *) DATAPTR(y),yvalue,*x3;
-    RETURN_TYPE *m=(RETURN_TYPE*)DATAPTR(mat);
+    T *xx=(T *) DATAPTR_RO(x),*xend=xx+ncol*nrow,*yy=(T *) DATAPTR_RO(y),yvalue,*x3;
+    RETURN_TYPE *m=(RETURN_TYPE*)DATAPTR_RO(mat);
     for(;xx!=xend;++yy){
         yvalue=*yy;
         for(x3=xx,xx+=nrow;x3!=xx;++x3,++m){
