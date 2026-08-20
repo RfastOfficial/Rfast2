@@ -21,7 +21,6 @@ BEGIN_RCPP
 END_RCPP
 }
 
-// [[Rcpp::export]]
 Rcpp::List mmp_c(arma::vec target_vars, arma::mat ds, int max_k, 
 		const double thres, const std::string method, Rcpp::List inits, 
 		const bool hash_on, Rcpp::Environment stats_kv, 

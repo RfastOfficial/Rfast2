@@ -206,7 +206,6 @@ List mmhc_skeleton_c(mat& x, mat& ini_pval, const double la, unsigned const int 
   return ret;
 }
 
-// [[Rcpp::export]]
 List mmhc_skeleton(NumericMatrix X, NumericMatrix INI_PVAL, unsigned const int n, const double la,
                    const int maxk, unsigned const int method, NumericMatrix Rmat, const bool parallel) {
   int d = INI_PVAL.ncol();

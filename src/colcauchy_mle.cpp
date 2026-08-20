@@ -60,7 +60,6 @@ double cauchy_mle_calc_lik2(vec::iterator xiter, double* mlogses,int n){
   return n*mlogses[1]-lik2;
 }
 
-// [[Rcpp::export]]
 NumericMatrix colcauchy_mle(Rcpp::NumericMatrix X, const double tol = 1e-09, const bool parallel = 1, const int maxiters = 100) {
   int n = X.nrow(), d=X.ncol();
 

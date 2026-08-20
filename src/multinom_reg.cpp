@@ -11,7 +11,6 @@ using namespace Rcpp;
 using namespace arma;
 using namespace std;
 
-//[[Rcpp::export]]
 List multinom_reg(NumericVector Y, NumericMatrix X0, const double tol, const int maxiters){
   int n = X0.nrow(), p = X0.ncol();
   mat y = design_matrix_helper<mat,NumericVector>(Y);

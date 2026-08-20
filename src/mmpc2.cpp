@@ -50,7 +50,6 @@ T pmax(T x,T y){
     return x;
 }
 
-//[[Rcpp::export]]
 arma::mat quasi_poisson_only(arma::mat x, arma::colvec y, const double ylogy, const double tol,const int maxiters){
     const unsigned int n=x.n_rows,pcols=x.n_cols,d=2;
     unsigned int i;

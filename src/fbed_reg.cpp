@@ -14,7 +14,6 @@ using namespace arma;
 using namespace Rcpp;
 using namespace std;
 
-// [[Rcpp::export]]
 List fbed_reg(Rcpp::NumericVector Y, Rcpp::NumericMatrix X,
               const double sig = 0.05, const std::string type = "logistic", IntegerVector id = IntegerVector(1), int K = 0, bool backward = 1, const double tol = 1e-07, const bool parallel = 1, const int maxiters = 100)
 {

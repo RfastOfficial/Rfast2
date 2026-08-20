@@ -12,7 +12,6 @@ using namespace Rcpp;
 using namespace arma;
 using namespace std;
 
-//[[Rcpp::export]]
 NumericMatrix weib_regs(NumericVector Y, NumericMatrix X, const double tol = 1e-07, const bool logged =0,
                         const int maxiters = 100, const bool parallel = 0){
   int n = Y.size(), d = X.ncol();
