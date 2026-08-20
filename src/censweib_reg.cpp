@@ -10,7 +10,6 @@ using namespace arma;
 using namespace Rcpp;
 using namespace std;
 
-// [[Rcpp::export]]
 List censweib_reg (NumericVector Y, NumericMatrix X, NumericVector di = NumericVector(1), const double tol = 1e-07, const int maxiters = 100){
   List ret;
   int n = X.nrow(), p = X.ncol(),i,j, n1=0,disz = di.size();

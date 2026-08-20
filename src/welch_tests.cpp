@@ -10,7 +10,6 @@ using namespace arma;
 using namespace Rcpp;
 using namespace std;
 
-// [[Rcpp::export]]
 NumericMatrix welch_tests(NumericMatrix X, NumericVector Y, const bool logged, const bool parallel) {
   const int D = X.ncol(), n = X.nrow();
   mat x(X.begin(),n,D,false);

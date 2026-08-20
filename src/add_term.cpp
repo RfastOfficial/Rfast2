@@ -10,7 +10,6 @@ using namespace arma;
 using namespace Rcpp;
 using namespace std;
 
-// [[Rcpp::export]]
 NumericMatrix add_term(Rcpp::NumericVector Y, Rcpp::NumericMatrix Xinc, Rcpp::NumericMatrix Xout, double devi_0,
                        const std::string type, const double tol, const bool logged, const bool parallel, const int maxiters) {
 

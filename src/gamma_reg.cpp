@@ -11,7 +11,6 @@ using namespace arma;
 using namespace Rcpp;
 using namespace std;
 
-// [[Rcpp::export]]
 List gamma_reg(NumericVector Y, NumericMatrix X, List mod, const double tol = 1e-08, const int maxiters = 100)
 {
   int p = X.ncol(), n = X.nrow();

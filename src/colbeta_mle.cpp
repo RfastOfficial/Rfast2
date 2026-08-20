@@ -11,7 +11,6 @@ using namespace arma;
 using namespace Rcpp;
 using namespace std;
 
-// [[Rcpp::export]]
 NumericMatrix colbeta_mle(Rcpp::NumericMatrix X, const double tol = 1e-09, const bool parallel = 1, const int maxiters = 100) {
   int n = X.nrow(), d=X.ncol();
 

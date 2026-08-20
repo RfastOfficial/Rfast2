@@ -95,7 +95,6 @@ vec diag_of_mult2(mat a, const mat &b)
 	return ret;
 }
 
-// [[Rcpp::export]]
 Rcpp::List wild_boot(const arma::mat &x, const arma::vec &y, arma::Col<int> cluster,
 					 const arma::uvec &ind, const unsigned int &R, const arma::uvec &tab,
 					 const bool &parallel)

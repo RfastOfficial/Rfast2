@@ -12,7 +12,6 @@ using namespace Rcpp;
 using namespace arma;
 using namespace std;
 
-//[[Rcpp::export]]
 
 NumericMatrix colspml_mle(NumericMatrix X, const double tol, const int maxiters, const bool parallel){
   int n = X.nrow(), yD = X.ncol();

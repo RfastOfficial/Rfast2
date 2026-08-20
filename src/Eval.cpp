@@ -27,7 +27,6 @@ static NumericVector measure_time(SEXP expr,SEXP env,const int tim){
     return NumericVector::create(min_t,sum_t/tim,max_t);
 }
 
-//[[Rcpp::export]]
 NumericMatrix benchmark(List exprs,SEXP env,const int tim,IntegerVector indices){
     NumericMatrix res(exprs.length(),3);
     for(auto& index : indices){

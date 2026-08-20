@@ -105,7 +105,6 @@ colvec halfcauchy_mle(colvec x1, const double tol = 1e-07)
 	return res;
 }
 
-// [[Rcpp::export]]
 NumericMatrix colhalfcauchy_mle(NumericMatrix x, const double tol = 1e-07, const bool parallel = false, const unsigned int cores = 0)
 {
 
@@ -252,7 +251,6 @@ colvec censpois_mle(colvec x1, const double tol = 1e-07)
 	return v;
 }
 
-// [[Rcpp::export]]
 NumericMatrix colcenspois_mle(NumericMatrix x, const double tol = 1e-07, const bool parallel = false, const unsigned int cores = 0)
 {
 	mat x1(x.begin(), x.nrow(), x.ncol(), false);
@@ -525,7 +523,6 @@ colvec censweibull_mle(colvec x1, colvec di1, const double tol = 1e-07)
 	return {(double)i, lik2 - accu(y1), exp(m), es};
 }
 
-// [[Rcpp::export]]
 NumericMatrix colcensweibull_mle(NumericMatrix x, NumericMatrix di, const double tol = 1e-07, const bool parallel = false, const unsigned int cores = 0)
 {
 

@@ -12,7 +12,6 @@ using namespace Rcpp;
 using namespace arma;
 using namespace std;
 
-//[[Rcpp::export]]
 List negbin_reg(NumericVector Y, NumericMatrix X, const double tol, const int maxiters){
   int n = X.nrow(), p = X.ncol();
   mat x(X.begin(),n,p,false);
